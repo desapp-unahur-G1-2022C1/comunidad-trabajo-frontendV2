@@ -17,7 +17,7 @@ const Header = () => {
             <button type="button" class="btn btn-danger ">Ingresar</button>
           </div>
         </div>
-        <div className="App">
+        <div className="header">
           <div className='titulo'> 
             <div className="row align-items-center contenidoTitulo">
               <div className="col contenidoTitulo">
@@ -36,4 +36,3 @@ const Header = () => {
 }
  
 export default Header;
-      

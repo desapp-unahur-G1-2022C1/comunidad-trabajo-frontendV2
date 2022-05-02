@@ -1,11 +1,15 @@
 import './App.css';
-import React from "react";
+import React, { Fragment } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from "./Components/Header"
-
+import Ofertas from './Components/Ofertas';
+import Search from './Components/Search';
 function App() {
   return (
-    <Header/>
+    <Fragment>
+      <Header/>
+      <Ofertas/>
+    </Fragment>
   );
 }
 
