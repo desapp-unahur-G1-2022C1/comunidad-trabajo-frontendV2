@@ -1,139 +1,138 @@
 import React, { Fragment } from "react";
 import App from "../App.css";
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import { Box } from "@mui/system";
 
-const Ofertas = () => {
+export default function MediaCard() {
   return (
     <Fragment>
-      <div class="container d-flex flex-wrap p-3 justify-content-start">
-        <div class="card d-flex ">
-          <img
-            src="http://cdn29.us1.fansshare.com/pictures/pepsi/pepsico-logo-386571302.jpg"
-            class="card-img-top"
-            alt="Phone"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Titulo</h5>
-            <h6 class="card-subitle">Nombre empresa</h6>
-            <p class="card-text">
-              This is an awesome smartphone that can help you do a lot of thing
-              in this modern era.
-            </p>
-            <a href="#" id="botonsito" className="btn d-flex justify-content-center">
-              Ver oferta
-            </a>
-          </div>
-        </div>
-        <div class="card d-flex ">
-          <img
-            src="http://cdn29.us1.fansshare.com/pictures/pepsi/pepsico-logo-386571302.jpg"
-            class="card-img-top"
-            alt="Phone"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Titulo</h5>
-            <h6 class="card-subitle">Nombre empresa</h6>
-            <p class="card-text">
-              This is an awesome smartphone that can help you do a lot of thing
-              in this modern era.
-            </p>
-            <a href="#" id="botonsito" className="btn d-flex justify-content-center">
-              Ver oferta
-            </a>
-          </div>
-        </div>
-        <div class="card d-flex ">
-          <img
-            src="http://cdn29.us1.fansshare.com/pictures/pepsi/pepsico-logo-386571302.jpg"
-            class="card-img-top"
-            alt="Phone"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Titulo</h5>
-            <h6 class="card-subitle">Nombre empresa</h6>
-            <p class="card-text">
-              This is an awesome smartphone that can help you do a lot of thing
-              in this modern era.
-            </p>
-            <a href="#" id="botonsito" className="btn d-flex justify-content-center">
-              Ver oferta
-            </a>
-          </div>
-        </div>
-        <div class="card d-flex ">
-          <img
-            src="http://cdn29.us1.fansshare.com/pictures/pepsi/pepsico-logo-386571302.jpg"
-            class="card-img-top"
-            alt="Phone"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Titulo</h5>
-            <h6 class="card-subitle">Nombre empresa</h6>
-            <p class="card-text">
-              This is an awesome smartphone that can help you do a lot of thing
-              in this modern era.
-            </p>
-            <a href="#" id="botonsito" className="btn d-flex justify-content-center">
-              Ver oferta
-            </a>
-          </div>
-        </div>
-        <div class="card d-flex ">
-          <img
-            src="http://cdn29.us1.fansshare.com/pictures/pepsi/pepsico-logo-386571302.jpg"
-            class="card-img-top"
-            alt="Phone"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Titulo</h5>
-            <h6 class="card-subitle">Nombre empresa</h6>
-            <p class="card-text">
-              This is an awesome smartphone that can help you do a lot of thing
-              in this modern era.
-            </p>
-            <a href="#" id="botonsito" className="btn d-flex justify-content-center">
-              Ver oferta
-            </a>
-          </div>
-        </div>
-        <div class="card d-flex ">
-          <img
-            src="http://cdn29.us1.fansshare.com/pictures/pepsi/pepsico-logo-386571302.jpg"
-            class="card-img-top"
-            alt="Phone"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Titulo</h5>
-            <h6 class="card-subitle">Nombre empresa</h6>
-            <p class="card-text">
-              This is an awesome smartphone that can help you do a lot of thing
-              in this modern era.
-            </p>
-            <a href="#" id="botonsito" className="btn d-flex justify-content-center">
-              Ver oferta
-            </a>
-          </div>
-        </div>
-        <div class="card d-flex ">
-          <img
-            src="http://cdn29.us1.fansshare.com/pictures/pepsi/pepsico-logo-386571302.jpg"
-            class="card-img-top"
-            alt="Phone"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Titulo</h5>
-            <h6 class="card-subitle">Nombre empresa</h6>
-            <p class="card-text">
-              This is an awesome smartphone that can help you do a lot of thing
-              in this modern era.
-            </p>
-            <a href="#" id="botonsito" className="btn d-flex justify-content-center">
-              Ver oferta
-            </a>
-          </div>
-        </div>
-      </div>
-    </Fragment>
+    <Box sx={{display:"flex", flexWrap:'wrap', justifyContent:"center"}}>
+    <Card sx={{ maxWidth: 350, margin:"1rem" }}>
+      <CardMedia
+        component="img"
+        height="140"
+        image= "https://i.blogs.es/deec05/pepsi/450_1000.jpg"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          Lizard
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Lizards are a widespread group of squamate reptiles, with over 6,000
+          species, ranging across all continents except Antarctica
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small">Share</Button>
+        <Button size="small">Learn More</Button>
+      </CardActions>
+    </Card>
+    <Card sx={{ maxWidth: 350, margin:"1rem" }}>
+    <CardMedia
+      component="img"
+      height="140"
+      image= "https://i.blogs.es/deec05/pepsi/450_1000.jpg"
+    />
+    <CardContent>
+      <Typography gutterBottom variant="h5" component="div">
+        Lizard
+      </Typography>
+      <Typography variant="body2" color="text.secondary">
+        Lizards are a widespread group of squamate reptiles, with over 6,000
+        species, ranging across all continents except Antarctica
+      </Typography>
+    </CardContent>
+    <CardActions>
+      <Button size="small">Share</Button>
+      <Button size="small">Learn More</Button>
+    </CardActions>
+  </Card>
+  <Card sx={{ maxWidth: 350, margin:"1rem" }}>
+    <CardMedia
+      component="img"
+      height="140"
+      image= "https://i.blogs.es/deec05/pepsi/450_1000.jpg"
+    />
+    <CardContent>
+      <Typography gutterBottom variant="h5" component="div">
+        Lizard
+      </Typography>
+      <Typography variant="body2" color="text.secondary">
+        Lizards are a widespread group of squamate reptiles, with over 6,000
+        species, ranging across all continents except Antarctica
+      </Typography>
+    </CardContent>
+    <CardActions>
+      <Button size="small">Share</Button>
+      <Button size="small">Learn More</Button>
+    </CardActions>
+  </Card>
+  <Card sx={{ maxWidth: 350, margin:"1rem" }}>
+    <CardMedia
+      component="img"
+      height="140"
+      image= "https://i.blogs.es/deec05/pepsi/450_1000.jpg"
+    />
+    <CardContent>
+      <Typography gutterBottom variant="h5" component="div">
+        Lizard
+      </Typography>
+      <Typography variant="body2" color="text.secondary">
+        Lizards are a widespread group of squamate reptiles, with over 6,000
+        species, ranging across all continents except Antarctica
+      </Typography>
+    </CardContent>
+    <CardActions>
+      <Button size="small">Share</Button>
+      <Button size="small">Learn More</Button>
+    </CardActions>
+  </Card>
+  <Card sx={{ maxWidth: 350, margin:"1rem" }}>
+    <CardMedia
+      component="img"
+      height="140"
+      image= "https://i.blogs.es/deec05/pepsi/450_1000.jpg"
+    />
+    <CardContent>
+      <Typography gutterBottom variant="h5" component="div">
+        Lizard
+      </Typography>
+      <Typography variant="body2" color="text.secondary">
+        Lizards are a widespread group of squamate reptiles, with over 6,000
+        species, ranging across all continents except Antarctica
+      </Typography>
+    </CardContent>
+    <CardActions>
+      <Button size="small">Share</Button>
+      <Button size="small">Learn More</Button>
+    </CardActions>
+  </Card>
+  <Card sx={{ maxWidth: 350, margin:"1rem" }}>
+    <CardMedia
+      component="img"
+      height="140"
+      image= "https://i.blogs.es/deec05/pepsi/450_1000.jpg"
+    />
+    <CardContent>
+      <Typography gutterBottom variant="h5" component="div">
+        Lizard
+      </Typography>
+      <Typography variant="body2" color="text.secondary">
+        Lizards are a widespread group of squamate reptiles, with over 6,000
+        species, ranging across all continents except Antarctica
+      </Typography>
+    </CardContent>
+    <CardActions>
+      <Button size="small">Share</Button>
+      <Button size="small">Learn More</Button>
+    </CardActions>
+  </Card>  
+  </Box>
+  </Fragment>
   );
-};
-
-export default Ofertas;
+}
