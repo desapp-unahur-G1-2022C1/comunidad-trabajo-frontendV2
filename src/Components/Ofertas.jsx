@@ -27,10 +27,9 @@ export default function MediaCard() {
           species, ranging across all continents except Antarctica
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
+      <CardActions sx={{display:"flex", justifyContent:"center"}}>
+      <Button  size="large" variant="contained">Ver oferta</Button>
+    </CardActions>
     </Card>
     <Card sx={{ maxWidth: 350, margin:"1rem" }}>
     <CardMedia
@@ -47,9 +46,8 @@ export default function MediaCard() {
         species, ranging across all continents except Antarctica
       </Typography>
     </CardContent>
-    <CardActions>
-      <Button size="small">Share</Button>
-      <Button size="small">Learn More</Button>
+    <CardActions sx={{display:"flex", justifyContent:"center"}}>
+      <Button  size="large" variant="contained">Ver oferta</Button>
     </CardActions>
   </Card>
   <Card sx={{ maxWidth: 350, margin:"1rem" }}>
@@ -67,9 +65,8 @@ export default function MediaCard() {
         species, ranging across all continents except Antarctica
       </Typography>
     </CardContent>
-    <CardActions>
-      <Button size="small">Share</Button>
-      <Button size="small">Learn More</Button>
+    <CardActions sx={{display:"flex", justifyContent:"center"}}>
+      <Button  size="large" variant="contained">Ver oferta</Button>
     </CardActions>
   </Card>
   <Card sx={{ maxWidth: 350, margin:"1rem" }}>
@@ -87,9 +84,8 @@ export default function MediaCard() {
         species, ranging across all continents except Antarctica
       </Typography>
     </CardContent>
-    <CardActions>
-      <Button size="small">Share</Button>
-      <Button size="small">Learn More</Button>
+    <CardActions sx={{display:"flex", justifyContent:"center"}}>
+      <Button  size="large" variant="contained">Ver oferta</Button>
     </CardActions>
   </Card>
   <Card sx={{ maxWidth: 350, margin:"1rem" }}>
@@ -107,9 +103,8 @@ export default function MediaCard() {
         species, ranging across all continents except Antarctica
       </Typography>
     </CardContent>
-    <CardActions>
-      <Button size="small">Share</Button>
-      <Button size="small">Learn More</Button>
+    <CardActions sx={{display:"flex", justifyContent:"center"}}>
+      <Button  size="large" variant="contained">Ver oferta</Button>
     </CardActions>
   </Card>
   <Card sx={{ maxWidth: 350, margin:"1rem" }}>
@@ -127,9 +122,8 @@ export default function MediaCard() {
         species, ranging across all continents except Antarctica
       </Typography>
     </CardContent>
-    <CardActions>
-      <Button size="small">Share</Button>
-      <Button size="small">Learn More</Button>
+    <CardActions sx={{display:"flex", justifyContent:"center"}}>
+      <Button  size="large" variant="contained">Ver oferta</Button>
     </CardActions>
   </Card>  
   </Box>
