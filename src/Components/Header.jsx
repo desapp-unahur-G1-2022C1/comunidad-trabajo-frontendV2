@@ -14,8 +14,8 @@ const Header = () => {
   }));
   return ( 
     <div>
-      <Box sx= {{display:"flex", backgroundColor:"#ADC98F", paddingTop:"1%", paddingBottom:"1%"}}>
-        <img className='logo' style={{height:"80px",display:"flex" , maxWidth:"50%"}} src="http://comunidad-de-trabajo.unahur.edu.ar/static/media/logoComunidadDeTrabajo.b8bf300b.svg"></img>
+      <Box className='header' sx= {{display:"flex", backgroundColor:"#ADC98F", paddingTop:"1rem", paddingBottom:"1rem", width:"100%"}}>
+        <img className='logo' style={{width: "300px" ,display:"flex" , maxWidth:"300px", margin:"1rem", padding:"1rem"}} src="http://comunidad-de-trabajo.unahur.edu.ar/static/media/logoComunidadDeTrabajo.b8bf300b.svg"></img>
         <h1 style={{display:"flex"}}>Ofertas</h1>
       </Box>
 

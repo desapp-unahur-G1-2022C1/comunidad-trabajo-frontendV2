@@ -6,6 +6,9 @@ import Ofertas from './Components/Ofertas';
 import Search from './Components/Search';
 import Burger from './Components/Burger';
 import Filtros from './Components/Filtros'
+import { useState } from 'react';
+import Login from './Components/Login';
+import VentanaLogin from './Components/VentanaLogin'
 
 function App() {
   return (

@@ -12,7 +12,7 @@ export default function MediaCard() {
   return (
     <Fragment>
     <Box sx={{display:"flex", flexWrap:'wrap', justifyContent:"center"}}>
-    <Card sx={{ maxWidth: 350, margin:"1rem" }}>
+    <Card sx={{ maxWidth: 250, margin:"1rem" }}>
       <CardMedia
         component="img"
         height="140"
@@ -31,7 +31,7 @@ export default function MediaCard() {
       <Button  size="large" variant="contained">Ver oferta</Button>
     </CardActions>
     </Card>
-    <Card sx={{ maxWidth: 350, margin:"1rem" }}>
+    <Card sx={{ maxWidth: 250, margin:"1rem" }}>
     <CardMedia
       component="img"
       height="140"
@@ -50,7 +50,7 @@ export default function MediaCard() {
       <Button  size="large" variant="contained">Ver oferta</Button>
     </CardActions>
   </Card>
-  <Card sx={{ maxWidth: 350, margin:"1rem" }}>
+  <Card sx={{ maxWidth: 250, margin:"1rem" }}>
     <CardMedia
       component="img"
       height="140"
@@ -69,7 +69,7 @@ export default function MediaCard() {
       <Button  size="large" variant="contained">Ver oferta</Button>
     </CardActions>
   </Card>
-  <Card sx={{ maxWidth: 350, margin:"1rem" }}>
+  <Card sx={{ maxWidth: 250, margin:"1rem" }}>
     <CardMedia
       component="img"
       height="140"
@@ -88,7 +88,7 @@ export default function MediaCard() {
       <Button  size="large" variant="contained">Ver oferta</Button>
     </CardActions>
   </Card>
-  <Card sx={{ maxWidth: 350, margin:"1rem" }}>
+  <Card sx={{ maxWidth: 250, margin:"1rem" }}>
     <CardMedia
       component="img"
       height="140"
@@ -107,7 +107,7 @@ export default function MediaCard() {
       <Button  size="large" variant="contained">Ver oferta</Button>
     </CardActions>
   </Card>
-  <Card sx={{ maxWidth: 350, margin:"1rem" }}>
+  <Card sx={{ maxWidth: 250, margin:"1rem" }}>
     <CardMedia
       component="img"
       height="140"
