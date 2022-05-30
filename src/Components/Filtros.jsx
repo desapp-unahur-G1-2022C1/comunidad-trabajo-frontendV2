@@ -41,7 +41,6 @@ export default function Playground() {
           <TextField {...params} label="disableClearable" variant="standard" />
         )}
       />
-      
     </Stack>
   );
 }
