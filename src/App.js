@@ -10,24 +10,22 @@ import Login from './Components/Login';
 import VentanaLogin from './Components/VentanaLogin'
 import Home from './Components/Home';
 import { BrowserRouter as Router, Switch , Route } from 'react-router-dom';
-import Registro from "./Components/Registro"
+import PerfilUsuarioPrivado from "./Components/PerfilUsuarioPrivado"
 
 function App() {
   return (
     
       <Router>
+        <Header></Header>
         <Switch>
           <Route exact path="/">
             <Home/>
           </Route>
-          <Route exact path="/registro">
-            <Registro/>
+          <Route exact path="/miPerfil">
+            <PerfilUsuarioPrivado/>
           </Route>
         </Switch>
       </Router>
-
-    
-    
   );
 }
 

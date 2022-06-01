@@ -14,7 +14,6 @@ const Home = () => {
     return ( 
     <Fragment>
         <Burger/>
-        <Header/>
         <div style={{display:"flex"}}>
           <Filtros/>
           <Ofertas/>
