@@ -61,7 +61,7 @@ export default function CustomizedDialogs() {
 
   return (
     <div>
-      <Button variant="contained" onClick={handleClickOpen}>
+      <Button variant="contained" color="secondary" onClick={handleClickOpen}>
         Iniciar Sesion
       </Button>
       <BootstrapDialog

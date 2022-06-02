@@ -28,7 +28,7 @@ export default function MediaCard() {
         </Typography>
       </CardContent>
       <CardActions sx={{display:"flex", justifyContent:"center"}}>
-      <Button  size="large" variant="contained">Ver oferta</Button>
+      <Button  size="large" variant="contained" color="secondary">Ver oferta</Button>
     </CardActions>
     </Card>
     <Card sx={{ maxWidth: 250, margin:"1rem" }}>
@@ -47,7 +47,7 @@ export default function MediaCard() {
       </Typography>
     </CardContent>
     <CardActions sx={{display:"flex", justifyContent:"center"}}>
-      <Button  size="large" variant="contained">Ver oferta</Button>
+      <Button  size="large" variant="contained" color="secondary">Ver oferta</Button>
     </CardActions>
   </Card>
   <Card sx={{ maxWidth: 250, margin:"1rem" }}>
@@ -66,7 +66,7 @@ export default function MediaCard() {
       </Typography>
     </CardContent>
     <CardActions sx={{display:"flex", justifyContent:"center"}}>
-      <Button  size="large" variant="contained">Ver oferta</Button>
+      <Button  size="large" variant="contained" color="secondary">Ver oferta</Button>
     </CardActions>
   </Card>
   <Card sx={{ maxWidth: 250, margin:"1rem" }}>
@@ -85,7 +85,7 @@ export default function MediaCard() {
       </Typography>
     </CardContent>
     <CardActions sx={{display:"flex", justifyContent:"center"}}>
-      <Button  size="large" variant="contained">Ver oferta</Button>
+      <Button  size="large" variant="contained" color="secondary">Ver oferta</Button>
     </CardActions>
   </Card>
   <Card sx={{ maxWidth: 250, margin:"1rem" }}>
@@ -104,7 +104,7 @@ export default function MediaCard() {
       </Typography>
     </CardContent>
     <CardActions sx={{display:"flex", justifyContent:"center"}}>
-      <Button  size="large" variant="contained">Ver oferta</Button>
+      <Button  size="large" variant="contained" color="secondary">Ver oferta</Button>
     </CardActions>
   </Card>
   <Card sx={{ maxWidth: 250, margin:"1rem" }}>
@@ -123,7 +123,7 @@ export default function MediaCard() {
       </Typography>
     </CardContent>
     <CardActions sx={{display:"flex", justifyContent:"center"}}>
-      <Button  size="large" variant="contained">Ver oferta</Button>
+      <Button  size="large" variant="contained" color="secondary">Ver oferta</Button>
     </CardActions>
   </Card>  
   </Box>
