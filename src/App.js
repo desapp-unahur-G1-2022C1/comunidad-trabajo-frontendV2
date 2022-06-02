@@ -9,8 +9,10 @@ import { useState } from 'react';
 import Login from './Components/Login';
 import VentanaLogin from './Components/VentanaLogin'
 import Home from './Components/Home';
-import { BrowserRouter as Router, Switch , Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch , Route, Link } from 'react-router-dom';
 import PerfilUsuarioPrivado from "./Components/PerfilUsuarioPrivado"
+import RegistroPregunta from './Components/RegistroPregunta';
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   return (
@@ -24,7 +26,10 @@ function App() {
           <Route exact path="/miPerfil">
             <PerfilUsuarioPrivado/>
           </Route>
-        </Switch>
+          <Route exact path="/registroPregunta">
+            <RegistroPregunta/>
+          </Route>
+          </Switch>
       </Router>
   );
 }
