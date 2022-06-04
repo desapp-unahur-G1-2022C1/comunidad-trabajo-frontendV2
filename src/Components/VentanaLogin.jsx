@@ -9,7 +9,8 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { TextField } from '@mui/material';
 import Button from '@mui/material/Button';
-import { Image } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
+import '../App.css';
 
 export default function InputAdornments() {
   const [values, setValues] = React.useState({
@@ -66,14 +67,14 @@ export default function InputAdornments() {
           />
         </FormControl>
         <Box sx={{display:"flex", justifyContent:"center"}}>
-          <Button sx={{display:"flex", justifyContent:"center"}} variant="contained">
+          <Button sx={{display:"flex", justifyContent:"center"}} variant="contained" color="secondary">
             Iniciar sesion
           </Button>
         </Box>
         
         <Box sx={{display:"flex", justifyContent:"center"}}>
-          <h6 style={{display:"flex", marginRight:"2rem", margin:"1rem", justifyContent:"flex-start", color:"#3f50b5"}}>Olvidaste tu contraseña?</h6>
-          <h6 style={{display:"flex", marginLeft:"2rem", margin:"1rem", justifyContent:"flex-end", color:"#3f50b5"}}>Registrate</h6>
+          <Link to="/recuperarContrasena"style={{ textDecoration: 'none'}}><h6 style={{display:"flex", marginRight:"2rem", margin:"1rem", justifyContent:"flex-start", color:"#3f50b5"}}>¿Olvidaste tu contraseña?</h6></Link>
+          <Link to="/registroPregunta"style={{ textDecoration: 'none'}}><h6 style={{display:"flex", marginLeft:"2rem", margin:"1rem", justifyContent:"flex-end", color:"#3f50b5"}}>Registrate</h6></Link>
         </Box>
     </Box>
   );

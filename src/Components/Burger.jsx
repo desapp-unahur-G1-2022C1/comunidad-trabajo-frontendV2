@@ -28,7 +28,7 @@ export default function AccountMenu() {
   return (
     <React.Fragment>
         <MenuItem sx={{display:"flex", justifyContent:"flex-end"}}>
-          <Login></Login>
+          <Login/>
         </MenuItem>
     </React.Fragment>
   );
