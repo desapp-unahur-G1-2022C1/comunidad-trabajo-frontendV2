@@ -13,6 +13,7 @@ function App() {
   return (
     
       <Router>
+        
         <Header/>
         <Switch>
           <Route exact path="/">
@@ -28,6 +29,7 @@ function App() {
             <NotFound/>
           </Route>
           </Switch>
+
       </Router>
   );
 }
