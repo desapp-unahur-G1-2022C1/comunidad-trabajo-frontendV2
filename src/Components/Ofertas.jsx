@@ -7,6 +7,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Box } from "@mui/system";
+import { Link } from "react-router-dom";
 
 export default function MediaCard() {
   return (
@@ -28,7 +29,7 @@ export default function MediaCard() {
         </Typography>
       </CardContent>
       <CardActions sx={{display:"flex", justifyContent:"center"}}>
-      <Button  size="large" variant="contained" color="secondary">Ver oferta</Button>
+      <Link to="/descripcionOferta"> <Button  size="large" variant="contained" color="secondary">Ver oferta</Button> </Link>
     </CardActions>
     </Card>
     <Card sx={{ maxWidth: 250, margin:"1rem" }}>

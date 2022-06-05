@@ -71,6 +71,7 @@ export default function CustomizedDialogs() {
       >
        <VentanaLogin></VentanaLogin>
       </BootstrapDialog>
+    
     </div>
   );
 }
