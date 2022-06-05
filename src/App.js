@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch , Route, Link } from 'react-router-dom'
 import PerfilUsuarioPrivado from "./Components/PerfilUsuarioPrivado"
 import RegistroPregunta from './Components/RegistroPregunta';
 import NotFound from './Components/NotFound'
+import DescripcionOferta from './Components/DescripcionOferta'
 
 
 
@@ -13,7 +14,7 @@ function App() {
   return (
     
       <Router>
-        
+
         <Header/>
         <Switch>
           <Route exact path="/">
@@ -24,6 +25,9 @@ function App() {
           </Route>
           <Route exact path="/registroPregunta">
             <RegistroPregunta/>
+          </Route>
+          <Route exact path="/descripcionOferta">
+            <DescripcionOferta/>
           </Route>
           <Route path="*">
             <NotFound/>
