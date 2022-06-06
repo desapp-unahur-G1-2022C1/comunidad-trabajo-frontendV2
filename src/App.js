@@ -7,6 +7,7 @@ import PerfilUsuarioPrivado from "./Components/PerfilUsuarioPrivado"
 import RegistroPregunta from './Components/RegistroPregunta';
 import NotFound from './Components/NotFound'
 import DescripcionOferta from './Components/DescripcionOferta'
+import RegistroPostulante from './Components/RegistroPostulante';
 
 
 
@@ -14,6 +15,8 @@ function App() {
   return (
     
       <Router>
+
+        
         <Switch>
           <Route exact path="/">
             <Home/>
@@ -26,6 +29,9 @@ function App() {
           </Route>
           <Route exact path="/descripcionOferta">
             <DescripcionOferta/>
+          </Route>
+          <Route exact path="/registroPostulante">
+            <RegistroPostulante/>
           </Route>
           <Route path="*">
             <NotFound/>
