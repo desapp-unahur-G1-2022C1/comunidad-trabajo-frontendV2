@@ -2,11 +2,12 @@ import { Typography, Box, Button } from '@mui/material';
 
 import React, { Fragment } from 'react'
 import { Redirect, Link } from 'react-router-dom';
-
+import Header from './Header'
 
 const RegistroPregunta = () => {
     return ( 
         <Fragment>
+            <Header/>
             <Box sx={{display:"flex", justifyContent:"center", margin:"1rem"}}>
 
                 <Typography variant="h5">

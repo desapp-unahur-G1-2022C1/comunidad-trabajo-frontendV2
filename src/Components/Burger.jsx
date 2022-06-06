@@ -12,7 +12,7 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { Button } from '@mui/material';
-import Login from './Login';
+import Login from './BotonInicioSesion';
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -23,12 +23,9 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  
   return (
     <React.Fragment>
         <MenuItem sx={{display:"flex", justifyContent:"flex-end"}}>
-          <Login/>
         </MenuItem>
     </React.Fragment>
   );

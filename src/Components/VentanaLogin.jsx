@@ -67,7 +67,7 @@ export default function InputAdornments() {
           />
         </FormControl>
         <Box sx={{display:"flex", justifyContent:"center"}}>
-          <Button sx={{display:"flex", justifyContent:"center"}} variant="contained" color="secondary">
+          <Button sx={{display:"flex", justifyContent:"center"}} variant="contained" color="relaxed">
             Iniciar sesion
           </Button>
         </Box>

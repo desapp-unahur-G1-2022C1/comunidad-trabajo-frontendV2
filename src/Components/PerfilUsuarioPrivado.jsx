@@ -4,11 +4,13 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
 import { Avatar, Button } from '@mui/material';
 import Box from '@mui/material/Box';
+import Header from './Header'
 
 export default function PerfilUsuario() {
 
   return (
     <React.Fragment>
+      <Header/>
       <Box>
         <Box sx={{display:"flex", justifyContent:"flex-start", alignContent:"center"}}>
             <Box>
