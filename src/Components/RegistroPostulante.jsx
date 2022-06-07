@@ -98,8 +98,8 @@ export default function AddressForm() {
         </Grid>
         <Grid item xs={12}>
           <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <Link to="/registroPostulante/1">
-              <Button variant="contained" color="secondary">
+            <Link to="/registroPostulante/1" style={{ textDecoration: 'none'}}>
+              <Button variant="contained" color="relaxed">
                 Siguiente
               </Button>
             </Link>
