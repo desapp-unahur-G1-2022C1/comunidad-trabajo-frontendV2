@@ -8,6 +8,7 @@ import RegistroPregunta from './Components/RegistroPregunta';
 import NotFound from './Components/NotFound'
 import DescripcionOferta from './Components/DescripcionOferta'
 import RegistroPostulante from './Components/RegistroPostulante';
+import RegistroDatosAcademicos from './Components/RegistroDatosAcademicos'
 
 
 
@@ -34,6 +35,9 @@ function App() {
             <RegistroPostulante/>
           </Route>
           <Route exact path="/registroPostulante/1">
+            <RegistroDatosAcademicos/>
+          </Route>
+          <Route exact path="/registroPostulante/2">
             
           </Route>
           <Route path="*">
