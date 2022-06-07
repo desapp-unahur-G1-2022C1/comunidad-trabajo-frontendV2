@@ -21,6 +21,15 @@ export default function AddressForm() {
         Datos Académicos
       </Typography>
       <Grid container spacing={3} sx={{ padding: "2rem", paddingTop: "0" }}>
+      <Grid item xs={6} sm={6}>
+          <TextField
+            id="estudios"
+            name="estudios"
+            label="Estudios"
+            fullWidth
+            variant="standard"
+          />
+        </Grid>
         <Grid item xs={6} sm={6}>
           <TextField
             required
@@ -66,19 +75,9 @@ export default function AddressForm() {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={6} sm={6}>
-          <TextField
-            id="estudios"
-            name="estudios"
-            label="Estudios"
-            fullWidth
-            variant="standard"
-          />
-        </Grid>
         <Grid item xs={12}>
-        <FormControlLabel sx={{display:"flex", justifyContent:"center"}} control={<Checkbox/>} label="¿Es alumno UNAHUR?" />
+        <FormControlLabel control={<Checkbox sx={{display:"flex", justifyContent:"center"}}/>} label="¿Es alumno UNAHUR?" />
           <Box sx={{ display: "flex", justifyContent: "center"}}>
-          
             <Link style={{textDecoration:'none'}} to="/registroPostulante/2">
               <Button variant="contained" color="relaxed">
                 Siguiente
