@@ -24,9 +24,9 @@ export default function AddressForm() {
         <Grid item xs={6} sm={6}>
           <TextField
             required
-            id="nombre"
-            name="Nombre"
-            label="Nombre"
+            id="universidad"
+            name="universidad"
+            label="Universidad"
             fullWidth
             autoComplete="given-name"
             variant="standard"
@@ -35,9 +35,9 @@ export default function AddressForm() {
         <Grid item xs={6} sm={6}>
           <TextField
             required
-            id="apellido"
-            name="Apellido"
-            label="Apellido"
+            id="carrera"
+            name="carrera"
+            label="Carrera"
             fullWidth
             autoComplete="family-name"
             variant="standard"
@@ -46,31 +46,21 @@ export default function AddressForm() {
         <Grid item xs={6}>
           <TextField
             required
-            id="dni"
-            name="dni"
-            label="DNI"
+            id="cantAprobadas"
+            name="cantAprobadas"
+            label="Cantidad de Materias Aprobadas"
             fullWidth
             autoComplete="shipping address-line1"
             variant="standard"
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <TextField
-            id="fechaNacimiento"
-            name="fechaNacimiento"
-            label="Fecha de nacimiento"
-            fullWidth
-            autoComplete="shipping address-line2"
-            variant="standard"
-            type="date"
+            type="number"
           />
         </Grid>
         <Grid item xs={6} sm={6}>
           <TextField
             required
-            id="nacionalidad"
-            name="nacionalidad"
-            label="Nacionalidad"
+            id="idioma"
+            name="idioma"
+            label="Idioma"
             fullWidth
             autoComplete="shipping address-level2"
             variant="standard"
@@ -78,28 +68,19 @@ export default function AddressForm() {
         </Grid>
         <Grid item xs={6} sm={6}>
           <TextField
-            id="provincia"
-            name="provincia"
-            label="Provincia"
+            id="estudios"
+            name="estudios"
+            label="Estudios"
             fullWidth
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={6} sm={6}>
-          <TextField
-            required
-            id="localidad"
-            name="localidad"
-            label="Localidad"
-            fullWidth
-            autoComplete="shipping postal-code"
             variant="standard"
           />
         </Grid>
         <Grid item xs={12}>
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <Link to="/registroPostulante/2">
-              <Button variant="contained" color="secondary">
+        <FormControlLabel sx={{display:"flex", justifyContent:"center"}} control={<Checkbox/>} label="¿Es alumno UNAHUR?" />
+          <Box sx={{ display: "flex", justifyContent: "center"}}>
+          
+            <Link style={{textDecoration:'none'}} to="/registroPostulante/2">
+              <Button variant="contained" color="relaxed">
                 Siguiente
               </Button>
             </Link>
