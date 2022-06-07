@@ -33,6 +33,9 @@ function App() {
           <Route exact path="/registroPostulante">
             <RegistroPostulante/>
           </Route>
+          <Route exact path="/registroPostulante/1">
+            
+          </Route>
           <Route path="*">
             <NotFound/>
           </Route>
