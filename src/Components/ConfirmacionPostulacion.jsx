@@ -42,7 +42,7 @@ export default function InputAdornments() {
             </CardActions>
             </Card>  
             <Box sx={{display:"flex", justifyContent:"center", padding:"1rem"}}>
-                <Link to="/"> <Button size="large" variant="contained" color="secondary">Volver a inicio</Button> </Link>
+                <Link style={{textDecoration:'none'}} to="/"> <Button size="large" variant="contained" color="secondary">Volver a inicio</Button> </Link>
             </Box>
     </Box>
   );

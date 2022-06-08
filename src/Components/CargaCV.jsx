@@ -15,6 +15,6 @@ export default class extends Component {
     });
   }
   render() {
-    return <DropzoneArea dropzoneText="Arrastre o seleccione su CV en formato .PDF" acceptedFiles={['document/*']} onChange={this.handleChange.bind(this)} />;
+    return <DropzoneArea dropzoneText="Arrastre o seleccione su CV en formato .PDF" acceptedFiles={['.pdf']} onChange={this.handleChange.bind(this)} />;
   }
 }
