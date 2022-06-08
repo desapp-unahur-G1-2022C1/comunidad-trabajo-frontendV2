@@ -9,7 +9,7 @@ import NotFound from './Components/NotFound'
 import DescripcionOferta from './Components/DescripcionOferta'
 import RegistroPostulante from './Components/RegistroPostulante';
 import RegistroDatosAcademicos from './Components/RegistroDatosAcademicos'
-
+import RegistroCV from './Components/RegistroCV'
 
 
 function App() {
@@ -38,7 +38,7 @@ function App() {
             <RegistroDatosAcademicos/>
           </Route>
           <Route exact path="/registroPostulante/2">
-            
+            <RegistroCV></RegistroCV>
           </Route>
           <Route path="*">
             <NotFound/>
