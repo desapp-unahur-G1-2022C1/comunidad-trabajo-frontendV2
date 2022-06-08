@@ -80,7 +80,7 @@ const BootstrapDialogTitle = (props) => {
                 <h3 style={{display:"flex"}}>Nombre empresa</h3>
             </Box>
             <Box sx={{padding:"1rem", display:"flex", justifyContent:"center"}}>
-              <Button  size="large" variant="contained" color="secondary" onClick={handleClickOpen} sx={{width:"300px"}}>Postularme</Button> 
+              <Button  size="large" variant="contained" color="relaxed" onClick={handleClickOpen} sx={{width:"300px"}}>Postularme</Button> 
               <BootstrapDialog
               onClose={handleClose}
               aria-labelledby="customized-dialog-title"
