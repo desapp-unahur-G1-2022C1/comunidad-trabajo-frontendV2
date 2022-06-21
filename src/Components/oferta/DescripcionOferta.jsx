@@ -1,11 +1,8 @@
 import * as React from 'react';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
 import { Avatar, Button, ButtonBase, styled, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
-import WorkIcon from '@mui/icons-material/Work';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Dialog from '@mui/material/Dialog';
@@ -14,7 +11,7 @@ import PropTypes from 'prop-types';
 import ConfirmacionPostulacion from './ConfirmacionPostulacion'
 import Grid from '@mui/material/Grid';
 import StoreIcon from '@mui/icons-material/Store';
-import Header from './Header'
+import Header from '../Header'
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({

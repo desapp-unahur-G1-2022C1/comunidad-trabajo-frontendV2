@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import CargaCV from './CargaCV'
-import Header from './Header'
+import Header from '../Header'
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 

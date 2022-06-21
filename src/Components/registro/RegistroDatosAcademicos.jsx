@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Header from "./Header";
+import Header from "../Header";
 import Button from "@mui/material/Button";
 import { Box, Step, Stepper } from "@mui/material";
 import { Link } from "react-router-dom";

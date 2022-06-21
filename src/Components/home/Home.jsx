@@ -1,6 +1,6 @@
-import '../App.css';
+import '../../App.css';
 import React, { Fragment } from "react";
-import Header from "./Header"
+import Header from "../Header"
 import Ofertas from './Ofertas';
 
 import Burger from './Burger';

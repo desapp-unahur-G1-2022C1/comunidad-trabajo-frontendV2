@@ -1,15 +1,14 @@
 import './App.css';
 import React, { Fragment } from "react";
-import Header from "./Components/Header"
-import Home from './Components/Home';
+import Home from './Components/home/Home';
 import { BrowserRouter as Router, Switch , Route, Link } from 'react-router-dom';
 import PerfilUsuarioPrivado from "./Components/PerfilUsuarioPrivado"
-import RegistroPregunta from './Components/RegistroPregunta';
+import RegistroPregunta from './Components/registro/RegistroPregunta';
 import NotFound from './Components/NotFound'
-import DescripcionOferta from './Components/DescripcionOferta'
-import RegistroPostulante from './Components/RegistroPostulante';
-import RegistroDatosAcademicos from './Components/RegistroDatosAcademicos'
-import RegistroCV from './Components/RegistroCV'
+import DescripcionOferta from './Components/oferta/DescripcionOferta'
+import RegistroPostulante from './Components/registro/RegistroPostulante';
+import RegistroDatosAcademicos from './Components/registro/RegistroDatosAcademicos'
+import RegistroCV from './Components/registro/RegistroCV'
 
 
 function App() {
