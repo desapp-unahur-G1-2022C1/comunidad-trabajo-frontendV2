@@ -39,12 +39,13 @@ function App() {
           <Route exact path="/registroPostulante/2">
             <RegistroCV></RegistroCV>
           </Route>
+          <Route exact path="/admin">
+            
+          </Route>
           <Route path="*">
             <NotFound/>
           </Route>
-          <Route path="/admin">
-            
-          </Route>
+          
           </Switch>
 
       </Router>
