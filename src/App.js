@@ -42,6 +42,9 @@ function App() {
           <Route path="*">
             <NotFound/>
           </Route>
+          <Route path="/admin">
+            
+          </Route>
           </Switch>
 
       </Router>
