@@ -32,16 +32,16 @@ export default function MediaCard() {
               image="https://i.blogs.es/deec05/pepsi/450_1000.jpg"
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography gutterBottom variant="h5" component="div"  sx={{height:'4rem'}}>
                 {oferta.titulo_oferta}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" color="text.secondary" sx={{height:'4rem'}}>
                 {oferta.descripcion}
               </Typography>
             </CardContent>
             <CardActions sx={{ display: "flex", justifyContent: "center" }}>
-              <Link to="/descripcionOferta" style={{ textDecoration: "none" }}>
-                <Button size="large" variant="contained" color="relaxed">
+              <Link to="/descripcionOferta" style={{ textDecoration: "none", height:'4rem'}}>
+                <Button size="large" variant="contained" color="relaxed" >
                   Ver oferta
                 </Button>
               </Link>

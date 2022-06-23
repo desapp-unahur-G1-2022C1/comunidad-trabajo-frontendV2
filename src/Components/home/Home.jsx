@@ -14,8 +14,7 @@ const Home = () => {
     <Fragment>
       <Header/>
         <Burger/>
-        <div style={{display:"flex"}}>
-          <Filtros/>
+        <div style={{display:"flex", justifyContent:"center"}}>
           <Ofertas/>
         </div>
       </Fragment> );
