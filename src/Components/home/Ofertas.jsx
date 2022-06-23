@@ -35,7 +35,7 @@ export default function MediaCard() {
               <Typography gutterBottom variant="h5" component="div"  sx={{height:'4rem'}}>
                 {oferta.titulo_oferta}
               </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{height:'4rem'}}>
+              <Typography variant="body2" color="text.secondary" sx={{height:'4rem', textOverflow: 'ellipsis' }}>
                 {oferta.descripcion}
               </Typography>
             </CardContent>
