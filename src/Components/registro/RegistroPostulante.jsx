@@ -33,7 +33,7 @@ export default function AddressForm() {
         Datos personales
       </Typography>
       <Grid container spacing={3} sx={{ padding: "2rem", paddingTop: "0" }}>
-        <Grid item xs={6} sm={6}>
+        <Grid item xs={12} sm={6}>
           <TextField
             onChange = {(e) => {
               setNombreCampo(e.target.value);
@@ -55,7 +55,7 @@ export default function AddressForm() {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={6} sm={6}>
+        <Grid item xs={12} sm={6}>
           <TextField
             onChange = {(e) => {
               setApellidoCampo(e.target.value);
@@ -77,7 +77,7 @@ export default function AddressForm() {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <TextField
             onChange = {(e) => {
               setDniCampo(e.target.value);
@@ -99,7 +99,7 @@ export default function AddressForm() {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="fechaNacimiento"
             name="fechaNacimiento"
@@ -110,7 +110,7 @@ export default function AddressForm() {
             type="date"
           />
         </Grid>
-        <Grid item xs={6} sm={6}>
+        <Grid item xs={12} sm={6}>
           <TextField
             required
             id="nacionalidad"
@@ -121,7 +121,7 @@ export default function AddressForm() {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={6} sm={6}>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="provincia"
             name="provincia"
@@ -130,7 +130,7 @@ export default function AddressForm() {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={6} sm={6}>
+        <Grid item xs={12} sm={6}>
           <TextField
             required
             id="localidad"
@@ -141,16 +141,16 @@ export default function AddressForm() {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={12}>
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Grid item xs={12} sm={6}>
+        </Grid>
+      </Grid>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Link to="/registroPostulante/1" style={{ textDecoration: 'none'}}>
               <Button variant="contained" color="relaxed">
                 Siguiente
               </Button>
             </Link>
           </Box>
-        </Grid>
-      </Grid>
     </React.Fragment>
   );
 }

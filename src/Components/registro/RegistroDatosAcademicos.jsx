@@ -21,7 +21,7 @@ export default function AddressForm() {
         Datos Académicos
       </Typography>
       <Grid container spacing={3} sx={{ padding: "2rem", paddingTop: "0" }}>
-      <Grid item xs={6} sm={6}>
+      <Grid item xs={12} sm={6}>
           <TextField
             id="estudios"
             name="estudios"
@@ -30,7 +30,7 @@ export default function AddressForm() {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={6} sm={6}>
+        <Grid item xs={12} sm={6}>
           <TextField
             required
             id="universidad"
@@ -41,7 +41,7 @@ export default function AddressForm() {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={6} sm={6}>
+        <Grid item xs={12} sm={6}>
           <TextField
             required
             id="carrera"
@@ -52,7 +52,7 @@ export default function AddressForm() {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <TextField
             required
             id="cantAprobadas"
@@ -64,7 +64,7 @@ export default function AddressForm() {
             type="number"
           />
         </Grid>
-        <Grid item xs={6} sm={6}>
+        <Grid item xs={12} sm={6}>
           <TextField
             required
             id="idioma"
@@ -75,17 +75,16 @@ export default function AddressForm() {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={12}>
-        <FormControlLabel control={<Checkbox sx={{display:"flex", justifyContent:"center"}}/>} label="¿Es alumno UNAHUR?" />
-          <Box sx={{ display: "flex", justifyContent: "center"}}>
+       
+      </Grid>
+      <FormControlLabel control={<Checkbox sx={{display:"flex", justifyContent:"center", marginLeft:"2rem"}}/>} label="¿Es alumno UNAHUR?" />
+      <Box sx={{ display: "flex", justifyContent: "center"}}>
             <Link style={{textDecoration:'none'}} to="/registroPostulante/2">
               <Button variant="contained" color="relaxed">
                 Siguiente
               </Button>
             </Link>
           </Box>
-        </Grid>
-      </Grid>
     </React.Fragment>
   );
 }
