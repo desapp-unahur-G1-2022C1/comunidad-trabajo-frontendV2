@@ -10,6 +10,18 @@ import { Box, Step, Stepper } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function AddressForm() {
+  const [nombreCampo, setNombreCampo] = React.useState("");
+  const [nombreLeyenda, setNombreLeyenda] = React.useState("");
+  const [errorNombre, setErrorNombre] = React.useState(false);
+
+  const [apellidoCampo, setApellidoCampo] = React.useState("");
+  const [apellidoLeyenda, setApellidoLeyenda] = React.useState("");
+  const [errorApellido, setErrorApellido] = React.useState(false);
+
+  const [dniCampo, setDniCampo] = React.useState("");
+  const [dniLeyenda, setDniLeyenda] = React.useState("");
+  const [errorDni, setErrorDni] = React.useState(false);
+
   return (
     <React.Fragment>
       <Header />
@@ -23,7 +35,18 @@ export default function AddressForm() {
       <Grid container spacing={3} sx={{ padding: "2rem", paddingTop: "0" }}>
         <Grid item xs={6} sm={6}>
           <TextField
-            required
+            onChange = {(e) => {
+              setNombreCampo(e.target.value);
+              if(nombreCampo.length==0){
+                setErrorNombre(true);
+                setNombreLeyenda("Este campo no puede estar vacio");
+              }else{
+                setErrorNombre(false);
+                setNombreLeyenda('');
+              }
+            }}
+            error = {errorNombre}
+            helperText = {nombreLeyenda}
             id="nombre"
             name="Nombre"
             label="Nombre"
@@ -34,7 +57,18 @@ export default function AddressForm() {
         </Grid>
         <Grid item xs={6} sm={6}>
           <TextField
-            required
+            onChange = {(e) => {
+              setApellidoCampo(e.target.value);
+              if(apellidoCampo.length==0){
+                setErrorApellido(true);
+                setApellidoLeyenda("Este campo no puede estar vacio");
+              }else{
+                setErrorApellido(false);
+                setApellidoLeyenda('');
+              }
+            }}
+            error = {errorApellido}
+            helperText = {apellidoLeyenda}
             id="apellido"
             name="Apellido"
             label="Apellido"
@@ -45,7 +79,18 @@ export default function AddressForm() {
         </Grid>
         <Grid item xs={6}>
           <TextField
-            required
+            onChange = {(e) => {
+              setDniCampo(e.target.value);
+              if(dniCampo.length==0){
+                setErrorDni(true);
+                setDniLeyenda("Este campo no puede estar vacio");
+              }else{
+                setErrorDni(false);
+                setDniLeyenda('');
+              }
+            }}
+            error = {errorDni}
+            helperText = {dniLeyenda}
             id="dni"
             name="dni"
             label="DNI"
