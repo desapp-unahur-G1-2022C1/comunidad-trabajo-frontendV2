@@ -36,7 +36,14 @@ export default function MediaCard() {
                 {oferta.titulo_oferta}
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{height:'4rem', textOverflow: 'ellipsis' }}>
-                {oferta.descripcion}
+               
+                {
+                  oferta.descripcion.length < 120
+                  ?
+                  oferta.descripcion
+                  :
+                  <p>{oferta.descripcion.substring(0,120)}...</p>
+                }
               </Typography>
             </CardContent>
             <CardActions sx={{ display: "flex", justifyContent: "center" }}>
