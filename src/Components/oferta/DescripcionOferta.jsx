@@ -13,6 +13,8 @@ import Grid from '@mui/material/Grid';
 import StoreIcon from '@mui/icons-material/Store';
 import Header from '../Header'
 import { useState } from 'react';
+import Ofertas from '../home/Ofertas'
+import { useParams } from 'react-router-dom';
 
 
 
@@ -56,14 +58,14 @@ const BootstrapDialogTitle = (props) => {
     onClose: PropTypes.func.isRequired,
   };
 
-  export default function CustomizedDialogs() {
-
+    const CustomizedDialogs = () => {
+    const {id} = useParams()
     const [tituloOferta, setTituloOferta] = useState(); 
     const [nombreEmpresa, setNombreEmpresa] = useState();
     const [descripcion, setDescripcion] = useState();
     const [zona, setZona] = useState();
     const [salario, setSalario] = useState();
-    const API_URL = `https://comunidad-de-trabajo.herokuapp.com/ofertas/3`
+    const API_URL = `https://comunidad-de-trabajo.herokuapp.com/ofertas/${id}`
     fetch(API_URL)
     .then(res => res.json())
     .then(datos =>{
@@ -116,14 +118,15 @@ const BootstrapDialogTitle = (props) => {
         <Box sx={{padding:"1rem", maxWidth:"30rem"}}>
             <Box sx={{borderBottom:"#009688 2px solid"}}> <h3>Descripcion:</h3> <Typography sx={{fontSize:"20px"}}>  {descripcion}</Typography></Box>
             <Box sx={{display:"flex", borderBottom:"#009688 2px solid"}}> <h3>Zona de trabajo:</h3> <Typography sx={{padding:"1rem", fontSize:"20px"}}>{zona}</Typography></Box>
-            <Box sx={{display:"flex", borderBottom:"#009688 2px solid"}}> <h3>Horario:</h3> <Typography sx={{padding:"1rem", fontSize:"20px"}}>  9hs a 18hs</Typography></Box>
-            <Box sx={{display:"flex", borderBottom:"#009688 2px solid"}}> <h3>Idiomas:</h3> <Typography sx={{padding:"1rem", fontSize:"20px"}}>  Ingles Basico</Typography></Box>
-            <Box sx={{display:"flex", borderBottom:"#009688 2px solid"}}> <h3>Modalidad de trabajo:</h3> <Typography sx={{padding:"1rem", fontSize:"20px"}}>  Hibrido</Typography></Box>
+            <Box sx={{display:"flex", borderBottom:"#009688 2px solid"}}> <h3>Horario:</h3> <Typography sx={{padding:"1rem", fontSize:"20px"}}></Typography></Box>
+            <Box sx={{display:"flex", borderBottom:"#009688 2px solid"}}> <h3>Idiomas:</h3> <Typography sx={{padding:"1rem", fontSize:"20px"}}></Typography></Box>
+            <Box sx={{display:"flex", borderBottom:"#009688 2px solid"}}> <h3>Modalidad de trabajo:</h3> <Typography sx={{padding:"1rem", fontSize:"20px"}}></Typography></Box>
             <Box sx={{display:"flex", borderBottom:"#009688 2px solid"}}> <h3>Salario:</h3> <Typography sx={{padding:"1rem", fontSize:"20px"}}>${salario}</Typography></Box>
-            <Box sx={{display:"flex"}}> <h3>Nombre del representante:</h3> <Typography sx={{padding:"1rem", fontSize:"20px"}}>  Juan Roman Riquelme</Typography></Box>
+            <Box sx={{display:"flex"}}> <h3>Nombre del representante:</h3> <Typography sx={{padding:"1rem", fontSize:"20px"}}></Typography></Box>
         </Box>
         </Grid>
       </Box>
     </React.Fragment>
   );
 }
+export default CustomizedDialogs;

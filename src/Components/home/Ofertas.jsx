@@ -23,9 +23,9 @@ export default function MediaCard() {
 
   return (
     <Fragment>
-      <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+      <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}> 
         {listaOfertas.map((oferta) => (
-          <Card sx={{ maxWidth: 250, margin: "1rem" }}>
+          <Card sx={{ maxWidth: 250, margin: "1rem" }} key = {oferta.id_oferta}>
             <CardMedia
               component="img"
               height="140"
@@ -47,7 +47,7 @@ export default function MediaCard() {
               </Typography>
             </CardContent>
             <CardActions sx={{ display: "flex", justifyContent: "center" }}>
-              <Link to="/descripcionOferta" style={{ textDecoration: "none", height:'4rem'}}>
+              <Link to={`/descripcionOferta/${oferta.id_oferta}`} style={{ textDecoration: "none", height:'4rem'}}>
                 <Button size="large" variant="contained" color="relaxed" >
                   Ver oferta
                 </Button>

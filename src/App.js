@@ -27,7 +27,7 @@ function App() {
           <Route exact path="/registroPregunta">
             <RegistroPregunta/>
           </Route>
-          <Route exact path="/descripcionOferta">
+          <Route exact path="/descripcionOferta/:id">
             <DescripcionOferta/>
           </Route>
           <Route exact path="/registroPostulante">
