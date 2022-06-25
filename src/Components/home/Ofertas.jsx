@@ -14,16 +14,21 @@ export default function MediaCard() {
   const [listaOfertas, setListaOfertas] = useState([]);
 
   const API_URL = `https://comunidad-de-trabajo.herokuapp.com/ofertas`;
-  fetch(API_URL)
-    .then((res) => res.json())
-    .then((datos) => {
-      setListaOfertas(datos.contenido);
-    })
-    .catch((error) => console.log(error));
 
+  const ofertasAPI = async () => {
+    try {
+      const api = await fetch(API_URL);
+      const datos = await api.json();
+      setListaOfertas(datos.contenido);
+      } catch (error) {
+        console.log(error);
+    }
+  }
+  ofertasAPI()
   return (
     <Fragment>
       <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}> 
+      
         {listaOfertas.map((oferta) => (
           <Card sx={{ maxWidth: 250, margin: "1rem" }} key = {oferta.id_oferta}>
             <CardMedia
