@@ -1,5 +1,5 @@
 import './App.css';
-import React, { Fragment } from "react";
+import React from "react";
 import Home from './Components/home/Home';
 import { BrowserRouter as Router, Switch , Route, Link } from 'react-router-dom';
 import PerfilUsuarioPrivado from "./Components/PerfilUsuarioPrivado"
@@ -9,6 +9,7 @@ import DescripcionOferta from './Components/oferta/DescripcionOferta'
 import RegistroPostulante from './Components/registro/RegistroPostulante';
 import RegistroDatosAcademicos from './Components/registro/RegistroDatosAcademicos'
 import RegistroCV from './Components/registro/RegistroCV'
+import PanelAdmin from './Components/panelAdmin/PanelAdmin'
 
 
 function App() {
@@ -40,7 +41,7 @@ function App() {
             <RegistroCV></RegistroCV>
           </Route>
           <Route exact path="/admin">
-            
+            <PanelAdmin/>
           </Route>
           <Route path="*">
             <NotFound/>
