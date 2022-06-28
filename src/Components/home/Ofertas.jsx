@@ -52,7 +52,7 @@ export default function MediaCard() {
               </Typography>
             </CardContent>
             <CardActions sx={{ display: "flex", justifyContent: "center" }}>
-              <Link to={`/descripcionOferta/${oferta.id_oferta}`} style={{ textDecoration: "none", height:'4rem'}}>
+              <Link to={`/oferta/${oferta.id_oferta}`} style={{ textDecoration: "none", height:'4rem'}}>
                 <Button size="large" variant="contained" color="relaxed" >
                   Ver oferta
                 </Button>

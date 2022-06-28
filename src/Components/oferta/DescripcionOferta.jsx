@@ -66,17 +66,21 @@ const BootstrapDialogTitle = (props) => {
     const [zona, setZona] = useState();
     const [salario, setSalario] = useState();
     const API_URL = `https://comunidad-de-trabajo.herokuapp.com/ofertas/${id}`
-    fetch(API_URL)
-    .then(res => res.json())
-    .then(datos =>{
-      setTituloOferta(datos.titulo_oferta)
-      setNombreEmpresa(datos.fk_id_cuit)
-      setDescripcion(datos.descripcion)
-      setZona(datos.zona_trabajo)
-      setSalario(datos.remuneracion)
-    })
-    .catch(error=>console.log(error));
     
+    const desrcripcionAPI = async () => {
+    try{
+    const api = await fetch(API_URL);
+    const datos = await api.json();
+    setTituloOferta(datos.titulo_oferta);
+    setNombreEmpresa(datos.fk_id_cuit);
+    setDescripcion(datos.descripcion);
+    setZona(datos.zona_trabajo);
+    setSalario(datos.remuneracion);
+    } catch(error){
+      console.log(error);
+    }
+  }
+
     
 
     const [open, setOpen] = React.useState(false);
@@ -87,7 +91,7 @@ const BootstrapDialogTitle = (props) => {
     const handleClose = () => {
       setOpen(false);
     };
-    
+  desrcripcionAPI()
   return (
     <React.Fragment>
       <Header/>
