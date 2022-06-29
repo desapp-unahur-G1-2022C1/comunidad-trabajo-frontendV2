@@ -10,6 +10,42 @@ import { Box, Step, Stepper } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function AddressForm() {
+
+  const listaIDs = ['datosLogin','datosPersonales', 'datosAcademicos']
+
+  var IdActual = 0
+  
+  function mostrarSiguiente(){
+    document.getElementById(listaIDs[IdActual + 1]).style.display = 'block';
+  }
+
+  function mostrarAnterior(){
+    document.getElementById(listaIDs[IdActual - 1]).style.display = 'block';
+  }
+
+  function ocultarActual(){
+    document.getElementById(listaIDs[IdActual]).style.display = 'none'; 
+  }
+
+  function siguiente(){
+    if (IdActual != listaIDs.length - 1){
+      ocultarActual()
+      mostrarSiguiente()
+      IdActual = IdActual + 1
+    }
+  }
+
+
+  function anterior(){
+    
+    if (IdActual != 0){
+      ocultarActual()
+      mostrarAnterior()
+      IdActual = IdActual - 1
+    }
+  }
+
+
   const [nombreCampo, setNombreCampo] = React.useState("");
   const [nombreLeyenda, setNombreLeyenda] = React.useState("");
   const [errorNombre, setErrorNombre] = React.useState(false);
@@ -25,6 +61,25 @@ export default function AddressForm() {
   return (
     <React.Fragment>
       <Header />
+
+      <div id='datosLogin'>
+        <TextField
+              id="Email"
+              name="Email"
+              label="Email"
+              fullWidth
+              variant="standard"
+        />
+        <TextField
+              id="Contra"
+              name="Contra"
+              label="Contra"
+              fullWidth
+              variant="standard"
+        />
+      </div>
+
+      <div id='datosPersonales' style={{display:'none'}}>
       <Typography
         variant="h6"
         gutterBottom
@@ -144,13 +199,86 @@ export default function AddressForm() {
         <Grid item xs={12} sm={6}>
         </Grid>
       </Grid>
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <Link to="/registroPostulante/1" style={{ textDecoration: 'none'}}>
-              <Button variant="contained" color="relaxed">
-                Siguiente
-              </Button>
-            </Link>
-          </Box>
+      </div>
+
+
+      <div id='datosAcademicos' style={{display:'none'}}>
+      <Typography
+        variant="h6"
+        gutterBottom
+        sx={{ display: "flex", justifyContent: "center", padding: "1rem" }}
+      >
+        Datos Académicos
+      </Typography>
+      <Grid container spacing={3} sx={{ padding: "2rem", paddingTop: "0" }}>
+      <Grid item xs={12} sm={6}>
+          <TextField
+            id="estudios"
+            name="estudios"
+            label="Estudios"
+            fullWidth
+            variant="standard"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="universidad"
+            name="universidad"
+            label="Universidad"
+            fullWidth
+            autoComplete="given-name"
+            variant="standard"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="carrera"
+            name="carrera"
+            label="Carrera"
+            fullWidth
+            autoComplete="family-name"
+            variant="standard"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="cantAprobadas"
+            name="cantAprobadas"
+            label="Cantidad de Materias Aprobadas"
+            fullWidth
+            autoComplete="shipping address-line1"
+            variant="standard"
+            type="number"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="idioma"
+            name="idioma"
+            label="Idioma"
+            fullWidth
+            autoComplete="shipping address-level2"
+            variant="standard"
+          />
+        </Grid>
+       
+      </Grid>
+      <FormControlLabel control={<Checkbox sx={{display:"flex", justifyContent:"center", marginLeft:"2rem"}}/>} label="¿Es alumno UNAHUR?" />
+      </div>
+
+
+      <Box sx={{ display: "flex", justifyContent: "center", }}>
+        <Button variant="contained" color="relaxed" onClick={anterior}>
+          Anterior
+        </Button>
+        <Button variant="contained" color="relaxed" onClick={siguiente}>
+          Siguiente
+        </Button>
+      </Box>
     </React.Fragment>
   );
 }
