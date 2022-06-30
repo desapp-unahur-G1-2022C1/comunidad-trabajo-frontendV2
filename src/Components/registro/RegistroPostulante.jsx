@@ -1,19 +1,69 @@
-import * as React from "react";
+import React, { Fragment } from 'react';
+import ReactDOM from 'react-dom';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Header from "../Header";
-import Button from "@mui/material/Button";
 import { Box, Step, Stepper } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useState } from 'react';
+import { TextFieldsOutlined } from '@material-ui/icons';
 
-export default function AddressForm() {
 
+const validationSchema = yup.object({
+  email: yup
+    .string('Enter your email')
+    .email('Enter a valid email')
+    .required('Email is required'),
+  password: yup
+    .string('Enter your password')
+    .min(8, 'Password should be of minimum 8 characters length')
+    .required('Password is required'),
+  nombre: yup
+    .string('Ingrese su nombre')
+    .min(1, 'Este campo no puede estar vacio')
+    .required('Nombre requerido'),
+  apellido: yup
+    .string('Ingrese su apellido')
+    .min(1, 'Este campo no puede estar vacio')
+    .required('Apellido requerido'),
+  dni: yup
+    .number('Ingrese su DNI')
+    .min(999999, 'Este campo debe ser de al menos 7 digitos')
+    .required('DNI requerido'),
+  localidad: yup
+    .string('Ingrese su localidad')
+    .min(1, 'Este campo no puede estar vacio'),
+  nacionalidad: yup
+    .string('Ingrese su nacionalidad')
+    .min(1, 'Este campo no puede estar vacio'),
+  fechaNac: yup
+    .string('Ingrese su fecha de nacimiento')
+    .min(1, 'Este campo no puede estar vacio'),
+  universidad: yup
+    .string('Ingrese su DNI')
+    .min('Este campo debe ser de al menos 7 digitos'),
+  carrera: yup
+    .string('Ingrese su localidad')
+    .min(1, 'Este campo no puede estar vacio'),
+  cantMateriasAprobadas: yup
+    .string('Ingrese su nacionalidad')
+    .min(0, 'Este campo no puede estar vacio'),
+  idiomas: yup
+    .string('Ingrese su fecha de nacimiento')
+    .min(1, 'Este campo no puede estar vacio'),
+});
+
+export default function WithMaterialUI () {
   const listaIDs = ['datosLogin','datosPersonales', 'datosAcademicos']
 
-  var IdActual = 0
+  const [IdActual, setIdActual] = useState(0)
+  const [estadoSiguiente, setEstadoSiguiente] = useState(false)
   
   function mostrarSiguiente(){
     document.getElementById(listaIDs[IdActual + 1]).style.display = 'block';
@@ -31,20 +81,235 @@ export default function AddressForm() {
     if (IdActual != listaIDs.length - 1){
       ocultarActual()
       mostrarSiguiente()
-      IdActual = IdActual + 1
+      setIdActual(IdActual + 1)
     }
   }
 
 
   function anterior(){
-    
     if (IdActual != 0){
       ocultarActual()
       mostrarAnterior()
-      IdActual = IdActual - 1
+      setIdActual(IdActual - 1)
     }
   }
 
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+      nombre:'',
+      apellido:'',
+      dni:'',
+      nacionalidad:'',
+      localidad:'',
+      fechaNac:'',
+      universidad:'',
+      carrera:'',
+      cantMateriasAprobadas:'',
+      idiomas:'',
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+      console.log(values)
+    },
+  });
+
+  return (
+    <Fragment>
+      <Header />
+    <div 
+    style={{
+      textAlign:'center',
+      display:'flex',
+      alignItems:'center',
+      justifyContent:'center',
+      flexDirection: "column",
+      height: '100vh',
+      }}
+    >
+      <form onSubmit={formik.handleSubmit} style={{width:"50%", padding:'2rem'}}>
+        <div id='datosLogin'>
+          <TextField style={{margin:"1rem"}}
+            id="email"
+            name="email"
+            label="Email"
+            fullWidth
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && Boolean(formik.errors.email)  && true}
+            helperText={formik.touched.email && formik.errors.email}
+          />
+          <TextField  style={{margin:"1rem"}}
+            id="password"
+            name="password"
+            label="Password"
+            type="password"
+            variant="standard"
+            fullWidth
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            error={formik.touched.password && Boolean(formik.errors.password)  && true}
+            helperText={formik.touched.password && formik.errors.password}
+          />
+        </div> 
+        <div id='datosPersonales' style={{display:'none'}}>
+          <TextField style={{margin:"1rem"}}
+            id="nombre"
+            name="nombre"
+            label="Nombre"
+            fullWidth
+            value={formik.values.nombre}
+            onChange={formik.handleChange}
+            error={formik.touched.nombre && Boolean(formik.errors.nombre) && true}
+            helperText={formik.touched.nombre && formik.errors.nombre}
+          />
+          <TextField style={{margin:"1rem"}}
+            id="apellido"
+            name="apellido"
+            label="Apellido"
+            fullWidth
+            value={formik.values.apellido}
+            onChange={formik.handleChange}
+            error={formik.touched.apellido && Boolean(formik.errors.apellido)  && true}
+            helperText={formik.touched.apellido && formik.errors.apellido}
+          />
+          <TextField style={{margin:"1rem"}}
+            id="dni"
+            name="dni"
+            label="DNI"
+            fullWidth
+            value={formik.values.dni}
+            onChange={formik.handleChange}
+            error={formik.touched.dni && Boolean(formik.errors.dni)  && true}
+            helperText={formik.touched.dni && formik.errors.dni}
+          />
+          <TextField style={{margin:"1rem"}}
+            id="nacionalidad"
+            name="nacionalidad"
+            label="Nacionalidad"
+            fullWidth
+            value={formik.values.nacionalidad}
+            onChange={formik.handleChange}
+            error={formik.touched.nacionalidad && Boolean(formik.errors.nacionalidad)}
+            helperText={formik.touched.nacionalidad && formik.errors.nacionalidad}
+          />
+          <TextField style={{margin:"1rem"}}
+            id="localidad"
+            name="localidad"
+            label="Localidad"
+            fullWidth
+            value={formik.values.localidad}
+            onChange={formik.handleChange}
+            error={formik.touched.localidad && Boolean(formik.errors.localidad)}
+            helperText={formik.touched.localidad && formik.errors.localidad}
+          />
+          <TextField style={{margin:"1rem"}}
+            id="fechaNac"
+            name="fechaNac"
+            label="Fecha de nacimiento"
+            type="date"
+            fullWidth
+            value={formik.values.fechaNac}
+            onChange={formik.handleChange}
+            error={formik.touched.fechaNac && Boolean(formik.errors.fechaNac)}
+            helperText={formik.touched.fechaNac && formik.errors.fechaNac}
+          />
+        </div>
+
+        <div id='datosAcademicos' style={{display:'none'}}>
+          <TextField style={{margin:"1rem"}}
+            id="universidad"
+            name="universidad"
+            label="Universidad"
+            fullWidth
+            value={formik.values.universidad}
+            onChange={formik.handleChange}
+            error={formik.touched.universidad && Boolean(formik.errors.universidad) && true}
+            helperText={formik.touched.universidad && formik.errors.universidad}
+          />
+          <TextField style={{margin:"1rem"}}
+            id="carrera"
+            name="carrera"
+            label="carrera"
+            fullWidth
+            value={formik.values.carrera}
+            onChange={formik.handleChange}
+            error={formik.touched.carrera && Boolean(formik.errors.carrera)  && true}
+            helperText={formik.touched.carrera && formik.errors.carrera}
+          />
+          <TextField style={{margin:"1rem"}}
+            id="cantMateriasAprobadas"
+            name="cantMateriasAprobadas"
+            label="Cantidad de materias aprobadas"
+            fullWidth
+            value={formik.values.cantMateriasAprobadas}
+            onChange={formik.handleChange}
+            error={formik.touched.cantMateriasAprobadas && Boolean(formik.errors.cantMateriasAprobadas)  && true}
+            helperText={formik.touched.cantMateriasAprobadas && formik.errors.cantMateriasAprobadas}
+          />
+          <TextField style={{margin:"1rem"}}
+            id="idiomas"
+            name="idiomas"
+            label="Idiomas"
+            fullWidth
+            value={formik.values.idiomas}
+            onChange={formik.handleChange}
+            error={formik.touched.idiomas && Boolean(formik.errors.idiomas)}
+            helperText={formik.touched.idiomas && formik.errors.idiomas}
+          />
+        </div>
+        {
+          IdActual == listaIDs.length - 1
+          ?
+          <Box sx={{justifyContent:'center'}}>
+          <Button color="primary" variant="contained" onClick={anterior}>
+            Anterior
+          </Button>
+          <Button color="secondary" variant="contained" type='submit'>
+            Confirmar
+          </Button>
+          </Box>
+          :
+          <div></div>
+        }
+      </form>
+      {
+          IdActual != listaIDs.length - 1
+          ?
+          <Box sx={{justifyContent:'center'}}>
+          <Button color="primary" variant="contained" onClick={anterior}>
+            Anterior
+          </Button>
+          <Button color="primary" variant="contained" onClick={siguiente} disabled={estadoSiguiente}>
+            Siguiente
+          </Button>
+         </Box>
+         :
+         <div></div>
+        }
+    </div>
+    </Fragment>
+  );
+};
+
+
+/* import * as React from "react";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Header from "../Header";
+import Button from "@mui/material/Button";
+import { Box, Step, Stepper } from "@mui/material";
+import { Link } from "react-router-dom";
+
+export default function AddressForm() {
+
+  const listaIDs = ['datosLogin','datosPersonales', 'datosAcademicos']
 
   const [nombreCampo, setNombreCampo] = React.useState("");
   const [nombreLeyenda, setNombreLeyenda] = React.useState("");
@@ -58,26 +323,108 @@ export default function AddressForm() {
   const [dniLeyenda, setDniLeyenda] = React.useState("");
   const [errorDni, setErrorDni] = React.useState(false);
 
+  const [emailCampo, setEmailCampo] = React.useState("");
+  const [emailLeyenda, setEmailLeyenda] = React.useState("");
+  const [errorEmail, setErrorEmail] = React.useState(false);
+
+  const [contraCampo, setContraCampo] = React.useState("");
+  const [contraLeyenda, setContraLeyenda] = React.useState("");
+  const [errorContra, setErrorContra] = React.useState(false);
+
+  const [estadoBotonSiguiente, setEstadoBotonSiguiente] = React.useState(false)
+
+  var IdActual = 0
+  
+  function mostrarSiguiente(){
+    document.getElementById(listaIDs[IdActual + 1]).style.display = 'block';
+  }
+
+  function mostrarAnterior(){
+    document.getElementById(listaIDs[IdActual - 1]).style.display = 'block';
+  }
+
+  function ocultarActual(){
+    document.getElementById(listaIDs[IdActual]).style.display = 'none'; 
+  }
+
+  function siguiente(){ 
+    if (validar == true){
+      setEstadoBotonSiguiente(true)
+    } else{
+      if (IdActual != listaIDs.length - 1){
+        ocultarActual()
+        mostrarSiguiente()
+        IdActual = IdActual + 1
+      }
+    }
+  }
+
+
+  function anterior(){
+    
+    if (IdActual != 0){
+      ocultarActual()
+      mostrarAnterior()
+      IdActual = IdActual - 1
+    }
+  }
+
+  function validar(){
+    let incorrecto = false 
+    if (errorEmail == true){
+      incorrecto = true
+    }
+    return incorrecto
+  }
+  
   return (
     <React.Fragment>
       <Header />
-
+      <Grid container spacing={3} sx={{ padding: "2rem", paddingTop: "6rem", justifyContent:'center'}}>
+        <Grid item xs={6} sm={12}></Grid>
       <div id='datosLogin'>
+      <TextField
+            onChange = {(e) => {
+              setEmailCampo(e.target.value);
+              if(emailCampo.length==0){
+                setErrorEmail(true);
+                setEmailLeyenda("Este campo no puede estar vacio");
+              }else{
+                setErrorEmail(false);
+                setEmailLeyenda('');
+              }
+            }}
+            error = {errorEmail}
+            helperText = {emailLeyenda}
+            id="email"
+            name="Email"
+            label="Email"
+            
+            autoComplete="given-name"
+            variant="standard"
+          />
         <TextField
-              id="Email"
-              name="Email"
-              label="Email"
-              fullWidth
-              variant="standard"
-        />
-        <TextField
-              id="Contra"
-              name="Contra"
-              label="Contra"
-              fullWidth
-              variant="standard"
-        />
+            onChange = {(e) => {
+              setContraCampo(e.target.value);
+              if(contraCampo.length==0){
+                setErrorContra(true);
+                setErrorContra("Este campo no puede estar vacio");
+              }else{
+                setErrorContra(false);
+                setContraLeyenda('');
+              }
+            }}
+            error = {errorContra}
+            helperText = {contraLeyenda}
+            id="Contra"
+            name="Contrasena"
+            label="Contrasena"
+            
+            autoComplete="given-name"
+            variant="standard"
+          />
       </div>
+      </Grid>
 
       <div id='datosPersonales' style={{display:'none'}}>
       <Typography
@@ -105,7 +452,7 @@ export default function AddressForm() {
             id="nombre"
             name="Nombre"
             label="Nombre"
-            fullWidth
+            
             autoComplete="given-name"
             variant="standard"
           />
@@ -127,7 +474,7 @@ export default function AddressForm() {
             id="apellido"
             name="Apellido"
             label="Apellido"
-            fullWidth
+            
             autoComplete="family-name"
             variant="standard"
           />
@@ -149,7 +496,7 @@ export default function AddressForm() {
             id="dni"
             name="dni"
             label="DNI"
-            fullWidth
+            
             autoComplete="shipping address-line1"
             variant="standard"
           />
@@ -159,7 +506,7 @@ export default function AddressForm() {
             id="fechaNacimiento"
             name="fechaNacimiento"
             label="Fecha de nacimiento"
-            fullWidth
+            
             autoComplete="shipping address-line2"
             variant="standard"
             type="date"
@@ -171,7 +518,7 @@ export default function AddressForm() {
             id="nacionalidad"
             name="nacionalidad"
             label="Nacionalidad"
-            fullWidth
+            
             autoComplete="shipping address-level2"
             variant="standard"
           />
@@ -181,7 +528,7 @@ export default function AddressForm() {
             id="provincia"
             name="provincia"
             label="Provincia"
-            fullWidth
+            
             variant="standard"
           />
         </Grid>
@@ -191,7 +538,7 @@ export default function AddressForm() {
             id="localidad"
             name="localidad"
             label="Localidad"
-            fullWidth
+            
             autoComplete="shipping postal-code"
             variant="standard"
           />
@@ -216,7 +563,7 @@ export default function AddressForm() {
             id="estudios"
             name="estudios"
             label="Estudios"
-            fullWidth
+            
             variant="standard"
           />
         </Grid>
@@ -226,7 +573,7 @@ export default function AddressForm() {
             id="universidad"
             name="universidad"
             label="Universidad"
-            fullWidth
+            
             autoComplete="given-name"
             variant="standard"
           />
@@ -237,7 +584,7 @@ export default function AddressForm() {
             id="carrera"
             name="carrera"
             label="Carrera"
-            fullWidth
+            
             autoComplete="family-name"
             variant="standard"
           />
@@ -248,7 +595,7 @@ export default function AddressForm() {
             id="cantAprobadas"
             name="cantAprobadas"
             label="Cantidad de Materias Aprobadas"
-            fullWidth
+            
             autoComplete="shipping address-line1"
             variant="standard"
             type="number"
@@ -260,7 +607,7 @@ export default function AddressForm() {
             id="idioma"
             name="idioma"
             label="Idioma"
-            fullWidth
+            
             autoComplete="shipping address-level2"
             variant="standard"
           />
@@ -275,10 +622,10 @@ export default function AddressForm() {
         <Button variant="contained" color="relaxed" onClick={anterior}>
           Anterior
         </Button>
-        <Button variant="contained" color="relaxed" onClick={siguiente}>
+        <Button disabled={estadoBotonSiguiente} variant="contained" color="relaxed" onClick={siguiente} >
           Siguiente
         </Button>
       </Box>
     </React.Fragment>
   );
-}
+} */
