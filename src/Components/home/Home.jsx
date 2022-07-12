@@ -13,16 +13,20 @@ import BarraBusqueda from './BarraBusqueda';
 const Home = () => {
 
   const [listaOfertas, setListaOfertas] = useState([]);
+  const [llamado, setLlamado] = useState(false)
 
   const API_URL = `https://comunidad-de-trabajo.herokuapp.com/ofertas`;
 
   const primerLlamado = async () => {
-    try{
-      const api = await fetch(API_URL);
-      const datos = await api.json();
-      setListaOfertas(datos.ofertas.rows)
-    } catch (error) {
-      console.log(error)
+    if (llamado === false){
+      try{
+        const api = await fetch(API_URL);
+        const datos = await api.json();
+        setListaOfertas(datos.ofertas.rows)
+        setLlamado(true)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
   
@@ -40,18 +44,11 @@ const Home = () => {
         console.log(err);
     }
   }
-
-
   
-    
-
-  
-  
+  primerLlamado()
     
     return ( 
-    
     <Fragment>
-      
       <Header/>
         <Burger/>
         <div style={{display:"flex", justifyContent:"center" ,flexDirection:"column"}}>
@@ -59,7 +56,7 @@ const Home = () => {
           ofertasAPI={ofertasAPI}/>
           <Ofertas
           listaOfertas={listaOfertas}/>
-        </div>
+          </div>
       </Fragment> );
 }
  
