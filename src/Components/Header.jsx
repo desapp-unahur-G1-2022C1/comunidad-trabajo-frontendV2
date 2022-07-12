@@ -18,31 +18,7 @@ import { Link } from 'react-router-dom';
 import BotonInicioSesion from './home/BotonInicioSesion'
 import logoComunidad from '../logo.svg'
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto',
-  },
-}));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
@@ -150,15 +126,7 @@ export default function PrimarySearchAppBar() {
             <MenuIcon />
           </IconButton>
           
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Buscar empleo..."
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
+
           <Box sx={{ flexGrow: 1,   display: { xs: 'none', lg: 'flex', xl: 'flex' }, justifyContent:"center"}} />
             <img src="https://cdn.discordapp.com/attachments/956988369693454466/989600731369709669/Logoblanco.png" style={{height:"4rem", padding:"0.5rem"}}></img> 
           <Box sx={{ flexGrow: 1 }} />

@@ -69,10 +69,12 @@ const BootstrapDialogTitle = (props) => {
     
     const desrcripcionAPI = async () => {
     try{
+  
     const api = await fetch(API_URL);
     const datos = await api.json();
+    console.log(datos.Empresa)
     setTituloOferta(datos.titulo_oferta);
-    setNombreEmpresa(datos.fk_id_cuit);
+    setNombreEmpresa(datos.Empresa.nombre_empresa);
     setDescripcion(datos.descripcion);
     setZona(datos.zona_trabajo);
     setSalario(datos.remuneracion);

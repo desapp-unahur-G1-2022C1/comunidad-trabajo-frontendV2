@@ -10,31 +10,19 @@ import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 
-export default function MediaCard() {
-  const [listaOfertas, setListaOfertas] = useState([]);
-
-  const API_URL = `https://comunidad-de-trabajo.herokuapp.com/ofertas`;
-
-  const ofertasAPI = async () => {
-    try {
-      const api = await fetch(API_URL);
-      const datos = await api.json();
-      setListaOfertas(datos.contenido);
-      } catch (error) {
-        console.log(error);
-    }
-  }
-  ofertasAPI()
+const Ofertas = ({listaOfertas}) => {
+ 
+  
   return (
     <Fragment>
       <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}> 
       
         {listaOfertas.map((oferta) => (
-          <Card sx={{ maxWidth: 250, margin: "1rem" }} key = {oferta.id_oferta}>
+          <Card sx={{ maxWidth: 250, margin: "1rem" }} key = {oferta.i}>
             <CardMedia
               component="img"
               height="140"
-              image="https://i.blogs.es/deec05/pepsi/450_1000.jpg"
+              image="https://media.discordapp.net/attachments/955646153297395722/996231287230705734/unknown.png?width=504&height=468"
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div"  sx={{height:'4rem'}}>
@@ -52,7 +40,7 @@ export default function MediaCard() {
               </Typography>
             </CardContent>
             <CardActions sx={{ display: "flex", justifyContent: "center" }}>
-              <Link to={`/oferta/${oferta.id_oferta}`} style={{ textDecoration: "none", height:'4rem'}}>
+              <Link to={`/oferta/${oferta.id}`} style={{ textDecoration: "none", height:'4rem'}}>
                 <Button size="large" variant="contained" color="relaxed" >
                   Ver oferta
                 </Button>
@@ -64,3 +52,6 @@ export default function MediaCard() {
     </Fragment>
   );
 }
+
+
+export default Ofertas;
