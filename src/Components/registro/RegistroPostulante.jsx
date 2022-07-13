@@ -106,8 +106,8 @@ export default function WithMaterialUI () {
       var data ={
         documento: values.dni,
         tipoDocumento: 1, 
-        idUsuario: ,
-        estudios: ,
+        //idUsuario: ,
+        //estudios: ,
         carrera: values.carrera, 
         estado: 1,
         nombre: values.nombre,
