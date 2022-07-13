@@ -6,7 +6,6 @@ import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 
 const BarraBusqueda = (props) => {
-  const [search, setSearch] = useState("");
 
   return (
     <Fragment>
