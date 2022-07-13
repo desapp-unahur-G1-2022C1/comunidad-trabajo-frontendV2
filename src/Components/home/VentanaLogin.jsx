@@ -74,7 +74,7 @@ export default function InputAdornments() {
         
         <Box sx={{display:"flex", justifyContent:"center"}}>
           <Link to="/recuperarContrasena"style={{ textDecoration: 'none'}}><h6 style={{display:"flex", marginRight:"2rem", margin:"1rem", justifyContent:"flex-start", color:"#3f50b5"}}>¿Olvidaste tu contraseña?</h6></Link>
-          <Link to="/registroPregunta"style={{ textDecoration: 'none'}}><h6 style={{display:"flex", marginLeft:"2rem", margin:"1rem", justifyContent:"flex-end", color:"#3f50b5"}}>Registrate</h6></Link>
+          <Link to="/registroUsuario"style={{ textDecoration: 'none'}}><h6 style={{display:"flex", marginLeft:"2rem", margin:"1rem", justifyContent:"flex-end", color:"#3f50b5"}}>Registrate</h6></Link>
         </Box>
     </Box>
   );

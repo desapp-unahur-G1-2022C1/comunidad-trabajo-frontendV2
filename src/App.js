@@ -7,8 +7,7 @@ import RegistroPregunta from './Components/registro/RegistroPregunta';
 import NotFound from './Components/NotFound'
 import DescripcionOferta from './Components/oferta/DescripcionOferta'
 import RegistroPostulante from './Components/registro/RegistroPostulante';
-import RegistroDatosAcademicos from './Components/registro/RegistroDatosAcademicos'
-import RegistroCV from './Components/registro/RegistroCV'
+import RegistroUsuario from './Components/registro/RegistroUsuario';
 import PanelAdmin from './Components/panelAdmin/PanelAdmin'
 
 
@@ -16,8 +15,6 @@ function App() {
   return (
     
       <Router>
-
-        
         <Switch>
           <Route exact path="/">
             <Home/>
@@ -31,14 +28,11 @@ function App() {
           <Route exact path="/oferta/:id">
             <DescripcionOferta/>
           </Route>
-          <Route exact path="/registroPostulante">
+          <Route exact path="/RegistroUsuario">
+            <RegistroUsuario/>
+          </Route>
+          <Route exact path="/RegistroPostulante">
             <RegistroPostulante/>
-          </Route>
-          <Route exact path="/registroPostulante/1">
-            <RegistroDatosAcademicos/>
-          </Route>
-          <Route exact path="/registroPostulante/2">
-            <RegistroCV></RegistroCV>
           </Route>
           <Route exact path="/admin">
             <PanelAdmin/>

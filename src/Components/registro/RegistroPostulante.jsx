@@ -13,17 +13,9 @@ import { Box, Step, Stepper } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useState } from 'react';
 import { TextFieldsOutlined } from '@material-ui/icons';
-
+import registroUsuario from './RegistroUsuario'
 
 const validationSchema = yup.object({
-  email: yup
-    .string('Enter your email')
-    .email('Enter a valid email')
-    .required('Email is required'),
-  password: yup
-    .string('Enter your password')
-    .min(8, 'Password should be of minimum 8 characters length')
-    .required('Password is required'),
   nombre: yup
     .string('Ingrese su nombre')
     .min(1, 'Este campo no puede estar vacio')
@@ -60,7 +52,7 @@ const validationSchema = yup.object({
 });
 
 export default function WithMaterialUI () {
-  const listaIDs = ['datosLogin','datosPersonales', 'datosAcademicos']
+  const listaIDs = ['datosPersonales', 'datosAcademicos']
 
   const [IdActual, setIdActual] = useState(0)
   const [estadoSiguiente, setEstadoSiguiente] = useState(false)
@@ -97,8 +89,6 @@ export default function WithMaterialUI () {
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
       nombre:'',
       apellido:'',
       dni:'',
@@ -112,11 +102,44 @@ export default function WithMaterialUI () {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
       console.log(values)
+      var data ={
+        documento: values.dni,
+        tipoDocumento: 1, 
+        idUsuario: ,
+        estudios: ,
+        carrera: values.carrera, 
+        estado: 1,
+        nombre: values.nombre,
+        apellido: values.apellido,
+        nacionalidad: values.nacionalidad,
+        fecha_nac: values.fechaNac,
+        pais: "",
+        provincia: "",
+        ciudad: values.localidad,
+        calle: "",
+        nro: 0,
+        piso: 0,
+        depto:  0, 
+        cp:  0,
+        telefono: 0,
+        cantMaterias: values.cantMateriasAprobadas, 
+        alumnoUnahur: true,
+        presentacion: ""
+      };
+      fetch('https://comunidad-de-trabajo.herokuapp.com/postulantes/', {
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify(data), // data can be `string` or {object}!
+        headers:{
+          'Content-Type': 'application/json'
+        }
+      }).then(res => res.json())
+      .catch(error => console.error('Error:', error))
+      .then(response => console.log('Success:', response))
     },
   });
 
+  console.log("Id: " + registroUsuario.idGuardado)
   return (
     <Fragment>
       <Header />
@@ -131,31 +154,7 @@ export default function WithMaterialUI () {
       }}
     >
       <form onSubmit={formik.handleSubmit} style={{width:"50%", padding:'2rem'}}>
-        <div id='datosLogin'>
-          <TextField style={{margin:"1rem"}}
-            id="email"
-            name="email"
-            label="Email"
-            fullWidth
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            error={formik.touched.email && Boolean(formik.errors.email)  && true}
-            helperText={formik.touched.email && formik.errors.email}
-          />
-          <TextField  style={{margin:"1rem"}}
-            id="password"
-            name="password"
-            label="Password"
-            type="password"
-            variant="standard"
-            fullWidth
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            error={formik.touched.password && Boolean(formik.errors.password)  && true}
-            helperText={formik.touched.password && formik.errors.password}
-          />
-        </div> 
-        <div id='datosPersonales' style={{display:'none'}}>
+        <div id='datosPersonales' style={{display:'block'}}>
           <TextField style={{margin:"1rem"}}
             id="nombre"
             name="nombre"
