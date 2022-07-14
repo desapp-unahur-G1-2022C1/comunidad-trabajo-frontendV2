@@ -22,7 +22,7 @@ const Ofertas = ({listaOfertas}) => {
             <CardMedia
               component="img"
               height="140"
-              image="https://media.discordapp.net/attachments/955646153297395722/996231287230705734/unknown.png?width=504&height=468"
+              image="https://cdn.discordapp.com/attachments/955646153297395722/996230598853148792/unknown.png"
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div"  sx={{height:'4rem'}}>
