@@ -65,6 +65,14 @@ const BootstrapDialogTitle = (props) => {
     const [descripcion, setDescripcion] = useState();
     const [zona, setZona] = useState();
     const [salario, setSalario] = useState();
+    const [horarioEnrada, setHorarioEntrada] = useState();
+    const [horarioSalida, setHorarioSalida] = useState();
+    const [idiomas, setIdiomas] = useState();
+    const [jornada, setJornada] = useState();
+    const [contrato, setContrato] = useState();
+    const [edadDesde, setEdadDesde] = useState();
+    const [edadHasta, setEdadHasta] = useState();
+    const [beneficios, setBeneficios] = useState();
     const API_URL = `https://comunidad-de-trabajo.herokuapp.com/ofertas/${id}`
     
     const desrcripcionAPI = async () => {
@@ -78,6 +86,13 @@ const BootstrapDialogTitle = (props) => {
     setDescripcion(datos.descripcion);
     setZona(datos.zona_trabajo);
     setSalario(datos.remuneracion);
+    setHorarioEntrada(datos.horario_laboral_desde)
+    setHorarioSalida(datos.horario_laboral_hasta)
+    setJornada(datos.Jornada.nombre_jornada)
+    setContrato(datos.Contrato.nombre_contrato)
+    setEdadDesde(datos.edad_desde)
+    setEdadHasta(datos.edad_hasta)
+    setBeneficios(datos.beneficios)
     } catch(error){
       console.log(error);
     }
@@ -124,9 +139,12 @@ const BootstrapDialogTitle = (props) => {
         <Box sx={{padding:"1rem", maxWidth:"30rem"}}>
             <Box sx={{borderBottom:"#009688 2px solid"}}> <h3>Descripcion:</h3> <Typography sx={{fontSize:"20px"}}>  {descripcion}</Typography></Box>
             <Box sx={{display:"flex", borderBottom:"#009688 2px solid"}}> <h3>Zona de trabajo:</h3> <Typography sx={{padding:"1rem", fontSize:"20px"}}>{zona}</Typography></Box>
-            <Box sx={{display:"flex", borderBottom:"#009688 2px solid"}}> <h3>Horario:</h3> <Typography sx={{padding:"1rem", fontSize:"20px"}}></Typography></Box>
+            <Box sx={{display:"flex", borderBottom:"#009688 2px solid"}}> <h3>Rango edad:</h3> <Typography sx={{padding:"1rem", fontSize:"20px"}}>Desde {edadDesde} hasta {edadHasta} años</Typography></Box>
+            <Box sx={{display:"flex", borderBottom:"#009688 2px solid"}}> <h3>Horario:</h3> <Typography sx={{padding:"1rem", fontSize:"20px"}}>De {horarioEnrada} a {horarioSalida}</Typography></Box>
             <Box sx={{display:"flex", borderBottom:"#009688 2px solid"}}> <h3>Idiomas:</h3> <Typography sx={{padding:"1rem", fontSize:"20px"}}></Typography></Box>
-            <Box sx={{display:"flex", borderBottom:"#009688 2px solid"}}> <h3>Modalidad de trabajo:</h3> <Typography sx={{padding:"1rem", fontSize:"20px"}}></Typography></Box>
+            <Box sx={{display:"flex", borderBottom:"#009688 2px solid"}}> <h3>Jornada: </h3> <Typography sx={{padding:"1rem", fontSize:"20px"}}>{jornada}</Typography></Box>
+            <Box sx={{display:"flex", borderBottom:"#009688 2px solid"}}> <h3>Contrato: </h3> <Typography sx={{padding:"1rem", fontSize:"20px"}}>{contrato}</Typography></Box>
+            <Box sx={{display:"flex", borderBottom:"#009688 2px solid"}}> <h3>Beneficios: </h3> <Typography sx={{padding:"1rem", fontSize:"20px"}}>{beneficios}</Typography></Box>
             <Box sx={{display:"flex", borderBottom:"#009688 2px solid"}}> <h3>Salario:</h3> <Typography sx={{padding:"1rem", fontSize:"20px"}}>${salario}</Typography></Box>
             <Box sx={{display:"flex"}}> <h3>Nombre del representante:</h3> <Typography sx={{padding:"1rem", fontSize:"20px"}}></Typography></Box>
         </Box>
