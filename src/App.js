@@ -37,6 +37,9 @@ function App() {
           <Route exact path="/admin">
             <PanelAdmin/>
           </Route>
+          <Route exact path="/listadoPostulantes">
+      
+          </Route>
           <Route path="*">
             <NotFound/>
           </Route>
