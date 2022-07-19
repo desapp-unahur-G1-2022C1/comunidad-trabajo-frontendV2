@@ -94,7 +94,7 @@ export default function WithMaterialUI () {
                 helperText={formik.touched.password && formik.errors.password}
             />
             
-            <Button color="secondary" variant="contained" type='submit'>
+            <Button id='confirmar' variant="contained" type='submit'>
                 Siguiente
             </Button>
         </form>

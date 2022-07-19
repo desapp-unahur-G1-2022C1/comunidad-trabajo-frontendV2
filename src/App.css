@@ -1,3 +1,8 @@
 .campos{
     margin: 8px
 }
+
+#confirmar{
+    background-color: #1c5550;
+    color: white
+}
