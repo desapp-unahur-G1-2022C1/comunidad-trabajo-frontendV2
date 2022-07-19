@@ -1,18 +1,14 @@
 import React, { Fragment } from 'react';
-import ReactDOM from 'react-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Header from "../Header";
-import { Box, Step, Stepper, MenuItem, Select, InputLabel, FormControl } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Box, MenuItem, Select, InputLabel, FormControl } from "@mui/material";
 import { useState } from 'react';
-import { TextFieldsOutlined } from '@material-ui/icons';
+
 
 const validationSchema = yup.object({
   nombre: yup
@@ -233,7 +229,7 @@ export default function WithMaterialUI () {
       padding: '2rem',
       }}
     >
-      <form onSubmit={formik.handleSubmit} style={{width:"50%", padding:'2rem'}}>
+      <form onSubmit={formik.handleSubmit} style={{display:"flex"}}>
         <div id='datosPersonales' style={{display:'block'}}>
           <TextField style={{margin:"1rem"}}
             id="nombre"
@@ -260,6 +256,7 @@ export default function WithMaterialUI () {
             name="fechaNac"
             label="Fecha de nacimiento"
             type="date"
+            InputLabelProps={{ shrink: true }}
             fullWidth
             value={formik.values.fechaNac}
             onChange={formik.handleChange}
@@ -432,11 +429,11 @@ export default function WithMaterialUI () {
         {
           IdActual == listaIDs.length - 1
           ?
-          <Box sx={{justifyContent:'center'}}>
-          <Button color="primary" variant="contained" onClick={anterior}>
+          <Box sx={{display:"flex", justifyContent:'center', flexDirection:"row"}}>
+          <Button style={{display:'flex', margin:"1rem"}} color="primary" variant="contained" onClick={anterior}>
             Anterior
           </Button>
-          <Button id='confirmar' variant="contained" type='submit'>
+          <Button style={{display:'flex', margin:"1rem"}} id='confirmar' variant="contained" type='submit'>
             Confirmar
           </Button>
           </Box>
@@ -448,16 +445,16 @@ export default function WithMaterialUI () {
       {
           IdActual != listaIDs.length - 1
           ?
-          <Box sx={{display:'flex', marginBottom:'1rem', justifyContent:'center'}}>
-            <Button sx={{ display:'flex', margin:'1rem', justifyContent:'center'}} color="primary" variant="contained" disabled={estadoBoton} onClick={anterior}>
+          <Box sx={{display:'flex', justifyContent:"center", flexDirection:"row" }}>
+            <Button style={{display:'flex', margin:"1rem"}} color="primary" variant="contained" disabled={estadoBoton} onClick={anterior}>
               Anterior
             </Button>
-            <Button sx={{display:'flex', margin:'1rem', justifyContent:'center'}} color="primary" variant="contained" onClick={siguiente} disabled={estadoSiguiente}>
+            <Button style={{display:'flex', margin:"1rem"}} color="primary" variant="contained" onClick={siguiente} disabled={estadoSiguiente}>
               Siguiente
             </Button>
          </Box>
          :
-         <div></div>
+         <Box></Box>
       }
     </Fragment>
   );
