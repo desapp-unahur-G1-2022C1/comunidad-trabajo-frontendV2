@@ -9,11 +9,10 @@ import Typography from "@mui/material/Typography";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Header from "../Header";
-import { Box, Step, Stepper } from "@mui/material";
+import { Box, Step, Stepper, MenuItem, Select } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useState } from 'react';
 import { TextFieldsOutlined } from '@material-ui/icons';
-import registroUsuario from './RegistroUsuario'
 
 const validationSchema = yup.object({
   nombre: yup
@@ -24,35 +23,70 @@ const validationSchema = yup.object({
     .string('Ingrese su apellido')
     .min(1, 'Este campo no puede estar vacio')
     .required('Apellido requerido'),
-  dni: yup
-    .number('Ingrese su DNI')
-    .min(999999, 'Este campo debe ser de al menos 7 digitos')
-    .required('DNI requerido'),
-  localidad: yup
-    .string('Ingrese su localidad')
-    .min(1, 'Este campo no puede estar vacio'),
-  nacionalidad: yup
-    .string('Ingrese su nacionalidad')
-    .min(1, 'Este campo no puede estar vacio'),
   fechaNac: yup
     .string('Ingrese su fecha de nacimiento')
-    .min(1, 'Este campo no puede estar vacio'),
-  universidad: yup
+    .min(''),
+  tipoDocumento:yup
+    .string('Ingrese su tipo de documento')
+    .required('Tipo de documento es requerido'),
+  dni: yup
     .string('Ingrese su DNI')
-    .min('Este campo debe ser de al menos 7 digitos'),
-  carrera: yup
-    .string('Ingrese su localidad')
-    .min(1, 'Este campo no puede estar vacio'),
-  cantMateriasAprobadas: yup
+    .required('DNI requerido'),
+  ciudad: yup
+    .string('Ingrese su ciudad')
+    .min(''),
+  nacionalidad: yup
     .string('Ingrese su nacionalidad')
-    .min(0, 'Este campo no puede estar vacio'),
+    .min(''),
+  provincia: yup
+    .string('Ingrese su provincia de residencia')
+    .min(''),
+  calle: yup
+    .string('Ingrese el nombre de su calle')
+    .min(''),
+  nro: yup
+    .string('Ingrese altura'),
+  telefono: yup
+    .string('Ingrese su telefono de contacto')
+    .min(''),
+  universidad: yup
+    .string('Ingrese el nombre de su Universidad')
+    .min(''),
+  carrera: yup
+    .string('Ingrese su carrera')
+    .min(''),
+  cantMateriasAprobadas: yup
+    .string('Ingrese la cantidad de materias aprobadas')
+    .min(''),
+  estudios: yup
+    .string('Ingrese sus estudios')
+    .min(''),
   idiomas: yup
-    .string('Ingrese su fecha de nacimiento')
-    .min(1, 'Este campo no puede estar vacio'),
+    .string('Elija idiomas')
+    .min('')
 });
 
 export default function WithMaterialUI () {
   const listaIDs = ['datosPersonales', 'datosAcademicos']
+
+  const [tipoDocumentoSeleccionado, setTipoDocumentoSeleccionado] = useState()
+  const [tiposDocumentos, setTiposDocumentos] = useState([])
+  const [llamadoTipoDocumento, setLlamadoTipoDocumento] = useState(false)
+
+  const llamarTipoDocumento = async () => {
+    if (llamadoTipoDocumento === false){
+      try{
+        const api = await fetch(`https://comunidad-de-trabajo.herokuapp.com/tiposDocumentos`);
+        const datos = await api.json();
+        setTiposDocumentos(datos.tipos_documentos)
+        setLlamadoTipoDocumento(true)
+        console.log(datos.tipos_documentos)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+  llamarTipoDocumento()
 
   const [IdActual, setIdActual] = useState(0)
   const [estadoSiguiente, setEstadoSiguiente] = useState(false)
@@ -86,60 +120,66 @@ export default function WithMaterialUI () {
     }
   }
 
+  var getLocal = localStorage.getItem("idGuardado")
+
 
   const formik = useFormik({
     initialValues: {
       nombre:'',
       apellido:'',
+      fechaNac:'',
+      tipoDocumento: '',
       dni:'',
       nacionalidad:'',
-      localidad:'',
-      fechaNac:'',
-      universidad:'',
-      carrera:'',
+      provincia: '',
+      ciudad:'',
+      calle: '',
+      nro: '',
+      telefono: '',
+      carrera: '',
       cantMateriasAprobadas:'',
       idiomas:'',
+      estudios:''
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values)
       var data ={
-        documento: values.dni,
-        tipoDocumento: 1, 
-        //idUsuario: ,
-        //estudios: ,
-        carrera: values.carrera, 
-        estado: 1,
-        nombre: values.nombre,
-        apellido: values.apellido,
-        nacionalidad: values.nacionalidad,
-        fecha_nac: values.fechaNac,
-        pais: "",
-        provincia: "",
-        ciudad: values.localidad,
-        calle: "",
-        nro: 0,
-        piso: 0,
-        depto:  0, 
-        cp:  0,
-        telefono: 0,
-        cantMaterias: values.cantMateriasAprobadas, 
-        alumnoUnahur: true,
-        presentacion: ""
+        'documento': values.dni,
+        'tipoDocumento': values.tipoDocumento, 
+        'idUsuario': getLocal,
+        'estado': 1,
+        'nombre': values.nombre,
+        'apellido': values.apellido,
+        'nacionalidad': values.nacionalidad,
+        'fecha_nac': values.fechaNac,
+        'pais':'Argentina',
+        'provincia': values.provincia,
+        'ciudad': values.ciudad,
+        'calle': values.calle,
+        'nro': values.nro,
+        'telefono': values.telefono,
+        'piso': 0,
+        'depto':  0, 
+        'cp':  '',
+        'estudios': 3 /*values.estudios*/,
+        'carrera': values.carrera, 
+        'cantMaterias': values.cantMateriasAprobadas, 
+        'alumnoUnahur': 'false',
+        'presentacion': ''
       };
+      console.log(values)
       fetch('https://comunidad-de-trabajo.herokuapp.com/postulantes/', {
         method: 'POST', // or 'PUT'
         body: JSON.stringify(data), // data can be `string` or {object}!
         headers:{
           'Content-Type': 'application/json'
         }
+        
       }).then(res => res.json())
       .catch(error => console.error('Error:', error))
       .then(response => console.log('Success:', response))
     },
   });
-
-  console.log("Id: " + registroUsuario.idGuardado)
   return (
     <Fragment>
       <Header />
@@ -151,6 +191,7 @@ export default function WithMaterialUI () {
       justifyContent:'center',
       flexDirection: "column",
       height: '100vh',
+      padding: '2rem',
       }}
     >
       <form onSubmit={formik.handleSubmit} style={{width:"50%", padding:'2rem'}}>
@@ -176,9 +217,35 @@ export default function WithMaterialUI () {
             helperText={formik.touched.apellido && formik.errors.apellido}
           />
           <TextField style={{margin:"1rem"}}
+            id="fechaNac"
+            name="fechaNac"
+            label="Fecha de nacimiento"
+            type="date"
+            fullWidth
+            value={formik.values.fechaNac}
+            onChange={formik.handleChange}
+            error={formik.touched.fechaNac && Boolean(formik.errors.fechaNac)}
+            helperText={formik.touched.fechaNac && formik.errors.fechaNac}
+          />
+          <Select sx={{margin:'1rem'}}
+            id="tipoDocumento"
+            name="tipoDocumento"
+            label="Tipo de documento"
+            type= "number"
+            fullWidth
+            value={formik.values.tipoDocumento}
+            onChange={formik.handleChange}>
+            {
+                tiposDocumentos.map(documento => (
+                  <MenuItem value={documento.id}> {documento.id}: {documento.tipo_documento} </MenuItem>
+                ))
+            }
+          </Select>
+          <TextField style={{margin:"1rem"}}
             id="dni"
             name="dni"
             label="DNI"
+            type= "number"
             fullWidth
             value={formik.values.dni}
             onChange={formik.handleChange}
@@ -196,43 +263,65 @@ export default function WithMaterialUI () {
             helperText={formik.touched.nacionalidad && formik.errors.nacionalidad}
           />
           <TextField style={{margin:"1rem"}}
-            id="localidad"
-            name="localidad"
-            label="Localidad"
+            id="provincia"
+            name="provincia"
+            label="Provincia"
             fullWidth
-            value={formik.values.localidad}
+            value={formik.values.provincia}
             onChange={formik.handleChange}
-            error={formik.touched.localidad && Boolean(formik.errors.localidad)}
-            helperText={formik.touched.localidad && formik.errors.localidad}
+            error={formik.touched.provincia && Boolean(formik.errors.provincia)}
+            helperText={formik.touched.provincia && formik.errors.provincia}
           />
           <TextField style={{margin:"1rem"}}
-            id="fechaNac"
-            name="fechaNac"
-            label="Fecha de nacimiento"
-            type="date"
+            id="ciudad"
+            name="ciudad"
+            label="Ciudad"
             fullWidth
-            value={formik.values.fechaNac}
+            value={formik.values.ciudad}
             onChange={formik.handleChange}
-            error={formik.touched.fechaNac && Boolean(formik.errors.fechaNac)}
-            helperText={formik.touched.fechaNac && formik.errors.fechaNac}
+            error={formik.touched.ciudad && Boolean(formik.errors.ciudad)}
+            helperText={formik.touched.ciudad && formik.errors.ciudad}
+          />
+          <TextField style={{margin:"1rem"}}
+            id="calle"
+            name="calle"
+            label="Nombre de calle"
+            fullWidth
+            value={formik.values.calle}
+            onChange={formik.handleChange}
+            error={formik.touched.calle && Boolean(formik.errors.calle)}
+            helperText={formik.touched.calle && formik.errors.calle}
+          />
+          <TextField style={{margin:"1rem"}}
+            id="nro"
+            name="nro"
+            label="Altura de calle"
+            type= "number"
+            fullWidth
+            value={formik.values.nro}
+            onChange={formik.handleChange}
+            error={formik.touched.nro && Boolean(formik.errors.nro)}
+            helperText={formik.touched.nro && formik.errors.nro}
+          />
+          <TextField style={{margin:"1rem"}}
+            id="telefono"
+            name="telefono"
+            label="Telefono de contacto"
+            type= "number"
+            fullWidth
+            value={formik.values.telefono}
+            onChange={formik.handleChange}
+            error={formik.touched.telefono && Boolean(formik.errors.telefono)}
+            helperText={formik.touched.telefono && formik.errors.telefono}
           />
         </div>
 
         <div id='datosAcademicos' style={{display:'none'}}>
           <TextField style={{margin:"1rem"}}
-            id="universidad"
-            name="universidad"
-            label="Universidad"
-            fullWidth
-            value={formik.values.universidad}
-            onChange={formik.handleChange}
-            error={formik.touched.universidad && Boolean(formik.errors.universidad) && true}
-            helperText={formik.touched.universidad && formik.errors.universidad}
-          />
-          <TextField style={{margin:"1rem"}}
             id="carrera"
             name="carrera"
             label="carrera"
+            type= "number"
             fullWidth
             value={formik.values.carrera}
             onChange={formik.handleChange}
@@ -243,6 +332,7 @@ export default function WithMaterialUI () {
             id="cantMateriasAprobadas"
             name="cantMateriasAprobadas"
             label="Cantidad de materias aprobadas"
+            type= "number"
             fullWidth
             value={formik.values.cantMateriasAprobadas}
             onChange={formik.handleChange}
@@ -253,11 +343,22 @@ export default function WithMaterialUI () {
             id="idiomas"
             name="idiomas"
             label="Idiomas"
+            type= "number"
             fullWidth
             value={formik.values.idiomas}
             onChange={formik.handleChange}
             error={formik.touched.idiomas && Boolean(formik.errors.idiomas)}
             helperText={formik.touched.idiomas && formik.errors.idiomas}
+          />
+          <FormControlLabel control={<Checkbox defaultChecked />}
+            label="Alumno UnaHur"
+            id="alumnoUnahur"
+            name="alumnoUnahur"
+            type= "checkbox"
+            value={formik.values.alumnoUnahur}
+            onChange={formik.handleChange}
+            error={formik.touched.alumnoUnahur && Boolean(formik.errors.alumnoUnahur)}
+            helperText={formik.touched.alumnoUnahur && formik.errors.alumnoUnahur}
           />
         </div>
         {

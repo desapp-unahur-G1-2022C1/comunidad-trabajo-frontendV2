@@ -17,6 +17,10 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 
+function guardarId(id){
+localStorage.setItem("idGuardado", id);
+}
+
 const validationSchema = yup.object({
   email: yup
     .string('Enter your email')
@@ -29,7 +33,9 @@ const validationSchema = yup.object({
 });
 
 export default function WithMaterialUI () {
-  const [idGuardado, setIdGuardado] = useState()
+
+
+  
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -37,9 +43,8 @@ export default function WithMaterialUI () {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      
       console.log(values)
-      var data = {'usuario': 'values.email', 'password': 'values.password'};
+      var data = {'usuario': values.email, 'password': values.password};
       fetch('https://comunidad-de-trabajo.herokuapp.com/usuarios/signup/', {
         method: 'POST', // or 'PUT'
         body: JSON.stringify(data), // data can be `string` or {object}!
@@ -48,7 +53,7 @@ export default function WithMaterialUI () {
         }
       }).then(res => res.json())
       .catch(error => console.error('Error:', error))
-      .then(response => console.log('Success:', response, setIdGuardado(response.id),window.location.replace('/registroPregunta')));
+      .then(response => console.log('Success:', response, guardarId(response.id), window.location.replace('/registroPregunta')));
     },
   });
 
