@@ -229,6 +229,7 @@ export default function WithMaterialUI () {
       <form onSubmit={formik.handleSubmit}>
         <div id='datosPersonales' style={{display:'block'}}>
           <TextField style={{margin:"1rem"}}
+          variant="outlined"
             id="nombre"
             name="nombre"
             label="Nombre"
@@ -239,6 +240,7 @@ export default function WithMaterialUI () {
             helperText={formik.touched.nombre && formik.errors.nombre}
           />
           <TextField style={{margin:"1rem"}}
+          variant="outlined"
             id="apellido"
             name="apellido"
             label="Apellido"
@@ -249,6 +251,7 @@ export default function WithMaterialUI () {
             helperText={formik.touched.apellido && formik.errors.apellido}
           />
           <TextField style={{margin:"1rem"}}
+          variant="outlined"
             id="fechaNac"
             name="fechaNac"
             label="Fecha de nacimiento"
@@ -265,6 +268,7 @@ export default function WithMaterialUI () {
             <Select sx={{margin:'1rem', height:'3rem'}}
               labelId="demo-simple-select-label-tipoDocumento"
               id="tipoDocumento"
+              variant="outlined"
               name="tipoDocumento"
               label="Tipo de documento"
               type= "number"
@@ -284,6 +288,7 @@ export default function WithMaterialUI () {
             label="Numero de documento"
             type= "number"
             fullWidth
+            variant="outlined"
             value={formik.values.dni}
             onChange={formik.handleChange}
             error={formik.touched.dni && Boolean(formik.errors.dni)  && true}
@@ -293,6 +298,7 @@ export default function WithMaterialUI () {
             id="nacionalidad"
             name="nacionalidad"
             label="Nacionalidad"
+            variant="outlined"
             fullWidth
             value={formik.values.nacionalidad}
             onChange={formik.handleChange}
@@ -303,6 +309,7 @@ export default function WithMaterialUI () {
             id="provincia"
             name="provincia"
             label="Provincia"
+            variant="outlined"
             fullWidth
             value={formik.values.provincia}
             onChange={formik.handleChange}
@@ -312,6 +319,7 @@ export default function WithMaterialUI () {
           <TextField style={{margin:"1rem"}}
             id="ciudad"
             name="ciudad"
+            variant="outlined"
             label="Ciudad"
             fullWidth
             value={formik.values.ciudad}
@@ -322,6 +330,7 @@ export default function WithMaterialUI () {
           <TextField style={{margin:"1rem"}}
             id="calle"
             name="calle"
+            variant="outlined"
             label="Nombre de calle"
             fullWidth
             value={formik.values.calle}
@@ -332,6 +341,7 @@ export default function WithMaterialUI () {
           <TextField style={{margin:"1rem"}}
             id="nro"
             name="nro"
+            variant="outlined"
             label="Altura de calle"
             type= "number"
             fullWidth
@@ -343,6 +353,7 @@ export default function WithMaterialUI () {
           <TextField style={{margin:"1rem"}}
             id="telefono"
             name="telefono"
+            variant="outlined"
             label="Telefono de contacto"
             type= "number"
             fullWidth
@@ -361,6 +372,7 @@ export default function WithMaterialUI () {
                 id="estudios"
                 name="estudios"
                 label="Nivel de estudios"
+                variant="outlined"
                 type= "number"
                 fullWidth
                 value={formik.values.estudios}
@@ -378,6 +390,7 @@ export default function WithMaterialUI () {
               labelId="demo-simple-select-label-carrera"
               id="carrera"
               name="carrera"
+              variant="outlined"
               label="Carrera"
               type= "number"
               fullWidth
@@ -395,6 +408,7 @@ export default function WithMaterialUI () {
             name="cantMateriasAprobadas"
             label="Cantidad de materias aprobadas"
             type= "number"
+            variant="outlined"
             fullWidth
             value={formik.values.cantMateriasAprobadas}
             onChange={formik.handleChange}
@@ -406,6 +420,7 @@ export default function WithMaterialUI () {
             name="idiomas"
             label="Idiomas"
             type= "number"
+            variant="outlined"
             fullWidth
             value={formik.values.idiomas}
             onChange={formik.handleChange}
@@ -415,6 +430,7 @@ export default function WithMaterialUI () {
           <FormControlLabel control={<Checkbox defaultChecked />}
             label="Alumno UnaHur"
             id="alumnoUnahur"
+            variant="outlined"
             name="alumnoUnahur"
             type= "checkbox"
             value={formik.values.alumnoUnahur}

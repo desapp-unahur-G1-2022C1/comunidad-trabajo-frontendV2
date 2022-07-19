@@ -60,6 +60,9 @@ export default function WithMaterialUI () {
   return (
     <Fragment>
       <Header />
+      <Typography variant="h4" sx={{display: "flex", justifyContent:"center", margin:"2rem"}}>
+        Registro de Usuario
+      </Typography>
     <div 
     style={{
       textAlign:'center',
@@ -67,11 +70,12 @@ export default function WithMaterialUI () {
       alignItems:'center',
       justifyContent:'center',
       flexDirection: "column",
-      height: '100vh',
+      
       }}
     >
         <form onSubmit={formik.handleSubmit} style={{width:"50%", padding:'2rem'}}>
             <TextField style={{margin:"1rem"}}
+                variant="outlined"
                 id="email"
                 name="email"
                 label="Email"
@@ -82,11 +86,12 @@ export default function WithMaterialUI () {
                 helperText={formik.touched.email && formik.errors.email}
             />
             <TextField  style={{margin:"1rem"}}
+            variant="outlined"
                 id="password"
                 name="password"
                 label="Password"
                 type="password"
-                variant="standard"
+               
                 fullWidth
                 value={formik.values.password}
                 onChange={formik.handleChange}
