@@ -77,7 +77,6 @@ export default function WithMaterialUI () {
         const datos = await api.json();
         setTiposDocumentos(datos.tipos_documentos)
         setLlamadoTipoDocumento(true)
-        console.log(datos.tipos_documentos)
       } catch (error) {
         console.log(error)
       }
@@ -95,7 +94,6 @@ export default function WithMaterialUI () {
         const datos = await api.json();
         setListaCarreras(datos.carreras)
         setLlamadoListaCarreras(true)
-        console.log(datos.carreras)
       } catch (error) {
         console.log(error)
       }
@@ -113,7 +111,6 @@ export default function WithMaterialUI () {
         const datos = await api.json();
         setListaEstudios(datos.estudios)
         setLlamadoEstudios(true)
-        console.log(datos.estudios)
       } catch (error) {
         console.log(error)
       }
@@ -229,7 +226,7 @@ export default function WithMaterialUI () {
       padding: '2rem',
       }}
     >
-      <form onSubmit={formik.handleSubmit} style={{display:"flex"}}>
+      <form onSubmit={formik.handleSubmit}>
         <div id='datosPersonales' style={{display:'block'}}>
           <TextField style={{margin:"1rem"}}
             id="nombre"
@@ -430,12 +427,12 @@ export default function WithMaterialUI () {
           IdActual == listaIDs.length - 1
           ?
           <Box sx={{display:"flex", justifyContent:'center', flexDirection:"row"}}>
-          <Button style={{display:'flex', margin:"1rem"}} color="primary" variant="contained" onClick={anterior}>
-            Anterior
-          </Button>
-          <Button style={{display:'flex', margin:"1rem"}} id='confirmar' variant="contained" type='submit'>
-            Confirmar
-          </Button>
+            <Button style={{display:'flex', margin:"1rem"}} color="primary" variant="contained" onClick={anterior}>
+              Anterior
+            </Button>
+            <Button style={{display:'flex', margin:"1rem"}} id='confirmar' variant="contained" type='submit'>
+              Confirmar
+            </Button>
           </Box>
           :
           <div></div>
