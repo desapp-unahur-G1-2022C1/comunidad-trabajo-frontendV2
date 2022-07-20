@@ -1,20 +1,13 @@
 import React, { Fragment } from 'react';
-import ReactDOM from 'react-dom';
+
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Grid from "@mui/material/Grid";
+
 import Typography from "@mui/material/Typography";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+
 import Header from "../Header";
-import { Box, Step, Stepper } from "@mui/material";
-import { Link } from "react-router-dom";
-import { useState } from 'react';
-import { Navigation, TextFieldsOutlined } from '@material-ui/icons';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 
 function guardarId(id){
@@ -23,19 +16,17 @@ localStorage.setItem("idGuardado", id);
 
 const validationSchema = yup.object({
   email: yup
-    .string('Enter your email')
-    .email('Enter a valid email')
-    .required('Email is required'),
+    .string('Ingrese su email')
+    .email('Ingrese un email valido')
+    .required('El email es requerido'),
   password: yup
-    .string('Enter your password')
-    .min(8, 'Password should be of minimum 8 characters length')
-    .required('Password is required'),
+    .string('Ingrese su contraseña')
+    .min(8, 'La contraseña debe tener como minimo 8 caracteres')
+    .required('La contraseña es requerida'),
 });
 
 export default function WithMaterialUI () {
 
-
-  
   const formik = useFormik({
     initialValues: {
       email: '',
