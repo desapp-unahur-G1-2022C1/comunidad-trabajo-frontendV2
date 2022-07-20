@@ -9,8 +9,7 @@ import DescripcionOferta from './Components/oferta/DescripcionOferta'
 import RegistroPostulante from './Components/registro/RegistroPostulante';
 import RegistroUsuario from './Components/registro/RegistroUsuario';
 import PanelAdmin from './Components/panelAdmin/PanelAdmin'
-
-
+import ListadoPostulantes from './Components/panelAdmin/listadoPostulantes/ListadoPostulantes'
 function App() {
   return (
     
@@ -38,7 +37,7 @@ function App() {
             <PanelAdmin/>
           </Route>
           <Route exact path="/listadoPostulantes">
-      
+            <ListadoPostulantes/>
           </Route>
           <Route path="*">
             <NotFound/>

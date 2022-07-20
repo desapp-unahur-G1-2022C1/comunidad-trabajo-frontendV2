@@ -4,6 +4,7 @@ import Stack from "@mui/material/Stack";
 import { Avatar, Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const PanelAdmin = () => {
   return (
@@ -40,9 +41,10 @@ const PanelAdmin = () => {
         <Box
           sx={{ display: "flex", justifyContent: "center", padding: "1rem" }}
         >
-          <Button variant="contained" sx={{ width: "25rem" }}>
+          <Link  style={{textDecoration:"none"}} to="/listadoPostulantes"><Button variant="contained" sx={{ width: "25rem" }}>
+          
             Postulantes
-          </Button>
+          </Button></Link>
         </Box>
         <Box
           sx={{ display: "flex", justifyContent: "center", padding: "1rem" }}
