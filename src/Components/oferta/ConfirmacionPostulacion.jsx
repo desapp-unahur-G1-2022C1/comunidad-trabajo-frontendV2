@@ -1,18 +1,11 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormControl from '@mui/material/FormControl';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { Card, CardActions, CardContent, CardMedia, TextField, Typography } from '@mui/material';
+import { Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import '../../App.css';
 
-export default function InputAdornments() {
+export default function InputAdornments(props) {
   const [values, setValues] = React.useState({
     password: '',
   });
@@ -28,14 +21,14 @@ export default function InputAdornments() {
             <CardMedia
                 component="img"
                 height="140"
-                image= "https://i.blogs.es/deec05/pepsi/450_1000.jpg"
+                image= "https://cdn.discordapp.com/attachments/955646153297395722/996230598853148792/unknown.png"
             />
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                Desarrollador Trainee - java
+                {props.tituloOferta}
                 </Typography>
-                <Typography gutterBottom variant="h6" component="div">
-                Nombre empresa
+                <Typography gutterBottom variant="body" component="div">
+                {props.nombreEmpresa}
                 </Typography>
             </CardContent>
             <CardActions sx={{display:"flex", justifyContent:"center"}}>
