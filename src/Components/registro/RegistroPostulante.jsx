@@ -200,7 +200,20 @@ export default function WithMaterialUI() {
       })
         .then((res) => res.json())
         .catch((error) => console.error("Error:", error))
-        .then((response) => console.log("Success:", response), Swal.fire('Good job!','You clicked the button!','success'))
+        .then((response) => console.log("Success:", response),
+        Swal.fire({
+          icon: 'success',
+          title: 'Su registro fue realizado correctamente',
+          confirmButtonText: 'Finalizar',
+          text: 'Para continuar pulse el boton',
+          footer: '',
+          showCloseButton: true
+      })
+      .then(function (result) {
+          if (result.value) {
+              window.location = "/";
+          }
+      }))
         
     },
   });
