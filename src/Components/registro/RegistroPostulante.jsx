@@ -13,9 +13,11 @@ import {
   InputLabel,
   FormControl,
   Typography,
+  alertClasses,
 } from "@mui/material";
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
+import Swal from 'sweetalert2'
 
 const validationSchema = yup.object({
   nombre: yup
@@ -194,10 +196,12 @@ export default function WithMaterialUI() {
         headers: {
           "Content-Type": "application/json",
         },
+        
       })
         .then((res) => res.json())
         .catch((error) => console.error("Error:", error))
-        .then((response) => console.log("Success:", response));
+        .then((response) => console.log("Success:", response), Swal.fire('Good job!','You clicked the button!','success'))
+        
     },
   });
   return (
