@@ -1,5 +1,5 @@
 import './App.css';
-import React from "react";
+import React, { Fragment } from "react";
 import Home from './Components/home/Home';
 import { BrowserRouter as Router, Switch , Route, Link } from 'react-router-dom';
 import PerfilUsuarioPrivado from "./Components/PerfilUsuarioPrivado"
@@ -12,7 +12,6 @@ import PanelAdmin from './Components/panelAdmin/PanelAdmin'
 import ListadoPostulantes from './Components/panelAdmin/listadoPostulantes/ListadoPostulantes'
 function App() {
   return (
-    
       <Router>
         <Switch>
           <Route exact path="/">
@@ -42,9 +41,7 @@ function App() {
           <Route path="*">
             <NotFound/>
           </Route>
-          
           </Switch>
-
       </Router>
   );
 }

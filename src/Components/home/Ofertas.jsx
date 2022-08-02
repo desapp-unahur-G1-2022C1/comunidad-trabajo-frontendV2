@@ -18,17 +18,21 @@ const Ofertas = ({listaOfertas}) => {
       <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}> 
       
         {listaOfertas.map((oferta) => (
-          <Card sx={{ maxWidth: 250, margin: "1rem" }} key = {oferta.i}>
+          <Card sx={{ width: 500, margin: "1rem" }} key = {oferta.id}>
+            <Box sx={{ height: 325, margin: "1rem" }}>
             <CardMedia
               component="img"
               height="140"
               image="https://cdn.discordapp.com/attachments/955646153297395722/996230598853148792/unknown.png"
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div"  sx={{height:'4rem'}}>
-                {oferta.titulo_oferta}
-              </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{height:'4rem', textOverflow: 'ellipsis' }}>
+            <Typography variant="h5" gutterBottom component="div" sx={{height:'3rem'}}>
+                {oferta.titulo_oferta.toUpperCase()}
+            </Typography>
+            <Typography variant="h6" gutterBottom component="div" sx={{height:'2rem'}}>
+                {oferta.Empresa.nombre_empresa}
+            </Typography>
+            <Typography variant="body1" gutterBottom component="div">
                
                 {
                   oferta.descripcion.length < 120
@@ -39,13 +43,12 @@ const Ofertas = ({listaOfertas}) => {
                 }
               </Typography>
             </CardContent>
-            <CardActions sx={{ display: "flex", justifyContent: "center" }}>
-              <Link to={`/oferta/${oferta.id}`} style={{ textDecoration: "none", height:'4rem'}}>
+            </Box>
+              <Link to={`/oferta/${oferta.id}`} style={{ textDecoration: "none", height:'3rem', display:'flex', justifyContent:'center', margin:'1rem'}}>
                 <Button size="large" variant="contained" color="relaxed" >
                   Ver oferta
                 </Button>
               </Link>
-            </CardActions>
           </Card>
         ))}
       </Box>
@@ -54,4 +57,4 @@ const Ofertas = ({listaOfertas}) => {
 }
 
 
-export default Ofertas;
+export default Ofertas

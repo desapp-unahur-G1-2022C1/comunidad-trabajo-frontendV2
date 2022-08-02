@@ -50,7 +50,9 @@ const Home = () => {
   primerLlamado()
     
     return ( 
+    
     <Fragment>
+      <div style={{backgroundColor:'#f3f3f3'}}>
       <Header/>
         <Burger/>
         <div style={{display:"flex", justifyContent:"center" ,flexDirection:"column"}}>
@@ -62,6 +64,7 @@ const Home = () => {
           listaOfertas={listaOfertas}/> }
            
           </div>
+        </div>
       </Fragment> );
 }
  

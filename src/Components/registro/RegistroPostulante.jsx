@@ -18,6 +18,8 @@ import {
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import Swal from 'sweetalert2'
+import FormFormHelperText from "@mui/material";
+import { MenuList } from "@material-ui/core";
 
 const validationSchema = yup.object({
   nombre: yup
@@ -48,7 +50,10 @@ const validationSchema = yup.object({
   idiomas: yup.string("Elija idiomas").min(""),
 });
 
+
 export default function WithMaterialUI() {
+  
+
   const listaIDs = ["datosPersonales", "datosAcademicos"];
   const [estadoBoton, setEstadoBoton] = useState(true);
 
@@ -124,14 +129,12 @@ export default function WithMaterialUI() {
   function ocultarActual() {
     document.getElementById(listaIDs[IdActual]).style.display = "none";
   }
-
+  
   function siguiente() {
-    if (IdActual != listaIDs.length - 1) {
       ocultarActual();
       mostrarSiguiente();
       setIdActual(IdActual + 1);
       setEstadoBoton(false);
-    }
   }
 
   function anterior() {
@@ -190,17 +193,18 @@ export default function WithMaterialUI() {
         presentacion: "",
       };
       console.log(values);
-      fetch("https://comunidad-de-trabajo.herokuapp.com/postulantes/", {
+      console.log(IdActual);
+      if (IdActual == listaIDs.length - 1){
+        fetch("https://comunidad-de-trabajo.herokuapp.com/postulantes/", {
         method: "POST", // or 'PUT'
         body: JSON.stringify(data), // data can be `string` or {object}!
         headers: {
           "Content-Type": "application/json",
         },
         
-      })
+        })
         .then((res) => res.json())
-        .catch((error) => console.error("Error:", error))
-        .then((response) => console.log("Success:", response),
+        .then((response) => console.log("Success:", response,
         Swal.fire({
           icon: 'success',
           title: 'Su registro fue realizado correctamente',
@@ -208,16 +212,28 @@ export default function WithMaterialUI() {
           text: 'Para continuar pulse el boton',
           footer: '',
           showCloseButton: true
-      })
-      .then(function (result) {
+        })
+        .then(function (result) {
           if (result.value) {
               window.location = "/";
           }
-      }))
-        
+        })))
+        .catch((error) => console.error("Error:", error,
+        Swal.fire({
+          icon: 'error',
+          title: 'Ocurrio un error al registrarse',
+          confirmButtonText: 'Volver',
+          text: 'Verifique sus datos',
+          footer: '',
+          showCloseButton: true
+        })))
+      }else{
+        siguiente()
+      }
     },
   });
   return (
+    
     <Fragment>
       <Header />
       <Typography
@@ -278,32 +294,34 @@ export default function WithMaterialUI() {
                   error={
                     formik.touched.fechaNac && Boolean(formik.errors.fechaNac)
                   }
-                  helperText={formik.touched.fechaNac && formik.errors.fechaNac}
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label-tipoDocumento">
+                  <InputLabel>
                     Tipo de documento
                   </InputLabel>
                   <Select
-                    labelId="demo-simple-select-label-tipoDocumento"
+                    labelId="demo-simple-select-error-label"
                     id="tipoDocumento"
                     variant="outlined"
-                    defaultValue="1"
                     name="tipoDocumento"
                     label="Tipo de documento"
-                    type="number"
+                    type='number'
                     fullWidth
                     value={formik.values.tipoDocumento}
                     onChange={formik.handleChange}
+                    error={formik.touched.tipoDocumento && Boolean(formik.errors.tipoDocumento)}
+                    
                   >
-                    {tiposDocumentos.map((documento) => (
-                      <MenuItem value={documento.id}>
-                        {documento.tipo_documento}{" "}
-                      </MenuItem>
+                    {tiposDocumentos.map((documento) => ( 
+                      <MenuList sx={{display:'flex', justifyContent:'center'}} value={documento.id} key={documento.id}>
+                        {documento.tipo_documento}
+                      </MenuList>
                     ))}
+                  helperText={formik.touched.tipoDocumento && formik.errors.tipoDocumento}
                   </Select>
+                  
                 </FormControl>
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
@@ -335,9 +353,6 @@ export default function WithMaterialUI() {
                     formik.touched.nacionalidad &&
                     Boolean(formik.errors.nacionalidad)
                   }
-                  helperText={
-                    formik.touched.nacionalidad && formik.errors.nacionalidad
-                  }
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
@@ -352,9 +367,6 @@ export default function WithMaterialUI() {
                   error={
                     formik.touched.provincia && Boolean(formik.errors.provincia)
                   }
-                  helperText={
-                    formik.touched.provincia && formik.errors.provincia
-                  }
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
@@ -367,7 +379,6 @@ export default function WithMaterialUI() {
                   value={formik.values.ciudad}
                   onChange={formik.handleChange}
                   error={formik.touched.ciudad && Boolean(formik.errors.ciudad)}
-                  helperText={formik.touched.ciudad && formik.errors.ciudad}
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
@@ -380,7 +391,6 @@ export default function WithMaterialUI() {
                   value={formik.values.calle}
                   onChange={formik.handleChange}
                   error={formik.touched.calle && Boolean(formik.errors.calle)}
-                  helperText={formik.touched.calle && formik.errors.calle}
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
@@ -394,7 +404,6 @@ export default function WithMaterialUI() {
                   value={formik.values.nro}
                   onChange={formik.handleChange}
                   error={formik.touched.nro && Boolean(formik.errors.nro)}
-                  helperText={formik.touched.nro && formik.errors.nro}
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
@@ -410,7 +419,6 @@ export default function WithMaterialUI() {
                   error={
                     formik.touched.telefono && Boolean(formik.errors.telefono)
                   }
-                  helperText={formik.touched.telefono && formik.errors.telefono}
                 />
               </Grid>
             </Grid>
@@ -418,15 +426,17 @@ export default function WithMaterialUI() {
 
 
 
-          <Box id="datosAcademicos" sx={{ display: "none" }}>
-            <Box
+          <div id="datosAcademicos" style={{ display: "none" }}>
+            <Box item xs={12} sm={6} md={4}
               sx={{
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "left",
                 flexDirection: "column",
+                width: '300px'
               }}
             >
-              <FormControl sx={{ margin:"1rem", width:"300px" }}>
+              <Box sx={{margin:'16px', display:'flex', justifyContent:'center'}}>
+              <FormControl fullWidth>
               <InputLabel>Estudios</InputLabel>
               <Select
                 id="estudios"
@@ -436,9 +446,12 @@ export default function WithMaterialUI() {
                 type="number"
                 value={formik.values.estudios}
                 onChange={formik.handleChange}
+                error={
+                  formik.touched.estudios && Boolean(formik.errors.estudios)
+                }
               >
                 {listaEstudios.map((estudios) => (
-                  <MenuItem value={estudios.id}>
+                  <MenuItem value={estudios.id} key={estudios.id}>
                     {" "}
                     {estudios.id}: {estudios.nombre_estudio}{" "}
                     {estudios.estado_estudio}
@@ -446,7 +459,9 @@ export default function WithMaterialUI() {
                 ))}
               </Select>
               </FormControl>
-              <FormControl sx={{ margin:"1rem", width: "300px" }}>
+              </Box>
+              <Box sx={{margin:'16px', display:'flex', justifyContent:'center'}}>
+              <FormControl fullWidth>
                 <InputLabel>Carrera</InputLabel>
                 <Select
                   id="carrera"
@@ -456,16 +471,21 @@ export default function WithMaterialUI() {
                   type="number"
                   value={formik.values.carrera}
                   onChange={formik.handleChange}
+                  error={
+                    formik.touched.carrera && Boolean(formik.errors.carrera)
+                  }
                 >
-                  {listaCarreras.map((cerrera) => (
-                    <MenuItem value={cerrera.id}>
+                  {listaCarreras.map((carrera) => (
+                    <MenuItem value={carrera.id} key={carrera.id}>
                       {" "}
-                      {cerrera.id}: {cerrera.nombre_carrera}{" "}
+                      {carrera.id}: {carrera.nombre_carrera}{" "}
                     </MenuItem>
                   ))}
                 </Select>
               </FormControl>
-              <TextField style={{ margin:"1rem", width: "300px" }}
+              </Box>
+              <Box sx={{margin:'16px', display:'flex', justifyContent:'center'}}>
+              <TextField fullWidth 
                 id="cantMateriasAprobadas"
                 name="cantMateriasAprobadas"
                 label="Cantidad de materias aprobadas"
@@ -479,12 +499,11 @@ export default function WithMaterialUI() {
                   Boolean(formik.errors.cantMateriasAprobadas) &&
                   true
                 }
-                helperText={
-                  formik.touched.cantMateriasAprobadas &&
-                  formik.errors.cantMateriasAprobadas
-                }
               />
-              <TextField style={{margin:"1rem", width:"300px"}}
+              </Box>
+              <Box sx={{margin:'16px', display:'flex', justifyContent:'center'}}>
+              <TextField
+                fullWidth
                 id="idiomas"
                 name="idiomas"
                 label="Idiomas"
@@ -493,8 +512,8 @@ export default function WithMaterialUI() {
                 value={formik.values.idiomas}
                 onChange={formik.handleChange}
                 error={formik.touched.idiomas && Boolean(formik.errors.idiomas)}
-                helperText={formik.touched.idiomas && formik.errors.idiomas}
               />
+              </Box>
               <FormControlLabel
                 sx={{margin:"0.5rem"}}
                 control={<Checkbox defaultChecked />}
@@ -508,12 +527,9 @@ export default function WithMaterialUI() {
                   formik.touched.alumnoUnahur &&
                   Boolean(formik.errors.alumnoUnahur)
                 }
-                helperText={
-                  formik.touched.alumnoUnahur && formik.errors.alumnoUnahur
-                }
               />
             </Box>
-          </Box>
+          </div>
           {IdActual == listaIDs.length - 1 ? (
             <Box
               sx={{
@@ -539,41 +555,40 @@ export default function WithMaterialUI() {
                 Confirmar
               </Button>
             </Box>
-          ) : (
-            <div></div>
-          )}
+          ) 
+          : 
+          (
+            <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "row",
+            }}
+          >
+            <Button
+              style={{ display: "flex", margin: "1rem" }}
+              color="primary"
+              variant="contained"
+              disabled={estadoBoton}
+              onClick={anterior}
+            >
+              Anterior
+            </Button>
+            <Button
+              style={{ display: "flex", margin: "1rem" }}
+              color="primary"
+              variant="contained"
+              type="submit"
+              //onClick= {}
+              disabled={estadoSiguiente}
+            >
+              Siguiente
+            </Button>
+          </Box>
+          )
+          }
         </form>
       </Box>
-      {IdActual != listaIDs.length - 1 ? (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "row",
-          }}
-        >
-          <Button
-            style={{ display: "flex", margin: "1rem" }}
-            color="primary"
-            variant="contained"
-            disabled={estadoBoton}
-            onClick={anterior}
-          >
-            Anterior
-          </Button>
-          <Button
-            style={{ display: "flex", margin: "1rem" }}
-            color="primary"
-            variant="contained"
-            onClick={siguiente}
-            disabled={estadoSiguiente}
-          >
-            Siguiente
-          </Button>
-        </Box>
-      ) : (
-        <Box></Box>
-      )}
     </Fragment>
   );
 }
