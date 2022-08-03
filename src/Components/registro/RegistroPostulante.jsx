@@ -30,24 +30,23 @@ const validationSchema = yup.object({
     .string("Ingrese su apellido")
     .min(1, "Este campo no puede estar vacio")
     .required("Apellido requerido"),
-  fechaNac: yup.string("Ingrese su fecha de nacimiento").min(""),
+  fechaNac: yup.string("Ingrese su fecha de nacimiento").optional(),
   tipoDocumento: yup
     .string("Ingrese su tipo de documento")
     .required("Tipo de documento es requerido"),
-  dni: yup.string("Ingrese su DNI").required("DNI requerido"),
-  ciudad: yup.string("Ingrese su ciudad").min(""),
-  nacionalidad: yup.string("Ingrese su nacionalidad").min(""),
-  provincia: yup.string("Ingrese su provincia de residencia").min(""),
-  calle: yup.string("Ingrese el nombre de su calle").min(""),
-  nro: yup.string("Ingrese altura"),
-  telefono: yup.string("Ingrese su telefono de contacto").min(""),
-  universidad: yup.string("Ingrese el nombre de su Universidad").min(""),
-  carrera: yup.string("Ingrese su carrera").min(""),
+  dni: yup.string("Ingrese su DNI").required("DNI requerido").optional(),
+  ciudad: yup.string("Ingrese su ciudad").optional(),
+  nacionalidad: yup.string("Ingrese su nacionalidad").optional(),
+  provincia: yup.string("Ingrese su provincia de residencia").optional(),
+  calle: yup.string("Ingrese el nombre de su calle").optional(),
+  nro: yup.string("Ingrese altura").optional(),
+  telefono: yup.string("Ingrese su telefono de contacto").optional(),
+  universidad: yup.string("Ingrese el nombre de su Universidad").optional(),
+  carrera: yup.string("Ingrese su carrera").optional(),
   cantMateriasAprobadas: yup
-    .string("Ingrese la cantidad de materias aprobadas")
-    .min(""),
-  estudios: yup.string("Ingrese sus estudios").min(""),
-  idiomas: yup.string("Elija idiomas").min(""),
+    .string("Ingrese la cantidad de materias aprobadas").optional(),
+  estudios: yup.string("Ingrese sus estudios").optional(),
+  idiomas: yup.string("Elija idiomas").optional(),
 });
 
 
@@ -152,19 +151,19 @@ export default function WithMaterialUI() {
     initialValues: {
       nombre: "",
       apellido: "",
-      fechaNac: "",
+      fechaNac: undefined,
       tipoDocumento: "",
       dni: "",
-      nacionalidad: "",
-      provincia: "",
-      ciudad: "",
-      calle: "",
-      nro: "",
-      telefono: "",
-      carrera: "",
-      cantMateriasAprobadas: "",
-      idiomas: "",
-      estudios: "",
+      nacionalidad: '',
+      provincia: '',
+      ciudad: '',
+      calle: '',
+      nro: '',
+      telefono: '',
+      carrera: undefined,
+      cantMateriasAprobadas: undefined,
+      idiomas: undefined,
+      estudios: undefined,
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
