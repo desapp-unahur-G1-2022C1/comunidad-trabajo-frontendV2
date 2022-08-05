@@ -1,5 +1,5 @@
 import './App.css';
-import React, { Fragment } from "react";
+import React from "react";
 import Home from './Components/home/Home';
 import { BrowserRouter as Router, Switch , Route, Link } from 'react-router-dom';
 import PerfilUsuarioPrivado from "./Components/PerfilUsuarioPrivado";
@@ -14,6 +14,8 @@ import RegistroUsuario from './Components/registro/RegistroUsuario';
 import PanelAdmin from './Components/panelAdmin/PanelAdmin';
 import ListadoPostulantes from './Components/panelAdmin/listadoPostulantes/ListadoPostulantes';
 import ListadoOfertasEmpresa from './Components/empresa/listadoDeOfertas/ListadoOfertas';
+import Login from './Components/login/Login';
+
 
 
 function App() {
@@ -22,6 +24,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Home/>
+          </Route>
+          <Route exact path="/login">
+            <Login/>
           </Route>
           <Route exact path="/miPerfil">
             <PerfilUsuarioPrivado/>
