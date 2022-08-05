@@ -10,6 +10,9 @@ import RegistroPostulante from './Components/registro/RegistroPostulante';
 import RegistroUsuario from './Components/registro/RegistroUsuario';
 import PanelAdmin from './Components/panelAdmin/PanelAdmin'
 import ListadoPostulantes from './Components/panelAdmin/listadoPostulantes/ListadoPostulantes'
+import Login from './Components/login/Login'
+
+
 function App() {
   return (
     
@@ -17,6 +20,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Home/>
+          </Route>
+          <Route exact path="/login">
+            <Login/>
           </Route>
           <Route exact path="/miPerfil">
             <PerfilUsuarioPrivado/>
