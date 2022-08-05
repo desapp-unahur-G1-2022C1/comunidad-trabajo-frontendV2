@@ -56,7 +56,7 @@ const Home = () => {
 
   const cambiarPagina = async (e, p) => {
     
-    const api = await fetch(`https://comunidad-de-trabajo.herokuapp.com/ofertas/?pagina=${pagina}&limite=3&ordenar=id `);
+    const api = await fetch(`https://comunidad-de-trabajo.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&ordenar=id `);
     const datos = await api.json();
     setListaOfertas(datos.ofertas.rows);
     setCantPaginas(datos.totalPaginas)
