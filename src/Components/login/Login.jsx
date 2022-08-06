@@ -19,19 +19,30 @@ const Login = () => {
         })
     }
 
-    function traerDatosLogeado(id){
-        axios.get(`https://comunidad-de-trabajo.herokuapp.com/usuariosPostulantes/${id}`)
-        .then(({datosPostulante}) => {
-            console.log(datosPostulante)
+    async function traerDatosLogeado(id){
+        await axios.get(`https://comunidad-de-trabajo.herokuapp.com/usuariosPostulantes/${id}`)
+        .then(({data}) => {
+            setIdUsuario(id)
+            console.log(data)
+            setDatosUsuario(data)
         })
     }
     
+    const [idUsuario, setIdUsuario] = useState();
+    const [token, setToken] = useState("");
+    const [estaLogeado, setEstaLogeado] = useState(false);
+    const [datosUsuario, setDatosUsuario] = useState([]);
+
+
     const handleSubmit= () => {
         axios.post('https://comunidad-de-trabajo.herokuapp.com/usuarios/signin', body)
-        .then(({idUsuario}) => {
-            console.log(idUsuario)
+        .then(({data}) => {
+            console.log(data)
+            setToken(data.token)
+            setEstaLogeado(true)
+            traerDatosLogeado(data.id)
         })
-        .catch(({response})=> console.log(response.idUsuario))
+        .catch(({response}) => console.log(response.data))
     }
 
     return ( 
@@ -59,6 +70,7 @@ const Login = () => {
                 <Box sx={{display:"flex", justifyContent:"center", margin:"1.5rem"}}><Button fullWidth color='relaxed' onClick={handleSubmit}  variant="contained">
                     Ingresar
                 </Button></Box>
+                <Typography> {datosUsuario.nombre}, {datosUsuario.apellido} logeado </Typography>
             </form></Box>
             <Box sx={{display:"flex", justifyContent:"center"}}>
           <Link to="/recuperarContrasena"style={{ textDecoration: 'none'}}><Typography sx={{display:"flex", margin:"0.5rem", justifyContent:"flex-start", color:"#3f50b5"}}>¿Olvidaste tu contraseña?</Typography></Link>
