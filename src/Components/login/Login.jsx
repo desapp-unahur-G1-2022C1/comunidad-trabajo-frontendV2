@@ -18,16 +18,22 @@ const Login = () => {
             [name]: value
         })
     }
+
+    function traerDatosLogeado(id){
+        axios.get(`https://comunidad-de-trabajo.herokuapp.com/usuariosPostulantes/${id}`)
+        .then(({datosPostulante}) => {
+            console.log(datosPostulante)
+        })
+    }
     
     const handleSubmit= () => {
         axios.post('https://comunidad-de-trabajo.herokuapp.com/usuarios/signin', body)
-        .then(({data}) => {
-            console.log(data)
+        .then(({idUsuario}) => {
+            console.log(idUsuario)
         })
-        .catch(({response})=> console.log(response.data))
+        .catch(({response})=> console.log(response.idUsuario))
     }
- 
-    
+
     return ( 
         <Fragment>
             <Header/>
@@ -42,7 +48,6 @@ const Login = () => {
                 onChange={inputChange}
                 >
                 </TextField></Box>
-                
                 <Box sx={{display:"flex", flexDirection:"column", margin:"1.5rem"}}><TextField
                 type="password"
                 value={body.password}
