@@ -34,7 +34,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+const Header = ({datosUsuario, estaLogeado}) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -130,7 +130,7 @@ export default function PrimarySearchAppBar() {
           <Box sx={{ flexGrow: 1,   display: { xs: 'none', lg: 'flex', xl: 'flex' }, justifyContent:"center"}} />
             <img src="https://cdn.discordapp.com/attachments/956988369693454466/989600731369709669/Logoblanco.png" style={{height:"4rem", padding:"0.5rem"}}></img> 
           <Box sx={{ flexGrow: 1 }} />
-          <BotonInicioSesion/>
+          {estaLogeado ? <p>Hola, {datosUsuario.nombre}</p> : <BotonInicioSesion/>}
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
@@ -138,3 +138,5 @@ export default function PrimarySearchAppBar() {
     </Box>
   );
 }
+
+export default Header;

@@ -41,13 +41,15 @@ const Login = () => {
             setToken(data.token)
             setEstaLogeado(true)
             traerDatosLogeado(data.id)
+            window.location = "/"
         })
         .catch(({response}) => console.log(response.data))
     }
 
     return ( 
         <Fragment>
-            <Header/>
+            <Header datosUsuario={datosUsuario}
+            estaLogeado={estaLogeado}/>
             <Typography sx={{display:"flex", justifyContent:"center", margin:"2rem"}} variant='h4'> Iniciar sesión </Typography>
             <Box sx={{display:"flex", justifyContent:"center", margin:"2rem", }}>
                 <form onSubmit="#">

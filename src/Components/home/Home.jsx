@@ -1,13 +1,13 @@
 import '../../App.css';
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import Header from "../Header"
 import Ofertas from './Ofertas';
-import Box from '@mui/material/Box'
+
 import Burger from './Burger';
-import Filtros from './Filtros'
+
 import { useState } from 'react';
 import BarraBusqueda from './BarraBusqueda';
-import { Typography } from '@material-ui/core';
+
 import BusquedaNoEncontrada from './BusquedaNoEncontrada';
 
 
