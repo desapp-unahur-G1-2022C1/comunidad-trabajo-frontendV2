@@ -38,12 +38,12 @@ const Home = () => {
     }
   }
   
-  const ofertasAPI = async (e) => {
+  const ofertasAPI = async (e, p) => {
     try {
       e.preventDefault()
       const {ofertas} = e.target.elements;
       const ofertasValue = ofertas.value;
-      const api = await fetch(`https://comunidad-de-trabajo.herokuapp.com/ofertas/?pagina=${pagina}&limite=3&buscarTitulo=${ofertasValue}&ordenar=id `);
+      const api = await fetch(`https://comunidad-de-trabajo.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&buscarTitulo=${ofertasValue}&ordenar=id `);
       const datos = await api.json();
       setListaOfertas(datos.ofertas.rows);
       setCantPaginas(datos.totalPaginas)
@@ -59,7 +59,6 @@ const Home = () => {
     const api = await fetch(`https://comunidad-de-trabajo.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&ordenar=id `);
     const datos = await api.json();
     setListaOfertas(datos.ofertas.rows);
-    setCantPaginas(datos.totalPaginas)
     setPagina(p)
     console.log(datos.ofertas.rows)
   }
@@ -79,7 +78,7 @@ const Home = () => {
           <BusquedaNoEncontrada/>
           : <Ofertas
           listaOfertas={listaOfertas}/> }
-           <Pagination count={cantPaginas} page={pagina} onChange={cambiarPagina} variant='outlined'></Pagination>
+           <Pagination color='primary'count={cantPaginas} page={pagina} onChange={cambiarPagina} variant='text'sx={{display:"flex", justifyContent:"center"}}></Pagination>
           </div>
         </div>
       </Fragment> );
