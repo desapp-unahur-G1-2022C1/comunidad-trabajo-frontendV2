@@ -11,7 +11,7 @@ export default function PerfilEmpresa() {
 
   return (
     <React.Fragment>
-      <Header/>
+      
       <Box>
         <Box sx={{display:"flex", justifyContent:"flex-start", alignContent:"center"}}>
             <Box>
@@ -25,7 +25,9 @@ export default function PerfilEmpresa() {
             </Box>
         </Box>
         <Box sx={{display:"flex", justifyContent:"center", padding:"1rem"}}>
-          <Button variant="contained" sx={{width:"25rem"}}>Datos</Button>
+        <Link to="/empresaDatosPrivado" style={{ textDecoration: 'none'}}>
+          <Button variant="contained" sx={{width:"25rem"}} >Datos</Button>
+        </Link>
         </Box>
         <Box sx={{display:"flex", justifyContent:"center", padding:"1rem"}}>
         <Link to="/listadoOfertasEmpresa" style={{ textDecoration: 'none'}}>

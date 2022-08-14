@@ -14,7 +14,7 @@ const ListadoOfertas = () => {
     const [llamado, setLlamado] = useState(false);
     const [Ofertas, setOfertas] = useState([]);
 
-    const API_URL = `https://comunidad-de-trabajo.herokuapp.com/usuariosPostulantes/`
+    const API_URL = `https://comunidad-de-trabajo.herokuapp.com/ofertasPorEmpresa/30100552408/`
 
     const primerLlamado = async () => {
         if(llamado === false){
@@ -22,7 +22,8 @@ const ListadoOfertas = () => {
             const api = await fetch(API_URL);
             const datos = await api.json();
             setLlamado(true)
-            setOfertas(datos.Ofertas.rows)
+            setOfertas(datos)
+            console.log(datos)
             
             }
             catch(error){
@@ -49,6 +50,7 @@ const ListadoOfertas = () => {
     }
 
     primerLlamado()
+    console.log(Ofertas)
     return (  
         <Fragment>
             <Header/>

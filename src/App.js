@@ -4,6 +4,7 @@ import Home from './Components/home/Home';
 import { BrowserRouter as Router, Switch , Route, Link } from 'react-router-dom';
 import PerfilUsuarioPrivado from "./Components/PerfilUsuarioPrivado";
 import PerfilEmpresaPrivado from "./Components/empresa/PerfilEmpresaPrivado";
+import EmpresaDatosPrivado from "./Components/empresa/EmpresaDatosPrivado";
 import RegistroPregunta from './Components/registro/RegistroPregunta';
 import NotFound from './Components/NotFound';
 import DescripcionOferta from './Components/oferta/DescripcionOferta';
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route exact path="/perfilEmpresa">
             <PerfilEmpresaPrivado/>
+          </Route>
+          <Route exact path="/empresaDatosPrivado">
+            <EmpresaDatosPrivado/>
           </Route>
           <Route exact path="/registroPregunta">
             <RegistroPregunta/>
