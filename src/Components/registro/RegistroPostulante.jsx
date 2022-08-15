@@ -8,7 +8,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Header from "../Header";
 import {
   Box,
-  MenuItem,
+  MenuList,
   Select,
   InputLabel,
   FormControl,
@@ -18,8 +18,7 @@ import {
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import Swal from 'sweetalert2'
-import FormFormHelperText from "@mui/material";
-import { MenuList } from "@material-ui/core";
+import '../../App.css';
 
 const validationSchema = yup.object({
   nombre: yup
@@ -30,7 +29,7 @@ const validationSchema = yup.object({
     .string("Ingrese su apellido")
     .min(1, "Este campo no puede estar vacio")
     .required("Apellido requerido"),
-  fechaNac: yup.string("Ingrese su fecha de nacimiento").optional(),
+  fechaNac: yup.string("Ingrese su fecha de nacimiento").required("Fecha es requerido"),
   tipoDocumento: yup
     .string("Ingrese su tipo de documento")
     .required("Tipo de documento es requerido"),
@@ -247,6 +246,7 @@ export default function WithMaterialUI() {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6} md={4}>
                 <TextField
+                  color="success"
                   variant="outlined"
                   id="nombre"
                   name="nombre"
@@ -311,11 +311,10 @@ export default function WithMaterialUI() {
                     value={formik.values.tipoDocumento}
                     onChange={formik.handleChange}
                     error={formik.touched.tipoDocumento && Boolean(formik.errors.tipoDocumento)}
-                    
                   >
                     {tiposDocumentos.map((documento) => ( 
-                      <MenuList sx={{display:'flex', justifyContent:'center'}} value={documento.id} key={documento.id}>
-                        {documento.tipo_documento}
+                      <MenuList className='selectCss'  value={documento.id} key={documento.id} >
+                        <Box sx={{display:'flex', justifyContent:'center'}}>{documento.tipo_documento}</Box>
                       </MenuList>
                     ))}
                   helperText={formik.touched.tipoDocumento && formik.errors.tipoDocumento}
@@ -450,11 +449,9 @@ export default function WithMaterialUI() {
                 }
               >
                 {listaEstudios.map((estudios) => (
-                  <MenuItem value={estudios.id} key={estudios.id}>
-                    {" "}
-                    {estudios.id}: {estudios.nombre_estudio}{" "}
-                    {estudios.estado_estudio}
-                  </MenuItem>
+                  <MenuList className="selectCss" value={estudios.id} key={estudios.id}>
+                    <Box sx={{display:'flex', justifyContent:'center'}}>{estudios.id}: {estudios.nombre_estudio} - {estudios.estado_estudio}</Box> 
+                  </MenuList>
                 ))}
               </Select>
               </FormControl>
@@ -475,10 +472,9 @@ export default function WithMaterialUI() {
                   }
                 >
                   {listaCarreras.map((carrera) => (
-                    <MenuItem value={carrera.id} key={carrera.id}>
-                      {" "}
-                      {carrera.id}: {carrera.nombre_carrera}{" "}
-                    </MenuItem>
+                    <MenuList className="selectCss" value={carrera.id} key={carrera.id}>
+                      <Box sx={{display:'flex', justifyContent:'center'}}> {carrera.id}: {carrera.nombre_carrera}</Box>
+                    </MenuList>
                   ))}
                 </Select>
               </FormControl>

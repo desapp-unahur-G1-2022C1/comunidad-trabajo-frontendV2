@@ -6,3 +6,7 @@
     background-color: #1c5550;
     color: white
 }
+
+.selectCss:hover{
+    background-color: #dadada;
+}
