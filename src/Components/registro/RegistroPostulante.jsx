@@ -18,6 +18,9 @@ import {
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import Swal from 'sweetalert2'
+import { useContext } from 'react';
+import IdFormContext from '../../Context/IdFormContext';
+
 
 const validationSchema = yup.object({
   nombre: yup
@@ -142,9 +145,8 @@ export default function WithMaterialUI() {
       setEstadoBoton(true);
     }
   }
-
-  var getLocal = localStorage.getItem("idGuardado");
-
+  const {id} = useContext(IdFormContext)
+  console.log(id)
   const formik = useFormik({
     initialValues: {
       nombre: "",
@@ -168,7 +170,7 @@ export default function WithMaterialUI() {
       var data = {
         documento: values.dni,
         tipoDocumento: values.tipoDocumento,
-        idUsuario: getLocal,
+        idUsuario: id,
         estado: 1,
         nombre: values.nombre,
         apellido: values.apellido,
@@ -217,6 +219,7 @@ export default function WithMaterialUI() {
         
     },
   });
+  
   return (
     <Fragment>
       <Header />
