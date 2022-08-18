@@ -1,18 +1,19 @@
 import React, { Fragment } from 'react';
-
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-
 import Typography from "@mui/material/Typography";
-
 import Header from "../Header";
-
+import { useContext } from 'react';
+import IdFormContext from '../../Context/IdFormContext';
+import { useHistory } from 'react-router-dom';
 
 function guardarId(id){
 localStorage.setItem("idGuardado", id);
 }
+
+
 
 const validationSchema = yup.object({
   email: yup
@@ -26,6 +27,9 @@ const validationSchema = yup.object({
 });
 
 export default function WithMaterialUI () {
+  const history = useHistory()
+  const {id, cambiarId} = useContext(IdFormContext)
+  console.log(id)
 
   const formik = useFormik({
     initialValues: {
@@ -44,10 +48,10 @@ export default function WithMaterialUI () {
         }
       }).then(res => res.json())
       .catch(error => console.error('Error:', error))
-      .then(response => console.log('Success:', response, guardarId(response.id), window.location.replace('/registroPregunta')));
+      .then(response => console.log('Success:', response, cambiarId(response.id), history.push('/registroPregunta')));
     },
   });
-
+  
   return (
     <Fragment>
       <Header />
