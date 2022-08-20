@@ -11,7 +11,7 @@ import DescripcionOferta from './Components/oferta/DescripcionOferta';
 import RegistroPostulante from './Components/registro/RegistroPostulante';
 import RegistroOferta from './Components/empresa/RegistroOferta';
 import RegistroUsuario from './Components/registro/RegistroUsuario';
-
+import ListadoOfertasEmpresa from './Components/empresa/listadoDeOfertas/ListadoOfertas'
 import PanelAdmin from './Components/panelAdmin/PanelAdmin'
 import ListadoPostulantes from './Components/panelAdmin/listadoPostulantes/ListadoPostulantes'
 import Login from './Components/login/Login'
