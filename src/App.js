@@ -20,6 +20,7 @@ import {IdFormContextProvider} from './Context/IdFormContext';
 function App() {
   return (
       <Router>
+        
         <IdFormContextProvider>
         <Switch>
           

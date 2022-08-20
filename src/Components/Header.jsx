@@ -15,8 +15,10 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import Login from './home/BotonInicioSesion'
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Link } from 'react-router-dom';
-import BotonInicioSesion from './home/BotonInicioSesion'
-import logoComunidad from '../logo.svg'
+import BotonInicioSesion from './home/BotonInicioSesion';
+import logoComunidad from '../logo.svg';
+import DatosUsuarioContextProvider from '../Context/DatosUsuarioContext';
+import { useContext } from 'react';
 
 
 
@@ -34,7 +36,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const Header = ({datosUsuario, estaLogeado}) => {
+const Header = () => {
+  const {datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado} = useContext(DatosUsuarioContextProvider)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
