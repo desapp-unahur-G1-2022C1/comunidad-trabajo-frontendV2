@@ -4,9 +4,13 @@ import { useState } from 'react';
 import Header from "../Header"
 import Button from '@mui/material/Button';
 import axios from "axios"
-import { Link} from "react-router-dom"
+import { Link, useHistory} from "react-router-dom"
+import DatosUsuarioContextProvider from '../../Context/DatosUsuarioContext';
+import { useContext } from 'react';
 
 const Login = () => {
+
+    const {datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado} = useContext(DatosUsuarioContextProvider)
 
     const [body, setBody] = useState({usuario:'', password:''})
 
@@ -18,34 +22,23 @@ const Login = () => {
             [name]: value
         })
     }
-
-    async function traerDatosLogeado(id){
-        await axios.get(`https://comunidad-de-trabajo.herokuapp.com/usuariosPostulantes/${id}`)
+    const history = useHistory()
+    const handleSubmit = async () => {
+        await axios.post('https://comunidad-de-trabajo.herokuapp.com/usuarios/signin', body)
         .then(({data}) => {
-            setIdUsuario(id)
             console.log(data)
-            setDatosUsuario(data)
+            cambiarToken(data.token)
+            cambiarEstadoLogeado(true)
+            axios.get(`https://comunidad-de-trabajo.herokuapp.com/usuariosPostulantes/${data.id}`)
+            .then(({data}) => {
+            cambiarIdUsuario(data.id)
+            console.log(estaLogeado)
+            cambiarDatosUsuario(data) 
         })
-    }
-    
-    const [idUsuario, setIdUsuario] = useState();
-    const [token, setToken] = useState("");
-    const [estaLogeado, setEstaLogeado] = useState(false);
-    const [datosUsuario, setDatosUsuario] = useState([]);
-
-
-    const handleSubmit= () => {
-        axios.post('https://comunidad-de-trabajo.herokuapp.com/usuarios/signin', body)
-        .then(({data}) => {
-            console.log(data)
-            setToken(data.token)
-            setEstaLogeado(true)
-            traerDatosLogeado(data.id)
-            window.location = "/"
+            history.push('/')
         })
         .catch(({response}) => console.log(response.data))
     }
-
     return ( 
         <Fragment>
             <Header datosUsuario={datosUsuario}
