@@ -3,12 +3,13 @@ import DatosUsuarioContextProvider from '../Context/DatosUsuarioContext';
 import { Avatar, MenuItem, Menu } from '@mui/material';
 import { useContext } from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Fragment } from 'react';
 
 const AvatarUsuario = () => {
 
 
-  const {datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado} = useContext(DatosUsuarioContextProvider)
+  const {datosUsuario, grupo, } = useContext(DatosUsuarioContextProvider)
   const [anchorEl, setAnchorEl] = useState(null);
   function stringToColor(string) {
       let hash = 0;
@@ -60,7 +61,9 @@ const AvatarUsuario = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Mi Perfil</MenuItem>
+        {grupo === 1 ? <Link to="/miPerfil"><MenuItem>Perfil</MenuItem></Link> : null}
+        {grupo === 2 ? <Link to="/perfilEmpresa" ><MenuItem>Perfil Empresa</MenuItem></Link> : null}
+        {grupo === 3 ? <Link to="/panelAdmin"> <MenuItem> onClick={handleClose}>Panel Administrador</MenuItem></Link> : null}
         <MenuItem onClick={handleClose}>Cerrar Sesión</MenuItem>
       </Menu></Fragment>
     );

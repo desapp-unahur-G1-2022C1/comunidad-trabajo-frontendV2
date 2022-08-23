@@ -9,6 +9,7 @@ export function DatosUsuarioContextProvider({children}){
     const [token, setToken] = useState('')
     const [idUsuario, setIdUsuario] = useState(0)
     const [estaLogeado, setestaLogeado] = useState(false)
+    const [grupo, setGrupo] = useState(0)
 
     const cambiarDatosUsuario = useCallback ((datoNuevo) => {
         setDatosUsuarios(datoNuevo)
@@ -26,6 +27,10 @@ export function DatosUsuarioContextProvider({children}){
         setestaLogeado(nuevoEstado)
     }, []);
 
+    const cambiarGrupo = useCallback ((grupoNuevo) => {
+        setGrupo(grupoNuevo)
+    }, []);
+
     const value = useMemo(() => ({
         datosUsuario,
         cambiarDatosUsuario,
@@ -35,7 +40,9 @@ export function DatosUsuarioContextProvider({children}){
         cambiarIdUsuario,
         estaLogeado,
         cambiarEstadoLogeado,
-    }), [datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado])
+        grupo,
+        cambiarGrupo
+    }), [datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado, grupo, cambiarGrupo])
 
     return(
     <DatosUsuarioContext.Provider value={value}>

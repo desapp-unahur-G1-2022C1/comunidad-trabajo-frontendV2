@@ -44,11 +44,13 @@ const Ofertas = ({listaOfertas}) => {
               </Typography>
             </CardContent>
             </Box>
-              <Link to={`/oferta/${oferta.id}`} style={{ textDecoration: "none", height:'3rem', display:'flex', justifyContent:'center', margin:'1rem'}}>
-                <Button size="large" variant="contained" color="relaxed" >
+             <Box sx={{display:"flex", justifyContent:"center", textDecoration:"none", margin:"1rem"}}>
+                <Button variant="contained" color="relaxed" >
+                <Link to={`/oferta/${oferta.id}`} style={{ textDecoration: "none"}}>
                   Ver oferta
+                  </Link>
                 </Button>
-              </Link>
+                </Box>
           </Card>
         ))}
       </Box>

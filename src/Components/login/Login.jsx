@@ -10,7 +10,7 @@ import { useContext } from 'react';
 
 const Login = () => {
 
-    const {datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado} = useContext(DatosUsuarioContextProvider)
+    const {datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado, grupo, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
 
     const [body, setBody] = useState({usuario:'', password:''})
 
@@ -24,18 +24,20 @@ const Login = () => {
     }
     const history = useHistory()
     const handleSubmit = async () => {
-        await axios.post('https://comunidad-de-trabajo.herokuapp.com/usuarios/signin', body)
+        await axios.post('https://comunidad-backend-v3.herokuapp.com/usuarios/signin', body)
         .then(({data}) => {
             console.log(data)
             cambiarToken(data.token)
+            cambiarGrupo(data.grupo)
             cambiarEstadoLogeado(true)
-            axios.get(`https://comunidad-de-trabajo.herokuapp.com/usuariosPostulantes/${data.id}`)
+            axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${data.id}`)
             .then(({data}) => {
             cambiarIdUsuario(data.id)
             console.log(estaLogeado)
-            cambiarDatosUsuario(data) 
+            cambiarDatosUsuario(data)
+            console.log(data)
         })
-            history.push('/')
+            history.push("/")
         })
         .catch(({response}) => console.log(response.data))
     }
