@@ -67,7 +67,6 @@ const Login = () => {
                 <Box sx={{display:"flex", justifyContent:"center", margin:"1.5rem"}}><Button fullWidth color='relaxed' onClick={handleSubmit}  variant="contained">
                     Ingresar
                 </Button></Box>
-                <Typography> {datosUsuario.nombre}, {datosUsuario.apellido} logeado </Typography>
             </form></Box>
             <Box sx={{display:"flex", justifyContent:"center"}}>
           <Link to="/recuperarContrasena"style={{ textDecoration: 'none'}}><Typography sx={{display:"flex", margin:"0.5rem", justifyContent:"flex-start", color:"#3f50b5"}}>¿Olvidaste tu contraseña?</Typography></Link>
