@@ -1,14 +1,16 @@
 import * as React from 'react';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
 import { Avatar, Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Header from '../Header'
+import DatosUsuarioContext from '../../Context/DatosUsuarioContext';
+import { useContext } from 'react';
 
 export default function PerfilUsuario() {
+    const {datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado, grupo, cambiarGrupo} = useContext(DatosUsuarioContext)
 
   return (
+    
     <React.Fragment>
       <Header/>
       <Box>
@@ -19,7 +21,7 @@ export default function PerfilUsuario() {
                 </Stack>
             </Box>
             <Box sx={{padding:"1rem"}}>
-                <h1 style={{display:"flex"}}>Nombre y Apellido</h1>
+                <h1 style={{display:"flex"}}>{datosUsuario.nombre} {datosUsuario.apellido}</h1>
                 <h3 style={{display:"flex"}}>Desarrollador Junior</h3>
             </Box>
         </Box>

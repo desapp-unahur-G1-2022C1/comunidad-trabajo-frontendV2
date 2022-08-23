@@ -30,7 +30,7 @@ function App() {
           <Route exact path="/login">
             <Login/>
           </Route>
-          <Route exact path="/miperfil">
+          <Route exact path="/miPerfil">
             <PerfilUsuario/>
           </Route>
           <Route exact path="/perfilEmpresa">
