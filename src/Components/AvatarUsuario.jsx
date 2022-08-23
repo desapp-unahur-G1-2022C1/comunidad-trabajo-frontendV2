@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 const AvatarUsuario = () => {
 
 
-  const {datosUsuario, grupo, cambiarToken, cambiarEstadoLogeado} = useContext(DatosUsuarioContextProvider)
+  const {datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado, grupo, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
   const [anchorEl, setAnchorEl] = useState(null);
   const history = useHistory();
   function stringToColor(string) {
@@ -58,6 +58,9 @@ const AvatarUsuario = () => {
       cambiarToken('')
       cambiarEstadoLogeado(false)
       setAnchorEl(null)
+      cambiarDatosUsuario([])
+      cambiarIdUsuario(0)
+      cambiarGrupo(0)
       history.push("/")
     }
   return (
