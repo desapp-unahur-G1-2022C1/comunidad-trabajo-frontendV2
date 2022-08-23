@@ -2,7 +2,7 @@ import './App.css';
 import React from "react";
 import Home from './Components/home/Home';
 import { BrowserRouter as Router, Switch , Route, Link } from 'react-router-dom';
-import PerfilUsuarioPrivado from "./Components/PerfilUsuarioPrivado";
+import PerfilUsuario from "./Components/perfilUsuario/PerfilUsuario";
 import PerfilEmpresaPrivado from "./Components/empresa/PerfilEmpresaPrivado";
 import EmpresaDatosPrivado from "./Components/empresa/EmpresaDatosPrivado";
 import RegistroPregunta from './Components/registro/RegistroPregunta';
@@ -30,8 +30,8 @@ function App() {
           <Route exact path="/login">
             <Login/>
           </Route>
-          <Route exact path="/miPerfil">
-            <PerfilUsuarioPrivado/>
+          <Route exact path="/miperfil">
+            <PerfilUsuario/>
           </Route>
           <Route exact path="/perfilEmpresa">
             <PerfilEmpresaPrivado/>

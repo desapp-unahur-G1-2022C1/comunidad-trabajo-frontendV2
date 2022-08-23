@@ -4,7 +4,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
 import { Avatar, Button } from '@mui/material';
 import Box from '@mui/material/Box';
-import Header from './Header'
+import Header from '../Header'
 
 export default function PerfilUsuario() {
 
