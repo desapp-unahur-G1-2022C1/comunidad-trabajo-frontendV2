@@ -5,12 +5,14 @@ import { useContext } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Fragment } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const AvatarUsuario = () => {
 
 
-  const {datosUsuario, grupo, } = useContext(DatosUsuarioContextProvider)
+  const {datosUsuario, grupo, cambiarToken, cambiarEstadoLogeado} = useContext(DatosUsuarioContextProvider)
   const [anchorEl, setAnchorEl] = useState(null);
+  const history = useHistory();
   function stringToColor(string) {
       let hash = 0;
       let i;
@@ -51,6 +53,13 @@ const AvatarUsuario = () => {
       setAnchorEl(null);
     };
 
+    const cerrarSesion = () => {
+
+      cambiarToken('')
+      cambiarEstadoLogeado(false)
+      setAnchorEl(null)
+      history.push("/")
+    }
   return (
     <Fragment>
     <Avatar onClick={handleClick} {...stringAvatar(`${datosUsuario.nombre}` + " " + `${datosUsuario.apellido}`)  }/>
@@ -64,7 +73,7 @@ const AvatarUsuario = () => {
         {grupo === 1 ? <Link to="/miPerfil"><MenuItem>Perfil</MenuItem></Link> : null}
         {grupo === 2 ? <Link to="/perfilEmpresa" ><MenuItem>Perfil Empresa</MenuItem></Link> : null}
         {grupo === 3 ? <Link to="/admin"> <MenuItem>Panel Administrador</MenuItem></Link> : null}
-        <MenuItem onClick={handleClose}>Cerrar Sesión</MenuItem>
+        <MenuItem onClick={cerrarSesion}>Cerrar Sesión</MenuItem>
       </Menu></Fragment>
     );
 }
