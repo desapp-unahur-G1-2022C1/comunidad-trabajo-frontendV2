@@ -63,7 +63,7 @@ const AvatarUsuario = () => {
       >
         {grupo === 1 ? <Link to="/miPerfil"><MenuItem>Perfil</MenuItem></Link> : null}
         {grupo === 2 ? <Link to="/perfilEmpresa" ><MenuItem>Perfil Empresa</MenuItem></Link> : null}
-        {grupo === 3 ? <Link to="/panelAdmin"> <MenuItem> onClick={handleClose}>Panel Administrador</MenuItem></Link> : null}
+        {grupo === 3 ? <Link to="/admin"> <MenuItem>Panel Administrador</MenuItem></Link> : null}
         <MenuItem onClick={handleClose}>Cerrar Sesión</MenuItem>
       </Menu></Fragment>
     );
