@@ -57,7 +57,7 @@ function App() {
           <Route exact path="/admin">
             <PanelAdmin/>
           </Route>
-          <Route exact path="/listadoPostulantes">
+          <Route exact path="/admin/listadoPostulantes">
             <ListadoPostulantes/>
           </Route>
           <Route exact path="/listadoOfertasEmpresa">

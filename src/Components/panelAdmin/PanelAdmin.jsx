@@ -41,7 +41,7 @@ const PanelAdmin = () => {
         <Box
           sx={{ display: "flex", justifyContent: "center", padding: "1rem" }}
         >
-          <Link  style={{textDecoration:"none"}} to="/listadoPostulantes"><Button variant="contained" sx={{ width: "25rem" }}>
+          <Link  style={{textDecoration:"none"}} to="/admin/listadoPostulantes"><Button variant="contained" sx={{ width: "25rem" }}>
           
             Postulantes
           </Button></Link>
