@@ -71,7 +71,7 @@ const ListadoPostulantes = () => {
             <BusquedaNoEncontrada/> :
             <ListaPostulantes
             postulantes={postulantes}/>}
-            <Pagination color="primary" count={cantPaginas} page={pagina} onChange={cambiarPagina} />
+            <Pagination color="primary" count={cantPaginas} page={pagina} onChange={cambiarPagina} sx={{display:"flex", justifyContent:"center", margin:"1rem"}}/>
         
             
             
