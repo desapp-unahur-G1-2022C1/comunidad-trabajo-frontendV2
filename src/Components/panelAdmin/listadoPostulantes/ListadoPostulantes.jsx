@@ -39,7 +39,7 @@ const ListadoPostulantes = () => {
             e.preventDefault()
             const {usuario} = e.target.elements;
             const usuarioValue = usuario.value;
-            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/postulantes/?pagina=${p - 1}&limite=3&buscarNombre=${usuarioValue}`);
+            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/postulantes/?pagina=${p - 1}&limite=3&buscarPostulante=${usuarioValue}`);
             const datos = await api.json();
             console.log(datos)
             setPostulantes(datos.postulantes.rows)
