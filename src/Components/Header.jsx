@@ -8,6 +8,7 @@ import BotonInicioSesion from './home/BotonInicioSesion';
 import DatosUsuarioContextProvider from '../Context/DatosUsuarioContext';
 import { useContext } from 'react';
 import AvatarUsuario from './AvatarUsuario';
+import { Link } from 'react-router-dom';
 
 
 
@@ -34,7 +35,7 @@ const Header = () => {
           
 
           <Box sx={{ flexGrow: 1,   display: { xs: 'none', lg: 'flex', xl: 'flex' }, justifyContent:"center"}} />
-            <img src="https://cdn.discordapp.com/attachments/956988369693454466/989600731369709669/Logoblanco.png" style={{height:"4rem", padding:"0.5rem"}}></img> 
+            <Link to="/"><img src="https://cdn.discordapp.com/attachments/956988369693454466/989600731369709669/Logoblanco.png" style={{height:"4rem", padding:"0.5rem"}}></img></Link>
           <Box sx={{ flexGrow: 1 }} />
           {estaLogeado ? <AvatarUsuario/> : <BotonInicioSesion/>}
         </Toolbar>
