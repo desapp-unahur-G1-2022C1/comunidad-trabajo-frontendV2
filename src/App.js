@@ -1,7 +1,7 @@
 import './App.css';
 import React from "react";
 import Home from './Components/home/Home';
-import { BrowserRouter as Router, Switch , Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch , Route } from 'react-router-dom';
 import PerfilUsuario from "./Components/perfilUsuario/PerfilUsuario";
 import PerfilEmpresaPrivado from "./Components/empresa/PerfilEmpresaPrivado";
 import EmpresaDatosPrivado from "./Components/empresa/EmpresaDatosPrivado";
@@ -16,6 +16,7 @@ import PanelAdmin from './Components/panelAdmin/PanelAdmin'
 import ListadoPostulantes from './Components/panelAdmin/listadoPostulantes/ListadoPostulantes'
 import Login from './Components/login/Login'
 import {IdFormContextProvider} from './Context/IdFormContext';
+import ListadoEmpresas from './Components/panelAdmin/listadoEmpresasAdmin/ListadoEmpresas';
 
 function App() {
   return (
@@ -62,6 +63,9 @@ function App() {
           </Route>
           <Route exact path="/listadoOfertasEmpresa">
             <ListadoOfertasEmpresa/>
+          </Route>
+          <Route exact path="/admin/listadoEmpresas">
+            <ListadoEmpresas/>
           </Route>
           <Route path="*">
             <NotFound/>

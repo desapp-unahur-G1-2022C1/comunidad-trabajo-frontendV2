@@ -56,9 +56,9 @@ const PanelAdmin = () => {
         <Box
           sx={{ display: "flex", justifyContent: "center", padding: "1rem" }}
         >
-          <Button variant="contained" sx={{ width: "25rem" }}>
+        <Link  style={{textDecoration:"none"}} to="/admin/listadoEmpresas"> <Button variant="contained" sx={{ width: "25rem" }}>
             Empresas
-          </Button>
+          </Button></Link> 
         </Box>
       </Box>
       <Box
