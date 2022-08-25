@@ -13,7 +13,7 @@ import RegistroOferta from './Components/empresa/RegistroOferta';
 import RegistroUsuario from './Components/registro/RegistroUsuario';
 import ListadoOfertasEmpresa from './Components/empresa/listadoDeOfertas/ListadoOfertas'
 import PanelAdmin from './Components/panelAdmin/PanelAdmin'
-import ListadoPostulantes from './Components/panelAdmin/listadoPostulantes/ListadoPostulantes'
+import ListadoPostulantes from './Components/panelAdmin/listadoPostulantesAdmin/ListadoPostulantes'
 import Login from './Components/login/Login'
 import {IdFormContextProvider} from './Context/IdFormContext';
 import ListadoEmpresas from './Components/panelAdmin/listadoEmpresasAdmin/ListadoEmpresas';

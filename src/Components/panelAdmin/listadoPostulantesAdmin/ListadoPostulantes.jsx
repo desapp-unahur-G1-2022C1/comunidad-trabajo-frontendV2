@@ -1,9 +1,7 @@
 import React, { Fragment, useState} from 'react'
-import { TextField } from '@mui/material/TextField';
-import { Button } from '@mui/material/Button';
-import { Box } from '@mui/system';
+
 import Header from "../../Header"
-import { Grid, Pagination, Typography } from '@mui/material';
+import { Pagination } from '@mui/material';
 import BarraBusquedaPostulantes from './BarraBusquedaPostuluantes';
 import ListaPostulantes from './ListaPostulantes';
 import BusquedaNoEncontrada from './BusquedaNoEncontrada';
