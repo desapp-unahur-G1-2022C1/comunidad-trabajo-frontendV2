@@ -49,9 +49,9 @@ const PanelAdmin = () => {
         <Box
           sx={{ display: "flex", justifyContent: "center", padding: "1rem" }}
         >
-          <Button variant="contained" sx={{ width: "25rem" }}>
+           <Link  style={{textDecoration:"none"}} to="/admin/listadoOfertas"><Button variant="contained" sx={{ width: "25rem" }}>
             Ofertas
-          </Button>
+          </Button></Link>
         </Box>
         <Box
           sx={{ display: "flex", justifyContent: "center", padding: "1rem" }}

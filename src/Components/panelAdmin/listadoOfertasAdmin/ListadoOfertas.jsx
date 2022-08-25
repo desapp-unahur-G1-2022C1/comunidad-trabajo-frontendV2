@@ -2,19 +2,19 @@ import React, { Fragment, useState} from 'react'
 
 import Header from "../../Header"
 import { Pagination } from '@mui/material';
-import BarraBusquedaPostulantes from './BarraBusquedaPostulantes';
-import ListaPostulantes from './ListaPostulantes';
+import BarraBusquedaOfertas from './BarraBusquedaOfertas';
+import ListaOfertas from './ListaOfertas';
 import BusquedaNoEncontrada from './BusquedaNoEncontrada';
 
-const ListadoPostulantes = () => {
+const ListadoOfertas = () => {
 
 
     const [llamado, setLlamado] = useState(false);
-    const [postulantes, setPostulantes] = useState([]);
+    const [ofertas, setOfertas] = useState([]);
     const [cantPaginas, setCantPaginas] = useState(0);
     const [pagina, setPagina] = useState(1);
 
-    const API_URL = `https://comunidad-backend-v3.herokuapp.com/postulantes/?pagina=0&limite=3`;
+    const API_URL = `https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=0&limite=3`;
 
     const primerLlamado = async () => {
         if(llamado === false){
@@ -22,7 +22,7 @@ const ListadoPostulantes = () => {
                 const api = await fetch(API_URL);
                 const datos = await api.json();
                 setLlamado(true)
-                setPostulantes(datos.postulantes.rows)
+                setOfertas(datos.ofertas.rows)
                 setCantPaginas(datos.totalPaginas)
                 
             }
@@ -32,17 +32,17 @@ const ListadoPostulantes = () => {
         }
     }
 
-    const traerPostulantes = async (e, p) => {
+    const traerOfertas = async (e, p) => {
         try{
             e.preventDefault()
             const {usuario} = e.target.elements;
             const usuarioValue = usuario.value;
-            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/postulantes/?pagina=${p - 1}&limite=3&buscarPostulante=${usuarioValue}`);
+            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&buscarTitulo=${usuarioValue}`);
             const datos = await api.json();
             console.log(datos)
-            setPostulantes(datos.postulantes.rows)
+            setOfertas(datos.ofertas.rows)
             setCantPaginas(datos.totalPaginas)
-            console.log(postulantes)
+            console.log(ofertas)
         }
         catch(err){
             console.log(err)
@@ -51,9 +51,9 @@ const ListadoPostulantes = () => {
 
     const cambiarPagina = async (e, p) => {
         
-        const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/postulantes/?pagina=${p - 1}&limite=3&ordenar=id`);;
+        const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&ordenar=id`);
         const datos = await api.json();
-        setPostulantes(datos.postulantes.rows);
+        setOfertas(datos.ofertas.rows);
         setPagina(p)
         console.log(datos.ofertas.rows)
     }
@@ -63,18 +63,15 @@ const ListadoPostulantes = () => {
     return (  
         <Fragment>
             <Header/>
-            <BarraBusquedaPostulantes
-            traerPostulantes={traerPostulantes}/>
-            {postulantes.length === 0 && llamado === true ?
+            <BarraBusquedaOfertas
+            traerOfertas={traerOfertas}/>
+            {ofertas.length === 0 && llamado === true ?
             <BusquedaNoEncontrada/> :
-            <ListaPostulantes
-            postulantes={postulantes}/>}
+            <ListaOfertas
+            ofertas={ofertas}/>}
             <Pagination color="primary" count={cantPaginas} page={pagina} onChange={cambiarPagina} sx={{display:"flex", justifyContent:"center", margin:"1rem"}}/>
-        
-            
-            
         </Fragment>
     );
 }
  
-export default ListadoPostulantes;
+export default ListadoOfertas;
