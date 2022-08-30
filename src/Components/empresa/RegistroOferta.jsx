@@ -20,96 +20,102 @@ import Grid from "@mui/material/Grid";
 import Swal from 'sweetalert2'
 import FormFormHelperText from "@mui/material";
 import { MenuList } from "@material-ui/core";
+import DatosUsuarioContextProvider from '../../Context/DatosUsuarioContext';
+import { useContext } from 'react';
+import { useHistory } from "react-router-dom";
 
 const validationSchema = yup.object({
-  titulo_oferta: yup
+  tituloOferta: yup
     .string("Ingrese su un titulo para la oferta")
     .min(1, "Este campo no puede estar vacio")
-    .required("El titulo de la oferta requerido"),
+    .optional("El titulo de la oferta requerido"),
   descripcion: yup
     .string("Ingrese una descripcion a la descripcion")
     .min(1, "Este campo no puede estar vacio")
-    .required("Descripcion requerido"),
-  fecha_vigencia: yup
+    .optional("Descripcion requerido"),
+  fechaVigencia: yup
     .string("Ingrese su fecha de nacimiento")
+    .min(1, "Este campo no puede estar vacio")
     .optional(),
-  horario_laboral_desde: yup
-    .number("Ingrese su horario_laboral_desde")
+  horarioLaboralDesde: yup
+    .number("Ingrese su horario laboral desde")
+    .min(1, "Este campo no puede estar vacio")
     .optional(),
-  horario_laboral_hasta: yup
-    .number("Ingrese su horario_laboral_hasta")
+  horarioLaboralDesde: yup
+    .number("Ingrese su horario laboral hasta")
+    .min(1, "Este campo no puede estar vacio")
     .optional(),
-  edad_hasta: yup
-    .number("Ingrese su edad_hasta")
+  edadDesde: yup
+    .number("Ingrese su edad hasta")
+    .min(1, "Este campo no puede estar vacio")
     .optional(),
-  edad_desde: yup
-    .number("Ingrese su edad_desde de residencia")
+  edadHasta: yup
+    .number("Ingrese su edad desde de residencia")
+    .min(1, "Este campo no puede estar vacio")
     .optional(),
-  experiencia_previa_desc: yup
-    .string("Ingrese el titulo_oferta de su experiencia_previa_desc")
+  experienciaPreviaDesc: yup
+    .string("Descripcion de experiencia previa")
+    .min(1, "Este campo no puede estar vacio")
     .optional(),
-  zona_trabajo: yup
+  zonaTrabajo: yup
     .string("Ingrese altura")
+    .min(1, "Este campo no puede estar vacio")
     .optional(),
-  areas_estudio: yup
-    .string("Ingrese su areas_estudio de contacto")
+  areasEstudio: yup
+    .string("Ingrese su areasEstudio de contacto")
+    .min(1, "Este campo no puede estar vacio")
+    .optional(),
+  otrosDetalles: yup
+    .string("Ingrese otros detalles de la oferta")
+    .min(1, "Este campo no puede estar vacio")
+    .optional(),
+  beneficios: yup
+    .string("Ingrese otros detalles de la oferta")
+    .min(1, "Este campo no puede estar vacio")
+    .optional(),
+  remuneracion: yup
+    .number("Ingrese la remuneracion")
+    .min(1, "Este campo no puede estar vacio")
+    .optional(),
+  idEstudio: yup
+    .number("Ingrese la remuneracion")
+    .min(1, "Este campo no puede estar vacio")
+    .optional(),
+  idCarrera: yup
+    .number("Ingrese la remuneracion")
+    .min(1, "Este campo no puede estar vacio")
+    .optional(),
+  idCarrera: yup
+  .number("Ingrese la remuneracion")
+  .min(1, "Este campo no puede estar vacio")
+  .optional(),
+  idContrato: yup
+    .number("Ingrese la remuneracion")
+    .min(1, "Este campo no puede estar vacio")
+    .optional(),
+  idJornada: yup
+    .number("Ingrese la remuneracion")
+    .min(1, "Este campo no puede estar vacio")
     .optional(),
 });
 
 
 export default function WithMaterialUI() {
+  const history = useHistory()
+  const {datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado, grupo, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
 
-  /*Llama a los TIPOS DE DOCUMENTOS para seleccionar en el formulario*/
-  const [tiposDocumentos, setTiposDocumentos] = useState([]);
-  const [llamadoTipoDocumento, setLlamadoTipoDocumento] = useState(false);
-
-  const llamarTipoDocumento = async () => {
-    if (llamadoTipoDocumento === false) {
-      try {
-        const api = await fetch(
-          `https://comunidad-de-trabajo.herokuapp.com/tiposDocumentos`
-        );
-        const datos = await api.json();
-        setTiposDocumentos(datos.tipos_documentos);
-        setLlamadoTipoDocumento(true);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
-  llamarTipoDocumento();
-
-  /*Llama a las CARRERAS para seleccionar en el formulario*/
-  const [listaCarreras, setListaCarreras] = useState([]);
-  const [llamadoListaCarreras, setLlamadoListaCarreras] = useState(false);
-  const llamarCarreras = async () => {
-    if (llamadoTipoDocumento === false) {
-      try {
-        const api = await fetch(
-          `https://comunidad-de-trabajo.herokuapp.com/carreras/`
-        );
-        const datos = await api.json();
-        setListaCarreras(datos.carreras);
-        setLlamadoListaCarreras(true);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
-  llamarCarreras();
-
-  /*Llama a los ESTUDIOS para seleccionar en el formulario*/
-  const [listaEstudios, setListaEstudios] = useState([]);
-  const [llamadoEstudios, setLlamadoEstudios] = useState(false);
+  /*Llama a los idEstudio para seleccionar en el formulario*/
+  const [listaEstudio, setlistaEstudio] = useState([]);
+  const [llamadolistaEstudio, setLlamadolistaEstudio] = useState(false);
   const llamarEstudios = async () => {
-    if (llamadoTipoDocumento === false) {
+    if (llamadolistaEstudio === false) {
       try {
         const api = await fetch(
           `https://comunidad-de-trabajo.herokuapp.com/estudios/`
         );
         const datos = await api.json();
-        setListaEstudios(datos.estudios);
-        setLlamadoEstudios(true);
+        setlistaEstudio(datos.estudios);
+        setLlamadolistaEstudio(true);
       } catch (error) {
         console.log(error);
       }
@@ -117,43 +123,110 @@ export default function WithMaterialUI() {
   };
   llamarEstudios();
 
-  var getLocal = localStorage.getItem("idGuardado");
+  /*Llama a las idCarrera para seleccionar en el formulario*/
+  const [listaCarrera, setlistaCarrera] = useState([]);
+  const [llamadolistaCarrera, setLlamadolistaCarrera] = useState(false);
+  const llamarCarreras = async () => {
+    if (llamadolistaCarrera === false) {
+      try {
+        const api = await fetch(
+          `https://comunidad-de-trabajo.herokuapp.com/carreras/`
+        );
+        const datos = await api.json();
+        setlistaCarrera(datos.carreras);
+        setLlamadolistaCarrera(true);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+  llamarCarreras();
+
+  /*Llama a las idCarrera para seleccionar en el formulario*/
+  const [listaJornada, setlistaJornada] = useState([]);
+  const [llamadolistaJornada, setLlamadolistaJornada] = useState(false);
+  const llamarJornada = async () => {
+    if (llamadolistaJornada === false) {
+      try {
+        const api = await fetch(
+          ` https://comunidad-backend-v3.herokuapp.com/jornadas/`
+        );
+        const datos = await api.json();
+        setlistaJornada(datos.jornadas);
+        setLlamadolistaJornada(true);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+  llamarJornada();
+
+  /*Llama a las idContrato para seleccionar en el formulario*/
+  const [listaContrato, setlistaContrato] = useState([]);
+  const [llamadolistaContrato, setLlamadolistaContrato] = useState(false);
+  const llamarContrato = async () => {
+    if (llamadolistaContrato === false) {
+      try {
+        const api = await fetch(
+          ` https://comunidad-backend-v3.herokuapp.com/contratos/`
+        );
+        const datos = await api.json();
+        setlistaContrato(datos.contratos);
+        setLlamadolistaContrato(true);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+  llamarContrato();
 
   const formik = useFormik({
     initialValues: {
-      titulo_oferta: "",
+      tituloOferta: "",
       descripcion: "",
-      fecha_vigencia: undefined,
-      horario_laboral_desde: "",
-      horario_laboral_hasta: '',
-      edad_desde: '',
-      edad_hasta: '',
-      experiencia_previa_desc: '',
-      zona_trabajo: '',
-      areas_estudio: '',
-      otros_detalles: '',
-      beneficios: '',
+      fechaVigencia: undefined,
+      horarioLaboralDesde: "",
+      horarioLaboralHasta: "",
+      edadHasta: "",
+      edadDesde: "",
+      experienciaPreviaDesc: "",
+      zonaTrabajo: "",
+      areasEstudio: "",
+      otrosDetalles: "",
+      beneficios: "",
+      idEmpresa: datosUsuario.id,
       remuneracion: undefined,
+      idEstudio: undefined,
+      idCarrera: undefined,
+      idCarrera: undefined,
+      idContrato: undefined,
+      idJornada:undefined,
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       var data = {
-        titulo_oferta: values.titulo_oferta,
+        idEmpresa: datosUsuario.id,
+        idCarrera: values.idCarrera,
+        idContrato: values.idContrato,
+        idEstudio: values.idEstudio,
+        idCarrera: values.idCarrera,
+        idJornada: values.idJornada,
+        fechaVigencia: values.fechaVigencia,
+        tituloOferta: values.tituloOferta,
         descripcion: values.descripcion,
-        horario_laboral_desde: values.horario_laboral_desde,
-        horario_laboral_hasta: values.horario_laboral_hasta,
-        edad_desde: values.edad_desde,
-        edad_hasta: values.edad_hasta,
-        experiencia_previa_desc: values.experiencia_previa_desc,
-        zona_trabajo: values.zona_trabajo,
-        areas_estudio: values.areas_estudio,
-        otros_detalles: values.otros_detalles,
+        horarioLaboralDesde: values.horarioLaboralDesde,
+        horarioLaboralHasta: values.horarioLaboralHasta,
+        edadHasta: values.edadHasta,
+        edadDesde: values.edadDesde,
+        experienciaPreviaDesc: values.experienciaPreviaDesc,
+        zonaTrabajo: values.zonaTrabajo,
+        areasEstudio: values.areasEstudio,
+        otrosDetalles: values.otrosDetalles,
         beneficios: values.beneficios,
-        remuneracion: values.remuneracion,
-        fecha_vigencia: values.fecha_vigencia,
+        remuneracion: values.remuneracion
       };
       console.log(values);
-        fetch("https://comunidad-de-trabajo.herokuapp.com/postulantes/", {
+        fetch("https://comunidad-backend-v3.herokuapp.com/ofertas/", {
         method: "POST", // or 'PUT'
         body: JSON.stringify(data), // data can be `string` or {object}!
         headers: {
@@ -165,7 +238,7 @@ export default function WithMaterialUI() {
         .then((response) => console.log("Success:", response,
         Swal.fire({
           icon: 'success',
-          title: 'Su registro fue realizado correctamente',
+          title: 'La oferta fue creada exitosamente',
           confirmButtonText: 'Finalizar',
           text: 'Para continuar pulse el boton',
           footer: '',
@@ -173,13 +246,13 @@ export default function WithMaterialUI() {
         })
         .then(function (result) {
           if (result.value) {
-              window.location = "/";
+              history.push('/listadoOfertasEmpresa')
           }
         })))
         .catch((error) => console.error("Error:", error,
         Swal.fire({
           icon: 'error',
-          title: 'Ocurrio un error al registrarse',
+          title: 'Ocurrio un error al crear la oferta',
           confirmButtonText: 'Volver',
           text: 'Verifique sus datos',
           footer: '',
@@ -204,18 +277,18 @@ export default function WithMaterialUI() {
               <Grid item xs={12} sm={6} md={4}>
                 <TextField
                   variant="outlined"
-                  id="titulo_oferta"
-                  name="titulo_oferta"
+                  id="tituloOferta"
+                  name="tituloOferta"
                   label="Nombre de la oferta"
                   fullWidth
-                  value={formik.values.titulo_oferta}
+                  value={formik.values.tituloOferta}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.titulo_oferta &&
-                    Boolean(formik.errors.titulo_oferta) &&
+                    formik.touched.tituloOferta &&
+                    Boolean(formik.errors.tituloOferta) &&
                     true
                   }
-                  helperText={formik.touched.titulo_oferta && formik.errors.titulo_oferta}
+                  helperText={formik.touched.tituloOferta && formik.errors.tituloOferta}
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
@@ -238,128 +311,128 @@ export default function WithMaterialUI() {
               <Grid item xs={12} sm={6} md={4}>
                 <TextField
                   variant="outlined"
-                  id="fecha_vigencia"
-                  name="fecha_vigencia"
+                  id="fechaVigencia"
+                  name="fechaVigencia"
                   label="Fecha de vigencia"
                   type="date"
                   InputLabelProps={{ shrink: true }}
                   fullWidth
-                  value={formik.values.fecha_vigencia}
+                  value={formik.values.fechaVigencia}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.fecha_vigencia && Boolean(formik.errors.fecha_vigencia)
+                    formik.touched.fechaVigencia && Boolean(formik.errors.fechaVigencia)
                   }
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <TextField
-                  id="horario_laboral_desde"
-                  name="horario_laboral_desde"
+                  id="horarioLaboralDesde"
+                  name="horarioLaboralDesde"
                   label="Horario laboral desde:"
                   type="number"
                   fullWidth
                   variant="outlined"
-                  value={formik.values.horario_laboral_desde}
+                  value={formik.values.horarioLaboralDesde}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.horario_laboral_desde && Boolean(formik.errors.horario_laboral_desde) && true
+                    formik.touched.horarioLaboralDesde && Boolean(formik.errors.horarioLaboralDesde) && true
                   }
-                  helperText={formik.touched.horario_laboral_desde && formik.errors.horario_laboral_desde}
+                  helperText={formik.touched.horarioLaboralDesde && formik.errors.horarioLaboralDesde}
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <TextField
-                  id="horario_laboral_hasta"
-                  name="horario_laboral_hasta"
+                  id="horarioLaboralHasta"
+                  name="horarioLaboralHasta"
                   label="Horario laboral hasta:"
                   variant="outlined"
                   type= "number"
                   fullWidth
-                  value={formik.values.horario_laboral_hasta}
+                  value={formik.values.horarioLaboralHasta}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.horario_laboral_hasta &&
-                    Boolean(formik.errors.horario_laboral_hasta)
+                    formik.touched.horarioLaboralHasta &&
+                    Boolean(formik.errors.horarioLaboralHasta)
                   }
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <TextField
-                  id="edad_desde"
-                  name="edad_desde"
+                  id="edadDesde"
+                  name="edadDesde"
                   label="Edad desde: "
                   variant="outlined"
                   type= "number"
                   fullWidth
-                  value={formik.values.edad_desde}
+                  value={formik.values.edadDesde}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.edad_desde && Boolean(formik.errors.edad_desde)
+                    formik.touched.edadDesde && Boolean(formik.errors.edadDesde)
                   }
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <TextField
-                  id="edad_hasta"
-                  name="edad_hasta"
+                  id="edadHasta"
+                  name="edadHasta"
                   variant="outlined"
                   label="Edad hasta:"
                   type="number"
                   fullWidth
-                  value={formik.values.edad_hasta}
+                  value={formik.values.edadHasta}
                   onChange={formik.handleChange}
-                  error={formik.touched.edad_hasta && Boolean(formik.errors.edad_hasta)}
+                  error={formik.touched.edadHasta && Boolean(formik.errors.edadHasta)}
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <TextField
-                  id="experiencia_previa_desc"
-                  name="experiencia_previa_desc"
+                  id="experienciaPreviaDesc"
+                  name="experienciaPreviaDesc"
                   variant="outlined"
                   label="Experiencia previa descripcion"
                   fullWidth
-                  value={formik.values.experiencia_previa_desc}
+                  value={formik.values.experienciaPreviaDesc}
                   onChange={formik.handleChange}
-                  error={formik.touched.experiencia_previa_desc && Boolean(formik.errors.experiencia_previa_desc)}
+                  error={formik.touched.experienciaPreviaDesc && Boolean(formik.errors.experienciaPreviaDesc)}
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <TextField
-                  id="zona_trabajo"
-                  name="zona_trabajo"
+                  id="zonaTrabajo"
+                  name="zonaTrabajo"
                   variant="outlined"
                   label="Zona de trabajo"
                   fullWidth
-                  value={formik.values.zona_trabajo}
+                  value={formik.values.zonaTrabajo}
                   onChange={formik.handleChange}
-                  error={formik.touched.zona_trabajo && Boolean(formik.errors.zona_trabajo)}
+                  error={formik.touched.zonaTrabajo && Boolean(formik.errors.zonaTrabajo)}
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <TextField
-                  id="areas_estudio"
-                  name="areas_estudio"
+                  id="areasEstudio"
+                  name="areasEstudio"
                   variant="outlined"
                   label="Areas de estudio"
                   fullWidth
-                  value={formik.values.areas_estudio}
+                  value={formik.values.areasEstudio}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.areas_estudio && Boolean(formik.errors.areas_estudio)
+                    formik.touched.areasEstudio && Boolean(formik.errors.areasEstudio)
                   }
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <TextField
-                  id="otros_detalles"
-                  name="otros_detalles"
+                  id="otrosDetalles"
+                  name="otrosDetalles"
                   variant="outlined"
                   label="Otros detalles"
                   fullWidth
-                  value={formik.values.otros_detalles}
+                  value={formik.values.otrosDetalles}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.otros_detalles && Boolean(formik.errors.otros_detalles)
+                    formik.touched.otrosDetalles && Boolean(formik.errors.otrosDetalles)
                   }
                 />
               </Grid>
@@ -391,6 +464,98 @@ export default function WithMaterialUI() {
                     formik.touched.remuneracion && Boolean(formik.errors.remuneracion)
                   }
                 />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+              <FormControl fullWidth>
+              <InputLabel>Estudio</InputLabel>
+              <Select
+                id="idEstudio"
+                name="idEstudio"
+                label="Nivel de estudio"
+                variant="outlined"
+                type="number"
+                value={formik.values.estudio}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.estudio && Boolean(formik.errors.estudio)
+                }
+              >
+                {listaEstudio.map((estudio) => (
+                  <MenuList className="selectCss" value={estudio.id} key={estudio.id}>
+                    <Box sx={{display:'flex', justifyContent:'center'}}>{estudio.id}: {estudio.nombre_estudio} - {estudio.estado_estudio}</Box> 
+                  </MenuList>
+                ))}
+              </Select>
+              </FormControl>
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+              <FormControl fullWidth>
+                <InputLabel>Carrera</InputLabel>
+                <Select
+                  id="idCarrera"
+                  name="idCarrera"
+                  variant="outlined"
+                  label="Carrera"
+                  type="number"
+                  value={formik.values.carrera}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.carrera && Boolean(formik.errors.carrera)
+                  }
+                >
+                  {listaCarrera.map((carrera) => (
+                    <MenuList className="selectCss" value={carrera.id} key={carrera.id}>
+                      <Box sx={{display:'flex', justifyContent:'center'}}> {carrera.id}: {carrera.nombre_carrera}</Box>
+                    </MenuList>
+                  ))}
+                </Select>
+              </FormControl>
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+              <FormControl fullWidth>
+              <InputLabel>Jornada</InputLabel>
+              <Select
+                id="idJornada"
+                name="idJornada"
+                label="Ingrese la jornada"
+                variant="outlined"
+                type="number"
+                value={formik.values.jornada}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.jornada && Boolean(formik.errors.jornada)
+                }
+              >
+                {listaJornada.map((jornada) => (
+                  <MenuList className="selectCss" value={jornada.id} key={jornada.id}>
+                    <Box sx={{display:'flex', justifyContent:'center'}}>{jornada.id} : {jornada.nombre_jornada}</Box> 
+                  </MenuList>
+                ))}
+              </Select>
+              </FormControl>
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+              <FormControl fullWidth>
+                <InputLabel>Contrato</InputLabel>
+                <Select
+                  id="idContrato"
+                  name="idContrato"
+                  variant="outlined"
+                  label="Tipo de contrato"
+                  type="number"
+                  value={formik.values.contrato}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.contrato && Boolean(formik.errors.contrato)
+                  }
+                >
+                  {listaContrato.map((contrato) => (
+                    <MenuList className="selectCss" value={contrato.id} key={contrato.id}>
+                      <Box sx={{display:'flex', justifyContent:'center'}}> {contrato.id} : {contrato.nombre_contrato}</Box>
+                    </MenuList>
+                  ))}
+                </Select>
+              </FormControl>
               </Grid>
             </Grid>
           </div>

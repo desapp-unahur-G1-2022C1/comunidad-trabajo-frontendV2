@@ -82,7 +82,7 @@ export default function WithMaterialUI() {
   const [listaCarreras, setListaCarreras] = useState([]);
   const [llamadoListaCarreras, setLlamadoListaCarreras] = useState(false);
   const llamarCarreras = async () => {
-    if (llamadoTipoDocumento === false) {
+    if (llamadoListaCarreras === false) {
       try {
         const api = await fetch(
           `https://comunidad-de-trabajo.herokuapp.com/carreras/`

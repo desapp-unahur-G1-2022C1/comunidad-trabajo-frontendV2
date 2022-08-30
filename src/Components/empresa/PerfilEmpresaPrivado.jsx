@@ -6,12 +6,15 @@ import { Avatar, Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Header from '../Header';
 import { Link } from "react-router-dom";
+import DatosUsuarioContextProvider from '../../Context/DatosUsuarioContext';
+import { useContext } from 'react';
 
 export default function PerfilEmpresa() {
+    const {datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado, grupo, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
 
   return (
     <React.Fragment>
-      
+      <Header/>
       <Box>
         <Box sx={{display:"flex", justifyContent:"flex-start", alignContent:"center"}}>
             <Box>
@@ -20,8 +23,8 @@ export default function PerfilEmpresa() {
                 </Stack>
             </Box>
             <Box sx={{padding:"1rem"}}>
-                <h1 style={{display:"flex"}}>Nombre de la empresa</h1>
-                <h3 style={{display:"flex"}}>....</h3>
+                <h1 style={{display:"flex"}}>{datosUsuario.nombre_empresa}</h1>
+                <h3 style={{display:"flex"}}>{datosUsuario.web}</h3>
             </Box>
         </Box>
         <Box sx={{display:"flex", justifyContent:"center", padding:"1rem"}}>

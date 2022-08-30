@@ -7,14 +7,17 @@ import { Grid, Typography } from '@mui/material';
 import BarraBusquedaOfertas from './BarraBusquedaOfertas';
 import ListaOfertas from './ListaOfertas';
 import BusquedaNoEncontrada from './BusquedaNoEncontrada';
+import DatosUsuarioContextProvider from '../../../Context/DatosUsuarioContext';
+import { useContext } from 'react';
 
 const ListadoOfertas = () => {
 
+    const {datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado, grupo, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
 
     const [llamado, setLlamado] = useState(false);
     const [Ofertas, setOfertas] = useState([]);
 
-    const API_URL = `https://comunidad-de-trabajo.herokuapp.com/ofertasPorEmpresa/30100552408/`
+    const API_URL = `https://comunidad-backend-v3.herokuapp.com/ofertas/cuit/${datosUsuario.id}/`
 
     const primerLlamado = async () => {
         if(llamado === false){
@@ -50,7 +53,6 @@ const ListadoOfertas = () => {
     }
 
     primerLlamado()
-    console.log(Ofertas)
     return (  
         <Fragment>
             <Header/>
@@ -61,8 +63,6 @@ const ListadoOfertas = () => {
             <ListaOfertas
             Ofertas={Ofertas}/>
             }
-            
-            
         </Fragment>
     );
 }

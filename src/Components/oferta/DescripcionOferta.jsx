@@ -180,7 +180,7 @@ const CustomizedDialogs = () => {
               {" "}
               <h3>Horario:</h3>{" "}
               <Typography sx={{ paddingLeft:"0.5rem", fontSize: "20px" }}>
-                De {horarioEnrada} a {horarioSalida}
+                De {horarioEnrada}hs. a {horarioSalida}hs.
               </Typography>
             </Box>
             <Box sx={{ display: "flex", alignItems:"center", borderBottom: "#009688 2px solid" }}>

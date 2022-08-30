@@ -5,6 +5,9 @@ import Chip from '@mui/material/Chip';
 import Header from '../Header';
 import { Box, Typography, Button } from '@mui/material';
 import { useState } from 'react';
+import DatosUsuarioContextProvider from '../../Context/DatosUsuarioContext';
+import { useContext } from 'react';
+
 
 const Root = styled('div')(({ theme }) => ({
   width: '100%',
@@ -15,6 +18,7 @@ const Root = styled('div')(({ theme }) => ({
 }));
 
 export default function DividerText() {
+  const {datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado, grupo, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
   const content = (
     <div>
       {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id dignissim justo.
@@ -22,34 +26,6 @@ export default function DividerText() {
    Sed malesuada lobortis pretium.`}
     </div>
   );
-
-  const [nombre, setNombreEmpresa] = useState();
-  const [descripcion, setDescripcion] = useState();
-  const [email, setEmail] = useState();
-  const [telefono, setTelefono] = useState();
-  const [web, setWeb] = useState();
-  const [pais, setPais] = useState();
-  const [provincia, setProvincia] = useState();
-  const [ciudad, setCiudad] = useState();
-  const API_URL = `https://comunidad-de-trabajo.herokuapp.com/empresas/`;
-
-  const descripcionAPI = async () => {
-    try {
-      const api = await fetch(API_URL);
-      const datos = await api.json();
-      setNombreEmpresa(datos.empresas[0].nombre_empresa);
-      setDescripcion(datos.empresas[0].descripcion);
-      setEmail(datos.empresas[0].email_representante);
-      setTelefono(datos.empresas[0].telefono);
-      setWeb(datos.empresas[0].web);
-      setPais(datos.empresas[0].pais);
-      setProvincia(datos.empresas[0].provincia);
-      setCiudad(datos.empresas[0].ciudad);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  descripcionAPI();
   return (
     <React.Fragment>
     <Header/>
@@ -64,11 +40,11 @@ export default function DividerText() {
       <Box>
         <Typography sx={{display:'flex', justifyContent:'center', margin:'2rem'}}>
             <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">Nombre:</Typography>
-            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{nombre}</Typography>
+            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{datosUsuario.nombre_empresa}</Typography>
         </Typography>
         <Typography sx={{display:'flex', justifyContent:'center', margin:'2rem'}}>
             <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">Descripcion:</Typography>
-            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{descripcion}</Typography>
+            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{datosUsuario.descripcion}</Typography>
         </Typography>
       </Box>
       <Divider>
@@ -77,15 +53,15 @@ export default function DividerText() {
       <Box>
         <Typography sx={{display:'flex', justifyContent:'center', margin:'2rem'}}>
             <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">Email del representante:</Typography>
-            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{email}</Typography>
+            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{datosUsuario.email_representante}</Typography>
         </Typography>
         <Typography sx={{display:'flex', justifyContent:'center'}}>
             <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">Numero de contecto:</Typography>
-            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{telefono}</Typography>
+            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{datosUsuario.telefono}</Typography>
         </Typography>
         <Typography sx={{display:'flex', justifyContent:'center', margin:'2rem'}}>
             <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">Pagina web:</Typography>
-            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{web}</Typography>
+            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{datosUsuario.web}</Typography>
         </Typography>
       </Box>
       <Divider>
@@ -94,15 +70,15 @@ export default function DividerText() {
       <Box>
         <Typography sx={{display:'flex', justifyContent:'center', margin:'2rem'}}>
             <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">Pais:</Typography>
-            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{pais}</Typography>
+            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{datosUsuario.pais}</Typography>
         </Typography>
         <Typography sx={{display:'flex', justifyContent:'center', margin:'2rem'}}>
             <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">Provincia:</Typography>
-            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{provincia}</Typography>
+            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{datosUsuario.provincia}</Typography>
         </Typography>
         <Typography sx={{display:'flex', justifyContent:'center', margin:'2rem'}}>
             <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">Ciudad:</Typography>
-            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{ciudad}</Typography>
+            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{datosUsuario.ciudad}</Typography>
         </Typography>
       </Box>
     </Root>

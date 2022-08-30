@@ -73,9 +73,9 @@ const AvatarUsuario = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {grupo === 1 ? <Link to="/miPerfil"><MenuItem>Perfil</MenuItem></Link> : null}
-        {grupo === 2 ? <Link to="/perfilEmpresa" ><MenuItem>Perfil Empresa</MenuItem></Link> : null}
-        {grupo === 3 ? <Link to="/admin"> <MenuItem>Panel Administrador</MenuItem></Link> : null}
+        {grupo === 1 ? <Link to="/miPerfil" style={{textDecoration:'none', color:'black'}}><MenuItem>Perfil</MenuItem></Link> : null}
+        {grupo === 2 ? <Link to="/perfilEmpresa" style={{textDecoration:'none', color:'black'}}><MenuItem>Perfil Empresa</MenuItem></Link> : null}
+        {grupo === 3 ? <Link to="/admin" style={{textDecoration:'none', color:'black'}}> <MenuItem>Panel Administrador</MenuItem></Link> : null}
         <MenuItem onClick={cerrarSesion}>Cerrar Sesión</MenuItem>
       </Menu></Fragment>
     );

@@ -7,6 +7,7 @@ import axios from "axios"
 import { Link, useHistory} from "react-router-dom"
 import DatosUsuarioContextProvider from '../../Context/DatosUsuarioContext';
 import { useContext } from 'react';
+import Swal from 'sweetalert2';
 
 const Login = () => {
 
@@ -29,15 +30,38 @@ const Login = () => {
             console.log(data)
             cambiarToken(data.token)
             cambiarGrupo(data.grupo)
-            cambiarEstadoLogeado(true)
+        if (data.estado == false){
+            Swal.fire({
+                icon: 'error',
+                title: 'Su cuenta aun no se encuentra activa',
+                confirmButtonText: 'Volver',
+                text: 'Verifique sus datos',
+                footer: '',
+                showCloseButton: true
+              })
+        }
+        else if (grupo == 1 || grupo == 3){
             axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${data.id}`)
             .then(({data}) => {
-            cambiarIdUsuario(data.id)
-            console.log(estaLogeado)
-            cambiarDatosUsuario(data)
-            console.log(data)
-        })
-            history.push("/")
+                cambiarEstadoLogeado(true)
+                cambiarIdUsuario(data.id)
+                console.log(estaLogeado)
+                cambiarDatosUsuario(data)
+                console.log(data)
+                history.push("/")
+            })
+        }
+        else{
+            axios.get(`https://comunidad-backend-v3.herokuapp.com/empresas/idUsuario/${data.id}`)
+            .then(({data}) => {
+                    cambiarEstadoLogeado(true)
+                    cambiarIdUsuario(data.id)
+                    console.log(estaLogeado)
+                    cambiarDatosUsuario(data)
+                    console.log(data)
+                    history.push("/")
+            })
+        }
         })
         .catch(({response}) => console.log(response.data))
     }
