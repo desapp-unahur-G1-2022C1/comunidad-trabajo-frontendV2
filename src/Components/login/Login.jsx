@@ -40,7 +40,7 @@ const Login = () => {
                 showCloseButton: true
               })
         }
-        else if (grupo == 1 ){
+        else if (grupo == 1 || grupo == 3){
             axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${data.id}`)
             .then(({data}) => {
                 cambiarEstadoLogeado(true)
@@ -62,12 +62,27 @@ const Login = () => {
                     history.push("/")
             })
         } else{
-            cambiarEstadoLogeado(true)
-            history.push("/")
+            Swal.fire({
+                icon: 'error',
+                title: 'Su grupo de usuario no es valido',
+                confirmButtonText: 'Volver',
+                text: 'Verifique sus datos',
+                footer: '',
+                showCloseButton: true
+              })
             
         }
         })
-        .catch(({response}) => console.log(response.data))
+        .catch(({response}) => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Los datos ingresados no son incorrectos!',
+                confirmButtonText: 'Volver',
+                text: 'Verifique sus datos',
+                footer: '',
+                showCloseButton: true
+              })
+        })
     }
     return ( 
         <Fragment>
