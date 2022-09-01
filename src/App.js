@@ -9,6 +9,7 @@ import RegistroPregunta from './Components/registro/RegistroPregunta';
 import NotFound from './Components/NotFound';
 import DescripcionOferta from './Components/oferta/DescripcionOferta';
 import RegistroPostulante from './Components/registro/RegistroPostulante';
+import RegistroEmpresa from './Components/registro/RegistroEmpresa';
 import RegistroOferta from './Components/empresa/RegistroOferta';
 import RegistroUsuario from './Components/registro/RegistroUsuario';
 import ListadoOfertasEmpresa from './Components/empresa/listadoDeOfertas/ListadoOfertas'
@@ -55,6 +56,9 @@ function App() {
           </Route>
           <Route exact path="/RegistroPostulante">
             <RegistroPostulante/>
+          </Route>
+          <Route exact path="/RegistroEmpresa">
+            <RegistroEmpresa/>
           </Route>
           <Route exact path="/admin">
             <PanelAdmin/>
