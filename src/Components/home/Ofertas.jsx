@@ -45,12 +45,12 @@ const Ofertas = ({listaOfertas}) => {
             </CardContent>
             </Box>
              <Box sx={{display:"flex", justifyContent:"center", textDecoration:"none", margin:"1rem"}}>
-                <Button variant="contained" color="relaxed" >
                 <Link to={`/oferta/${oferta.id}`} style={{ textDecoration: "none"}}>
-                  Ver oferta
-                  </Link>
-                </Button>
-                </Box>
+                  <Button variant="contained" color="relaxed" >
+                    Ver oferta
+                  </Button>
+                </Link>
+              </Box>
           </Card>
         ))}
       </Box>
