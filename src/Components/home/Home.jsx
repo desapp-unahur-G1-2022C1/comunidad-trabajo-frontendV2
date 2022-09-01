@@ -19,6 +19,7 @@ const Home = () => {
   const [llamado, setLlamado] = useState(false);
   const [cantPaginas, setCantPaginas] = useState(0);
   const [pagina, setPagina] = useState(1);
+  const [busquedaActual, setBusquedaActual] = useState('');
 
   
   
@@ -43,6 +44,7 @@ const Home = () => {
       e.preventDefault()
       const {ofertas} = e.target.elements;
       const ofertasValue = ofertas.value;
+      setBusquedaActual(ofertasValue);
       const api = await fetch(`https://comunidad-de-trabajo.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&buscarTitulo=${ofertasValue}&ordenar=id `);
       const datos = await api.json();
       setListaOfertas(datos.ofertas.rows);
@@ -55,8 +57,7 @@ const Home = () => {
   }
 
   const cambiarPagina = async (e, p) => {
-    
-    const api = await fetch(`https://comunidad-de-trabajo.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&ordenar=id `);
+    const api = await fetch(`https://comunidad-de-trabajo.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&ordenar=id&buscarTitulo=${busquedaActual}`);
     const datos = await api.json();
     setListaOfertas(datos.ofertas.rows);
     setPagina(p)

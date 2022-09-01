@@ -40,7 +40,7 @@ const Login = () => {
                 showCloseButton: true
               })
         }
-        else if (grupo == 1 || grupo == 3){
+        else if (grupo == 1 ){
             axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${data.id}`)
             .then(({data}) => {
                 cambiarEstadoLogeado(true)
@@ -51,7 +51,7 @@ const Login = () => {
                 history.push("/")
             })
         }
-        else{
+        else if (grupo == 2){
             axios.get(`https://comunidad-backend-v3.herokuapp.com/empresas/idUsuario/${data.id}`)
             .then(({data}) => {
                     cambiarEstadoLogeado(true)
@@ -61,6 +61,10 @@ const Login = () => {
                     console.log(data)
                     history.push("/")
             })
+        } else{
+            cambiarEstadoLogeado(true)
+            history.push("/")
+            
         }
         })
         .catch(({response}) => console.log(response.data))

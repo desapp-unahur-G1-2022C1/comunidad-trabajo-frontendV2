@@ -22,7 +22,7 @@ const BarraBusquedaOfertas = (props) => {
           <TextField
             placeholder="Buscar ofertas..."
             type="search"
-            name="usuario"
+            name="oferta"
           ></TextField>
           <Button type="submit" variant="contained">
             <SearchIcon />

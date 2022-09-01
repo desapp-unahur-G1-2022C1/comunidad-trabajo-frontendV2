@@ -22,7 +22,7 @@ const BarraBusquedaPostulantes = (props) => {
           <TextField
             placeholder="Buscar empresa..."
             type="search"
-            name="usuario"
+            name="empresa"
           ></TextField>
           <Button type="submit" variant="contained">
             <SearchIcon />

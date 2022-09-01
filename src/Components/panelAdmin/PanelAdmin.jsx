@@ -27,17 +27,10 @@ const PanelAdmin = () => {
             </Stack>
           </Box>
           <Box sx={{ padding: "1rem" }}>
-            <h1 style={{ display: "flex" }}>Apellido, Nombre</h1>
-            <h3 style={{ display: "flex" }}>administrador</h3>
+            <h1 style={{ display: "flex" }}>ADMINISTRADOR</h1>
           </Box>
         </Box>
-        <Box
-          sx={{ display: "flex", justifyContent: "center", padding: "1rem" }}
-        >
-          <Button variant="contained" sx={{ width: "25rem" }}>
-            Datos Personales
-          </Button>
-        </Box>
+        
         <Box
           sx={{ display: "flex", justifyContent: "center", padding: "1rem" }}
         >

@@ -15,8 +15,8 @@ const ListadoEmpresas = () => {
     const [empresas, setEmpresas] = useState([]);
     const [cantPaginas, setCantPaginas] = useState(0);
     const [pagina, setPagina] = useState(1);
-
-    const API_URL = `https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=0&limite=3`;
+    const [busquedaActual, setBusquedaActual] = useState('');
+    const API_URL = `https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=0&limite=5`;
 
     const primerLlamado = async () => {
         if(llamado === false){
@@ -37,9 +37,10 @@ const ListadoEmpresas = () => {
     const traerEmpresas = async (e, p) => {
         try{
             e.preventDefault()
-            const {usuario} = e.target.elements;
-            const usuarioValue = usuario.value;
-            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=${p - 1}&limite=3&nombreEmpresa=${usuarioValue}`);
+            const {empresa} = e.target.elements;
+            const empresaValue = empresa.value;
+            setBusquedaActual(empresaValue);
+            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=${p - 1}&limite=5&nombreEmpresa=${empresaValue}`);
             const datos = await api.json();
             console.log(datos)
             setEmpresas(datos.empresas.rows)
@@ -53,11 +54,13 @@ const ListadoEmpresas = () => {
 
     const cambiarPagina = async (e, p) => {
         
-        const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=${p - 1}&limite=3&ordenar=id`);;
+        const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=${p - 1}&limite=5&nombreEmpresa=${busquedaActual}`);;
         const datos = await api.json();
         setEmpresas(datos.empresas.rows);
         setPagina(p)
-        console.log(datos.ofertas.rows)
+        console.log(datos.empresas.rows)
+        
+        
     }
 
 
