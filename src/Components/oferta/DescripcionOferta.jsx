@@ -10,11 +10,11 @@ import DialogTitle from "@mui/material/DialogTitle";
 import PropTypes from "prop-types";
 import ConfirmacionPostulacion from "./ConfirmacionPostulacion";
 import Grid from "@mui/material/Grid";
-
 import Header from "../Header";
 import { useState } from "react";
-
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import DatosUsuarioContext from '../../Context/DatosUsuarioContext';
+import { useContext } from 'react';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -72,6 +72,7 @@ const CustomizedDialogs = () => {
   const API_URL = `https://comunidad-de-trabajo.herokuapp.com/ofertas/${id}`;
 
   const descripcionAPI = async () => {
+
     try {
       const api = await fetch(API_URL);
       const datos = await api.json();
@@ -101,7 +102,7 @@ const CustomizedDialogs = () => {
     setOpen(false);
   };
   descripcionAPI();
-
+  const {datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado, grupo, cambiarGrupo} = useContext(DatosUsuarioContext)
   return (
     <React.Fragment>
       <Header />
@@ -135,15 +136,46 @@ const CustomizedDialogs = () => {
                 justifyContent: "center",
               }}
             >
-              <Button
-                size="large"
-                variant="contained"
-                color="relaxed"
-                onClick={handleClickOpen}
-                sx={{ width: "20rem" }}
-              >
-                Postularme
-              </Button>
+              {
+                grupo == 2
+                ?
+                  
+                  nombreEmpresa == datosUsuario.nombre_empresa
+                  ?
+                  <Box sx={{ width: "20rem" }}>
+                  <Button
+                    size="large"
+                    variant="contained"
+                    color="relaxed"
+                    sx={{ width: "20rem", marginBottom:'1rem' }}
+                    >
+                    Editar oferta
+                  </Button>
+                  <Link to="/ListadoDePostulantes"style={{ textDecoration: 'none'}}>
+                    <Button
+                      size="large"
+                      variant="contained"
+                      color="relaxed"
+                      sx={{ width: "20rem" }}
+                    >
+                      Ver postulantes
+                    </Button>
+                  </Link>
+                  </Box>
+                  :
+                  <Box></Box>
+                : 
+                <Button
+                    size="large"
+                    variant="contained"
+                    color="relaxed"
+                    onClick={handleClickOpen}
+                    sx={{ width: "20rem" }}
+                  >
+                    Postularme
+                  </Button>
+              }
+              
               <BootstrapDialog
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"

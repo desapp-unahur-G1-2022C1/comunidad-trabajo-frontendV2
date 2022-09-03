@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Header from '../Header'
 import DatosUsuarioContext from '../../Context/DatosUsuarioContext';
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function PerfilUsuario() {
     const {datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado, grupo, cambiarGrupo} = useContext(DatosUsuarioContext)
@@ -33,6 +34,11 @@ export default function PerfilUsuario() {
         </Box>
         <Box sx={{display:"flex", justifyContent:"center" , padding:"1rem"}}>
           <Button variant="contained" sx={{width:"25rem"}}>CV</Button>
+        </Box>
+        <Box sx={{display:"flex", justifyContent:"center" , padding:"1rem"}}>
+          <Link to="/ofertasPostulante"style={{ textDecoration: 'none'}}>
+            <Button variant="contained" sx={{width:"25rem"}}>Postulaciones</Button>
+          </Link>
         </Box>
       </Box>
     </React.Fragment>

@@ -19,6 +19,8 @@ import Login from './Components/login/Login'
 import {IdFormContextProvider} from './Context/IdFormContext';
 import ListadoEmpresas from './Components/panelAdmin/listadoEmpresasAdmin/ListadoEmpresas';
 import ListadoOfertas from './Components/panelAdmin/listadoOfertasAdmin/ListadoOfertas';
+import OfertasPostulante from './Components/perfilUsuario/listadoDeOfertas/ListadoOfertas';
+import PostulantesDeOferta from './Components/oferta/listadoDePostulantes/ListadoDePostulantes';
 
 function App() {
   return (
@@ -68,6 +70,12 @@ function App() {
           </Route>
           <Route exact path="/listadoOfertasEmpresa">
             <ListadoOfertasEmpresa/>
+          </Route>
+          <Route exact path="/ofertasPostulante">
+            <OfertasPostulante/>
+          </Route>
+          <Route exact path="/listadoDePostulantes">
+            <PostulantesDeOferta/>
           </Route>
           <Route exact path="/admin/listadoEmpresas">
             <ListadoEmpresas/>
