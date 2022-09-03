@@ -71,8 +71,8 @@ const Home = () => {
     <Fragment>
       <div style={{backgroundColor:'#f3f3f3'}}>
       <Header/>
-        <Burger/>
-        <div style={{display:"flex", justifyContent:"center" ,flexDirection:"column"}}>
+        
+        <div style={{display:"flex", justifyContent:"center" ,flexDirection:"column", margin:"1rem"}}>
           <BarraBusqueda
           ofertasAPI={ofertasAPI}/>
           {listaOfertas.length === 0 && llamado === true ? 
