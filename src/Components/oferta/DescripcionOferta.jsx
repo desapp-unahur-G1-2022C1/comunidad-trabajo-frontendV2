@@ -2,7 +2,7 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import { Button, styled, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
-
+import { Fragment } from "react";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Dialog from "@mui/material/Dialog";
@@ -104,7 +104,7 @@ const CustomizedDialogs = () => {
   descripcionAPI();
 
 
-  const {datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado, grupo, cambiarGrupo} = useContext(DatosUsuarioContext)
+  const {datosUsuario, estaLogeado, grupo} = useContext(DatosUsuarioContext)
   
   const postularse = async () => {
    try{
@@ -130,7 +130,7 @@ const CustomizedDialogs = () => {
 
 
   return (
-    <React.Fragment>
+    <Fragment>
       <Header />
       <Box sx={{ padding: "2rem" }}>
         <Grid
@@ -292,7 +292,7 @@ const CustomizedDialogs = () => {
           </Box>
         </Grid>
       </Box>
-    </React.Fragment>
+    </Fragment>
   );
 };
 export default CustomizedDialogs;
