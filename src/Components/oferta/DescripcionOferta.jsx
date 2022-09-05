@@ -165,15 +165,28 @@ const CustomizedDialogs = () => {
                   :
                   <Box></Box>
                 : 
+                estaLogeado == true
+                ?
                 <Button
-                    size="large"
-                    variant="contained"
-                    color="relaxed"
-                    onClick={handleClickOpen}
-                    sx={{ width: "20rem" }}
-                  >
-                    Postularme
-                  </Button>
+                  size="large"
+                  variant="contained"
+                  color="relaxed"
+                  onClick={handleClickOpen}
+                  sx={{ width: "20rem" }}
+                >
+                  Postularme
+                </Button>
+                :
+                <Link to='/login' style={{textDecoration:'none'}}>
+                <Button
+                  size="large"
+                  variant="contained"
+                  color="relaxed"
+                  sx={{ width: "20rem" }}
+                >
+                  Postularme
+                </Button>
+                </Link>
               }
               
               <BootstrapDialog

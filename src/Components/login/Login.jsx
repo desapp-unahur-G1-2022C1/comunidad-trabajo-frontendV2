@@ -8,6 +8,7 @@ import { Link, useHistory} from "react-router-dom"
 import DatosUsuarioContextProvider from '../../Context/DatosUsuarioContext';
 import { useContext } from 'react';
 import Swal from 'sweetalert2';
+import { CopyAll } from '@mui/icons-material';
 
 const Login = () => {
 
@@ -40,27 +41,29 @@ const Login = () => {
                 showCloseButton: true
               })
         }
-        else if (grupo == 1 || grupo == 3){
+        else if (data.grupo == 1){
             axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${data.id}`)
             .then(({data}) => {
                 cambiarEstadoLogeado(true)
                 cambiarIdUsuario(data.id)
-                console.log(estaLogeado)
                 cambiarDatosUsuario(data)
                 console.log(data)
                 history.push("/")
             })
         }
-        else if (grupo == 2){
+        else if (data.grupo == 2){
             axios.get(`https://comunidad-backend-v3.herokuapp.com/empresas/idUsuario/${data.id}`)
             .then(({data}) => {
                     cambiarEstadoLogeado(true)
                     cambiarIdUsuario(data.id)
-                    console.log(estaLogeado)
                     cambiarDatosUsuario(data)
                     console.log(data)
                     history.push("/")
             })
+        }
+        else if(data.grupo == 3){
+            cambiarEstadoLogeado(true)
+            cambiarIdUsuario(data.id)
         } else{
             Swal.fire({
                 icon: 'error',
@@ -70,7 +73,6 @@ const Login = () => {
                 footer: '',
                 showCloseButton: true
               })
-            
         }
         })
         .catch(({response}) => {
