@@ -64,6 +64,7 @@ const Login = () => {
         else if(data.grupo == 3){
             cambiarEstadoLogeado(true)
             cambiarIdUsuario(data.id)
+            history.push("/")
         } else{
             Swal.fire({
                 icon: 'error',
