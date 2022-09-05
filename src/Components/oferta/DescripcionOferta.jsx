@@ -102,7 +102,33 @@ const CustomizedDialogs = () => {
     setOpen(false);
   };
   descripcionAPI();
+
+
   const {datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado, grupo, cambiarGrupo} = useContext(DatosUsuarioContext)
+  
+  const postularse = async () => {
+   try{
+    const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/postulaciones`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        postulante: datosUsuario.id,
+        oferta: id
+      })
+    })
+    const datos = await api.json();
+    console.log(datos);
+    handleClickOpen();
+   }
+    catch(error){
+      console.log(error)
+    }
+  }
+
+
+
   return (
     <React.Fragment>
       <Header />
@@ -171,7 +197,7 @@ const CustomizedDialogs = () => {
                   size="large"
                   variant="contained"
                   color="relaxed"
-                  onClick={handleClickOpen}
+                  onClick={postularse}
                   sx={{ width: "20rem" }}
                 >
                   Postularme
