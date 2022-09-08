@@ -13,27 +13,27 @@ export function DatosUsuarioContextProvider({children}){
 
     const cambiarDatosUsuario = useCallback ((datoNuevo) => {
         setDatosUsuarios(datoNuevo)
-        localStorage.setItem('datosUsuario', JSON.stringify(datoNuevo));
+        sessionStorage.setItem('datosUsuario', JSON.stringify(datoNuevo));
     }, []);
 
     const cambiarToken = useCallback ((tokenNuevo) => {
         setToken(tokenNuevo)
-        localStorage.setItem('token', tokenNuevo);
+        sessionStorage.setItem('token', tokenNuevo);
     }, []);
 
     const cambiarIdUsuario = useCallback ((idNuevo) => {
         setIdUsuario(idNuevo)
-        localStorage.setItem('idUsuario', idNuevo);
+        sessionStorage.setItem('idUsuario', idNuevo);
     }, []);
 
     const cambiarEstadoLogeado = useCallback ((nuevoEstado) => {
         setestaLogeado(nuevoEstado)
-        localStorage.setItem('estaLogeado', nuevoEstado);
+        sessionStorage.setItem('estaLogeado', nuevoEstado);
     }, []);
 
     const cambiarGrupo = useCallback ((grupoNuevo) => {
         setGrupo(grupoNuevo)
-        localStorage.setItem('grupo', grupoNuevo);
+        sessionStorage.setItem('grupo', grupoNuevo);
     }, []);
 
     const value = useMemo(() => ({

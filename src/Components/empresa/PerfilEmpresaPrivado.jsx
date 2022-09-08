@@ -11,11 +11,11 @@ import { useContext } from 'react';
 
 export default function PerfilEmpresa() {
   const {cambiarDatosUsuario, cambiarToken, cambiarIdUsuario, cambiarEstadoLogeado, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
-  var datosUsuario = JSON.parse(localStorage.getItem('datosUsuario'))
-  var token = localStorage.getItem('token')
-  var idUsuario = localStorage.getItem('idUsuario')
-  var grupo =  localStorage.getItem('grupo')
-  var estaLogeado = localStorage.getItem('estaLogeado')
+  var datosUsuario = JSON.parse(sessionStorage.getItem('datosUsuario'))
+  var token = sessionStorage.getItem('token')
+  var idUsuario = sessionStorage.getItem('idUsuario')
+  var grupo =  sessionStorage.getItem('grupo')
+  var estaLogeado = sessionStorage.getItem('estaLogeado')
 
   return (
     <React.Fragment>

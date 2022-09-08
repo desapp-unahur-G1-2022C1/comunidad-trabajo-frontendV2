@@ -10,7 +10,7 @@ import IdFormContext from '../../Context/IdFormContext';
 import { useHistory } from 'react-router-dom';
 
 function guardarId(id){
-localStorage.setItem("idGuardado", id);
+sessionStorage.setItem("idGuardado", id);
 }
 
 

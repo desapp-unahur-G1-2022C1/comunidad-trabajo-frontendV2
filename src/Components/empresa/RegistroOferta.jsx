@@ -103,11 +103,11 @@ const validationSchema = yup.object({
 export default function WithMaterialUI() {
   const history = useHistory()
   const {cambiarDatosUsuario, cambiarToken, cambiarIdUsuario, cambiarEstadoLogeado, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
-  var datosUsuario = JSON.parse(localStorage.getItem('datosUsuario'))
-  var token = localStorage.getItem('token')
-  var idUsuario = localStorage.getItem('idUsuario')
-  var grupo =  localStorage.getItem('grupo')
-  var estaLogeado = localStorage.getItem('estaLogeado')
+  var datosUsuario = JSON.parse(sessionStorage.getItem('datosUsuario'))
+  var token = sessionStorage.getItem('token')
+  var idUsuario = sessionStorage.getItem('idUsuario')
+  var grupo =  sessionStorage.getItem('grupo')
+  var estaLogeado = sessionStorage.getItem('estaLogeado')
 
   /*Llama a los idEstudio para seleccionar en el formulario*/
   const [listaEstudio, setlistaEstudio] = useState([]);
