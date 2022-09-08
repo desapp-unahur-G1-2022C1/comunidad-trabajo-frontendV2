@@ -1,12 +1,19 @@
 import Header from "../Header";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import Stack from "@mui/material/Stack";
 import { Avatar, Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import React from "react";
 import { Link } from "react-router-dom";
+import DatosUsuarioContext from "../../Context/DatosUsuarioContext";
 
 const PanelAdmin = () => {
+  const {cambiarDatosUsuario, cambiarToken, cambiarIdUsuario, cambiarEstadoLogeado, cambiarGrupo} = useContext(DatosUsuarioContext)
+  var datosUsuario = JSON.parse(localStorage.getItem('datosUsuario'))
+  var token = localStorage.getItem('token')
+  var idUsuario = localStorage.getItem('idUsuario')
+  var grupo =  localStorage.getItem('grupo')
+  var estaLogeado = localStorage.getItem('estaLogeado')
   return (
     <Fragment>
       <Header />

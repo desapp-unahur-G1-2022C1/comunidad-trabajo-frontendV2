@@ -12,7 +12,12 @@ import { CopyAll } from '@mui/icons-material';
 
 const Login = () => {
 
-    const {datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado, grupo, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
+    const {cambiarDatosUsuario, cambiarToken, cambiarIdUsuario, cambiarEstadoLogeado, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
+    var datosUsuario = JSON.parse(localStorage.getItem('datosUsuario'))
+    var token = localStorage.getItem('token')
+    var idUsuario = localStorage.getItem('idUsuario')
+    var grupo =  localStorage.getItem('grupo')
+    var estaLogeado = localStorage.getItem('estaLogeado')
 
     const [body, setBody] = useState({usuario:'', password:''})
 

@@ -13,7 +13,7 @@ import Grid from "@mui/material/Grid";
 import Header from "../Header";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import DatosUsuarioContext from '../../Context/DatosUsuarioContext';
+import DatosUsuarioContextProvider from '../../Context/DatosUsuarioContext';
 import { useContext } from 'react';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -104,7 +104,12 @@ const CustomizedDialogs = () => {
   descripcionAPI();
 
 
-  const {datosUsuario, estaLogeado, grupo} = useContext(DatosUsuarioContext)
+  const {cambiarDatosUsuario, cambiarToken, cambiarIdUsuario, cambiarEstadoLogeado, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
+  var datosUsuario = JSON.parse(localStorage.getItem('datosUsuario'))
+  var token = localStorage.getItem('token')
+  var idUsuario = localStorage.getItem('idUsuario')
+  var grupo =  localStorage.getItem('grupo')
+  var estaLogeado = localStorage.getItem('estaLogeado')
   
   const postularse = async () => {
    try{

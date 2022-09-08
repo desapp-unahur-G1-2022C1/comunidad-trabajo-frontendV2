@@ -3,12 +3,17 @@ import Stack from '@mui/material/Stack';
 import { Avatar, Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Header from '../Header'
-import DatosUsuarioContext from '../../Context/DatosUsuarioContext';
+import DatosUsuarioContextProvider from '../../Context/DatosUsuarioContext';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function PerfilUsuario() {
-    const {datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado, grupo, cambiarGrupo} = useContext(DatosUsuarioContext)
+  const {cambiarDatosUsuario, cambiarToken, cambiarIdUsuario, cambiarEstadoLogeado, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
+  var datosUsuario = JSON.parse(localStorage.getItem('datosUsuario'))
+  var token = localStorage.getItem('token')
+  var idUsuario = localStorage.getItem('idUsuario')
+  var grupo =  localStorage.getItem('grupo')
+  var estaLogeado = localStorage.getItem('estaLogeado')
 
   return (
     

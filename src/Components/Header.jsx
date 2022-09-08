@@ -15,8 +15,12 @@ import { Link } from 'react-router-dom';
 
 
 const Header = () => {
-  const {datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado} = useContext(DatosUsuarioContextProvider)
-  
+  const {cambiarDatosUsuario, cambiarToken, cambiarIdUsuario, cambiarEstadoLogeado, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
+  var datosUsuario = JSON.parse(localStorage.getItem('datosUsuario'))
+  var token = localStorage.getItem('token')
+  var idUsuario = localStorage.getItem('idUsuario')
+  var grupo =  localStorage.getItem('grupo')
+  var estaLogeado = localStorage.getItem('estaLogeado')
  
 
   return (
@@ -28,7 +32,7 @@ const Header = () => {
           <Box sx={{ flexGrow: 1,   display: { xs: 'none', lg: 'flex', xl: 'flex' }, justifyContent:"center"}} />
             <Link to="/"><img src="https://cdn.discordapp.com/attachments/956988369693454466/989600731369709669/Logoblanco.png" style={{height:"4rem", padding:"0.5rem"}}></img></Link>
           <Box sx={{ flexGrow: 1 }} />
-          {estaLogeado ? <AvatarUsuario/> : <BotonInicioSesion/>}
+          {estaLogeado == 'true' ? <AvatarUsuario/> : <BotonInicioSesion/>}
         </Toolbar>
       </AppBar>
     </Box>

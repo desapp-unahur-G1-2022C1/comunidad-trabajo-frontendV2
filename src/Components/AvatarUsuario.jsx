@@ -10,7 +10,13 @@ import { useHistory } from 'react-router-dom';
 const AvatarUsuario = () => {
 
 
-  const {datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado, grupo, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
+  const {cambiarDatosUsuario, cambiarToken, cambiarIdUsuario, cambiarEstadoLogeado, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
+  var datosUsuario = JSON.parse(localStorage.getItem('datosUsuario'))
+  var token = localStorage.getItem('token')
+  var idUsuario = localStorage.getItem('idUsuario')
+  var grupo =  localStorage.getItem('grupo')
+  var estaLogeado = localStorage.getItem('estaLogeado')
+
   const [anchorEl, setAnchorEl] = useState(null);
   const history = useHistory();
   function stringToColor(string) {
@@ -73,9 +79,9 @@ const AvatarUsuario = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {grupo === 1 ? <Link to="/miPerfil" style={{textDecoration:'none', color:'black'}}><MenuItem>Perfil</MenuItem></Link> : null}
-        {grupo === 2 ? <Link to="/perfilEmpresa" style={{textDecoration:'none', color:'black'}}><MenuItem>Perfil Empresa</MenuItem></Link> : null}
-        {grupo === 3 ? <Link to="/admin" style={{textDecoration:'none', color:'black'}}> <MenuItem>Panel Administrador</MenuItem></Link> : null}
+        {grupo == 1 ? <Link to="/miPerfil" style={{textDecoration:'none', color:'black'}}><MenuItem>Perfil</MenuItem></Link> : null}
+        {grupo == 2 ? <Link to="/perfilEmpresa" style={{textDecoration:'none', color:'black'}}><MenuItem>Perfil Empresa</MenuItem></Link> : null}
+        {grupo == 3 ? <Link to="/admin" style={{textDecoration:'none', color:'black'}}> <MenuItem>Panel Administrador</MenuItem></Link> : null}
         <MenuItem onClick={cerrarSesion}>Cerrar Sesión</MenuItem>
       </Menu></Fragment>
     );
