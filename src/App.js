@@ -74,7 +74,7 @@ function App() {
           <Route exact path="/ofertasPostulante">
             <OfertasPostulante/>
           </Route>
-          <Route exact path="/listadoDePostulantes">
+          <Route exact path="/listadoDePostulantes/:id">
             <PostulantesDeOferta/>
           </Route>
           <Route exact path="/admin/listadoEmpresas">

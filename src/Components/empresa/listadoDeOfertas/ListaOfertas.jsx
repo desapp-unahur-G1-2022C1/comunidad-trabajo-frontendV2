@@ -38,6 +38,15 @@ export default function ListaOfertas({Ofertas}) {
                     Ver
                   </Button>
                 </Link>
+                <Link to={`/ListadoDePostulantes/${oferta.id}`} style={{ textDecoration: 'none'}}>
+                    <Button
+                      size="large"
+                      variant="contained"
+                      color="relaxed"
+                    >
+                      Ver postulantes
+                    </Button>
+                  </Link>
                 <Button variant="outlined" color='error'sx={{margin:"0.5rem"}}>Borrar</Button>
               </TableCell>
             </TableRow>

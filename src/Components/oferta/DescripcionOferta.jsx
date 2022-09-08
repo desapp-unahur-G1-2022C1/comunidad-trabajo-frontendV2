@@ -126,9 +126,6 @@ const CustomizedDialogs = () => {
       console.log(error)
     }
   }
-
-
-
   return (
     <Fragment>
       <Header />
@@ -177,7 +174,8 @@ const CustomizedDialogs = () => {
                     >
                     Editar oferta
                   </Button>
-                  <Link to="/ListadoDePostulantes"style={{ textDecoration: 'none'}}>
+                  
+                  <Link to={`/ListadoDePostulantes/${id}`}style={{ textDecoration: 'none'}}>
                     <Button
                       size="large"
                       variant="contained"
