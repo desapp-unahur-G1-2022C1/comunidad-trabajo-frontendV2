@@ -194,7 +194,7 @@ const CustomizedDialogs = () => {
                   :
                   <Box></Box>
                 : 
-                estaLogeado == true
+                estaLogeado == 'true'
                 ?
                 <Button
                   size="large"

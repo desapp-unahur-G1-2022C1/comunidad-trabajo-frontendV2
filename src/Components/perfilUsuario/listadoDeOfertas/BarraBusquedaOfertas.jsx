@@ -7,9 +7,9 @@ import SearchIcon from "@mui/icons-material/Search";
 
 
 
-const BarraBusquedaOfertas = (props) => {
+const BarraBusquedaPostulaciones = (props) => {
     return ( 
-        <form onSubmit={props.traerOfertas} >
+        <form onSubmit={props.traerPostulaciones} >
         <Box
           sx={{
             display: "flex",
@@ -22,7 +22,7 @@ const BarraBusquedaOfertas = (props) => {
           <TextField
             placeholder="Buscar Ofertas..."
             type="search"
-            name="tituloOferta"
+            name="tituloPostulacion"
           ></TextField>
           <Button type="submit" variant="contained">
             <SearchIcon />
@@ -32,4 +32,4 @@ const BarraBusquedaOfertas = (props) => {
      );
 }
  
-export default BarraBusquedaOfertas;
+export default BarraBusquedaPostulaciones;

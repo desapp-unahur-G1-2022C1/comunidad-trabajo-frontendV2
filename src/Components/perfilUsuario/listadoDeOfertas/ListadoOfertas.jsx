@@ -22,7 +22,7 @@ const ListadoOfertas = () => {
     const [llamado, setLlamado] = useState(false);
     const [Ofertas, setOfertas] = useState([]);
 
-    const API_URL = `https://comunidad-backend-v3.herokuapp.com/ofertas/cuit/30712116608/`
+    const API_URL = `https://comunidad-backend-v3.herokuapp.com/postulacionesId/postulante/?pagina=0&limite=10&id=${datosUsuario.id}`
 
     const primerLlamado = async () => {
         if(llamado === false){
@@ -30,8 +30,8 @@ const ListadoOfertas = () => {
             const api = await fetch(API_URL);
             const datos = await api.json();
             setLlamado(true)
-            setOfertas(datos)
-            console.log(datos)
+            setOfertas(datos.postulaciones.rows)
+            console.log(datos.postulaciones.rows)
             
             }
             catch(error){
@@ -40,34 +40,13 @@ const ListadoOfertas = () => {
         }
     }
 
-    const traerOfertas = async (e) => {
-        try{
-            e.preventDefault()
-            const {usuario} = e.target.elements;
-            const usuarioValue = usuario.value;
-            const api = await fetch(`https://comunidad-de-trabajo.herokuapp.com/usuariosOfertas/?buscarApellido=${usuarioValue}`);
-            const datos = await api.json();
-            console.log(datos.Ofertas.rows)
-            setOfertas(datos.Ofertas.rows)
-            
-            
-        }
-        catch(err){
-            console.log(err)
-        }
-    }
-
     primerLlamado()
     return (  
         <Fragment>
             <Header/>
-            <BarraBusquedaOfertas
-            traerOfertas={traerOfertas}/>
-            {Ofertas.length === 0 && llamado === true ?
-            <BusquedaNoEncontrada/> :
+            <BarraBusquedaOfertas/>
             <ListaOfertas
             Ofertas={Ofertas}/>
-            }
         </Fragment>
     );
 }
