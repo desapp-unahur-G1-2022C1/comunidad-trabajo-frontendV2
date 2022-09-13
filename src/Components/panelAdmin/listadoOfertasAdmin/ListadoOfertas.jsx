@@ -15,7 +15,7 @@ const ListadoOfertas = () => {
     const [pagina, setPagina] = useState(1);
     const [busquedaActual, setBusquedaActual] = useState('');
 
-    const API_URL = `https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=0&limite=3`;
+    const API_URL = `https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=0&limite=3&idEstado=1`;
 
     const primerLlamado = async () => {
         if(llamado === false){
@@ -39,7 +39,7 @@ const ListadoOfertas = () => {
             const {oferta} = e.target.elements;
             const ofertaValue = oferta.value;
             setBusquedaActual(ofertaValue);
-            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&buscarTitulo=${ofertaValue}`);
+            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&idEstado=1&buscarTitulo=${ofertaValue}`);
             const datos = await api.json();
             console.log(datos)
             setOfertas(datos.ofertas.rows)

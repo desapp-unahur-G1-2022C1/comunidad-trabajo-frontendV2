@@ -7,6 +7,7 @@ import { Box, Typography, Button } from '@mui/material';
 import { useState } from 'react';
 import DatosUsuarioContextProvider from '../../Context/DatosUsuarioContext';
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const Root = styled('div')(({ theme }) => ({
@@ -36,7 +37,9 @@ export default function DividerText() {
     <React.Fragment>
     <Header/>
     <Box sx={{display:'flex', justifyContent:'center', marginTop:'1rem'}}>
+    <Link to='/edicionEmpresa' style={{ textDecoration: 'none'}}>
     <Button variant="contained">Editar</Button>
+    </Link>
     </Box>
     <Typography style={{margin:"2rem"}}>
     <Root>

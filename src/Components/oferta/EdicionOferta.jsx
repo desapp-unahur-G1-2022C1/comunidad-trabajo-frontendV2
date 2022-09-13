@@ -22,7 +22,7 @@ import FormFormHelperText from "@mui/material";
 import { MenuList } from "@material-ui/core";
 import DatosUsuarioContextProvider from '../../Context/DatosUsuarioContext';
 import { useContext } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 const validationSchema = yup.object({
   tituloOferta: yup
@@ -100,7 +100,8 @@ const validationSchema = yup.object({
 });
 
 
-export default function WithMaterialUI() {
+
+export default function WithMaterialUI()  {
   const history = useHistory()
   const {cambiarDatosUsuario, cambiarToken, cambiarIdUsuario, cambiarEstadoLogeado, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
   var datosUsuario = JSON.parse(sessionStorage.getItem('datosUsuario'))
@@ -108,6 +109,25 @@ export default function WithMaterialUI() {
   var idUsuario = sessionStorage.getItem('idUsuario')
   var grupo =  sessionStorage.getItem('grupo')
   var estaLogeado = sessionStorage.getItem('estaLogeado')
+
+  const { id } = useParams();
+  const API_URL = `https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${id}`;
+
+  const [llamadoOferta, setLlamadoOferta] = useState(false);
+  const  descripcionAPI = async () => {
+    if (llamadoOferta === false)
+      try {
+      setLlamadoOferta(true)
+      const api = await fetch(API_URL);
+      const datos = await api.json();
+      console.log(datos);
+      sessionStorage.setItem('datosOferta', JSON.stringify(datos))
+      } catch (error) {
+        console.log(error);
+      }
+  }
+descripcionAPI();
+let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
 
   /*Llama a los idEstudio para seleccionar en el formulario*/
   const [listaEstudio, setlistaEstudio] = useState([]);
@@ -187,24 +207,24 @@ export default function WithMaterialUI() {
 
   const formik = useFormik({
     initialValues: {
-      tituloOferta: "",
-      descripcion: "",
+      tituloOferta: datosOferta.titulo_oferta,
+      descripcion: datosOferta.descripcion,
       fechaVigencia: undefined,
-      horarioLaboralDesde: "",
-      horarioLaboralHasta: "",
-      edadHasta: "",
-      edadDesde: "",
-      experienciaPreviaDesc: "",
-      zonaTrabajo: "",
-      areasEstudio: "",
-      otrosDetalles: "",
-      beneficios: "",
-      idEmpresa: datosUsuario.id,
-      remuneracion: undefined,
-      idEstudio: undefined,
-      idCarrera: undefined,
-      idContrato: undefined,
-      idJornada:undefined,
+      horarioLaboralDesde: datosOferta.horario_laboral_desde,
+      horarioLaboralHasta: datosOferta.horario_laboral_hasta,
+      edadHasta: datosOferta.edad_hasta,
+      edadDesde: datosOferta.edad_desde,
+      experienciaPreviaDesc: datosOferta.experiencia_previa_desc,
+      zonaTrabajo: datosOferta.zona_trabajo,
+      areasEstudio: datosOferta.areas_estudio,
+      otrosDetalles: datosOferta.otros_detalles,
+      beneficios: datosOferta.beneficios,
+      idEmpresa: datosUsuario.fk_id_empresa,
+      remuneracion: datosOferta.remuneracion,
+      idEstudio: datosOferta.fk_id_estudio,
+      idCarrera: datosOferta.fk_id_carrera,
+      idContrato: datosOferta.fk_id_contrato,
+      idJornada:datosOferta.fk_id_jornada,
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -230,8 +250,8 @@ export default function WithMaterialUI() {
         remuneracion: values.remuneracion
       };
       console.log(values);
-        fetch("https://comunidad-backend-v3.herokuapp.com/ofertas/", {
-        method: "POST", // or 'PUT'
+        fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${datosOferta.id}`, {
+        method: "PUT", // or 'PUT'
         body: JSON.stringify(data), // data can be `string` or {object}!
         headers: {
           "Content-Type": "application/json",
@@ -242,7 +262,7 @@ export default function WithMaterialUI() {
         .then((response) => console.log("Success:", response,
         Swal.fire({
           icon: 'success',
-          title: 'La oferta fue creada exitosamente',
+          title: 'La oferta fue editada exitosamente',
           confirmButtonText: 'Finalizar',
           text: 'Para continuar pulse el boton',
           footer: '',
@@ -256,7 +276,7 @@ export default function WithMaterialUI() {
         .catch((error) => console.error("Error:", error,
         Swal.fire({
           icon: 'error',
-          title: 'Ocurrio un error al crear la oferta',
+          title: 'Ocurrio un error al editar la oferta',
           confirmButtonText: 'Volver',
           text: 'Verifique sus datos',
           footer: '',
@@ -264,6 +284,7 @@ export default function WithMaterialUI() {
         })))
     },
   });
+  
   return (
     
     <Fragment>
@@ -478,7 +499,7 @@ export default function WithMaterialUI() {
                 label="Nivel de estudio"
                 variant="outlined"
                 type="number"
-                value={formik.values.estudio}
+                value={formik.values.idEstudio}
                 onChange={formik.handleChange}
                 error={
                   formik.touched.estudio && Boolean(formik.errors.estudio)
@@ -501,7 +522,7 @@ export default function WithMaterialUI() {
                   variant="outlined"
                   label="Carrera"
                   type="number"
-                  value={formik.values.carrera}
+                  value={formik.values.idCarrera}
                   onChange={formik.handleChange}
                   error={
                     formik.touched.carrera && Boolean(formik.errors.carrera)
@@ -524,7 +545,7 @@ export default function WithMaterialUI() {
                 label="Ingrese la jornada"
                 variant="outlined"
                 type="number"
-                value={formik.values.jornada}
+                value={formik.values.idJornada}
                 onChange={formik.handleChange}
                 error={
                   formik.touched.jornada && Boolean(formik.errors.jornada)
@@ -547,7 +568,7 @@ export default function WithMaterialUI() {
                   variant="outlined"
                   label="Tipo de contrato"
                   type="number"
-                  value={formik.values.contrato}
+                  value={formik.values.idContrato}
                   onChange={formik.handleChange}
                   error={
                     formik.touched.contrato && Boolean(formik.errors.contrato)

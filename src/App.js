@@ -21,6 +21,8 @@ import ListadoEmpresas from './Components/panelAdmin/listadoEmpresasAdmin/Listad
 import ListadoOfertas from './Components/panelAdmin/listadoOfertasAdmin/ListadoOfertas';
 import OfertasPostulante from './Components/perfilUsuario/listadoDeOfertas/ListadoOfertas';
 import PostulantesDeOferta from './Components/oferta/listadoDePostulantes/ListadoDePostulantes';
+import EdicionEmpresa from './Components/empresa/EdicionEmpresa';
+import EdicionOferta from './Components/oferta/EdicionOferta';
 
 function App() {
   return (
@@ -82,6 +84,12 @@ function App() {
           </Route>
           <Route exact path="/admin/listadoOfertas">
             <ListadoOfertas/>
+          </Route>
+          <Route exact path="/edicionEmpresa">
+            <EdicionEmpresa/>
+          </Route>
+          <Route exact path="/edicionOferta/:id">
+            <EdicionOferta/>
           </Route>
           <Route path="*">
             <NotFound/>

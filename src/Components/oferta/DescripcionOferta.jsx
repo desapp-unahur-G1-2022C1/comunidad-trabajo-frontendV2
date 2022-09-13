@@ -69,13 +69,14 @@ const CustomizedDialogs = () => {
   const [edadDesde, setEdadDesde] = useState();
   const [edadHasta, setEdadHasta] = useState();
   const [beneficios, setBeneficios] = useState();
-  const API_URL = `https://comunidad-de-trabajo.herokuapp.com/ofertas/${id}`;
+  const API_URL = `https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${id}`;
 
   const descripcionAPI = async () => {
 
     try {
       const api = await fetch(API_URL);
       const datos = await api.json();
+      sessionStorage.setItem('datosOferta', JSON.stringify(datos));
       setTituloOferta(datos.titulo_oferta);
       setNombreEmpresa(datos.Empresa.nombre_empresa);
       setDescripcion(datos.descripcion);
@@ -105,11 +106,11 @@ const CustomizedDialogs = () => {
 
 
   const {cambiarDatosUsuario, cambiarToken, cambiarIdUsuario, cambiarEstadoLogeado, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
-  var datosUsuario = JSON.parse(sessionStorage.getItem('datosUsuario'))
-  var token = sessionStorage.getItem('token')
-  var idUsuario = sessionStorage.getItem('idUsuario')
-  var grupo =  sessionStorage.getItem('grupo')
-  var estaLogeado = sessionStorage.getItem('estaLogeado')
+  var datosUsuario = JSON.parse(sessionStorage.getItem('datosUsuario'))            
+  var token = sessionStorage.getItem('token')                                   
+  var idUsuario = sessionStorage.getItem('idUsuario')                       
+  var grupo =  sessionStorage.getItem('grupo')                              
+  var estaLogeado = sessionStorage.getItem('estaLogeado')                    
   
   const postularse = async () => {
    try{
@@ -171,6 +172,7 @@ const CustomizedDialogs = () => {
                   nombreEmpresa == datosUsuario.nombre_empresa
                   ?
                   <Box sx={{ width: "20rem" }}>
+                  <Link to={`/edicionOferta/${id}`}>
                   <Button
                     size="large"
                     variant="contained"
@@ -179,7 +181,7 @@ const CustomizedDialogs = () => {
                     >
                     Editar oferta
                   </Button>
-                  
+                  </Link>
                   <Link to={`/ListadoDePostulantes/${id}`}style={{ textDecoration: 'none'}}>
                     <Button
                       size="large"
