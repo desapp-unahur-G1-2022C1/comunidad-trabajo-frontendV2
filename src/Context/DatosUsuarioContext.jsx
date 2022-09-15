@@ -23,7 +23,7 @@ export function DatosUsuarioContextProvider({children}){
 
     const cambiarIdUsuario = useCallback ((idNuevo) => {
         setIdUsuario(idNuevo)
-        sessionStorage.setItem('idUsuario', idNuevo);
+        parseInt(sessionStorage.setItem('idUsuario', idNuevo));
     }, []);
 
     const cambiarEstadoLogeado = useCallback ((nuevoEstado) => {

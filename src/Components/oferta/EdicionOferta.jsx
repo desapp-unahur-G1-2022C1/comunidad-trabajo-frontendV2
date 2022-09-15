@@ -227,7 +227,7 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
       idJornada:datosOferta.fk_id_jornada,
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       var data = {
         idEmpresa: datosUsuario.id,
         idCarrera: values.idCarrera,
@@ -250,7 +250,7 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
         remuneracion: values.remuneracion
       };
       console.log(values);
-        fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${datosOferta.id}`, {
+        await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${datosOferta.id}`, {
         method: "PUT", // or 'PUT'
         body: JSON.stringify(data), // data can be `string` or {object}!
         headers: {
@@ -258,8 +258,6 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
         },
         
         })
-        .then((res) => res.json())
-        .then((response) => console.log("Success:", response,
         Swal.fire({
           icon: 'success',
           title: 'La oferta fue editada exitosamente',
@@ -270,9 +268,9 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
         })
         .then(function (result) {
           if (result.value) {
-              history.push('/listadoOfertasEmpresa')
+              history.push(`/oferta/${id}`)
           }
-        })))
+        })
         .catch((error) => console.error("Error:", error,
         Swal.fire({
           icon: 'error',

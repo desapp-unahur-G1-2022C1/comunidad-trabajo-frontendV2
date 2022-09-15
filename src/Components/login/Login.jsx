@@ -36,6 +36,7 @@ const Login = () => {
             console.log(data)
             cambiarToken(data.token)
             cambiarGrupo(data.grupo)
+            cambiarIdUsuario(data.id)
         if (data.estado == false){
             Swal.fire({
                 icon: 'error',
@@ -50,7 +51,6 @@ const Login = () => {
             axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${data.id}`)
             .then(({data}) => {
                 cambiarEstadoLogeado(true)
-                cambiarIdUsuario(data.id)
                 cambiarDatosUsuario(data)
                 console.log(data)
                 history.push("/")
@@ -60,7 +60,6 @@ const Login = () => {
             axios.get(`https://comunidad-backend-v3.herokuapp.com/empresas/idUsuario/${data.id}`)
             .then(({data}) => {
                     cambiarEstadoLogeado(true)
-                    cambiarIdUsuario(data.id)
                     cambiarDatosUsuario(data)
                     console.log(data)
                     history.push("/")
@@ -68,7 +67,6 @@ const Login = () => {
         }
         else if(data.grupo == 3){
             cambiarEstadoLogeado(true)
-            cambiarIdUsuario(data.id)
             history.push("/")
         } else{
             Swal.fire({

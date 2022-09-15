@@ -8,7 +8,7 @@ import { useState } from 'react';
 import DatosUsuarioContextProvider from '../../Context/DatosUsuarioContext';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-
+import axios from "axios";
 
 const Root = styled('div')(({ theme }) => ({
   width: '100%',
@@ -20,7 +20,7 @@ const Root = styled('div')(({ theme }) => ({
 
 export default function DividerText() {
   const {cambiarDatosUsuario, cambiarToken, cambiarIdUsuario, cambiarEstadoLogeado, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
-  var datosUsuario = JSON.parse(sessionStorage.getItem('datosUsuario'))
+  let datosUsuario = JSON.parse(sessionStorage.getItem('datosUsuario'))
   var token = sessionStorage.getItem('token')
   var idUsuario = sessionStorage.getItem('idUsuario')
   var grupo =  sessionStorage.getItem('grupo')
@@ -33,6 +33,9 @@ export default function DividerText() {
    Sed malesuada lobortis pretium.`}
     </div>
   );
+  axios.get(`https://comunidad-backend-v3.herokuapp.com/empresas/idUsuario/${idUsuario}`)
+            .then(({data}) => {
+                    cambiarDatosUsuario(data)})
   return (
     <React.Fragment>
     <Header/>

@@ -22,6 +22,7 @@ import FormFormHelperText from "@mui/material";
 import { useContext } from 'react';
 import { useHistory } from "react-router-dom";
 import DatosUsuarioContextProvider from "../../Context/DatosUsuarioContext";
+import axios from "axios";
 
 const validationSchema = yup.object({
   nombreEmpresa: yup
@@ -29,7 +30,7 @@ const validationSchema = yup.object({
     .min(1, "Este campo no puede estar vacio")
     .optional("El titulo de la oferta requerido"),
   cuit: yup
-    .string("Ingrese una cuit a la cuit")
+    .number("Ingrese una cuit a la cuit")
     .min(1, "Este campo no puede estar vacio")
     .optional("cuit requerido"),
   descripcion: yup
@@ -46,7 +47,6 @@ const validationSchema = yup.object({
     .optional(),
   provincia: yup
     .string("Ingrese su edad desde de residencia")
-    .min(1, "Este campo no puede estar vacio")
     .optional(),
   calle: yup
     .string("cuit de experiencia previa")
@@ -103,11 +103,11 @@ export default function WithMaterialUI() {
   const {cambiarDatosUsuario, cambiarToken, cambiarIdUsuario, cambiarEstadoLogeado, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
   var datosUsuario = JSON.parse(sessionStorage.getItem('datosUsuario'))
   var token = sessionStorage.getItem('token')
-  var idUsuario = sessionStorage.getItem('idUsuario')
+  var idUsuario = parseInt(sessionStorage.getItem('idUsuario'))
   var grupo =  sessionStorage.getItem('grupo')
   var estaLogeado = sessionStorage.getItem('estaLogeado')
   const history = useHistory()
-
+  
   const formik = useFormik({
     initialValues: {
       nombreEmpresa: datosUsuario.nombre_empresa,
@@ -125,18 +125,18 @@ export default function WithMaterialUI() {
       web: datosUsuario.web,
       nombreRepresentante: datosUsuario.nombre_representante,
       emailRepresentante: datosUsuario.email_representante,
-      idUsuario: 315,
+      idUsuario: idUsuario,
       idRubro: 1,
       idEstado: 2,
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       var data = {
-        idUsuario: 315,
+        nombreEmpresa: datosUsuario.nombre_empresa,
+        cuit: parseInt(datosUsuario.id),
+        idUsuario: idUsuario,
         idRubro: 1,
         idEstado: 2,
-        nombreEmpresa: values.nombreEmpresa,
-        cuit: values.cuit,
         descripcion: values.descripcion,
         pais: values.pais,
         provincia: values.provincia,
@@ -151,31 +151,33 @@ export default function WithMaterialUI() {
         nombreRepresentante: values.nombreRepresentante,
         emailRepresentante: values.emailRepresentante,
       };
-      console.log(values);
-        fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/cuit/${datosUsuario.id}`, {
+      console.log(data);
+      await fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/cuit/${datosUsuario.id}`, 
+        {
         method: 'PUT', // or 'PUT'
         body: JSON.stringify(data), // data can be `string` or {object}!
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"  
         },
-        
-        })
-        .then((res) => res.json())
-        .then((response) => console.log("Success:", response,
+      })
         Swal.fire({
           icon: 'success',
           title: 'La empresa fue editada exitosamente',
           confirmButtonText: 'Finalizar',
           text: 'Para continuar pulse el boton',
           footer: '',
-          showCloseButton: true
+          showCloseButton: true,
         })
         .then(function (result) {
           if (result.value) {
-              history.push('/')
+            axios.get(`https://comunidad-backend-v3.herokuapp.com/empresas/idUsuario/${idUsuario}`)
+            .then(({data}) => {
+              sessionStorage.setItem('datosUsuario', JSON.stringify(data));
+            })
+            window.location = 'empresaDatosPrivado'
           }
-        })))
-        .catch((error) => console.error("Error:", error,
+        })
+        .catch((err) => console.error("Error:", err, 
         Swal.fire({
           icon: 'error',
           title: 'Ocurrio un error al editar la empresa',
@@ -184,8 +186,7 @@ export default function WithMaterialUI() {
           footer: '',
           showCloseButton: true
         })))
-    },
-  });
+  }});
   return (
     
     <Fragment>
@@ -200,41 +201,6 @@ export default function WithMaterialUI() {
         <form onSubmit={formik.handleSubmit}>
           <div>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} md={4}>
-                <TextField
-                  variant="outlined"
-                  id="nombreEmpresa"
-                  name="nombreEmpresa"
-                  label="Nombre de la empresa"
-                  fullWidth
-                  value={formik.values.nombreEmpresa}
-                  onChange={formik.handleChange}
-                  error={
-                    formik.touched.nombreEmpresa &&
-                    Boolean(formik.errors.nombreEmpresa) &&
-                    true
-                  }
-                  helperText={formik.touched.nombreEmpresa && formik.errors.nombreEmpresa}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6} md={4}>
-                <TextField
-                  variant="outlined"
-                  id="cuit"
-                  name="cuit"
-                  label="Cuit"
-                  fullWidth
-                  type='number'
-                  value={formik.values.cuit}
-                  onChange={formik.handleChange}
-                  error={
-                    formik.touched.cuit &&
-                    Boolean(formik.errors.cuit) &&
-                    true
-                  }
-                  helperText={formik.touched.cuit && formik.errors.cuit}
-                />
-              </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <TextField
                   id="descripcion"

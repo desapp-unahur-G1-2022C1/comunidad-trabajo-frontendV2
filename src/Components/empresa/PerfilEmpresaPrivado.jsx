@@ -8,6 +8,7 @@ import Header from '../Header';
 import { Link } from "react-router-dom";
 import DatosUsuarioContextProvider from '../../Context/DatosUsuarioContext';
 import { useContext } from 'react';
+import axios from 'axios';
 
 export default function PerfilEmpresa() {
   const {cambiarDatosUsuario, cambiarToken, cambiarIdUsuario, cambiarEstadoLogeado, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
@@ -16,7 +17,9 @@ export default function PerfilEmpresa() {
   var idUsuario = sessionStorage.getItem('idUsuario')
   var grupo =  sessionStorage.getItem('grupo')
   var estaLogeado = sessionStorage.getItem('estaLogeado')
-
+  axios.get(`https://comunidad-backend-v3.herokuapp.com/empresas/idUsuario/${idUsuario}`)
+            .then(({data}) => {
+                    cambiarDatosUsuario(data)})
   return (
     <React.Fragment>
       <Header/>
