@@ -3,7 +3,7 @@ import React, { Fragment, useState} from 'react'
 import Header from "../../Header"
 import { Box, Button, Pagination } from '@mui/material';
 import BarraBusquedaOfertas from './BarraBusquedaOfertas';
-import ListaOfertas from './ListaOfertas';
+import ListaOfertasInactivas from './ListaOfertasInactivas';
 import BusquedaNoEncontrada from './BusquedaNoEncontrada';
 import { Link } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ const ListadoOfertas = () => {
     const [pagina, setPagina] = useState(1);
     const [busquedaActual, setBusquedaActual] = useState('');
 
-    const API_URL = `https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=0&limite=3&idEstado=1`;
+    const API_URL = `https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=0&limite=3&idEstado=2`;
 
     const primerLlamado = async () => {
         if(llamado === false){
@@ -40,7 +40,7 @@ const ListadoOfertas = () => {
             const {oferta} = e.target.elements;
             const ofertaValue = oferta.value;
             setBusquedaActual(ofertaValue);
-            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&idEstado=1&buscarTitulo=${ofertaValue}`);
+            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&idEstado=2&buscarTitulo=${ofertaValue}`);
             const datos = await api.json();
             console.log(datos)
             setOfertas(datos.ofertas.rows)
@@ -54,7 +54,7 @@ const ListadoOfertas = () => {
 
     const cambiarPagina = async (e, p) => {
         
-        const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&ordenar=id&buscarTitulo=${busquedaActual}`);
+        const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&ordenar=id&buscarTitulo=${busquedaActual}&idEstado=2`);
         const datos = await api.json();
         setOfertas(datos.ofertas.rows);
         setPagina(p)
@@ -68,16 +68,9 @@ const ListadoOfertas = () => {
             <Header/>
             <BarraBusquedaOfertas
             traerOfertas={traerOfertas}/>
-            <Box sx={{display:"flex", justifyContent:"start"}}>
-                <Link to="/admin/listadoOfertasInactivas" style={{textDecoration:"none"}}>
-                    <Button variant="contained" color='edit' sx={{margin:"0.5rem"}}>
-                        Aceptar ofertas
-                    </Button>
-                </Link>
-            </Box>
             {ofertas.length === 0 && llamado === true ?
             <BusquedaNoEncontrada/> :
-            <ListaOfertas
+            <ListaOfertasInactivas
             ofertas={ofertas}/>}
             <Pagination color="primary" count={cantPaginas} page={pagina} onChange={cambiarPagina} sx={{display:"flex", justifyContent:"center", margin:"1rem"}}/>
         </Fragment>

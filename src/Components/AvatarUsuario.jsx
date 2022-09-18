@@ -71,7 +71,13 @@ const AvatarUsuario = () => {
     }
   return (
     <Fragment>
-    <Avatar onClick={handleClick} {...stringAvatar(`${datosUsuario.nombre}` + " " + `${datosUsuario.apellido}`)  }/>
+    {
+      grupo == 3
+      ?
+      <Avatar onClick={handleClick} {...stringAvatar(`A D`)  }/>
+      :
+      <Avatar onClick={handleClick} {...stringAvatar(`${datosUsuario.nombre}` + " " + `${datosUsuario.apellido}`)  }/>
+    }
     <Menu
         id="simple-menu"
         anchorEl={anchorEl}

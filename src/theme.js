@@ -11,6 +11,10 @@ export const theme = createTheme({
         relaxed:{
             main:"#1c5550",
             contrastText: '#ffffff'
+        },
+        edit:{
+            main:"#F4E900",
+            contrastText: '#ffffff'
         }
     }
 });

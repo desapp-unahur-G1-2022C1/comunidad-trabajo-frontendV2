@@ -5,7 +5,7 @@ import { Box } from '@mui/system';
 import Header from "../../Header"
 import { Grid, Pagination, Typography } from '@mui/material';
 import BarraBusquedaEmpresas from './BarraBusquedaEmpresas';
-import ListaEmpresas from './ListaEmpresas';
+import ListaEmpresasInactivas from './ListaEmpresasInactivas';
 import BusquedaNoEncontrada from './BusquedaNoEncontrada';
 import { Link } from "react-router-dom";
 
@@ -17,7 +17,7 @@ const ListadoEmpresas = () => {
     const [cantPaginas, setCantPaginas] = useState(0);
     const [pagina, setPagina] = useState(1);
     const [busquedaActual, setBusquedaActual] = useState('');
-    const API_URL = `https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=0&limite=5`;
+    const API_URL = `https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=0&limite=5&idEstado=2`;
 
     const primerLlamado = async () => {
         if(llamado === false){
@@ -41,7 +41,7 @@ const ListadoEmpresas = () => {
             const {empresa} = e.target.elements;
             const empresaValue = empresa.value;
             setBusquedaActual(empresaValue);
-            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=${p - 1}&limite=5&nombreEmpresa=${empresaValue}`);
+            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=${p - 1}&limite=5&nombreEmpresa=${empresaValue}3&idEstado=2`);
             const datos = await api.json();
             console.log(datos)
             setEmpresas(datos.empresas.rows)
@@ -71,16 +71,9 @@ const ListadoEmpresas = () => {
             <Header/>
             <BarraBusquedaEmpresas
             traerEmpresas={traerEmpresas}/>
-            <Box sx={{display:"flex", justifyContent:"start"}}>
-                <Link to="/admin/listadoEmpresasInactivas" style={{textDecoration:"none"}}>
-                    <Button variant="contained" color='edit' sx={{margin:"0.5rem"}}>
-                        Aceptar empresas
-                    </Button>
-                </Link>
-            </Box>
             {empresas.length === 0 && llamado === true ?
             <BusquedaNoEncontrada/> :
-            <ListaEmpresas
+            <ListaEmpresasInactivas
             empresas={empresas}/>}
             <Pagination color="primary" count={cantPaginas} page={pagina} onChange={cambiarPagina} sx={{display:"flex", justifyContent:"center", margin:"1rem"}}/>
         

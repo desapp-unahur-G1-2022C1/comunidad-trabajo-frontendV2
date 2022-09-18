@@ -20,7 +20,7 @@ const Home = () => {
 
   
   
-  const API_URL = `https://comunidad-de-trabajo.herokuapp.com/ofertas/?pagina=0&limite=3&ordenar=id`;
+  const API_URL = `https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=0&limite=3&ordenar=id&idEstado=1`;
 
   const primerLlamado = async () => {
     if (llamado === false){
@@ -42,7 +42,7 @@ const Home = () => {
       const {ofertas} = e.target.elements;
       const ofertasValue = ofertas.value;
       setBusquedaActual(ofertasValue);
-      const api = await fetch(`https://comunidad-de-trabajo.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&buscarTitulo=${ofertasValue}&ordenar=id `);
+      const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&buscarTitulo=${ofertasValue}&ordenar=id&idEstado=1`);
       const datos = await api.json();
       setListaOfertas(datos.ofertas.rows);
       setCantPaginas(datos.totalPaginas)
@@ -54,7 +54,7 @@ const Home = () => {
   }
 
   const cambiarPagina = async (e, p) => {
-    const api = await fetch(`https://comunidad-de-trabajo.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&ordenar=id&buscarTitulo=${busquedaActual}`);
+    const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&ordenar=id&buscarTitulo=${busquedaActual}&idEstado=1`);
     const datos = await api.json();
     setListaOfertas(datos.ofertas.rows);
     setPagina(p)
