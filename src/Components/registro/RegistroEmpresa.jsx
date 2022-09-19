@@ -94,31 +94,29 @@ export default function WithMaterialUI() {
 
   const formik = useFormik({
     initialValues: {
-      nombreEmpresa: "",
-      cuit: "",
-      descripcion: "",
-      pais: "",
-      provincia: "",
-      ciudad: "",
-      calle: "",
-      nro: "",
-      piso: "",
-      depto: "",
-      cp: "",
+      nombreEmpresa: undefined,
+      cuit: undefined,
+      descripcion: undefined,
+      pais: undefined,
+      provincia: undefined,
+      ciudad: undefined,
+      calle: undefined,
+      nro: undefined,
+      piso: undefined,
+      depto: undefined,
+      cp: undefined,
       telefono: undefined,
-      web: "",
-      nombreRepresentante: "",
-      emailRepresentante: "",
+      web: undefined,
+      nombreRepresentante: undefined,
+      emailRepresentante: undefined,
       idUsuario: id,
       idRubro: 1,
-      idEstado: 1,
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       var data = {
         idUsuario: id,
         idRubro: 1,
-        idEstado: 2,
         nombreEmpresa: values.nombreEmpresa,
         cuit: values.cuit,
         descripcion: values.descripcion,
@@ -136,7 +134,7 @@ export default function WithMaterialUI() {
         emailRepresentante: values.emailRepresentante,
       };
       console.log(values);
-        fetch("https://comunidad-backend-v3.herokuapp.com/empresas/", {
+        fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/`, {
         method: "POST", // or 'PUT'
         body: JSON.stringify(data), // data can be `string` or {object}!
         headers: {
