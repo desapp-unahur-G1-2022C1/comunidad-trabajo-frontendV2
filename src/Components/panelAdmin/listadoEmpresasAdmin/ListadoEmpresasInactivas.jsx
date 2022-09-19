@@ -27,7 +27,6 @@ const ListadoEmpresas = () => {
                 setLlamado(true)
                 setEmpresas(datos.empresas.rows)
                 setCantPaginas(datos.totalPaginas)
-                
             }
             catch(error){
                 console.log(error)
@@ -41,9 +40,9 @@ const ListadoEmpresas = () => {
             const {empresa} = e.target.elements;
             const empresaValue = empresa.value;
             setBusquedaActual(empresaValue);
-            setPagina(1)
-            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=0&limite=5&ordenar=id&nombreEmpresa=${empresaValue}&idEstado=2`);
+            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=0&limite=5&idEstado=2&ordenar=id&nombreEmpresa=${empresaValue}`);
             const datos = await api.json();
+            setPagina(1)
             console.log(datos)
             setEmpresas(datos.empresas.rows)
             setCantPaginas(datos.totalPaginas)
@@ -56,7 +55,7 @@ const ListadoEmpresas = () => {
 
     const cambiarPagina = async (e, p) => {
         
-        const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=${p - 1}&ordenar=id&limite=5&nombreEmpresa=${busquedaActual}`);;
+        const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=${p - 1}&limite=5&idEstado=2&ordenar=id&nombreEmpresa=${busquedaActual}`);;
         const datos = await api.json();
         setEmpresas(datos.empresas.rows);
         setPagina(p)
