@@ -42,7 +42,7 @@ const ListadoEmpresas = () => {
             const empresaValue = empresa.value;
             setBusquedaActual(empresaValue);
             setPagina(1)
-            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=0&limite=5&ordenar=id&nombreEmpresa=${empresaValue}3&idEstado=2`);
+            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=0&limite=5&ordenar=id&nombreEmpresa=${empresaValue}&idEstado=2`);
             const datos = await api.json();
             console.log(datos)
             setEmpresas(datos.empresas.rows)
