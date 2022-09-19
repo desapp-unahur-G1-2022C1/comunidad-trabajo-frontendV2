@@ -42,8 +42,9 @@ const Home = () => {
       const {ofertas} = e.target.elements;
       const ofertasValue = ofertas.value;
       setBusquedaActual(ofertasValue);
-      const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&buscarTitulo=${ofertasValue}&ordenar=id&idEstado=1`);
+      const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=0&limite=3&buscarTitulo=${ofertasValue}&ordenar=id&idEstado=1`);
       const datos = await api.json();
+      setPagina(1)
       setListaOfertas(datos.ofertas.rows);
       setCantPaginas(datos.totalPaginas)
       console.log(datos.ofertas.rows)

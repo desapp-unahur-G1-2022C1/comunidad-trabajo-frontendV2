@@ -14,7 +14,7 @@ const ListadoPostulantes = () => {
     const [cantPaginas, setCantPaginas] = useState(0);
     const [pagina, setPagina] = useState(1);
     const [busquedaActual, setBusquedaActual] = useState('');
-    const API_URL = `https://comunidad-backend-v3.herokuapp.com/postulantes/?pagina=0&limite=3`;
+    const API_URL = `https://comunidad-backend-v3.herokuapp.com/postulantes/?pagina=0&limite=3&ordenar=id`;
 
     const primerLlamado = async () => {
         if(llamado === false){
@@ -24,7 +24,6 @@ const ListadoPostulantes = () => {
                 setLlamado(true)
                 setPostulantes(datos.postulantes.rows)
                 setCantPaginas(datos.totalPaginas)
-                
             }
             catch(error){
                 console.log(error)
@@ -38,9 +37,10 @@ const ListadoPostulantes = () => {
             const {usuario} = e.target.elements;
             const usuarioValue = usuario.value;
             setBusquedaActual(usuarioValue)
-            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/postulantes/?pagina=${p - 1}&limite=3&buscarPostulante=${usuarioValue}`);
+            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/postulantes/?pagina=0&limite=3&ordenar=id&buscarPostulante=${usuarioValue}`);
             const datos = await api.json();
             console.log(datos)
+            setPagina(1)
             setPostulantes(datos.postulantes.rows)
             setCantPaginas(datos.totalPaginas)
             console.log(postulantes)
