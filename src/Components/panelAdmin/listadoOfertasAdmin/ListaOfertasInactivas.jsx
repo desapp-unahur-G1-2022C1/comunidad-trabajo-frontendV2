@@ -10,11 +10,11 @@ import { Button, Typography } from '@mui/material';
 import Swal from 'sweetalert2';
 
 export default function ListaOfertas({ofertas}) {
-  function activar(idOferta){
+  const activar = async (idOferta) => {
     var data = {
       idEstado: 1
     };
-      fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${idOferta}`, {
+      await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${idOferta}`, {
       method: "PUT", // or 'PUT'
       body: JSON.stringify(data), // data can be `string` or {object}!
       headers: {
