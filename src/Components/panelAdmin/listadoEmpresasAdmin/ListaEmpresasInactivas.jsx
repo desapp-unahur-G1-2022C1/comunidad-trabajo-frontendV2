@@ -11,14 +11,9 @@ import Swal from 'sweetalert2';
 
 export default function ListaEmpresas({empresas}) {
   function activar(idEmpresa){
-      var data = {
-        idEstado: 1
-
-      };
       fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/cuit/${idEmpresa}`, 
         {
-        method: 'PUT', // or 'PUT'
-        body: JSON.stringify(data), // data can be `string` or {object}!
+        method: 'PATCH', // or 'PUT'
         headers: {
           "Content-Type": "application/json"  
         }
