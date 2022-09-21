@@ -176,7 +176,7 @@ export default function WithMaterialUI() {
         variant="h4"
         sx={{ display: "flex", justifyContent: "center", margin: "1rem" }}
       >
-        Datos de oferta
+        Datos de la empresa
       </Typography>
       <Box sx={{ display: "flex", justifyContent: "center", padding: "2rem" }}>
         <form onSubmit={formik.handleSubmit}>
