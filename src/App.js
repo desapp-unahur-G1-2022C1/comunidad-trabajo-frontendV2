@@ -21,10 +21,12 @@ import ListadoEmpresas from './Components/panelAdmin/listadoEmpresasAdmin/Listad
 import ListadoEmpresasInactivas from './Components/panelAdmin/listadoEmpresasAdmin/ListadoEmpresasInactivas';
 import ListadoOfertas from './Components/panelAdmin/listadoOfertasAdmin/ListadoOfertas';
 import ListadoOfertasInactivas from './Components/panelAdmin/listadoOfertasAdmin/ListadoOfertasInactivas';
-import OfertasPostulante from './Components/perfilUsuario/listadoDeOfertas/ListadoOfertas';
+import OfertasPostulante from './Components/perfilUsuario/listadoDePostulaciones/ListadoPostulaciones';
 import PostulantesDeOferta from './Components/oferta/listadoDePostulantes/ListadoDePostulantes';
 import EdicionEmpresa from './Components/empresa/EdicionEmpresa';
 import EdicionOferta from './Components/oferta/EdicionOferta';
+import PostulanteDatosPrivado from './Components/perfilUsuario/PostulanteDatosPrivado';
+
 
 function App() {
   return (
@@ -98,6 +100,9 @@ function App() {
           </Route>
           <Route exact path="/edicionOferta/:id">
             <EdicionOferta/>
+          </Route>
+          <Route exact path="/miPerfil/misDatos">
+            <PostulanteDatosPrivado/>
           </Route>
           <Route path="*">
             <NotFound/>

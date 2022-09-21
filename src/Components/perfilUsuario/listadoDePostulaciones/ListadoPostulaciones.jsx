@@ -5,7 +5,7 @@ import { Box } from '@mui/system';
 import Header from "../../Header"
 import { Grid, Typography } from '@mui/material';
 import BarraBusquedaOfertas from './BarraBusquedaOfertas';
-import ListaOfertas from './ListaOfertas';
+import ListaOfertas from './ListaPostulaciones';
 import BusquedaNoEncontrada from './BusquedaNoEncontrada';
 import DatosUsuarioContextProvider from '../../../Context/DatosUsuarioContext';
 import { useContext } from 'react';

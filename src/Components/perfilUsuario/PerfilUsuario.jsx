@@ -32,7 +32,9 @@ export default function PerfilUsuario() {
             </Box>
         </Box>
         <Box sx={{display:"flex", justifyContent:"center", padding:"1rem"}}>
-          <Button variant="contained" sx={{width:"25rem"}}>Datos personales</Button>
+          <Link to='/miPerfil/misDatos' style={{ textDecoration: 'none'}}>
+            <Button variant="contained" sx={{width:"25rem"}}>Datos personales</Button>
+          </Link>
         </Box>
         <Box sx={{display:"flex", justifyContent:"center", padding:"1rem"}}>
           <Button variant="contained" sx={{width:"25rem"}}>Datos academicos</Button>
