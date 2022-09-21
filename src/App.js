@@ -26,6 +26,7 @@ import PostulantesDeOferta from './Components/oferta/listadoDePostulantes/Listad
 import EdicionEmpresa from './Components/empresa/EdicionEmpresa';
 import EdicionOferta from './Components/oferta/EdicionOferta';
 import PostulanteDatosPrivado from './Components/perfilUsuario/PostulanteDatosPrivado';
+import EdicionDatosPersonalesPostulante from './Components/perfilUsuario/EdicionDatosPersonalesPostulante';
 
 
 function App() {
@@ -103,6 +104,9 @@ function App() {
           </Route>
           <Route exact path="/miPerfil/misDatos">
             <PostulanteDatosPrivado/>
+          </Route>
+          <Route exact path="/miPerfil/misDatos/editar">
+            <EdicionDatosPersonalesPostulante/>
           </Route>
           <Route path="*">
             <NotFound/>

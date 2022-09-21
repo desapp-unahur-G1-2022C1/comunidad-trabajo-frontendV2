@@ -40,7 +40,7 @@ export default function DividerText() {
     <React.Fragment>
     <Header/>
     <Box sx={{display:'flex', justifyContent:'center', marginTop:'1rem'}}>
-    <Link to='/edicionEmpresa' style={{ textDecoration: 'none'}}>
+    <Link to='/miPerfil/misDatos/editar' style={{ textDecoration: 'none'}}>
     <Button variant="contained">Editar</Button>
     </Link>
     </Box>
