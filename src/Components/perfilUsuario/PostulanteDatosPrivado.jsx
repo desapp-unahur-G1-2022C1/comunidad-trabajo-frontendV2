@@ -33,7 +33,7 @@ export default function DividerText() {
    Sed malesuada lobortis pretium.`}
     </div>
   );
-  axios.get(`https://comunidad-backend-v3.herokuapp.com/empresas/idUsuario/${idUsuario}`)
+  axios.get(`https://comunidad-backend-v3.herokuapp.com/postulante/dni/${datosUsuario.id}`)
             .then(({data}) => {
                     cambiarDatosUsuario(data)})
   return (

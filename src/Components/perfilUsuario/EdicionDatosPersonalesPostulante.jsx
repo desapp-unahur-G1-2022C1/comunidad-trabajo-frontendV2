@@ -20,6 +20,10 @@ import Grid from "@mui/material/Grid";
 import Swal from 'sweetalert2'
 import { useContext } from 'react';
 import IdFormContext from '../../Context/IdFormContext';
+import  DatosUsuarioContextProvider from "../../Context/DatosUsuarioContext";
+import axios from "axios";
+
+
 
 
 
@@ -32,7 +36,6 @@ const validationSchema = yup.object({
     .string("Ingrese su apellido")
     .min(1, "Este campo no puede estar vacio")
     .required("Apellido requerido"),
-  fechaNac: yup.string("Ingrese su fecha de nacimiento").required("Fecha es requerido"),
   tipoDocumento: yup
     .string("Ingrese su tipo de documento")
     .required("Tipo de documento es requerido"),
@@ -43,16 +46,26 @@ const validationSchema = yup.object({
   calle: yup.string("Ingrese el nombre de su calle").optional(),
   nro: yup.string("Ingrese altura").optional(),
   telefono: yup.string("Ingrese su telefono de contacto").optional(),
-  universidad: yup.string("Ingrese el nombre de su Universidad").optional(),
-  carrera: yup.string("Ingrese su carrera").optional(),
-  cantMateriasAprobadas: yup
-    .string("Ingrese la cantidad de materias aprobadas").optional(),
-  estudios: yup.string("Ingrese sus estudios").optional(),
-  idiomas: yup.string("Elija idiomas").optional(),
 });
 
 
 export default function WithMaterialUI() {
+
+  const {cambiarDatosUsuario, cambiarToken, cambiarIdUsuario, cambiarEstadoLogeado, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
+  var datosUsuario = JSON.parse(sessionStorage.getItem('datosUsuario'))
+  var token = sessionStorage.getItem('token')
+  var idUsuario = sessionStorage.getItem('idUsuario')
+  var grupo =  sessionStorage.getItem('grupo')
+  var estaLogeado = sessionStorage.getItem('estaLogeado')
+
+  const formatoFechaNacimiento = (fecha) => {
+    var fechaNacimiento = new Date(fecha);
+    var hora = fechaNacimiento.getHours();
+    var dia = fechaNacimiento.getDate() + 1;
+    var mes = fechaNacimiento.getMonth() + 1;
+    var anio = fechaNacimiento.getFullYear();
+    return dia + "/" + mes + "/" + anio;
+  }
   
 
   const listaIDs = ["datosPersonales", "datosAcademicos"];
@@ -104,7 +117,7 @@ export default function WithMaterialUI() {
     if (llamadoTipoDocumento === false) {
       try {
         const api = await fetch(
-          `https://comunidad-de-trabajo.herokuapp.com/estudios/`
+          `https://comunidad-backend-v3.herokuapp.com/estudios/`
         );
         const datos = await api.json();
         setListaEstudios(datos.estudios);
@@ -119,92 +132,51 @@ export default function WithMaterialUI() {
   const [IdActual, setIdActual] = useState(0);
   const [estadoSiguiente, setEstadoSiguiente] = useState(false);
 
-  function mostrarSiguiente() {
-    document.getElementById(listaIDs[IdActual + 1]).style.display = "block";
-  }
-
-  function mostrarAnterior() {
-    document.getElementById(listaIDs[IdActual - 1]).style.display = "block";
-  }
-
-  function ocultarActual() {
-    document.getElementById(listaIDs[IdActual]).style.display = "none";
-  }
-  
-  function siguiente() {
-      ocultarActual();
-      mostrarSiguiente();
-      setIdActual(IdActual + 1);
-      setEstadoBoton(false);
-  }
-
-  function anterior() {
-    if (IdActual != 0) {
-      ocultarActual();
-      mostrarAnterior();
-      setIdActual(IdActual - 1);
-      setEstadoBoton(true);
-    }
-  }
+ 
   const {id} = useContext(IdFormContext)
   console.log(id)
   const formik = useFormik({
     initialValues: {
-      nombre: "",
-      apellido: "",
-      fechaNac: undefined,
-      tipoDocumento: "",
-      dni: "",
-      nacionalidad: '',
-      provincia: '',
-      ciudad: '',
-      calle: '',
-      nro: '',
-      telefono: '',
-      carrera: undefined,
-      cantMateriasAprobadas: undefined,
-      idiomas: undefined,
-      estudios: undefined,
+      nombre: datosUsuario.nombre,
+      apellido: datosUsuario.apellido,
+      
+      tipoDocumento: datosUsuario.Tipo_documento.id,
+      dni: datosUsuario.id,
+      nacionalidad: datosUsuario.nacionalidad,
+      provincia: datosUsuario.provincia,
+      ciudad: datosUsuario.ciudad,
+      calle: datosUsuario.calle,
+      nro: datosUsuario.nro,
+      telefono: datosUsuario.telefono,
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       var data = {
         documento: values.dni,
         tipoDocumento: values.tipoDocumento,
-        idUsuario: id,
-        estado: 1,
+        idUsuario: datosUsuario.Usuario.id,
         nombre: values.nombre,
         apellido: values.apellido,
         nacionalidad: values.nacionalidad,
-        fecha_nac: values.fechaNac,
-        pais: "Argentina",
+       
         provincia: values.provincia,
         ciudad: values.ciudad,
         calle: values.calle,
         nro: values.nro,
         telefono: values.telefono,
-        piso: 0,
-        depto: 0,
-        cp: "",
-        estudios: values.estudios,
-        carrera: values.carrera,
-        cantMaterias: values.cantMateriasAprobadas,
-        alumnoUnahur: "false",
-        presentacion: "",
       };
       console.log(values);
       console.log(IdActual);
-      if (IdActual == listaIDs.length - 1){
-        fetch("https://comunidad-de-trabajo.herokuapp.com/postulantes/", {
-        method: "POST", // or 'PUT'
+      
+        fetch(`https://comunidad-backend-v3.herokuapp.com/postulantes/dni/${datosUsuario.id}`, {
+        method: "PUT", // or 'PUT'
         body: JSON.stringify(data), // data can be `string` or {object}!
         headers: {
           "Content-Type": "application/json",
         },
         
         })
-        .then((res) => res.json())
-        .then((response) => console.log("Success:", response,
+        
         Swal.fire({
           icon: 'success',
           title: 'Su registro fue realizado correctamente',
@@ -215,10 +187,14 @@ export default function WithMaterialUI() {
         })
         .then(function (result) {
           if (result.value) {
-              window.location = "/";
+            axios.get(`https://comunidad-backend-v3.herokuapp.com/postulante/dni/${idUsuario}`)
+            .then(({data}) => {
+              sessionStorage.setItem('datosUsuario', JSON.stringify(data));
+            })
+            window.location.href = "/miPerfil/misDatos";
           }
-        })))
-        .catch((error) => console.error("Error:", error,
+        })
+        .catch((err) => console.error("Error:", err,
         Swal.fire({
           icon: 'error',
           title: 'Ocurrio un error al registrarse',
@@ -227,9 +203,7 @@ export default function WithMaterialUI() {
           footer: '',
           showCloseButton: true
         })))
-      }else{
-        siguiente()
-      }
+      
     },
   });
   
@@ -263,7 +237,9 @@ export default function WithMaterialUI() {
                     true
                   }
                   helperText={formik.touched.nombre && formik.errors.nombre}
+                  disabled
                 />
+                
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <TextField
@@ -272,6 +248,7 @@ export default function WithMaterialUI() {
                   name="apellido"
                   label="Apellido"
                   fullWidth
+                  disabled
                   value={formik.values.apellido}
                   onChange={formik.handleChange}
                   error={
@@ -281,21 +258,16 @@ export default function WithMaterialUI() {
                   }
                   helperText={formik.touched.apellido && formik.errors.apellido}
                 />
+                
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <TextField
                   variant="outlined"
-                  id="fechaNac"
-                  name="fechaNac"
                   label="Fecha de nacimiento"
-                  type="date"
+                  value={formatoFechaNacimiento(datosUsuario.fecha_nac)}
                   InputLabelProps={{ shrink: true }}
                   fullWidth
-                  value={formik.values.fechaNac}
-                  onChange={formik.handleChange}
-                  error={
-                    formik.touched.fechaNac && Boolean(formik.errors.fechaNac)
-                  }
+                  disabled
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
@@ -314,13 +286,14 @@ export default function WithMaterialUI() {
                     value={formik.values.tipoDocumento}
                     onChange={formik.handleChange}
                     error={formik.touched.tipoDocumento && Boolean(formik.errors.tipoDocumento)}
+                    disabled
                   >
                     {tiposDocumentos.map((documento) => ( 
                       <MenuList className='selectCss'  value={documento.id} key={documento.id} >
                         <Box sx={{display:'flex', justifyContent:'center'}}>{documento.tipo_documento}</Box>
                       </MenuList>
                     ))}
-                  helperText={formik.touched.tipoDocumento && formik.errors.tipoDocumento}
+                  
                   </Select>
                   
                 </FormControl>
@@ -332,6 +305,7 @@ export default function WithMaterialUI() {
                   label="Numero de documento"
                   type="number"
                   fullWidth
+                  disabled
                   variant="outlined"
                   value={formik.values.dni}
                   onChange={formik.handleChange}
@@ -348,6 +322,7 @@ export default function WithMaterialUI() {
                   label="Nacionalidad"
                   variant="outlined"
                   fullWidth
+                  disabled
                   value={formik.values.nacionalidad}
                   onChange={formik.handleChange}
                   error={
@@ -427,123 +402,8 @@ export default function WithMaterialUI() {
 
 
 
-          <div id="datosAcademicos" style={{ display: "none" }}>
-            <Box item xs={12} sm={6} md={4}
-              sx={{
-                display: "flex",
-                justifyContent: "left",
-                flexDirection: "column",
-                width: '300px'
-              }}
-            >
-              <Box sx={{margin:'16px', display:'flex', justifyContent:'center'}}>
-              <FormControl fullWidth>
-              <InputLabel>Estudios</InputLabel>
-              <Select
-                id="estudios"
-                name="estudios"
-                label="Nivel de estudios"
-                variant="outlined"
-                type="number"
-                value={formik.values.estudios}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.estudios && Boolean(formik.errors.estudios)
-                }
-              >
-                {listaEstudios.map((estudios) => (
-                  <MenuList className="selectCss" value={estudios.id} key={estudios.id}>
-                    <Box sx={{display:'flex', justifyContent:'center'}}>{estudios.id}: {estudios.nombre_estudio} - {estudios.estado_estudio}</Box> 
-                  </MenuList>
-                ))}
-              </Select>
-              </FormControl>
-              </Box>
-              <Box sx={{margin:'16px', display:'flex', justifyContent:'center'}}>
-              <FormControl fullWidth>
-                <InputLabel>Carrera</InputLabel>
-                <Select
-                  id="carrera"
-                  name="carrera"
-                  variant="outlined"
-                  label="Carrera"
-                  type="number"
-                  value={formik.values.carrera}
-                  onChange={formik.handleChange}
-                  error={
-                    formik.touched.carrera && Boolean(formik.errors.carrera)
-                  }
-                >
-                  {listaCarreras.map((carrera) => (
-                    <MenuList className="selectCss" value={carrera.id} key={carrera.id}>
-                      <Box sx={{display:'flex', justifyContent:'center'}}> {carrera.id}: {carrera.nombre_carrera}</Box>
-                    </MenuList>
-                  ))}
-                </Select>
-              </FormControl>
-              </Box>
-              <Box sx={{margin:'16px', display:'flex', justifyContent:'center'}}>
-              <TextField fullWidth 
-                id="cantMateriasAprobadas"
-                name="cantMateriasAprobadas"
-                label="Cantidad de materias aprobadas"
-                type="number"
-                variant="outlined"
-                
-                value={formik.values.cantMateriasAprobadas}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.cantMateriasAprobadas &&
-                  Boolean(formik.errors.cantMateriasAprobadas) &&
-                  true
-                }
-              />
-              </Box>
-              <Box sx={{margin:'16px', display:'flex', justifyContent:'center'}}>
-              <TextField
-                fullWidth
-                id="idiomas"
-                name="idiomas"
-                label="Idiomas"
-                type="number"
-                variant="outlined"
-                value={formik.values.idiomas}
-                onChange={formik.handleChange}
-                error={formik.touched.idiomas && Boolean(formik.errors.idiomas)}
-              />
-              </Box>
-              <FormControlLabel
-                sx={{margin:"0.5rem"}}
-                control={<Checkbox defaultChecked />}
-                label="¿Es alumno UNAHUR?"
-                id="alumnoUnahur"
-                name="alumnoUnahur"
-                type="checkbox"
-                value={formik.values.alumnoUnahur}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.alumnoUnahur &&
-                  Boolean(formik.errors.alumnoUnahur)
-                }
-              />
-            </Box>
-          </div>
-          {IdActual == listaIDs.length - 1 ? (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                flexDirection: "row",
-              }}
-            >
-              <Button
-                style={{ display: "flex", margin: "1rem" }}
-                color="primary"
-                variant="contained"
-                onClick={anterior}
-              >
-                Anterior
-              </Button>
+          
+            
               <Button
                 style={{ display: "flex", margin: "1rem" }}
                 id="confirmar"
@@ -552,39 +412,8 @@ export default function WithMaterialUI() {
               >
                 Confirmar
               </Button>
-            </Box>
-          ) 
-          : 
-          (
-            <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              flexDirection: "row",
-            }}
-          >
-            <Button
-              style={{ display: "flex", margin: "1rem" }}
-              color="primary"
-              variant="contained"
-              disabled={estadoBoton}
-              onClick={anterior}
-            >
-              Anterior
-            </Button>
-            <Button
-              style={{ display: "flex", margin: "1rem" }}
-              color="primary"
-              variant="contained"
-              type="submit"
-              //onClick= {}
-              disabled={estadoSiguiente}
-            >
-              Siguiente
-            </Button>
-          </Box>
-          )
-          }
+            
+         
         </form>
       </Box>
     </Fragment>
