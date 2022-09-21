@@ -69,6 +69,7 @@ const CustomizedDialogs = () => {
   const [edadDesde, setEdadDesde] = useState();
   const [edadHasta, setEdadHasta] = useState();
   const [beneficios, setBeneficios] = useState();
+  const [idEmpresa, setIdEmpresa] = useState();
   const API_URL = `https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${id}`;
 
   const descripcionAPI = async () => {
@@ -79,6 +80,7 @@ const CustomizedDialogs = () => {
       sessionStorage.setItem('datosOferta', JSON.stringify(datos));
       setTituloOferta(datos.titulo_oferta);
       setNombreEmpresa(datos.Empresa.nombre_empresa);
+      setIdEmpresa(datos.Empresa.id);
       setDescripcion(datos.descripcion);
       setZona(datos.zona_trabajo);
       setSalario(datos.remuneracion);
@@ -121,7 +123,8 @@ const CustomizedDialogs = () => {
       },
       body: JSON.stringify({
         postulante: datosUsuario.id,
-        oferta: id
+        oferta: id,
+        empresa: idEmpresa
       })
     })
     const datos = await api.json();

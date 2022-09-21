@@ -31,7 +31,7 @@ export default function ListaOfertas({Ofertas}) {
               {oferta.Oferta.id}
               </TableCell>
               <TableCell align="left"><Typography variant="body1">{oferta.Oferta.titulo_oferta}</Typography></TableCell>
-              <TableCell align="left"><Typography variant="body1">{oferta.Oferta.titulo_oferta}</Typography></TableCell>
+              <TableCell align="left"><Typography variant="body1">{oferta.Empresa.nombre_empresa}</Typography></TableCell>
               <TableCell align="left">
                 <Link to={`/oferta/${oferta.Oferta.id}`} style={{textDecoration:'none'}}>
                   <Button variant="contained" color='relaxed'sx={{margin:"0.5rem"}}>
