@@ -20,11 +20,17 @@ const Root = styled('div')(({ theme }) => ({
 
 export default function DividerText() {
   const {cambiarDatosUsuario, cambiarToken, cambiarIdUsuario, cambiarEstadoLogeado, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
-  let datosUsuario = JSON.parse(sessionStorage.getItem('datosUsuario'))
+  var datosUsuario = JSON.parse(sessionStorage.getItem('datosUsuario'))
   var token = sessionStorage.getItem('token')
   var idUsuario = sessionStorage.getItem('idUsuario')
   var grupo =  sessionStorage.getItem('grupo')
   var estaLogeado = sessionStorage.getItem('estaLogeado')
+
+  axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${datosUsuario.Usuario.id}`)
+            .then(({data}) => {
+                    cambiarDatosUsuario(data)
+                    console.log(data)
+  })
 
   const content = (
     <div>
@@ -33,9 +39,7 @@ export default function DividerText() {
    Sed malesuada lobortis pretium.`}
     </div>
   );
-  axios.get(`https://comunidad-backend-v3.herokuapp.com/postulante/dni/${datosUsuario.id}`)
-            .then(({data}) => {
-                    cambiarDatosUsuario(data)})
+  
   return (
     <React.Fragment>
     <Header/>

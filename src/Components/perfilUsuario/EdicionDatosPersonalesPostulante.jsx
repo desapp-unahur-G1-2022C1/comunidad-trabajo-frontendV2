@@ -187,7 +187,7 @@ export default function WithMaterialUI() {
         })
         .then(function (result) {
           if (result.value) {
-            axios.get(`https://comunidad-backend-v3.herokuapp.com/postulante/dni/${idUsuario}`)
+            axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${datosUsuario.Usuario.id}`)
             .then(({data}) => {
               sessionStorage.setItem('datosUsuario', JSON.stringify(data));
             })

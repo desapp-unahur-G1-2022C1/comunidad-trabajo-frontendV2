@@ -37,6 +37,7 @@ const Login = () => {
             cambiarToken(data.token)
             cambiarGrupo(data.grupo)
             cambiarIdUsuario(data.id)
+            console.log(idUsuario)
         if (data.estado == false){
             Swal.fire({
                 icon: 'error',
@@ -79,6 +80,7 @@ const Login = () => {
               })
         }
         })
+        
         .catch(({response}) => {
             Swal.fire({
                 icon: 'error',
