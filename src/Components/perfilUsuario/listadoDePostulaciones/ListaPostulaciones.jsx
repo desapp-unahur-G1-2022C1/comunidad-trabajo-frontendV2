@@ -8,14 +8,29 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export default function ListaOfertas({Ofertas}) {
+
+
+  const eliminarPostulacion = (id) => {
+    axios.delete(`https://comunidad-backend-v3.herokuapp.com/postulaciones/${id}`)
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell><Typography variant='h6'>Id oferta</Typography></TableCell>
+            <TableCell><Typography variant='h6'>ID Oferta</Typography></TableCell>
             <TableCell align="left"><Typography variant='h6'>Nombre</Typography></TableCell>
             <TableCell align="left"><Typography variant='h6'>Empresa</Typography></TableCell>
             <TableCell align="left"><Typography variant='h6'>Acciones</Typography></TableCell>
@@ -38,7 +53,7 @@ export default function ListaOfertas({Ofertas}) {
                     Ver
                   </Button>
                 </Link>
-                <Button variant="outlined" color='error'sx={{margin:"0.5rem"}}>Borrar</Button>
+                <Button variant="outlined" color='error' sx={{margin:"0.5rem"}} onClick={() => eliminarPostulacion(oferta.id)}> Eliminar </Button>
               </TableCell>
             </TableRow>
           ))}
