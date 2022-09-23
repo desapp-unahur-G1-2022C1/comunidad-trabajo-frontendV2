@@ -9,20 +9,46 @@ import Paper from '@mui/material/Paper';
 import { Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
-export default function ListaOfertas({Ofertas}) {
+export default function ListaOfertas({ Ofertas }) {
 
 
   const eliminarPostulacion = (id) => {
-    axios.delete(`https://comunidad-backend-v3.herokuapp.com/postulaciones/${id}`)
-    .then(res => {
-      console.log(res);
-      console.log(res.data);
-    })
-    .catch(err => {
-      console.log(err);
+
+
+    Swal.fire({
+      icon: 'warning',
+      title: `¿Desea eliminar su postulacion a la oferta?`,
+      showDenyButton: true,
+      confirmButtonText: `Eliminar`,
+      denyButtonText: `Cancelar`,
+    }).then((res) => {
+      if (res.isConfirmed) {
+        axios.delete(`https://comunidad-backend-v3.herokuapp.com/postulaciones/${id}`)
+          .then(res => {
+            console.log(res);
+            console.log(res.data);
+            Swal.fire('Eliminado!', '', 'success')
+              .then((res) => {
+                if (res.isConfirmed) {
+                  window.location.reload();
+                }
+              }
+              )
+          })
+      }
     })
   }
+
+
+
+
+
+
+
+
+
 
 
   return (
@@ -39,21 +65,21 @@ export default function ListaOfertas({Ofertas}) {
         <TableBody>
           {Ofertas.map((oferta) => (
             <TableRow
-              
+
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-              {oferta.Oferta.id}
+                {oferta.Oferta.id}
               </TableCell>
               <TableCell align="left"><Typography variant="body1">{oferta.Oferta.titulo_oferta}</Typography></TableCell>
               <TableCell align="left"><Typography variant="body1">{oferta.Empresa.nombre_empresa}</Typography></TableCell>
               <TableCell align="left">
-                <Link to={`/oferta/${oferta.Oferta.id}`} style={{textDecoration:'none'}}>
-                  <Button variant="contained" color='relaxed'sx={{margin:"0.5rem"}}>
+                <Link to={`/oferta/${oferta.Oferta.id}`} style={{ textDecoration: 'none' }}>
+                  <Button variant="contained" color='relaxed' sx={{ margin: "0.5rem" }}>
                     Ver
                   </Button>
                 </Link>
-                <Button variant="outlined" color='error' sx={{margin:"0.5rem"}} onClick={() => eliminarPostulacion(oferta.id)}> Eliminar </Button>
+                <Button variant="outlined" color='error' sx={{ margin: "0.5rem" }} onClick={() => eliminarPostulacion(oferta.id)}> Eliminar </Button>
               </TableCell>
             </TableRow>
           ))}
