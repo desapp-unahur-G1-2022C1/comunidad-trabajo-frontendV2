@@ -21,6 +21,7 @@ const ListadoOfertas = () => {
 
     const [llamado, setLlamado] = useState(false);
     const [Ofertas, setOfertas] = useState([]);
+    
 
     const API_URL = `https://comunidad-backend-v3.herokuapp.com/ofertas/cuit/${datosUsuario.id}/`
 
