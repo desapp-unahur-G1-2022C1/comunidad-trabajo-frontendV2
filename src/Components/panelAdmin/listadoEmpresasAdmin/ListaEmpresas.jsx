@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Button, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export default function ListaEmpresas({empresas}) {
   return (
@@ -33,7 +34,12 @@ export default function ListaEmpresas({empresas}) {
               <TableCell align="left"><Typography variant="body1">{empresa.nombre_empresa}</Typography></TableCell>
               <TableCell align="left"><Typography variant="body1">{empresa.nombre_representante}</Typography></TableCell>
               <TableCell align="left"><Typography variant="body1">{empresa.email_representante}</Typography></TableCell>
-              <TableCell align="left"><Button variant="contained" color='relaxed'sx={{margin:"0.5rem"}}>Accion1</Button><Button variant="outlined" color='error'sx={{margin:"0.5rem"}}>Accion2</Button></TableCell>
+              <TableCell align="left">
+                <Link style={{textDecoration:"none"}} to={`/empresa/${empresa.id}`}>
+                  <Button variant="contained" color='relaxed'sx={{margin:"0.5rem"}}>Ver empresa</Button>
+                </Link>
+                <Button variant="outlined" color='error'sx={{margin:"0.5rem"}}>Accion2</Button>
+              </TableCell>
               
             </TableRow>
           ))}

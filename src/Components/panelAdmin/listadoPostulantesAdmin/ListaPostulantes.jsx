@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Button, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export default function ListaPostulantes({postulantes}) {
   return (
@@ -31,7 +32,12 @@ export default function ListaPostulantes({postulantes}) {
               </TableCell>
               <TableCell align="left"><Typography variant="body1">{postulante.nombre} {postulante.apellido}</Typography></TableCell>
               <TableCell align="left"><Typography variant="body1">{postulante.Usuario.usuario}</Typography></TableCell>
-              <TableCell align="left"><Button variant="contained" color='relaxed'sx={{margin:"0.5rem"}}>Accion1</Button><Button variant="outlined" color='error'sx={{margin:"0.5rem"}}>Accion2</Button></TableCell>
+              <TableCell align="left">
+                <Link style={{textDecoration:"none"}} to={`/postulante/${postulante.id}`}>
+                  <Button variant="contained" color='relaxed'sx={{margin:"0.5rem"}}>Ver postulante</Button>
+                </Link>
+                <Button variant="outlined" color='error'sx={{margin:"0.5rem"}}>Accion2</Button>
+              </TableCell>
               
             </TableRow>
           ))}

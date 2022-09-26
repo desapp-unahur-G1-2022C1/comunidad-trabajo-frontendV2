@@ -27,7 +27,8 @@ import EdicionEmpresa from './Components/empresa/EdicionEmpresa';
 import EdicionOferta from './Components/oferta/EdicionOferta';
 import PostulanteDatosPrivado from './Components/perfilUsuario/PostulanteDatosPrivado';
 import EdicionDatosPersonalesPostulante from './Components/perfilUsuario/EdicionDatosPersonalesPostulante';
-
+import PerfilEmpresaPublico from './Components/empresa/EmpresaPerfilPublico'
+import PerfilUsuarioPublico from './Components/perfilUsuario/UsuarioPerfilPublico'
 
 function App() {
   return (
@@ -101,6 +102,12 @@ function App() {
           </Route>
           <Route exact path="/edicionOferta/:id">
             <EdicionOferta/>
+          </Route>
+          <Route exact path="/empresa/:id">
+            <PerfilEmpresaPublico/>
+          </Route>
+          <Route exact path="/postulante/:id">
+            <PerfilUsuarioPublico/>
           </Route>
           <Route exact path="/miPerfil/misDatos">
             <PostulanteDatosPrivado/>
