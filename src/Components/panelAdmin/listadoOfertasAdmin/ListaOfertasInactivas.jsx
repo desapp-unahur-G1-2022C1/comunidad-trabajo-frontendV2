@@ -8,6 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Button, Typography } from '@mui/material';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 export default function ListaOfertas({ofertas}) {
   const activar = async (idOferta) => {
@@ -67,7 +68,10 @@ export default function ListaOfertas({ofertas}) {
               <TableCell align="left"><Typography variant="body1">{oferta.titulo_oferta}</Typography></TableCell>
               <TableCell align="left"><Typography variant="body1"></Typography>{oferta.Empresa.nombre_empresa}</TableCell>
               <TableCell align="left"><Typography variant="body1">{oferta.Estado.nombre_estado}</Typography></TableCell>
-              <TableCell align="left"><Button variant="contained" color='relaxed'sx={{margin:"0.5rem"}} onClick={async ()=> activar(oferta.id)}>Aceptar</Button><Button variant="outlined" color='error'sx={{margin:"0.5rem"}}>Accion2</Button></TableCell>
+              <TableCell align="left">
+                <Link style={{textDecoration:"none"}} to={`/oferta/${oferta.id}`}><Button variant="contained" color="relaxed" sx={{margin:"0.5rem"}}>VER OFERTA</Button></Link>
+                <Button variant="contained" color='relaxed'sx={{margin:"0.5rem"}} onClick={async ()=> activar(oferta.id)}>Aceptar</Button>
+              <Button variant="outlined" color='error'sx={{margin:"0.5rem"}}>Accion2</Button></TableCell>
               
             </TableRow>
           ))} 

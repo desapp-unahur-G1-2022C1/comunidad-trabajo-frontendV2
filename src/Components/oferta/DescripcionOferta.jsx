@@ -15,6 +15,7 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import DatosUsuarioContextProvider from '../../Context/DatosUsuarioContext';
 import { useContext } from 'react';
+import Swal from "sweetalert2";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -70,6 +71,7 @@ const CustomizedDialogs = () => {
   const [edadHasta, setEdadHasta] = useState();
   const [beneficios, setBeneficios] = useState();
   const [idEmpresa, setIdEmpresa] = useState();
+  const [estado, setEstado] = useState()
   const API_URL = `https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${id}`;
 
   const descripcionAPI = async () => {
@@ -91,6 +93,7 @@ const CustomizedDialogs = () => {
       setEdadDesde(datos.edad_desde);
       setEdadHasta(datos.edad_hasta);
       setBeneficios(datos.beneficios);
+      setEstado(datos.Estado.id);
     } catch (error) {
       console.log(error);
     }
@@ -135,6 +138,43 @@ const CustomizedDialogs = () => {
       console.log(error)
     }
   }
+
+
+  const activar = async (idOferta) => {
+    var data = {
+      idEstado: 1
+    };
+      await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${idOferta}`, {
+      method: "PUT", // or 'PUT'
+      body: JSON.stringify(data), // data can be `string` or {object}!
+      headers: {
+        "Content-Type": "application/json",
+      },
+      
+      })
+      Swal.fire({
+        icon: 'success',
+        title: 'La oferta fue aceptada exitosamente',
+        confirmButtonText: 'Finalizar',
+        text: 'Para continuar pulse el boton',
+        footer: '',
+        showCloseButton: true
+      })
+      .then(
+        window.location.reload()
+      )
+      .catch((error) => console.error("Error:", error,
+      Swal.fire({
+        icon: 'error',
+        title: 'Ocurrio un error al aceptar la oferta',
+        confirmButtonText: 'Volver',
+        text: 'Verifique sus datos',
+        footer: '',
+        showCloseButton: true
+      })),)
+  }
+
+
   return (
     <Fragment>
       <Header />
@@ -169,7 +209,8 @@ const CustomizedDialogs = () => {
               }}
             >
               {
-                grupo == 3 ? null :
+                grupo == 3 && estado == 2 ? <><Button color="relaxed" variant="contained" onClick={async ()=> activar(id)}> Aceptar </Button> <Button color="error" variant="contained">Rechazar</Button></>
+                : grupo == 3 && (estado == 1 || estado == 3) ? null:
                 grupo == 2 
                 ?
                   nombreEmpresa == datosUsuario.nombre_empresa
