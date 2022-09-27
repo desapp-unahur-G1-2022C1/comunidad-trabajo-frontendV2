@@ -40,8 +40,8 @@ export default function ListaOfertas({Ofertas}) {
                 </Link>
                 <Link to={`/ListadoDePostulantes/${oferta.id}`} style={{ textDecoration: 'none'}}>
                     <Button
-                      size="large"
-                      variant="contained"
+                      
+                      variant="outlined"
                       color="relaxed"
                     >
                       Ver postulantes

@@ -169,13 +169,13 @@ const CustomizedDialogs = () => {
               }}
             >
               {
-                grupo == 2
+                grupo == 3 ? null :
+                grupo == 2 
                 ?
-                  
                   nombreEmpresa == datosUsuario.nombre_empresa
                   ?
                   <Box sx={{ width: "20rem" }}>
-                  <Link to={`/edicionOferta/${id}`}>
+                  <Link style={{textDecoration:"none"}} to={`/edicionOferta/${id}`}>
                   <Button
                     size="large"
                     variant="contained"
@@ -185,10 +185,10 @@ const CustomizedDialogs = () => {
                     Editar oferta
                   </Button>
                   </Link>
-                  <Link to={`/ListadoDePostulantes/${id}`}style={{ textDecoration: 'none'}}>
+                  <Link style={{textDecoration:"none"}}to={`/ListadoDePostulantes/${id}`}>
                     <Button
                       size="large"
-                      variant="contained"
+                      variant="outlined"
                       color="relaxed"
                       sx={{ width: "20rem" }}
                     >
