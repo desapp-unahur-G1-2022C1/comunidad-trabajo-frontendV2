@@ -110,31 +110,31 @@ const CustomizedDialogs = () => {
   descripcionAPI();
 
 
-  const {cambiarDatosUsuario, cambiarToken, cambiarIdUsuario, cambiarEstadoLogeado, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
-  var datosUsuario = JSON.parse(sessionStorage.getItem('datosUsuario'))            
-  var token = sessionStorage.getItem('token')                                   
-  var idUsuario = sessionStorage.getItem('idUsuario')                       
-  var grupo =  sessionStorage.getItem('grupo')                              
-  var estaLogeado = sessionStorage.getItem('estaLogeado')                    
-  
+  const { cambiarDatosUsuario, cambiarToken, cambiarIdUsuario, cambiarEstadoLogeado, cambiarGrupo } = useContext(DatosUsuarioContextProvider)
+  var datosUsuario = JSON.parse(sessionStorage.getItem('datosUsuario'))
+  var token = sessionStorage.getItem('token')
+  var idUsuario = sessionStorage.getItem('idUsuario')
+  var grupo = sessionStorage.getItem('grupo')
+  var estaLogeado = sessionStorage.getItem('estaLogeado')
+
   const postularse = async () => {
-   try{
-    const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/postulaciones`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        postulante: datosUsuario.id,
-        oferta: id,
-        empresa: idEmpresa
+    try {
+      const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/postulaciones`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          postulante: datosUsuario.id,
+          oferta: id,
+          empresa: idEmpresa
+        })
       })
-    })
-    const datos = await api.json();
-    console.log(datos);
-    handleClickOpen();
-   }
-    catch(error){
+      const datos = await api.json();
+      console.log(datos);
+      handleClickOpen();
+    }
+    catch (error) {
       console.log(error)
     }
   }
@@ -144,34 +144,34 @@ const CustomizedDialogs = () => {
     var data = {
       idEstado: 1
     };
-      await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${idOferta}`, {
+    await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${idOferta}`, {
       method: "PUT", // or 'PUT'
       body: JSON.stringify(data), // data can be `string` or {object}!
       headers: {
         "Content-Type": "application/json",
       },
-      
-      })
-      Swal.fire({
-        icon: 'success',
-        title: 'La oferta fue aceptada exitosamente',
-        confirmButtonText: 'Finalizar',
-        text: 'Para continuar pulse el boton',
-        footer: '',
-        showCloseButton: true
-      })
+
+    })
+    Swal.fire({
+      icon: 'success',
+      title: 'La oferta fue aceptada exitosamente',
+      confirmButtonText: 'Finalizar',
+      text: 'Para continuar pulse el boton',
+      footer: '',
+      showCloseButton: true
+    })
       .then(
         window.location.reload()
       )
       .catch((error) => console.error("Error:", error,
-      Swal.fire({
-        icon: 'error',
-        title: 'Ocurrio un error al aceptar la oferta',
-        confirmButtonText: 'Volver',
-        text: 'Verifique sus datos',
-        footer: '',
-        showCloseButton: true
-      })),)
+        Swal.fire({
+          icon: 'error',
+          title: 'Ocurrio un error al aceptar la oferta',
+          confirmButtonText: 'Volver',
+          text: 'Verifique sus datos',
+          footer: '',
+          showCloseButton: true
+        })),)
   }
 
 
@@ -182,159 +182,159 @@ const CustomizedDialogs = () => {
         <Grid
           container
           spacing={3}
-          sx={{ justifyContent: "center", padding:"1rem" }}
+          sx={{ justifyContent: "center", padding: "1rem" }}
         >
-          <Box sx={{ display:"flex", flexDirection:"column", margin:"2rem" }}>
+          <Box sx={{ display: "flex", flexDirection: "column", margin: "2rem" }}>
             <Box
               sx={{
                 display: "flex",
                 padding: "2rem",
                 justifyContent: "center",
-                
+
               }}
             >
               <Stack direction="row" spacing={2}>
-              <img src="https://cdn.discordapp.com/attachments/955646153297395722/996230598853148792/unknown.png" style={{height:"15rem", width:"15rem"}}/>
+                <img src="https://cdn.discordapp.com/attachments/955646153297395722/996230598853148792/unknown.png" style={{ height: "15rem", width: "15rem" }} />
               </Stack>
             </Box>
-            <Box sx={{ display:"flex", justifyContent:"center", flexDirection:"column", maxWidth:"20rem"}}>
-              <Typography variant="h4" sx={{ textAlign:"center"}}>{tituloOferta}</Typography><br />
-              <Typography variant="h6" sx={{textAlign:"justify"}}>{nombreEmpresa}</Typography><br />
+            <Box sx={{ display: "flex", justifyContent: "center", flexDirection: "column", maxWidth: "20rem" }}>
+              <Typography variant="h4" sx={{ textAlign: "center" }}>{tituloOferta}</Typography><br />
+              <Typography variant="h6" sx={{ textAlign: "justify" }}>{nombreEmpresa}</Typography><br />
             </Box>
             <Box
               sx={{
-                
+
                 display: "flex",
                 justifyContent: "center",
               }}
             >
               {
-                grupo == 3 && estado == 2 ? <><Button color="relaxed" variant="contained" onClick={async ()=> activar(id)}> Aceptar </Button> <Button color="error" variant="contained">Rechazar</Button></>
-                : grupo == 3 && (estado == 1 || estado == 3) ? null:
-                grupo == 2 
-                ?
-                  nombreEmpresa == datosUsuario.nombre_empresa
-                  ?
-                  <Box sx={{ width: "20rem" }}>
-                  <Link style={{textDecoration:"none"}} to={`/edicionOferta/${id}`}>
-                  <Button
-                    size="large"
-                    variant="contained"
-                    color="relaxed"
-                    sx={{ width: "20rem", marginBottom:'1rem' }}
-                    >
-                    Editar oferta
-                  </Button>
-                  </Link>
-                  <Link style={{textDecoration:"none"}}to={`/ListadoDePostulantes/${id}`}>
-                    <Button
-                      size="large"
-                      variant="outlined"
-                      color="relaxed"
-                      sx={{ width: "20rem" }}
-                    >
-                      Ver postulantes
-                    </Button>
-                  </Link>
-                  </Box>
-                  :
-                  <Box></Box>
-                : 
-                estaLogeado == 'true'
-                ?
-                <Button
-                  size="large"
-                  variant="contained"
-                  color="relaxed"
-                  onClick={postularse}
-                  sx={{ width: "20rem" }}
-                >
-                  Postularme
-                </Button>
-                :
-                <Link to='/login' style={{textDecoration:'none'}}>
-                <Button
-                  size="large"
-                  variant="contained"
-                  color="relaxed"
-                  sx={{ width: "20rem" }}
-                >
-                  Postularme
-                </Button>
-                </Link>
+                grupo == 3 && estado == 2 ? <><Button color="relaxed" variant="contained" onClick={async () => activar(id)}> Aceptar </Button> <Button color="error" variant="contained">Rechazar</Button></>
+                  : grupo == 3 && (estado == 1 || estado == 3) ? null :
+                    grupo == 2
+                      ?
+                      nombreEmpresa == datosUsuario.nombre_empresa
+                        ?
+                        <Box sx={{ width: "20rem" }}>
+                          <Link style={{ textDecoration: "none" }} to={`/edicionOferta/${id}`}>
+                            <Button
+                              size="large"
+                              variant="contained"
+                              color="relaxed"
+                              sx={{ width: "20rem", marginBottom: '1rem' }}
+                            >
+                              Editar oferta
+                            </Button>
+                          </Link>
+                          <Link style={{ textDecoration: "none" }} to={`/ListadoDePostulantes/${id}`}>
+                            <Button
+                              size="large"
+                              variant="outlined"
+                              color="relaxed"
+                              sx={{ width: "20rem" }}
+                            >
+                              Ver postulantes
+                            </Button>
+                          </Link>
+                        </Box>
+                        :
+                        <Box></Box>
+                      :
+                      estaLogeado == 'true'
+                        ?
+                        <Button
+                          size="large"
+                          variant="contained"
+                          color="relaxed"
+                          onClick={postularse}
+                          sx={{ width: "20rem" }}
+                        >
+                          Postularme
+                        </Button>
+                        :
+                        <Link to='/login' style={{ textDecoration: 'none' }}>
+                          <Button
+                            size="large"
+                            variant="contained"
+                            color="relaxed"
+                            sx={{ width: "20rem" }}
+                          >
+                            Postularme
+                          </Button>
+                        </Link>
               }
-              
+
               <BootstrapDialog
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
                 open={open}
               >
-                <ConfirmacionPostulacion 
-                tituloOferta={tituloOferta}
-                nombreEmpresa={nombreEmpresa}/>
+                <ConfirmacionPostulacion
+                  tituloOferta={tituloOferta}
+                  nombreEmpresa={nombreEmpresa} />
               </BootstrapDialog>
             </Box>
           </Box>
 
-          <Box sx={{  maxWidth: "30rem" }}>
+          <Box sx={{ maxWidth: "30rem" }}>
             <Box sx={{ borderBottom: "#009688 2px solid" }}>
               {" "}
               <h3>Descripcion:</h3>{" "}
-              <Typography sx={{ fontSize: "20px", marginBottom:"1rem" }}> {descripcion}</Typography>
+              <Typography sx={{ fontSize: "20px", marginBottom: "1rem" }}> {descripcion}</Typography>
             </Box>
-            <Box sx={{ display: "flex", alignItems:"center", borderBottom: "#009688 2px solid" }}>
+            <Box sx={{ display: "flex", alignItems: "center", borderBottom: "#009688 2px solid" }}>
               {" "}
               <h3>Zona de trabajo: </h3>{" "}
-              <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">
+              <Typography sx={{ fontSize: "20px", paddingLeft: "0.5rem" }} variant="body1">
                 {zona}
               </Typography>
             </Box>
-            <Box sx={{ display: "flex", alignItems:"center", borderBottom: "#009688 2px solid" }}>
+            <Box sx={{ display: "flex", alignItems: "center", borderBottom: "#009688 2px solid" }}>
               {" "}
               <h3>Edad:</h3>{" "}
-              <Typography sx={{ paddingLeft:"0.5rem", fontSize: "20px" }}>
+              <Typography sx={{ paddingLeft: "0.5rem", fontSize: "20px" }}>
                 Desde {edadDesde} hasta {edadHasta} años
               </Typography>
             </Box>
-            <Box sx={{ display: "flex", alignItems:"center", borderBottom: "#009688 2px solid" }}>
+            <Box sx={{ display: "flex", alignItems: "center", borderBottom: "#009688 2px solid" }}>
               {" "}
               <h3>Horario:</h3>{" "}
-              <Typography sx={{ paddingLeft:"0.5rem", fontSize: "20px" }}>
+              <Typography sx={{ paddingLeft: "0.5rem", fontSize: "20px" }}>
                 De {horarioEnrada}hs. a {horarioSalida}hs.
               </Typography>
             </Box>
-            <Box sx={{ display: "flex", alignItems:"center", borderBottom: "#009688 2px solid" }}>
+            <Box sx={{ display: "flex", alignItems: "center", borderBottom: "#009688 2px solid" }}>
               {" "}
               <h3>Idiomas:</h3>{" "}
               <Typography
-                sx={{ paddingLeft:"0.5rem", fontSize: "20px" }}
+                sx={{ paddingLeft: "0.5rem", fontSize: "20px" }}
               ></Typography>
             </Box>
-            <Box sx={{ display: "flex", alignItems:"center", borderBottom: "#009688 2px solid" }}>
+            <Box sx={{ display: "flex", alignItems: "center", borderBottom: "#009688 2px solid" }}>
               {" "}
               <h3>Jornada: </h3>{" "}
-              <Typography sx={{ paddingLeft:"0.5rem", fontSize: "20px" }}>
+              <Typography sx={{ paddingLeft: "0.5rem", fontSize: "20px" }}>
                 {jornada}
               </Typography>
             </Box>
-            <Box sx={{ display: "flex", alignItems:"center", borderBottom: "#009688 2px solid" }}>
+            <Box sx={{ display: "flex", alignItems: "center", borderBottom: "#009688 2px solid" }}>
               {" "}
               <h3>Contrato: </h3>{" "}
-              <Typography sx={{ paddingLeft:"0.5rem", fontSize: "20px" }}>
+              <Typography sx={{ paddingLeft: "0.5rem", fontSize: "20px" }}>
                 {contrato}
               </Typography>
             </Box>
-            <Box sx={{ display: "flex", alignItems:"center", borderBottom: "#009688 2px solid" }}>
+            <Box sx={{ display: "flex", alignItems: "center", borderBottom: "#009688 2px solid" }}>
               {" "}
               <h3>Beneficios: </h3>{" "}
-              <Typography sx={{ paddingLeft:"0.5rem", fontSize: "20px" }}>
+              <Typography sx={{ paddingLeft: "0.5rem", fontSize: "20px" }}>
                 {beneficios}
               </Typography>
             </Box>
-            <Box sx={{ display: "flex", alignItems:"center", borderBottom: "#009688 2px solid" }}>
+            <Box sx={{ display: "flex", alignItems: "center", borderBottom: "#009688 2px solid" }}>
               {" "}
               <h3>Salario:</h3>{" "}
-              <Typography sx={{ paddingLeft:"0.5rem", fontSize: "20px" }}>
+              <Typography sx={{ paddingLeft: "0.5rem", fontSize: "20px" }}>
                 ${salario}
               </Typography>
             </Box>
