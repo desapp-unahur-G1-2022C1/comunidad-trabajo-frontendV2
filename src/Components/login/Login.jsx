@@ -54,7 +54,7 @@ const Login = () => {
                 cambiarEstadoLogeado(true)
                 cambiarDatosUsuario(data)
                 console.log(data)
-                history.push("/")
+                window.location.href = "/"
             })
         }
         else if (data.grupo == 2){
@@ -63,12 +63,12 @@ const Login = () => {
                     cambiarEstadoLogeado(true)
                     cambiarDatosUsuario(data)
                     console.log(data)
-                    history.push("/")
+                    window.location.href = "/"
             })
         }
         else if(data.grupo == 3){
             cambiarEstadoLogeado(true)
-            history.push("/")
+            window.location.href = "/"
         } else{
             Swal.fire({
                 icon: 'error',

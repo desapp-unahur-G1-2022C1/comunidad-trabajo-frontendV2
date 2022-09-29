@@ -29,7 +29,7 @@ import PostulanteDatosPrivado from './Components/perfilUsuario/PostulanteDatosPr
 import EdicionDatosPersonalesPostulante from './Components/perfilUsuario/EdicionDatosPersonalesPostulante';
 import PerfilEmpresaPublico from './Components/empresa/EmpresaPerfilPublico'
 import PerfilUsuarioPublico from './Components/perfilUsuario/UsuarioPerfilPublico'
-
+import { CheckRole } from './PrivateRoute';
 function App() {
   return (
       <Router>
@@ -47,7 +47,9 @@ function App() {
             <PerfilUsuario/>
           </Route>
           <Route exact path="/perfilEmpresa">
+            <CheckRole role={2}>
             <PerfilEmpresaPrivado/>
+            </CheckRole>
           </Route>
           <Route exact path="/empresaDatosPrivado">
             <EmpresaDatosPrivado/>

@@ -27,8 +27,6 @@ const Header = () => {
     <Box sx={{ flexGrow: 1, display:"flex"}}>
       <AppBar position="static">
         <Toolbar>
-          
-
           <Box sx={{ flexGrow: 1,   display: { xs: 'none', lg: 'flex', xl: 'flex' }, justifyContent:"center"}} />
             <Link to="/"><img src="https://cdn.discordapp.com/attachments/956988369693454466/989600731369709669/Logoblanco.png" style={{height:"4rem", padding:"0.5rem"}}></img></Link>
           <Box sx={{ flexGrow: 1 }} />
