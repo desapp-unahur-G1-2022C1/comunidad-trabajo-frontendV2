@@ -116,6 +116,45 @@ export default function WithMaterialUI() {
   };
   llamarEstudios();
 
+  const [listaProvincias, setListaProvincias] = useState([]);
+  const [llamadoProvincias, setLlamadoProvincias] = useState(false);
+  const [provinciaActual, setProvinciaActual] = useState();
+  const llamarProvincias = async () => {
+    if (llamadoProvincias === false) {
+      try {
+        const api = await fetch(
+          `https://comunidad-backend-v3.herokuapp.com/provincias`
+        );
+        const datos = await api.json();
+        setListaProvincias(datos.provincias);
+        setLlamadoProvincias(true);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+  llamarProvincias();
+
+  
+
+  const [listaCiudades, setListaCiudades] = useState([]);
+  const [llamadoCiudades, setLlamadoCiudades] = useState(false);
+  const llamarCiudades = async () => {
+    if (llamadoCiudades === false) {
+      try {
+        const api = await fetch(
+          `https://comunidad-backend-v3.herokuapp.com/departamentos/?idProvincia=${formik.values.provincia}`
+        );
+        const datos = await api.json();
+        setListaCiudades(datos.municipios);
+        setLlamadoCiudades(true);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+  llamarCiudades()
+
   const [IdActual, setIdActual] = useState(0);
   const [estadoSiguiente, setEstadoSiguiente] = useState(false);
 
@@ -156,8 +195,8 @@ export default function WithMaterialUI() {
       tipoDocumento: "",
       dni: "",
       nacionalidad: '',
-      provincia: '',
-      ciudad: '',
+      provincia: undefined,
+      ciudad: undefined,
       calle: '',
       nro: '',
       telefono: '',
@@ -357,30 +396,58 @@ export default function WithMaterialUI() {
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
-                <TextField
-                  id="provincia"
-                  name="provincia"
-                  label="Provincia"
-                  variant="outlined"
-                  fullWidth
-                  value={formik.values.provincia}
-                  onChange={formik.handleChange}
-                  error={
-                    formik.touched.provincia && Boolean(formik.errors.provincia)
-                  }
-                />
+                <FormControl fullWidth>
+                  <InputLabel>
+                    Provincia
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-error-label"
+                    id="provincia"
+                    variant="outlined"
+                    name="provincia"
+                    label="Provincia"
+                    type='number'
+                    fullWidth
+                    value={formik.values.provincia}
+                    onChange={formik.handleChange}
+                    
+                  >
+                    {listaProvincias.map((provincia) => ( 
+                      <MenuList className='selectCss'  value={provincia.id} key={provincia.id} >
+                        <Box sx={{display:'flex', justifyContent:'center'}}>{provincia.nombre}</Box>
+                      </MenuList>
+                    ))}
+                  
+                  </Select>
+                  
+                </FormControl>
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
-                <TextField
-                  id="ciudad"
-                  name="ciudad"
-                  variant="outlined"
-                  label="Ciudad"
-                  fullWidth
-                  value={formik.values.ciudad}
-                  onChange={formik.handleChange}
-                  error={formik.touched.ciudad && Boolean(formik.errors.ciudad)}
-                />
+                <FormControl fullWidth>
+                  <InputLabel>
+                    Ciudad
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-error-label"
+                    id="ciudad"
+                    variant="outlined"
+                    name="ciudad"
+                    label="Ciudad"
+                    type='number'
+                    fullWidth
+                    value={formik.values.ciudad}
+                    onChange={formik.handleChange}
+                    error={formik.touched.tipoDocumento && Boolean(formik.errors.tipoDocumento)}
+                  >
+                    {listaCiudades.map((ciudad) => ( 
+                      <MenuList className='selectCss'  value={ciudad.id} key={ciudad.id} >
+                        <Box sx={{display:'flex', justifyContent:'center'}}>{ciudad.nombre}</Box>
+                      </MenuList>
+                    ))}
+                  
+                  </Select>
+                  
+                </FormControl>
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <TextField
