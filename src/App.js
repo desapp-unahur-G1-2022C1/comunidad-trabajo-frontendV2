@@ -28,15 +28,17 @@ import EdicionOferta from './Components/oferta/EdicionOferta';
 import PostulanteDatosPrivado from './Components/perfilUsuario/PostulanteDatosPrivado';
 import EdicionDatosPersonalesPostulante from './Components/perfilUsuario/EdicionDatosPersonalesPostulante';
 import PerfilEmpresaPublico from './Components/empresa/EmpresaPerfilPublico'
-import PerfilUsuarioPublico from './Components/perfilUsuario/UsuarioPerfilPublico'
+import PerfilPostulantePublico from './Components/perfilUsuario/UsuarioPerfilPublico'
 import { CheckRole } from './PrivateRoute';
 function App() {
+  const postulante = 1
+  const empresa = 2
+  const admin = 3
   return (
       <Router>
         
         <IdFormContextProvider>
         <Switch>
-          
           <Route exact path="/">
             <Home/>
           </Route>
@@ -44,15 +46,19 @@ function App() {
             <Login/>
           </Route>
           <Route exact path="/miPerfil">
-            <PerfilUsuario/>
+            <CheckRole role={postulante}>
+              <PerfilUsuario/>
+            </CheckRole>       
           </Route>
           <Route exact path="/perfilEmpresa">
-            <CheckRole role={2}>
-            <PerfilEmpresaPrivado/>
+            <CheckRole role={empresa}>
+              <PerfilEmpresaPrivado/>
             </CheckRole>
           </Route>
           <Route exact path="/empresaDatosPrivado">
-            <EmpresaDatosPrivado/>
+            <CheckRole role={empresa}>
+              <EmpresaDatosPrivado/>
+            </CheckRole>
           </Route>
           <Route exact path="/registroPregunta">
             <RegistroPregunta/>
@@ -64,7 +70,9 @@ function App() {
             <RegistroUsuario/>
           </Route>
           <Route exact path="/RegistroOferta">
-            <RegistroOferta/>
+            <CheckRole role={empresa}>
+              <RegistroOferta/>
+            </CheckRole>
           </Route>
           <Route exact path="/RegistroPostulante">
             <RegistroPostulante/>
@@ -73,49 +81,75 @@ function App() {
             <RegistroEmpresa/>
           </Route>
           <Route exact path="/admin">
-            <PanelAdmin/>
+            <CheckRole role={admin}>
+              <PanelAdmin/>
+            </CheckRole>
           </Route>
           <Route exact path="/admin/listadoPostulantes">
-            <ListadoPostulantes/>
+            <CheckRole role={admin}>
+              <ListadoPostulantes/>
+            </CheckRole>
           </Route>
           <Route exact path="/listadoOfertasEmpresa">
-            <ListadoOfertasEmpresa/>
+            <CheckRole role={empresa}>
+              <ListadoOfertasEmpresa/>
+            </CheckRole>
           </Route>
           <Route exact path="/ofertasPostulante">
-            <OfertasPostulante/>
+            <CheckRole role={postulante}>
+              <OfertasPostulante/>
+            </CheckRole>
           </Route>
           <Route exact path="/listadoDePostulantes/:id">
-            <PostulantesDeOferta/>
+            <CheckRole role={empresa}>
+              <PostulantesDeOferta/>
+            </CheckRole>
           </Route>
           <Route exact path="/admin/listadoEmpresas">
-            <ListadoEmpresas/>
+            <CheckRole role={admin}>
+              <ListadoEmpresas/>
+            </CheckRole>
           </Route>
           <Route exact path="/admin/listadoEmpresasInactivas">
-            <ListadoEmpresasInactivas/>
+            <CheckRole role={admin}>
+              <ListadoEmpresasInactivas/>
+            </CheckRole>
           </Route>
           <Route exact path="/admin/listadoOfertas">
-            <ListadoOfertas/>
+            <CheckRole role={admin}>
+              <ListadoOfertas/>
+            </CheckRole>
           </Route>
           <Route exact path="/admin/listadoOfertasInactivas">
-            <ListadoOfertasInactivas/>
+            <CheckRole role={admin}>
+              <ListadoOfertasInactivas/>
+            </CheckRole>
           </Route>
           <Route exact path="/edicionEmpresa">
-            <EdicionEmpresa/>
+            <CheckRole role={empresa}>
+              <EdicionEmpresa/>
+            </CheckRole>
           </Route>
           <Route exact path="/edicionOferta/:id">
-            <EdicionOferta/>
+            <CheckRole role={empresa}>
+              <EdicionOferta/>
+            </CheckRole>
           </Route>
           <Route exact path="/empresa/:id">
             <PerfilEmpresaPublico/>
           </Route>
           <Route exact path="/postulante/:id">
-            <PerfilUsuarioPublico/>
+            <PerfilPostulantePublico/>
           </Route>
           <Route exact path="/miPerfil/misDatos">
-            <PostulanteDatosPrivado/>
+            <CheckRole role={postulante}>
+              <PostulanteDatosPrivado/>
+            </CheckRole>
           </Route>
           <Route exact path="/miPerfil/misDatos/editar">
-            <EdicionDatosPersonalesPostulante/>
+            <CheckRole role={postulante}>
+              <EdicionDatosPersonalesPostulante/>
+            </CheckRole>
           </Route>
           <Route path="*">
             <NotFound/>
