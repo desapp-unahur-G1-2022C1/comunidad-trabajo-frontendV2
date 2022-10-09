@@ -100,7 +100,7 @@ function App() {
               <OfertasPostulante/>
             </CheckRole>
           </Route>
-          <Route exact path="/listadoDePostulantes/:id">
+          <Route exact path='/listadoDePostulantes/:id'>
             <CheckRole role={empresa}>
               <PostulantesDeOferta/>
             </CheckRole>

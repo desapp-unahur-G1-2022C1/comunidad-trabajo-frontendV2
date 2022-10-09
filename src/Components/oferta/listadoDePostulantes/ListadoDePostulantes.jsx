@@ -14,7 +14,12 @@ import NotFound from '../../NotFound';
 
 const ListadoPostulantes = () => {
 
-    const {datosUsuario, cambiarDatosUsuario, token, cambiarToken, idUsuario, cambiarIdUsuario, estaLogeado, cambiarEstadoLogeado, grupo, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
+    const {cambiarDatosUsuario, cambiarToken, cambiarIdUsuario, cambiarEstadoLogeado, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
+    var datosUsuario = JSON.parse(sessionStorage.getItem('datosUsuario'))
+    var token = sessionStorage.getItem('token')
+    var idUsuario = sessionStorage.getItem('idUsuario')
+    var grupo = sessionStorage.getItem('grupo')
+    var estaLogeado = sessionStorage.getItem('estaLogeado')
 
     const [llamado, setLlamado] = useState(false);
     const [postulantes, setPostulantes] = useState([]);
