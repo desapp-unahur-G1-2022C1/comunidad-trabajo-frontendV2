@@ -49,6 +49,8 @@ const validationSchema = yup.object({
   cantMateriasAprobadas: yup
     .string("Ingrese la cantidad de materias aprobadas").optional(),
   estudios: yup.string("Ingrese sus estudios").optional(),
+  provincia: yup.string("Ingrese sus estudios").optional(),
+  ciudad: yup.string("Ingrese sus estudios").optional(),
   idiomas: yup.string("Elija idiomas").optional(),
 });
 
