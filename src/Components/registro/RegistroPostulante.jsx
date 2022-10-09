@@ -14,6 +14,7 @@ import {
   FormControl,
   Typography,
   alertClasses,
+  Popover,
 } from "@mui/material";
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
@@ -139,21 +140,22 @@ export default function WithMaterialUI() {
 
   const [listaCiudades, setListaCiudades] = useState([]);
   const [llamadoCiudades, setLlamadoCiudades] = useState(false);
-  const llamarCiudades = async () => {
-    if (llamadoCiudades === false) {
+  const llamarCiudades = async (provincia) => {
+    if (provinciaActual != provincia) {
       try {
         const api = await fetch(
-          `https://comunidad-backend-v3.herokuapp.com/departamentos/?idProvincia=${formik.values.provincia}`
+          `https://comunidad-backend-v3.herokuapp.com/departamentos/?idProvincia=${provincia}`
         );
         const datos = await api.json();
-        setListaCiudades(datos.municipios);
+        console.log(datos)
+        setListaCiudades(datos.departamentos);
         setLlamadoCiudades(true);
       } catch (error) {
         console.log(error);
       }
+    setProvinciaActual(provincia)
     }
   };
-  llamarCiudades()
 
   const [IdActual, setIdActual] = useState(0);
   const [estadoSiguiente, setEstadoSiguiente] = useState(false);
@@ -271,6 +273,20 @@ export default function WithMaterialUI() {
       }
     },
   });
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+  
+    const open = Boolean(anchorEl);
+    const ids = open ? 'simple-popover' : undefined;
   
   return (
     
@@ -410,7 +426,6 @@ export default function WithMaterialUI() {
                     fullWidth
                     value={formik.values.provincia}
                     onChange={formik.handleChange}
-                    
                   >
                     {listaProvincias.map((provincia) => ( 
                       <MenuList className='selectCss'  value={provincia.id} key={provincia.id} >
@@ -419,8 +434,20 @@ export default function WithMaterialUI() {
                     ))}
                   
                   </Select>
-                  
                 </FormControl>
+                {
+                  formik.values.provincia === undefined ? null 
+                  :
+                    <Popover>
+                      {console.log('aca' + formik.values.provincia)}
+                      {llamarCiudades(formik.values.provincia)}
+                      {listaCiudades.map((ciudad) => ( 
+                      <MenuList className='selectCss'  value={ciudad.id} key={ciudad.id} >
+                        <Box sx={{display:'flex', justifyContent:'center'}}>{ciudad.nombre}</Box>
+                      </MenuList>
+                    ))}
+                    </Popover>
+                }
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <FormControl fullWidth>
@@ -444,7 +471,6 @@ export default function WithMaterialUI() {
                         <Box sx={{display:'flex', justifyContent:'center'}}>{ciudad.nombre}</Box>
                       </MenuList>
                     ))}
-                  
                   </Select>
                   
                 </FormControl>
