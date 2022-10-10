@@ -13,7 +13,7 @@ export const theme = createTheme({
             contrastText: '#ffffff'
         },
         edit:{
-            main:"#F4E900",
+            main:"#e68025",
             contrastText: '#ffffff'
         }
     }
