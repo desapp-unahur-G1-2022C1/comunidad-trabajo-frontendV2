@@ -117,6 +117,22 @@ const CustomizedDialogs = () => {
   var grupo = sessionStorage.getItem('grupo')
   var estaLogeado = sessionStorage.getItem('estaLogeado')
 
+  const [llamado, setLlamado] = useState(false)
+  const estaPostulado = async () => {
+    let idsOfertas
+    try{
+      const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/postulacionesId/postulante/?&id=12345678`);
+      const datos = await api.json();
+      console.log(datos)
+      idsOfertas = datos.postulaciones.rows.map(postulacion => postulacion.id)
+      console.log(idsOfertas)
+    }catch(error){
+      console.log(error)
+    }
+    setLlamado(true)
+    var encontrado = false
+  }
+  estaPostulado()
   const postularse = async () => {
     try {
       const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/postulaciones`, {
