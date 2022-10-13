@@ -45,7 +45,7 @@ const AvatarUsuario = () => {
             bgcolor: stringToColor(nombre),
           },
          
-          children: `${nombre.split(' ')[0][0]}${nombre.split(' ')[0][1]}`,
+          children: `${nombre.split(' ')[0][0]}`,
         };
       } else {
         return {
@@ -89,7 +89,7 @@ const AvatarUsuario = () => {
       :
       grupo == 2
       ?
-      <Avatar onClick={handleClick} {...stringAvatar(`${datosUsuario.nombre_empresa}` + " " + `${datosUsuario.nombre_empresa}`)  }/>
+      <Avatar onClick={handleClick} {...stringAvatar(`${datosUsuario.nombre_empresa}`)  }/>
       :
       <Avatar onClick={handleClick} {...stringAvatar(`${datosUsuario.nombre}` + " " + `${datosUsuario.apellido}`)  }/>
     }
