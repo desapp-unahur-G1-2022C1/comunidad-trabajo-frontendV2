@@ -39,13 +39,24 @@ const AvatarUsuario = () => {
     }
   
     function stringAvatar(nombre) {
+      if (grupo == 2) {
+        return {
+          sx: {
+            bgcolor: stringToColor(nombre),
+          },
+         
+          children: `${nombre.split(' ')[0][0]}`,
+        };
+      } else {
+        return {
+          sx: {
+            bgcolor: stringToColor(nombre),
+          },
+         
+          children: `${nombre.split(' ')[0][0]}${nombre.split(' ')[1][0]}`,
+        };
+      }
       
-      return {
-        sx: {
-          bgcolor: stringToColor(nombre),
-        },
-        children: `${nombre.split(' ')[0][0]}${nombre.split(' ')[1][0]}`,
-      };
     }
 
     
@@ -75,6 +86,10 @@ const AvatarUsuario = () => {
       grupo == 3
       ?
       <Avatar onClick={handleClick} {...stringAvatar(`A D`)  }/>
+      :
+      grupo == 2
+      ?
+      <Avatar onClick={handleClick} {...stringAvatar(`${datosUsuario.nombre_empresa}`)  }/>
       :
       <Avatar onClick={handleClick} {...stringAvatar(`${datosUsuario.nombre}` + " " + `${datosUsuario.apellido}`)  }/>
     }
