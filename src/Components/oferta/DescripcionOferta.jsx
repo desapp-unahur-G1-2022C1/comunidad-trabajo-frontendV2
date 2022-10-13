@@ -122,6 +122,7 @@ const CustomizedDialogs = () => {
   
   const estaPostulado = async () => {
     let idsOfertas
+    if (estaLogeado && datosUsuario.id != null){
     try{
       const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/postulacionesId/postulante/?&id=${datosUsuario.id}`);
       const datos = await api.json();
@@ -141,6 +142,7 @@ const CustomizedDialogs = () => {
 
     console.log(encontrado)
   }
+}
   estaPostulado()
   const postularse = async () => {
     try {
@@ -154,7 +156,7 @@ const CustomizedDialogs = () => {
           oferta: id,
           empresa: idEmpresa
         })
-      })
+      }) 
       const datos = await api.json();
       console.log(datos);
       handleClickOpen();
