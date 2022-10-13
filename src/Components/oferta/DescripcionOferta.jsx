@@ -123,25 +123,23 @@ const CustomizedDialogs = () => {
   const estaPostulado = async () => {
     let idsOfertas
     try{
-      const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/postulacionesId/postulante/?&id=${idUsuario}`);
+      const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/postulacionesId/postulante/?&id=${datosUsuario.id}`);
       const datos = await api.json();
       console.log(datos)
-      idsOfertas = datos.postulaciones.rows.map(postulacion => postulacion.id)
+      idsOfertas = datos.postulaciones.rows.map(postulacion => postulacion.fk_id_oferta)
       console.log(idsOfertas)
     }catch(error){
       console.log(error)
     }
     setLlamado(true)
-    
-    idsOfertas.forEach(idOferta => {
-      if(idOferta == id){
+    console.log(id)
+    for (let i = 0; i <= idsOfertas.length; i++){
+      if(idsOfertas[i] == id){
         setEcontrado(true)
-      }
+      } 
     }
-    )
-    console.log(encontrado)
-    
 
+    console.log(encontrado)
   }
   estaPostulado()
   const postularse = async () => {
@@ -267,19 +265,19 @@ const CustomizedDialogs = () => {
                         :
                         <Box></Box>
                       :
-                      estaLogeado == 'true' && encontrado
-                        ?
-                        <Button
-                          size="large"
-                          variant="contained"
-                          color="relaxed"
-                          onClick={postularse}
-                          sx={{ width: "20rem" }}
-                          disabled
-                        >
-                          Postularme
-                        </Button> :
-                        estaLogeado == 'true' && !encontrado
+                        estaLogeado == 'true' && encontrado
+                          ?
+                          <Button
+                            size="large"
+                            variant="contained"
+                            color="relaxed"
+                            onClick={postularse}
+                            sx={{ width: "20rem" }}
+                            disabled
+                          >
+                            Postularme
+                          </Button> :
+                          estaLogeado == 'true' && !encontrado
                           ?
                           <Button
                             size="large"
