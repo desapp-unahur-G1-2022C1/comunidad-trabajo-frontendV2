@@ -118,10 +118,12 @@ const CustomizedDialogs = () => {
   var estaLogeado = sessionStorage.getItem('estaLogeado')
 
   const [llamado, setLlamado] = useState(false)
+  const [encontrado, setEcontrado] = useState(false)
+  
   const estaPostulado = async () => {
     let idsOfertas
     try{
-      const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/postulacionesId/postulante/?&id=12345678`);
+      const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/postulacionesId/postulante/?&id=${idUsuario}`);
       const datos = await api.json();
       console.log(datos)
       idsOfertas = datos.postulaciones.rows.map(postulacion => postulacion.id)
@@ -130,7 +132,16 @@ const CustomizedDialogs = () => {
       console.log(error)
     }
     setLlamado(true)
-    var encontrado = false
+    
+    idsOfertas.forEach(idOferta => {
+      if(idOferta == id){
+        setEcontrado(true)
+      }
+    }
+    )
+    console.log(encontrado)
+    
+
   }
   estaPostulado()
   const postularse = async () => {
@@ -256,7 +267,7 @@ const CustomizedDialogs = () => {
                         :
                         <Box></Box>
                       :
-                      estaLogeado == 'true'
+                      estaLogeado == 'true' && encontrado
                         ?
                         <Button
                           size="large"
@@ -264,9 +275,21 @@ const CustomizedDialogs = () => {
                           color="relaxed"
                           onClick={postularse}
                           sx={{ width: "20rem" }}
+                          disabled
                         >
                           Postularme
-                        </Button>
+                        </Button> :
+                        estaLogeado == 'true' && !encontrado
+                          ?
+                          <Button
+                            size="large"
+                            variant="contained"
+                            color="relaxed"
+                            onClick={postularse}
+                            sx={{ width: "20rem" }}
+                          >
+                            Postularme
+                          </Button>
                         :
                         <Link to='/login' style={{ textDecoration: 'none' }}>
                           <Button
