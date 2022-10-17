@@ -40,7 +40,7 @@ export default function WithMaterialUI () {
     onSubmit: (values) => {
       console.log(values)
       var data = {'usuario': values.email, 'password': values.password};
-      fetch('https://comunidad-de-trabajo.herokuapp.com/usuarios/signup/', {
+      fetch('https://comunidad-backend-v3.herokuapp.com/usuarios/signup/', {
         method: 'POST', // or 'PUT'
         body: JSON.stringify(data), // data can be `string` or {object}!
         headers:{
