@@ -88,7 +88,7 @@ export default function WithMaterialUI() {
     if (llamadoListaCarreras === false) {
       try {
         const api = await fetch(
-          `https://comunidad-de-trabajo.herokuapp.com/carreras/`
+          `https://comunidad-backend-v3.herokuapp.com/carreras/`
         );
         const datos = await api.json();
         setListaCarreras(datos.carreras);
@@ -107,7 +107,7 @@ export default function WithMaterialUI() {
     if (llamadoTipoDocumento === false) {
       try {
         const api = await fetch(
-          `https://comunidad-de-trabajo.herokuapp.com/estudios/`
+          `https://comunidad-backend-v3.herokuapp.com/estudios/`
         );
         const datos = await api.json();
         setListaEstudios(datos.estudios);
@@ -146,11 +146,11 @@ export default function WithMaterialUI() {
     if (provinciaActual != provincia) {
       try {
         const api = await fetch(
-          `https://comunidad-backend-v3.herokuapp.com/departamentos/?idProvincia=${provincia}`
+          `https://comunidad-backend-v3.herokuapp.com/ciudades/?idProvincia=${provincia}`
         );
         const datos = await api.json();
         console.log(datos)
-        setListaCiudades(datos.departamentos);
+        setListaCiudades(datos.ciudades);
         setLlamadoCiudades(true);
       } catch (error) {
         console.log(error);
@@ -238,7 +238,7 @@ export default function WithMaterialUI() {
       console.log(values);
       console.log(IdActual);
       if (IdActual == listaIDs.length - 1){
-        fetch("https://comunidad-de-trabajo.herokuapp.com/postulantes/", {
+        fetch("https://comunidad-backend-v3.herokuapp.com/postulantes/", {
         method: "POST", // or 'PUT'
         body: JSON.stringify(data), // data can be `string` or {object}!
         headers: {

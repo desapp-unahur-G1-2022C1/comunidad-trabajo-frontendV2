@@ -155,11 +155,11 @@ export default function WithMaterialUI() {
     if (provinciaActual != provincia) {
       try {
         const api = await fetch(
-          `https://comunidad-backend-v3.herokuapp.com/departamentos/?idProvincia=${provincia}`
+          `https://comunidad-backend-v3.herokuapp.com/ciudades/?idProvincia=${provincia}`
         );
         const datos = await api.json();
         console.log(datos)
-        setListaCiudades(datos.departamentos);
+        setListaCiudades(datos.ciudades);
         setLlamadoCiudades(true);
       } catch (error) {
         console.log(error);
@@ -401,7 +401,9 @@ export default function WithMaterialUI() {
                     <Popover>
                       {console.log('aca' + formik.values.provincia)}
                       {llamarCiudades(formik.values.provincia)}
+                      {console.log('aaaaaaaaaaaa' + formik.values.provincia)}
                       {listaCiudades.map((ciudad) => ( 
+                      
                       <MenuList className='selectCss'  value={ciudad.id} key={ciudad.id} >
                         <Box sx={{display:'flex', justifyContent:'center'}}>{ciudad.nombre}</Box>
                       </MenuList>
