@@ -277,7 +277,7 @@ const CustomizedDialogs = () => {
                             sx={{ width: "20rem" }}
                             disabled
                           >
-                            Postularme
+                            Ya estas postulado
                           </Button> :
                           estaLogeado == 'true' && !encontrado
                           ?
