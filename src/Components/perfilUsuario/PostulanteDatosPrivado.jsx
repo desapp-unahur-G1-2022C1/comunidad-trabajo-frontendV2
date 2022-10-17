@@ -32,14 +32,15 @@ export default function DividerText() {
                     console.log(data)
   })
 
-  const content = (
-    <div>
-      {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id dignissim justo.
-   Nulla ut facilisis ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-   Sed malesuada lobortis pretium.`}
-    </div>
-  );
-  
+ 
+  const formatoFechaNacimiento = (fecha) => {
+    var fechaNacimiento = new Date(fecha);
+    var hora = fechaNacimiento.getHours();
+    var dia = fechaNacimiento.getDate() + 1;
+    var mes = fechaNacimiento.getMonth() + 1;
+    var anio = fechaNacimiento.getFullYear();
+    return dia + "/" + mes + "/" + anio;
+  }
   return (
     <React.Fragment>
     <Header/>
@@ -60,7 +61,7 @@ export default function DividerText() {
         </Typography>
         <Typography sx={{display:'flex', justifyContent:'center', margin:'2rem'}}>
             <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">Fecha de nacimiento:</Typography>
-            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{datosUsuario.fecha_nac}</Typography>
+            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{formatoFechaNacimiento(datosUsuario.fecha_nac)}</Typography>
         </Typography>
       </Box>
       <Divider>
@@ -73,7 +74,7 @@ export default function DividerText() {
         </Typography>
         <Typography sx={{display:'flex', justifyContent:'center'}}>
             <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">Numero de contecto:</Typography>
-            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{datosUsuario.telefono}</Typography>
+            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1"> +54 9 {datosUsuario.telefono}</Typography>
         </Typography>
       </Box>
       <Divider>
@@ -86,11 +87,11 @@ export default function DividerText() {
         </Typography>
         <Typography sx={{display:'flex', justifyContent:'center', margin:'2rem'}}>
             <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">Provincia:</Typography>
-            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{datosUsuario.provincia}</Typography>
+            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{datosUsuario.Provincia.nombre}</Typography>
         </Typography>
         <Typography sx={{display:'flex', justifyContent:'center', margin:'2rem'}}>
             <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">Ciudad:</Typography>
-            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{datosUsuario.ciudad}</Typography>
+            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{datosUsuario.Ciudad.nombre}</Typography>
         </Typography>
       </Box>
     </Root>

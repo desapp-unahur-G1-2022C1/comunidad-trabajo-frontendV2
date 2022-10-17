@@ -14,6 +14,7 @@ export default function PerfilUsuario() {
   var idUsuario = sessionStorage.getItem('idUsuario')
   var grupo =  sessionStorage.getItem('grupo')
   var estaLogeado = sessionStorage.getItem('estaLogeado')
+  
 
   return (
     
