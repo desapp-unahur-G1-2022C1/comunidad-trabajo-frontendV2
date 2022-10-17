@@ -36,8 +36,8 @@ const Root = styled('div')(({ theme }) => ({
                 setNumContactoEmpresa(data.telefono)
                 setWebEmpresa(data.web)
                 setPaisEmpresa(data.pais)
-                seProvinciaEmpresa(data.provincia)
-                setCiudadEmpresa(data.ciudad)
+                seProvinciaEmpresa(data.Provincia.nombre)
+                setCiudadEmpresa(data.Ciudad.nombre)
               })
   return (
     <React.Fragment>
@@ -67,7 +67,7 @@ const Root = styled('div')(({ theme }) => ({
         </Typography>
         <Typography sx={{display:'flex', justifyContent:'center'}}>
             <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">Numero de contecto:</Typography>
-            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{numContactoEmpresa}</Typography>
+            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">+54 9 {numContactoEmpresa}</Typography>
         </Typography>
         <Typography sx={{display:'flex', justifyContent:'center', margin:'2rem'}}>
             <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">Pagina web:</Typography>
