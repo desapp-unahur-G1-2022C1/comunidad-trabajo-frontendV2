@@ -16,6 +16,10 @@ import { Link, useParams } from "react-router-dom";
 import DatosUsuarioContextProvider from '../../Context/DatosUsuarioContext';
 import { useContext } from 'react';
 import Swal from "sweetalert2";
+import PlaceIcon from '@mui/icons-material/Place';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import ScheduleIcon from '@mui/icons-material/Schedule';
+
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -62,7 +66,7 @@ const CustomizedDialogs = () => {
   const [descripcion, setDescripcion] = useState();
   const [zona, setZona] = useState();
   const [salario, setSalario] = useState();
-  const [horarioEnrada, setHorarioEntrada] = useState();
+  const [horarioEntrada, setHorarioEntrada] = useState();
   const [horarioSalida, setHorarioSalida] = useState();
   const [idiomas, setIdiomas] = useState();
   const [jornada, setJornada] = useState();
@@ -71,7 +75,8 @@ const CustomizedDialogs = () => {
   const [edadHasta, setEdadHasta] = useState();
   const [beneficios, setBeneficios] = useState();
   const [idEmpresa, setIdEmpresa] = useState();
-  const [estado, setEstado] = useState()
+  const [estado, setEstado] = useState();
+  const [fechaPublicacion, setFechaPublicacion] = useState();
   const API_URL = `https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${id}`;
 
   const descripcionAPI = async () => {
@@ -94,6 +99,7 @@ const CustomizedDialogs = () => {
       setEdadHasta(datos.edad_hasta);
       setBeneficios(datos.beneficios);
       setEstado(datos.Estado.id);
+      setFechaPublicacion(datos.createdAt)
     } catch (error) {
       console.log(error);
     }
@@ -201,185 +207,68 @@ const CustomizedDialogs = () => {
         })),)
   }
 
-
+  function publicadoHace(fechaPublicacion) {
+    var fechaPublicacion = new Date(fechaPublicacion);
+    var fechaActual = new Date();
+    var diferencia = fechaActual - fechaPublicacion;
+    var dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    var horas = Math.floor(diferencia / (1000 * 60 * 60));
+    var minutos = Math.floor(diferencia / (1000 * 60));
+    
+    if (dias > 0) {
+      return dias + " dias";
+    } else if (horas > 0) { 
+      return horas + " horas";
+    } else {
+      return minutos + " minutos";
+    }
+  }
   return (
     <Fragment>
       <Header />
-      <Box sx={{ padding: "2rem" }}>
-        <Grid
-          container
-          spacing={3}
-          sx={{ justifyContent: "center", padding: "1rem" }}
-        >
-          <Box sx={{ display: "flex", flexDirection: "column", margin: "2rem" }}>
-            <Box
-              sx={{
-                display: "flex",
-                padding: "2rem",
-                justifyContent: "center",
-
-              }}
-            >
-              <Stack direction="row" spacing={2}>
-                <img src="https://cdn.discordapp.com/attachments/955646153297395722/996230598853148792/unknown.png" style={{ height: "15rem", width: "15rem" }} />
-              </Stack>
+       <Box sx={{margin:"1rem"}}>
+       <Box >
+        <Box sx={{display:"flex", flexDirection:"row"}}>
+            <Box sx={{display:"flex", justifyContent:"center", flexDirection:"column"}}>
+              <Typography variant="h4">
+                {tituloOferta}
+              </Typography>
+              <Typography variant="h6">
+                {nombreEmpresa}
+              </Typography>
+              <Typography variant="body1" sx={{display: "flex", alignItems:"center"}}>
+                <PlaceIcon/>{zona}
+              </Typography>
+              <Typography variant="body1" sx={{display: "flex", alignItems:"center"}}>
+                <CalendarMonthIcon/>Publicado hace: {publicadoHace(fechaPublicacion)}
+              </Typography>
             </Box>
-            <Box sx={{ display: "flex", justifyContent: "center", flexDirection: "column", maxWidth: "20rem" }}>
-              <Typography variant="h4" sx={{ textAlign: "center" }}>{tituloOferta}</Typography><br />
-              <Typography variant="h6" sx={{ textAlign: "justify" }}>{nombreEmpresa}</Typography><br />
-            </Box>
-            <Box
-              sx={{
-
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              {
-                grupo == 3 && estado == 2 ? <><Button color="relaxed" variant="contained" onClick={async () => activar(id)}> Aceptar </Button> <Button color="error" variant="contained">Rechazar</Button></>
-                  : grupo == 3 && (estado == 1 || estado == 3) ? null :
-                    grupo == 2
-                      ?
-                      nombreEmpresa == datosUsuario.nombre_empresa
-                        ?
-                        <Box sx={{ width: "20rem" }}>
-                          <Link style={{ textDecoration: "none" }} to={`/edicionOferta/${id}`}>
-                            <Button
-                              size="large"
-                              variant="contained"
-                              color="relaxed"
-                              sx={{ width: "20rem", marginBottom: '1rem' }}
-                            >
-                              Editar oferta
-                            </Button>
-                          </Link>
-                          <Link style={{ textDecoration: "none" }} to={`/ListadoDePostulantes/${id}`}>
-                            <Button
-                              size="large"
-                              variant="outlined"
-                              color="relaxed"
-                              sx={{ width: "20rem" }}
-                            >
-                              Ver postulantes
-                            </Button>
-                          </Link>
-                        </Box>
-                        :
-                        <Box></Box>
-                      :
-                        estaLogeado == 'true' && encontrado
-                          ?
-                          <Button
-                            size="large"
-                            variant="contained"
-                            color="relaxed"
-                            onClick={postularse}
-                            sx={{ width: "20rem" }}
-                            disabled
-                          >
-                            Ya estas postulado
-                          </Button> :
-                          estaLogeado == 'true' && !encontrado
-                          ?
-                          <Button
-                            size="large"
-                            variant="contained"
-                            color="relaxed"
-                            onClick={postularse}
-                            sx={{ width: "20rem" }}
-                          >
-                            Postularme
-                          </Button>
-                        :
-                        <Link to='/login' style={{ textDecoration: 'none' }}>
-                          <Button
-                            size="large"
-                            variant="contained"
-                            color="relaxed"
-                            sx={{ width: "20rem" }}
-                          >
-                            Postularme
-                          </Button>
-                        </Link>
-              }
-
-              <BootstrapDialog
-                onClose={handleClose}
-                aria-labelledby="customized-dialog-title"
-                open={open}
-              >
-                <ConfirmacionPostulacion
-                  tituloOferta={tituloOferta}
-                  nombreEmpresa={nombreEmpresa} />
-              </BootstrapDialog>
-            </Box>
+            <img src="https://cdn.discordapp.com/attachments/955646153297395722/996230598853148792/unknown.png" alt="" style={{width:"200px", height:"200px"}}/>
           </Box>
+       </Box>
+       <Box sx={{display:"flex", flexDirection:"column"}}>
+         <Typography variant="h5" sx={{marginBottom:"0.5rem"}} >
+            Sobre la empresa
+          </Typography>
+          <Typography variant="body1"  sx={{marginBottom:"0.5rem"}}>
+            soy la descripcion de una empresa
+          </Typography>
+          <Typography variant="h5" sx={{marginBottom:"0.5rem"}}>
+            Descripcion
+          </Typography>
+          <Typography variant="body1" sx={{marginBottom:"0.5rem"}} >
+            {descripcion}
+          </Typography>
+          <Typography variant="h5"sx={{marginBottom:"0.5rem"}}>
+            Horario
+          </Typography>
+          <Typography variant="body1" >
+            <ScheduleIcon/> De {horarioEntrada} a {horarioSalida}
+          </Typography>
 
-          <Box sx={{ maxWidth: "30rem" }}>
-            <Box sx={{ borderBottom: "#009688 2px solid" }}>
-              {" "}
-              <h3>Descripcion:</h3>{" "}
-              <Typography sx={{ fontSize: "20px", marginBottom: "1rem" }}> {descripcion}</Typography>
-            </Box>
-            <Box sx={{ display: "flex", alignItems: "center", borderBottom: "#009688 2px solid" }}>
-              {" "}
-              <h3>Zona de trabajo: </h3>{" "}
-              <Typography sx={{ fontSize: "20px", paddingLeft: "0.5rem" }} variant="body1">
-                {zona}
-              </Typography>
-            </Box>
-            <Box sx={{ display: "flex", alignItems: "center", borderBottom: "#009688 2px solid" }}>
-              {" "}
-              <h3>Edad:</h3>{" "}
-              <Typography sx={{ paddingLeft: "0.5rem", fontSize: "20px" }}>
-                Desde {edadDesde} hasta {edadHasta} años
-              </Typography>
-            </Box>
-            <Box sx={{ display: "flex", alignItems: "center", borderBottom: "#009688 2px solid" }}>
-              {" "}
-              <h3>Horario:</h3>{" "}
-              <Typography sx={{ paddingLeft: "0.5rem", fontSize: "20px" }}>
-                De {horarioEnrada}hs. a {horarioSalida}hs.
-              </Typography>
-            </Box>
-            <Box sx={{ display: "flex", alignItems: "center", borderBottom: "#009688 2px solid" }}>
-              {" "}
-              <h3>Idiomas:</h3>{" "}
-              <Typography
-                sx={{ paddingLeft: "0.5rem", fontSize: "20px" }}
-              ></Typography>
-            </Box>
-            <Box sx={{ display: "flex", alignItems: "center", borderBottom: "#009688 2px solid" }}>
-              {" "}
-              <h3>Jornada: </h3>{" "}
-              <Typography sx={{ paddingLeft: "0.5rem", fontSize: "20px" }}>
-                {jornada}
-              </Typography>
-            </Box>
-            <Box sx={{ display: "flex", alignItems: "center", borderBottom: "#009688 2px solid" }}>
-              {" "}
-              <h3>Contrato: </h3>{" "}
-              <Typography sx={{ paddingLeft: "0.5rem", fontSize: "20px" }}>
-                {contrato}
-              </Typography>
-            </Box>
-            <Box sx={{ display: "flex", alignItems: "center", borderBottom: "#009688 2px solid" }}>
-              {" "}
-              <h3>Beneficios: </h3>{" "}
-              <Typography sx={{ paddingLeft: "0.5rem", fontSize: "20px" }}>
-                {beneficios}
-              </Typography>
-            </Box>
-            <Box sx={{ display: "flex", alignItems: "center", borderBottom: "#009688 2px solid" }}>
-              {" "}
-              <h3>Salario:</h3>{" "}
-              <Typography sx={{ paddingLeft: "0.5rem", fontSize: "20px" }}>
-                ${salario}
-              </Typography>
-            </Box>
+          
           </Box>
-        </Grid>
-      </Box>
+       </Box>
     </Fragment>
   );
 };

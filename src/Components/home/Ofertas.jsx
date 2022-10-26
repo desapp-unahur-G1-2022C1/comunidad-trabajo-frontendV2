@@ -11,7 +11,22 @@ import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 
 const Ofertas = ({listaOfertas}) => {
- 
+  function publicadoHace(fechaPublicacion) {
+    var fechaPublicacion = new Date(fechaPublicacion);
+    var fechaActual = new Date();
+    var diferencia = fechaActual - fechaPublicacion;
+    var dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    var horas = Math.floor(diferencia / (1000 * 60 * 60));
+    var minutos = Math.floor(diferencia / (1000 * 60));
+    
+    if (dias > 0) {
+      return dias + " dias";
+    } else if (horas > 0) { 
+      return horas + " horas";
+    } else {
+      return minutos + " minutos";
+    }
+  }
   
   return (
     <Fragment>
@@ -19,20 +34,27 @@ const Ofertas = ({listaOfertas}) => {
       
         {listaOfertas.map((oferta) => (
           <Card sx={{ width: 500, margin: "1rem" }} key = {oferta.id}>
-            <Box sx={{ height: 325, margin: "1rem" }}>
+            <Box sx={{ height: 400, margin: "1rem" }}>
             <CardMedia
               component="img"
               height="140"
               image="https://cdn.discordapp.com/attachments/955646153297395722/996230598853148792/unknown.png"
             />
             <CardContent>
-            <Typography variant="h5" gutterBottom component="div" sx={{height:'3rem'}}>
+            <Typography variant="h5" gutterBottom component="div">
                 {oferta.titulo_oferta.toUpperCase()}
             </Typography>
-            <Typography variant="h6" gutterBottom component="div" sx={{height:'2rem'}}>
+            <Typography variant="h6" gutterBottom component="div" >
                 {oferta.Empresa.nombre_empresa}
             </Typography>
+            <Typography variant="body1" gutterBottom component="div" >
+                {oferta.zona_trabajo}
+            </Typography>
+            <Typography variant="body2" gutterBottom component="div"  >
+               Hace {publicadoHace(oferta.createdAt)}
+            </Typography>
             <Typography variant="body1" gutterBottom component="div">
+                
                
                 {
                   oferta.descripcion.length < 120

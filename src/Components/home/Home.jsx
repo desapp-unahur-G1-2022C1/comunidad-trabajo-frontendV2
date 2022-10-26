@@ -79,6 +79,7 @@ const Home = () => {
           listaOfertas={listaOfertas}/> }
            <Pagination color='primary'count={cantPaginas} page={pagina} onChange={cambiarPagina} variant='text'sx={{display:"flex", justifyContent:"center"}}></Pagination>
           </div>
+          
         </div>
       </Fragment> );
 }

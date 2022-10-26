@@ -1,0 +1,67 @@
+{
+                grupo == 3 && estado == 2 ? <><Button color="relaxed" variant="contained" onClick={async () => activar(id)}> Aceptar </Button> <Button color="error" variant="contained">Rechazar</Button></>
+                  : grupo == 3 && (estado == 1 || estado == 3) ? null :
+                    grupo == 2
+                      ?
+                      nombreEmpresa == datosUsuario.nombre_empresa
+                        ?
+                        <Box sx={{ width: "20rem" }}>
+                          <Link style={{ textDecoration: "none" }} to={`/edicionOferta/${id}`}>
+                            <Button
+                              size="large"
+                              variant="contained"
+                              color="relaxed"
+                              sx={{ width: "20rem", marginBottom: '1rem' }}
+                            >
+                              Editar oferta
+                            </Button>
+                          </Link>
+                          <Link style={{ textDecoration: "none" }} to={`/ListadoDePostulantes/${id}`}>
+                            <Button
+                              size="large"
+                              variant="outlined"
+                              color="relaxed"
+                              sx={{ width: "20rem" }}
+                            >
+                              Ver postulantes
+                            </Button>
+                          </Link>
+                        </Box>
+                        :
+                        <Box></Box>
+                      :
+                        estaLogeado == 'true' && encontrado
+                          ?
+                          <Button
+                            size="large"
+                            variant="contained"
+                            color="relaxed"
+                            onClick={postularse}
+                            sx={{ width: "20rem" }}
+                            disabled
+                          >
+                            Ya estas postulado
+                          </Button> :
+                          estaLogeado == 'true' && !encontrado
+                          ?
+                          <Button
+                            size="large"
+                            variant="contained"
+                            color="relaxed"
+                            onClick={postularse}
+                            sx={{ width: "20rem" }}
+                          >
+                            Postularme
+                          </Button>
+                        :
+                        <Link to='/login' style={{ textDecoration: 'none' }}>
+                          <Button
+                            size="large"
+                            variant="contained"
+                            color="relaxed"
+                            sx={{ width: "20rem" }}
+                          >
+                            Postularme
+                          </Button>
+                        </Link>
+              }
