@@ -243,7 +243,7 @@ const CustomizedDialogs = () => {
                 <CalendarMonthIcon/>Publicado hace: {publicadoHace(fechaPublicacion)}
               </Typography>
             </Box>
-            <img src="https://cdn.discordapp.com/attachments/955646153297395722/996230598853148792/unknown.png" alt="" style={{width:"200px", height:"200px"}}/>
+            <img src="https://cdn.discordapp.com/attachments/955646153297395722/996230598853148792/unknown.png" alt="" style={{width:"150px", height:"150px"}}/>
           </Box>
        </Box>
        <Box sx={{display:"flex", flexDirection:"column"}}>
@@ -262,10 +262,76 @@ const CustomizedDialogs = () => {
           <Typography variant="h5"sx={{marginBottom:"0.5rem"}}>
             Horario
           </Typography>
-          <Typography variant="body1" >
+          <Typography variant="body1" sx={{display:"flex", alignItems:"center"}}>
             <ScheduleIcon/> De {horarioEntrada} a {horarioSalida}
           </Typography>
-
+          {
+                grupo == 3 && estado == 2 ? <><Button color="relaxed" variant="contained" onClick={async () => activar(id)}> Aceptar </Button> <Button color="error" variant="contained">Rechazar</Button></>
+                  : grupo == 3 && (estado == 1 || estado == 3) ? null :
+                    grupo == 2
+                      ?
+                      nombreEmpresa == datosUsuario.nombre_empresa
+                        ?
+                        <Box sx={{ width: "20rem" }}>
+                          <Link style={{ textDecoration: "none" }} to={`/edicionOferta/${id}`}>
+                            <Button
+                              size="large"
+                              variant="contained"
+                              color="relaxed"
+                              sx={{ width: "20rem", marginBottom: '1rem' }}
+                            >
+                              Editar oferta
+                            </Button>
+                          </Link>
+                          <Link style={{ textDecoration: "none" }} to={`/ListadoDePostulantes/${id}`}>
+                            <Button
+                              size="large"
+                              variant="outlined"
+                              color="relaxed"
+                              sx={{ width: "20rem" }}
+                            >
+                              Ver postulantes
+                            </Button>
+                          </Link>
+                        </Box>
+                        :
+                        <Box></Box>
+                      :
+                        estaLogeado == 'true' && encontrado
+                          ?
+                          <Button
+                            size="large"
+                            variant="contained"
+                            color="relaxed"
+                            onClick={postularse}
+                            sx={{ width: "20rem" }}
+                            disabled
+                          >
+                            Ya estas postulado
+                          </Button> :
+                          estaLogeado == 'true' && !encontrado
+                          ?
+                          <Button
+                            size="large"
+                            variant="contained"
+                            color="relaxed"
+                            onClick={postularse}
+                            sx={{ width: "20rem" }}
+                          >
+                            Postularme
+                          </Button>
+                        :
+                        <Link to='/login' style={{ textDecoration: 'none' }}>
+                          <Button
+                            size="large"
+                            variant="contained"
+                            color="relaxed"
+                            sx={{ width: "20rem" }}
+                          >
+                            Postularme
+                          </Button>
+                        </Link>
+              }
           
           </Box>
        </Box>
