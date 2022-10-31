@@ -24,6 +24,7 @@ import IdFormContext from '../../Context/IdFormContext';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Stack from '@mui/material/Stack'
+import axios from "axios";
 
 
 
@@ -338,6 +339,8 @@ export default function WithMaterialUI() {
     const open = Boolean(anchorEl);
     const ids = open ? 'simple-popover' : undefined;
   
+   
+
   return (
     
     <Fragment>
@@ -833,7 +836,7 @@ export default function WithMaterialUI() {
                 Archivos
               </Typography>
                 <Button variant="contained" component="label">
-                  <input accept="image/*" multiple type="file" />
+                  <input accept="application/pdf" multiple type="file" />
                 </Button>
           </div>
           {IdActual == listaIDs.length - 1 ? (
