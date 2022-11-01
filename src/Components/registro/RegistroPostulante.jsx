@@ -339,7 +339,32 @@ export default function WithMaterialUI() {
     const open = Boolean(anchorEl);
     const ids = open ? 'simple-popover' : undefined;
   
-   
+
+  const [uploadfile, setUploadfile] = useState(null);
+
+  function subirArchivo(e){
+    e.preventDefault();
+    const formData = new FormData();
+  
+    formData.append('uploadfile', uploadfile);
+    try {
+      axios({
+        method: 'post',
+        url: 'https://comunidad-backend-v3.herokuapp.com/uploadFiles',
+        data: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+      });
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const cambiarArchivo = (e) => {
+    setUploadfile(e.target.files[0])
+    console.log(e.target.files[0])
+  }
 
   return (
     
