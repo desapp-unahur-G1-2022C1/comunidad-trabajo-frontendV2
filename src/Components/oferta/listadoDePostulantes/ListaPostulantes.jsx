@@ -33,7 +33,7 @@ export default function ListaPostulantes({postulantes}) {
               <TableCell align="left"><Typography variant="body1">{postulante.Postulante.id}</Typography></TableCell>
               <TableCell align="left"><Typography variant="body1"></Typography>{postulante.Postulante.telefono}</TableCell>
               <TableCell align="left">
-                <Link to={`/postulante/${postulante.id}`} style={{textDecoration:'none'}}>
+                <Link to={`/postulante/${postulante.Postulante.id}`} style={{textDecoration:'none'}}>
                   <Button variant="contained" color='relaxed'sx={{margin:"0.5rem"}}>
                     Ver
                   </Button>
