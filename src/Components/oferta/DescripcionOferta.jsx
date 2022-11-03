@@ -21,6 +21,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 
 
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -125,30 +126,30 @@ const CustomizedDialogs = () => {
 
   const [llamado, setLlamado] = useState(false)
   const [encontrado, setEcontrado] = useState(false)
-  
+
   const estaPostulado = async () => {
     let idsOfertas
-    if (estaLogeado && datosUsuario.id != null){
-    try{
-      const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/postulacionesId/postulante/?&id=${datosUsuario.id}`);
-      const datos = await api.json();
-      console.log(datos)
-      idsOfertas = datos.postulaciones.rows.map(postulacion => postulacion.fk_id_oferta)
-      console.log(idsOfertas)
-    }catch(error){
-      console.log(error)
-    }
-    setLlamado(true)
-    console.log(id)
-    for (let i = 0; i <= idsOfertas.length; i++){
-      if(idsOfertas[i] == id){
-        setEcontrado(true)
-      } 
-    }
+    if (estaLogeado && datosUsuario.id != null) {
+      try {
+        const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/postulacionesId/postulante/?&id=${datosUsuario.id}`);
+        const datos = await api.json();
+        console.log(datos)
+        idsOfertas = datos.postulaciones.rows.map(postulacion => postulacion.fk_id_oferta)
+        console.log(idsOfertas)
+      } catch (error) {
+        console.log(error)
+      }
+      setLlamado(true)
+      console.log(id)
+      for (let i = 0; i <= idsOfertas.length; i++) {
+        if (idsOfertas[i] == id) {
+          setEcontrado(true)
+        }
+      }
 
-    console.log(encontrado)
+      console.log(encontrado)
+    }
   }
-}
   estaPostulado()
   const postularse = async () => {
     try {
@@ -162,7 +163,7 @@ const CustomizedDialogs = () => {
           oferta: id,
           empresa: idEmpresa
         })
-      }) 
+      })
       const datos = await api.json();
       console.log(datos);
       handleClickOpen();
@@ -214,10 +215,10 @@ const CustomizedDialogs = () => {
     var dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
     var horas = Math.floor(diferencia / (1000 * 60 * 60));
     var minutos = Math.floor(diferencia / (1000 * 60));
-    
+
     if (dias > 0) {
       return dias + " dias";
-    } else if (horas > 0) { 
+    } else if (horas > 0) {
       return horas + " horas";
     } else {
       return minutos + " minutos";
@@ -226,47 +227,74 @@ const CustomizedDialogs = () => {
   return (
     <Fragment>
       <Header />
-       <Box sx={{margin:"1rem"}}>
-       <Box >
-        <Box sx={{display:"flex", flexDirection:"row"}}>
-            <Box sx={{display:"flex", justifyContent:"center", flexDirection:"column"}}>
-              <Typography variant="h4">
-                {tituloOferta}
-              </Typography>
-              <Typography variant="h6">
-                {nombreEmpresa}
-              </Typography>
-              <Typography variant="body1" sx={{display: "flex", alignItems:"center"}}>
-                <PlaceIcon/>{zona}
-              </Typography>
-              <Typography variant="body1" sx={{display: "flex", alignItems:"center"}}>
-                <CalendarMonthIcon/>Publicado hace: {publicadoHace(fechaPublicacion)}
-              </Typography>
+      <Grid containter spacing={2}>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Box sx={{ margin: "1rem", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+            <Box >
+              <Box sx={{ display: "flex", flexDirection: "row" }}>
+                <Box sx={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
+                  <Typography variant="h4">
+                    {tituloOferta}
+                  </Typography>
+                  <Typography variant="h6">
+                    {nombreEmpresa}
+                  </Typography>
+                  <Typography variant="body1" sx={{ display: "flex", alignItems: "center" }}>
+                    <PlaceIcon />{zona}
+                  </Typography>
+                  <Typography variant="body1" sx={{ display: "flex", alignItems: "center" }}>
+                    <CalendarMonthIcon />Publicado hace: {publicadoHace(fechaPublicacion)}
+                  </Typography>
+                </Box>
+                <img src="https://cdn.discordapp.com/attachments/955646153297395722/996230598853148792/unknown.png" alt="" style={{ width: "150px", height: "150px" }} />
+              </Box>
             </Box>
-            <img src="https://cdn.discordapp.com/attachments/955646153297395722/996230598853148792/unknown.png" alt="" style={{width:"150px", height:"150px"}}/>
-          </Box>
-       </Box>
-       <Box sx={{display:"flex", flexDirection:"column"}}>
-         <Typography variant="h5" sx={{marginBottom:"0.5rem"}} >
-            Sobre la empresa
-          </Typography>
-          <Typography variant="body1"  sx={{marginBottom:"0.5rem"}}>
-            soy la descripcion de una empresa
-          </Typography>
-          <Typography variant="h5" sx={{marginBottom:"0.5rem"}}>
-            Descripcion
-          </Typography>
-          <Typography variant="body1" sx={{marginBottom:"0.5rem"}} >
-            {descripcion}
-          </Typography>
-          <Typography variant="h5"sx={{marginBottom:"0.5rem"}}>
-            Horario
-          </Typography>
-          <Typography variant="body1" sx={{display:"flex", alignItems:"center"}}>
-            <ScheduleIcon/> De {horarioEntrada} a {horarioSalida}
-          </Typography>
-          {
-                grupo == 3 && estado == 2 ? <><Button color="relaxed" variant="contained" onClick={async () => activar(id)}> Aceptar </Button> <Button color="error" variant="contained">Rechazar</Button></>
+            <Box sx={{ display: "flex", flexDirection: "column" }}>
+              <Typography variant="h5" sx={{ marginBottom: "0.5rem" }} >
+                Sobre la empresa
+              </Typography>
+              <Typography variant="body1" sx={{ marginBottom: "0.5rem" }}>
+                soy la descripcion de una empresa
+              </Typography>
+              <Typography variant="h5" sx={{ marginBottom: "0.5rem" }}>
+                Descripcion
+              </Typography>
+              <Typography variant="body1" sx={{ marginBottom: "0.5rem" }} >
+                {descripcion}
+              </Typography>
+              <Typography variant="h5" sx={{ marginBottom: "0.5rem" }}>
+                Horario
+              </Typography>
+              <Typography variant="body1" sx={{ marginBottom: "0.5rem", display: "flex", alignItems: "center" }}>
+                <ScheduleIcon /> De {horarioEntrada}hs a {horarioSalida}hs
+              </Typography>
+              <Typography variant="h5" sx={{ marginBottom: "0.5rem" }}>
+                Contrato
+              </Typography>
+              <Typography variant="body1" sx={{ marginBottom: "0.5rem" }}>
+                {contrato}
+              </Typography>
+              <Typography variant="h5" sx={{ marginBottom: "0.5rem" }}>
+                Salario
+              </Typography>
+              <Typography variant="body1" sx={{ display: "flex", alignItems: "center" }}>
+                ${salario}
+              </Typography>
+              <Typography variant="h5" sx={{ marginBottom: "0.5rem" }}>
+                Beneficios
+              </Typography>
+              <Typography variant="body1" sx={{ marginBottom: "0.5rem" }}>
+                {beneficios}
+              </Typography>
+
+
+
+              <Box sx={{ display: "flex", justifyContent: "space-around" }}>{
+                grupo == 3 && estado == 2 ? <> <Box sx={{ display: "flex" }}>
+                  <Button sx={{ margin: "0.5rem" }} color="relaxed" variant="contained" onClick={async () => activar(id)}> Aceptar </Button>
+                  <Button sx={{ margin: "0.5rem" }} color="error" variant="contained">Rechazar</Button>
+                </Box>
+                </>
                   : grupo == 3 && (estado == 1 || estado == 3) ? null :
                     grupo == 2
                       ?
@@ -297,19 +325,19 @@ const CustomizedDialogs = () => {
                         :
                         <Box></Box>
                       :
-                        estaLogeado == 'true' && encontrado
-                          ?
-                          <Button
-                            size="large"
-                            variant="contained"
-                            color="relaxed"
-                            onClick={postularse}
-                            sx={{ width: "20rem" }}
-                            disabled
-                          >
-                            Ya estas postulado
-                          </Button> :
-                          estaLogeado == 'true' && !encontrado
+                      estaLogeado == 'true' && encontrado
+                        ?
+                        <Button
+                          size="large"
+                          variant="contained"
+                          color="relaxed"
+                          onClick={postularse}
+                          sx={{ width: "20rem" }}
+                          disabled
+                        >
+                          Ya estas postulado
+                        </Button> :
+                        estaLogeado == 'true' && !encontrado
                           ?
                           <Button
                             size="large"
@@ -320,21 +348,22 @@ const CustomizedDialogs = () => {
                           >
                             Postularme
                           </Button>
-                        :
-                        <Link to='/login' style={{ textDecoration: 'none' }}>
-                          <Button
-                            size="large"
-                            variant="contained"
-                            color="relaxed"
-                            sx={{ width: "20rem" }}
-                          >
-                            Postularme
-                          </Button>
-                        </Link>
-              }
-          
+                          :
+                          <Link to='/login' style={{ textDecoration: 'none' }}>
+                            <Button
+                              size="large"
+                              variant="contained"
+                              color="relaxed"
+                              sx={{ width: "20rem" }}
+                            >
+                              Postularme
+                            </Button>
+                          </Link>
+              }</Box>
+
+            </Box>
           </Box>
-       </Box>
+        </Box></Grid>
     </Fragment>
   );
 };
