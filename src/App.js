@@ -29,6 +29,7 @@ import PostulanteDatosPrivado from './Components/perfilUsuario/PostulanteDatosPr
 import EdicionDatosPersonalesPostulante from './Components/perfilUsuario/EdicionDatosPersonalesPostulante';
 import PerfilEmpresaPublico from './Components/empresa/EmpresaPerfilPublico'
 import PerfilPostulantePublico from './Components/perfilUsuario/UsuarioPerfilPublico'
+import MiCV from './Components/perfilUsuario/miCV/MiCV';
 import { CheckRole } from './PrivateRoute';
 function App() {
   const postulante = 1
@@ -149,6 +150,11 @@ function App() {
           <Route exact path="/miPerfil/misDatos/editar">
             <CheckRole role={postulante}>
               <EdicionDatosPersonalesPostulante/>
+            </CheckRole>
+          </Route>
+          <Route exact path="/miPerfil/miCV">
+            <CheckRole role={postulante}>
+              <MiCV/>
             </CheckRole>
           </Route>
           <Route path="*">

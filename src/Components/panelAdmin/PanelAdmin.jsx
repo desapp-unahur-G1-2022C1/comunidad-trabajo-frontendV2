@@ -28,7 +28,7 @@ const PanelAdmin = () => {
           <Box>
             <Stack direction="row" spacing={2} sx={{ padding: "1rem" }}>
               <Avatar
-                src="/broken-image.jpg"
+                src="https://cdn.discordapp.com/attachments/967448302029254666/1031649016074731530/unknown.png"
                 sx={{ height: "8rem", width: "8rem" }}
               />
             </Stack>

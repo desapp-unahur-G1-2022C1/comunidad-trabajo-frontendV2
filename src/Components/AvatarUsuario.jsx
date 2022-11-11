@@ -6,6 +6,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 const AvatarUsuario = () => {
 
@@ -80,18 +82,53 @@ const AvatarUsuario = () => {
       cambiarGrupo(0)
       history.push("/")
     }
+
+
+    const [foto, setFoto] = useState();
+
+    function splitFileName(str) {
+      return str.split("|")[1];
+    }
+  
+  
+    useEffect(() => {
+      const traerFoto = async () => {
+        const fetchedData = await axios.get(
+          `https://comunidad-backend-v3.herokuapp.com/files`,
+          {
+            headers: {
+              "type": "image/jpeg",
+              "file": splitFileName(datosUsuario.foto)
+            },
+            responseType: 'blob'
+          }
+        );
+  
+        console.log(fetchedData)
+        const imageBlob = new Blob([fetchedData.data], { type: "image/jpeg" });
+        console.log(imageBlob)
+        const virtualUrl = URL.createObjectURL(imageBlob);
+        console.log(virtualUrl)
+        setFoto(virtualUrl)
+  
+  
+      }
+      traerFoto();
+    }, []);
+
+
   return (
     <Fragment>
     {
       grupo == 3
       ?
-      <Avatar onClick={handleClick} {...stringAvatar(`A D`)  }/>
+      <Avatar onClick={handleClick} src="https://cdn.discordapp.com/attachments/967448302029254666/1031649016074731530/unknown.png"  />
       :
       grupo == 2
       ?
       <Avatar onClick={handleClick} {...stringAvatar(`${datosUsuario.nombre_empresa}`)  }/>
       :
-      <Avatar onClick={handleClick} {...stringAvatar(`${datosUsuario.nombre}` + " " + `${datosUsuario.apellido}`)  }/>
+      datosUsuario.foto != "path de la foto" ? <Avatar onClick={handleClick} src={foto}/>:<Avatar onClick={handleClick} {...stringAvatar(`${datosUsuario.nombre}` + " " + `${datosUsuario.apellido}`)  }/>
     }
     <Menu
         id="simple-menu"
