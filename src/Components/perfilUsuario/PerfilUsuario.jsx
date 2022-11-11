@@ -10,6 +10,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import Swal from 'sweetalert2';
 
 
 export default function PerfilUsuario() {
@@ -24,29 +25,50 @@ export default function PerfilUsuario() {
 
   const [uploadFoto, setUploadFoto] = useState(null)
 
-    const handleSubmit  = async (e) => {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append('uploadFoto', uploadFoto);
-        try {
-            const res = await axios({
-              method: "post",
-              url: "https://comunidad-backend-v3.herokuapp.com/files/foto/",
-              data: formData,
-              headers: { 
-                "Content-Type": "multipart/form-data",
-                "id": datosUsuario.id
-            },
-            });
-          } catch (err) {
-            console.log(err);
+  function recargarDespuesDe5Segundos() {
+    setTimeout(function () { window.location.reload() }, 1000);
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('uploadFoto', uploadFoto);
+    try {
+      const res = await axios({
+        method: "post",
+        url: "https://comunidad-backend-v3.herokuapp.com/files/foto/",
+        data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "id": datosUsuario.id
+        },
+      })
+      Swal.fire({
+        icon: 'success',
+        title: 'Su registro fue realizado correctamente',
+        confirmButtonText: 'Finalizar',
+        text: 'Para continuar pulse el boton',
+        footer: '',
+        showCloseButton: true
+      })
+        .then(async function (result) {
+          if (result.value) {
+            await axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${datosUsuario.Usuario.id}`)
+              .then(({ data }) => {
+                console.log(data)
+                sessionStorage.setItem('datosUsuario', JSON.stringify(data));
+                recargarDespuesDe5Segundos()
+              })
           }
+        });
+    } catch (err) {
+      console.log(err);
     }
+  }
 
-    const handleFileSelect = (e) => {
-        setUploadFoto(e.target.files[0])
-        
-    }
+  const handleFileSelect = (e) => {
+    setUploadFoto(e.target.files[0])
+
+  }
 
 
 
@@ -87,7 +109,7 @@ export default function PerfilUsuario() {
       <Box>
         <Box sx={{ display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
           <Box>
-          <Stack direction="row" spacing={1} sx={{ padding: "1rem"}}>
+            <Stack direction="row" spacing={1} sx={{ padding: "1rem" }}>
               <Avatar
                 src={foto}
                 sx={{ height: "8rem", width: "8rem", border: "4px solid", borderColor: "primary.main" }}
