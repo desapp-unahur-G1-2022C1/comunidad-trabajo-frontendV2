@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import Header from '../../Header';
-import { Typography } from '@mui/material';
+import { FormControl, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import axios from 'axios';
@@ -11,10 +11,30 @@ const MiCV = () => {
 
     const [pdf, setPdf] = useState();
 
-    const [selectedFile, setSelectedFile] = useState(null)
+    const [uploadCV, setUploadCV] = useState(null)
 
+    const handleSubmit  = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('uploadCV', uploadCV);
+        try {
+            const res = await axios({
+              method: "post",
+              url: "https://comunidad-backend-v3.herokuapp.com/files/cv/",
+              data: formData,
+              headers: { 
+                "Content-Type": "multipart/form-data",
+                "id": datosUsuario.id
+            },
+            });
+          } catch (err) {
+            console.log(err);
+          }
+    }
 
-
+    const handleFileSelect = (e) => {
+        setUploadCV(e.target.files[0])
+    }
 
     function splitFileName(str) {
         return str.split("|")[1];
@@ -71,9 +91,10 @@ const MiCV = () => {
                     </Button>
                 </Box>
                 <Box sx={{ display: "flex", justifyContent: "center", padding: "1rem" }}>
-                    <Button variant="contained" size="large" sx={{ width: "25rem" }}>
-                        ACTUALIZAR MI CV
-                    </Button>
+                   <form onSubmit={handleSubmit}> 
+                        <input type="file" onChange={handleFileSelect} />
+                        <input type="submit" value="SUBIR CV" />
+                   </form>
                 </Box>
             </Box>
 

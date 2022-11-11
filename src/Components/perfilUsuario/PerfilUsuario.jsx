@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
-import { BorderAll } from '@mui/icons-material';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 
 export default function PerfilUsuario() {
@@ -58,11 +58,12 @@ export default function PerfilUsuario() {
       <Box>
         <Box sx={{ display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
           <Box>
-          <Stack direction="row" spacing={2} sx={{ padding: "1rem"}}>
+          <Stack direction="row" spacing={1} sx={{ padding: "1rem"}}>
               <Avatar
                 src={foto}
                 sx={{ height: "8rem", width: "8rem", border: "4px solid", borderColor: "primary.main" }}
               />
+              <AddAPhotoIcon />
             </Stack>
           </Box>
           <Box sx={{ padding: "1rem" }}>
