@@ -22,6 +22,35 @@ export default function PerfilUsuario() {
 
   const [foto, setFoto] = useState();
 
+  const [uploadFoto, setUploadFoto] = useState(null)
+
+    const handleSubmit  = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('uploadFoto', uploadFoto);
+        try {
+            const res = await axios({
+              method: "post",
+              url: "https://comunidad-backend-v3.herokuapp.com/files/foto/",
+              data: formData,
+              headers: { 
+                "Content-Type": "multipart/form-data",
+                "id": datosUsuario.id
+            },
+            });
+          } catch (err) {
+            console.log(err);
+          }
+    }
+
+    const handleFileSelect = (e) => {
+        setUploadFoto(e.target.files[0])
+        
+    }
+
+
+
+
   function splitFileName(str) {
     return str.split("|")[1];
   }
@@ -63,10 +92,13 @@ export default function PerfilUsuario() {
                 src={foto}
                 sx={{ height: "8rem", width: "8rem", border: "4px solid", borderColor: "primary.main" }}
               />
-              <AddAPhotoIcon />
+              <form onSubmit={handleSubmit}>
+                <input type="file" onChange={handleFileSelect} />
+                <button type="submit">Subir</button>
+              </form>
             </Stack>
           </Box>
-          <Box sx={{ padding: "1rem" }}>
+          <Box >
             <h1 style={{ display: "flex" }}>{datosUsuario.nombre} {datosUsuario.apellido}</h1>
             <h2 style={{ display: "flex" }}>{datosUsuario.Usuario.usuario}</h2>
           </Box>
