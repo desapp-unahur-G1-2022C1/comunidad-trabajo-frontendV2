@@ -25,8 +25,8 @@ export default function PerfilUsuario() {
 
   const [uploadFoto, setUploadFoto] = useState(null)
 
-  function recargarDespuesDe5Segundos() {
-    setTimeout(function () { window.location.reload() }, 1000);
+  function timeoutReload() {
+    setTimeout(function () { window.location.reload() }, 2000);
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,7 +56,7 @@ export default function PerfilUsuario() {
               .then(({ data }) => {
                 console.log(data)
                 sessionStorage.setItem('datosUsuario', JSON.stringify(data));
-                recargarDespuesDe5Segundos()
+                timeoutReload()
               })
           }
         });
