@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+
 import Swal from 'sweetalert2';
 
 
@@ -69,9 +69,6 @@ export default function PerfilUsuario() {
     setUploadFoto(e.target.files[0])
 
   }
-
-
-
 
   function splitFileName(str) {
     return str.split("|")[1];

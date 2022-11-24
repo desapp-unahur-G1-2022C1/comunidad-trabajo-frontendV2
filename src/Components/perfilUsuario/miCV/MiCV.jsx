@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 
 const MiCV = () => {
     var datosUsuario = JSON.parse(sessionStorage.getItem('datosUsuario'))
@@ -12,6 +13,10 @@ const MiCV = () => {
     const [pdf, setPdf] = useState();
 
     const [uploadCV, setUploadCV] = useState(null)
+
+    function timeoutReload() {
+        setTimeout(function () { window.location.reload() }, 2000);
+      }
 
     const handleSubmit  = async (e) => {
         e.preventDefault();
@@ -26,11 +31,29 @@ const MiCV = () => {
                 "Content-Type": "multipart/form-data",
                 "id": datosUsuario.id
             },
-            });
-          } catch (err) {
-            console.log(err);
+            })
+            Swal.fire({
+                icon: 'success',
+                title: 'Su registro fue realizado correctamente',
+                confirmButtonText: 'Finalizar',
+                text: 'Para continuar pulse el boton',
+                footer: '',
+                showCloseButton: true
+              })
+                .then(async function (result) {
+                  if (result.value) {
+                    await axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${datosUsuario.Usuario.id}`)
+                      .then(({ data }) => {
+                        console.log(data)
+                        sessionStorage.setItem('datosUsuario', JSON.stringify(data));
+                        timeoutReload()
+                      })
+                  }
+                });
+            } catch (err) {
+              console.log(err);
+            }
           }
-    }
 
     const handleFileSelect = (e) => {
         setUploadCV(e.target.files[0])
