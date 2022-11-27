@@ -12,6 +12,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 
 export default function ListaPostulantes({postulantes}) {
   
@@ -51,6 +52,8 @@ export default function ListaPostulantes({postulantes}) {
   
 
   
+
+  
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -75,7 +78,7 @@ export default function ListaPostulantes({postulantes}) {
               </TableCell>
               <TableCell align="center"><Typography variant="body1">{postulante.Postulante.id}</Typography></TableCell>
               <TableCell align="center"><Typography variant="body1"></Typography>{postulante.Postulante.telefono}</TableCell>
-              <TableCell align="center"><Typography variant="body1">{postulante.Postulante.email}</Typography></TableCell>
+              <TableCell align="center"><Typography variant="body1"><PictureAsPdfIcon color="error"/></Typography></TableCell>
               <TableCell align="center"><Typography variant="body1"></Typography>{postulante.contactado? <CheckIcon color="success"/>: <CloseIcon color="error"/> }</TableCell>
               <TableCell align="center">
                 <Link to={`/postulante/${postulante.Postulante.id}`} style={{textDecoration:'none'}}>
