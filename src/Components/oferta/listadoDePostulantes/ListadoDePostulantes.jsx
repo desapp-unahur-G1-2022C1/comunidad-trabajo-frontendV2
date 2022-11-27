@@ -41,22 +41,7 @@ const ListadoPostulantes = () => {
         }
     }
 
-    /*const traerPostulantes = async (e) => {
-        try{
-            e.preventDefault()
-            const {usuario} = e.target.elements;
-            const usuarioValue = usuario.value;
-            const api = await fetch(`https://comunidad-de-trabajo.herokuapp.com/usuariosPostulantes/?buscarApellido=${usuarioValue}`);
-            const datos = await api.json();
-            console.log(datos.Postulantes.rows)
-            setPostulantes(datos.Postulantes.rows)
-            
-            
-        }
-        catch(err){
-            console.log(err)
-        }
-    }*/
+
 
     const traerOferta = `https://comunidad-de-trabajo.herokuapp.com/ofertas/${id}`;
     const [idEmpresa, setIdEmpresa] = useState('')
