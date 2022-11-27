@@ -17,7 +17,9 @@ const ListadoEmpresas = () => {
     const [cantPaginas, setCantPaginas] = useState(0);
     const [pagina, setPagina] = useState(1);
     const [busquedaActual, setBusquedaActual] = useState('');
+    const [cantEmpresasPendientes, setCantEmpresasPendientes] = useState(0);
     const API_URL = `https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=0&limite=5&idEstado=1&ordenar=id`;
+    const API_EMPRESAS_PENDIENTES = `https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=0&idEstado=2`;
 
     const primerLlamado = async () => {
         if(llamado === false){
@@ -54,6 +56,20 @@ const ListadoEmpresas = () => {
         }
     }
 
+    const traerCantEmpresasPendientes = async () => {
+        try{
+            
+            const api = await fetch(API_EMPRESAS_PENDIENTES);
+            const datos = await api.json();
+            setCantEmpresasPendientes(datos.empresas.count);
+
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+    traerCantEmpresasPendientes();
+
     const cambiarPagina = async (e, p) => {
         
         const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=${p - 1}&ordenar=id&limite=5&idEstado=1&nombreEmpresa=${busquedaActual}`);;
@@ -75,7 +91,7 @@ const ListadoEmpresas = () => {
             <Box sx={{display:"flex", justifyContent:"start"}}>
                 <Link to="/admin/listadoEmpresasInactivas" style={{textDecoration:"none"}}>
                     <Button variant="contained" color='edit' sx={{margin:"0.5rem"}}>
-                        Aceptar empresas
+                        Empresas pendientes ({cantEmpresasPendientes})
                     </Button>
                 </Link>
             </Box>

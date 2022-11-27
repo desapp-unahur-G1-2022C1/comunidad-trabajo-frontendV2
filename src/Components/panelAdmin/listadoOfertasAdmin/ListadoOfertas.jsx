@@ -15,6 +15,9 @@ const ListadoOfertas = () => {
     const [cantPaginas, setCantPaginas] = useState(0);
     const [pagina, setPagina] = useState(1);
     const [busquedaActual, setBusquedaActual] = useState('');
+    const [cantOfertasPendientes, setCantOfertasPendientes] = useState(0);
+    const [cantOfertasRevision, setCantOfertasRevision] = useState(0);
+
 
     const API_URL = `https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=0&limite=3&ordenar=id&idEstado=1`;
 
@@ -61,6 +64,30 @@ const ListadoOfertas = () => {
         console.log(datos.ofertas.rows)
     }
 
+    const traerOfertasPendientes = async () => {
+        try {
+            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=0&ordenar=id&idEstado=2`);
+            const datos = await api.json();
+            setCantOfertasPendientes(datos.ofertas.count)
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
+    traerOfertasPendientes()
+
+    const traerOfertasRevision = async () => {
+        try {
+            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=0&ordenar=id&idEstado=4`);
+            const datos = await api.json();
+            setCantOfertasRevision(datos.ofertas.count)
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
+    traerOfertasRevision()
+
 
     primerLlamado()
     return (
@@ -72,14 +99,14 @@ const ListadoOfertas = () => {
                 <Box sx={{ display: "flex", justifyContent: "start" }}>
                     <Link to="/admin/listadoOfertasInactivas" style={{ textDecoration: "none" }}>
                         <Button variant="contained" color='edit' sx={{ margin: "0.5rem" }}>
-                            Ofertas pendientes
+                            Ofertas pendientes ({cantOfertasPendientes})
                         </Button>
                     </Link>
                 </Box>
                 <Box sx={{ display: "flex", justifyContent: "start" }}>
                     <Link to="/admin/listadoOfertasRevision" style={{ textDecoration: "none" }}>
                         <Button variant="contained" color='error' sx={{ margin: "0.5rem" }}>
-                            Ofertas en revisión
+                            Ofertas en revisión ({cantOfertasRevision})
                         </Button>
                     </Link>
                 </Box>
