@@ -10,6 +10,11 @@ import { Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 export default function ListaPostulantes({postulantes}) {
+
+
+
+
+  
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -18,6 +23,8 @@ export default function ListaPostulantes({postulantes}) {
             <TableCell><Typography variant='h6'>Nombre</Typography></TableCell>
             <TableCell align="left"><Typography variant='h6'>DNI</Typography></TableCell>
             <TableCell align="left"><Typography variant='h6'>Telefono</Typography></TableCell>
+            <TableCell align="left"><Typography variant='h6'>CV</Typography></TableCell>
+            <TableCell align="left"><Typography variant='h6'>Contactado</Typography></TableCell>
             <TableCell align="left"><Typography variant='h6'>Acciones</Typography></TableCell>
           </TableRow>
         </TableHead>
@@ -32,6 +39,8 @@ export default function ListaPostulantes({postulantes}) {
               </TableCell>
               <TableCell align="left"><Typography variant="body1">{postulante.Postulante.id}</Typography></TableCell>
               <TableCell align="left"><Typography variant="body1"></Typography>{postulante.Postulante.telefono}</TableCell>
+              <TableCell align="left"><Typography variant="body1">{postulante.Postulante.email}</Typography></TableCell>
+              <TableCell align="left"><Typography variant="body1"></Typography>{postulante.Postulante.contactado ? 'Si' : 'No'}</TableCell>
               <TableCell align="left">
                 <Link to={`/postulante/${postulante.Postulante.id}`} style={{textDecoration:'none'}}>
                   <Button variant="contained" color='relaxed'sx={{margin:"0.5rem"}}>
@@ -39,6 +48,7 @@ export default function ListaPostulantes({postulantes}) {
                   </Button>
                 </Link>
                 <Button variant="outlined" color='error'sx={{margin:"0.5rem"}}>Borrar</Button>
+                <Button variant="contained" color='info'sx={{margin:"0.5rem"}}>Contactado</Button>
               </TableCell>
             </TableRow>
           ))}
