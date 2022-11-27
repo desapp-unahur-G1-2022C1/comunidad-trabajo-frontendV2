@@ -191,8 +191,11 @@ const CustomizedDialogs = () => {
           `Te has postulado a ${tituloOferta}`,
           '¡Buena suerte!',
           'success'
+        ).then(() => {
+          timeoutReload()
+        }
         )
-        timeoutReload()
+        
         
       }
     })
