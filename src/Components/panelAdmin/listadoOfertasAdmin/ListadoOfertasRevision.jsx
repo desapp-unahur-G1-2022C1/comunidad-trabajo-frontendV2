@@ -3,9 +3,9 @@ import React, { Fragment, useState} from 'react'
 import Header from "../../Header"
 import { Box, Button, Pagination } from '@mui/material';
 import BarraBusquedaOfertas from './BarraBusquedaOfertas';
-import ListaOfertasInactivas from './ListaOfertasInactivas';
 import BusquedaNoEncontrada from './BusquedaNoEncontrada';
 import { Link } from 'react-router-dom';
+import ListaOfertasRevision from './ListaOfertasRevision';
 
 const ListadoOfertas = () => {
 
@@ -39,7 +39,7 @@ const ListadoOfertas = () => {
             const {oferta} = e.target.elements;
             const ofertaValue = oferta.value;
             setBusquedaActual(ofertaValue);
-            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=0&limite=3&idEstado=2&ordenar=id&buscarTitulo=${ofertaValue}`);
+            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=0&limite=3&idEstado=4&ordenar=id&buscarTitulo=${ofertaValue}`);
             const datos = await api.json();
             console.log(datos)
             setPagina(1)
@@ -54,7 +54,7 @@ const ListadoOfertas = () => {
 
     const cambiarPagina = async (e, p) => {
         
-        const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&ordenar=id&buscarTitulo=${busquedaActual}&idEstado=2`);
+        const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&ordenar=id&buscarTitulo=${busquedaActual}&idEstado=4`);
         const datos = await api.json();
         setOfertas(datos.ofertas.rows);
         setPagina(p)
@@ -70,7 +70,7 @@ const ListadoOfertas = () => {
             traerOfertas={traerOfertas}/>
             {ofertas.length === 0 && llamado === true ?
             <BusquedaNoEncontrada/> :
-            <ListaOfertasInactivas
+            <ListaOfertasRevision
             ofertas={ofertas}/>}
             <Pagination color="primary" count={cantPaginas} page={pagina} onChange={cambiarPagina} sx={{display:"flex", justifyContent:"center", margin:"1rem"}}/>
         </Fragment>
