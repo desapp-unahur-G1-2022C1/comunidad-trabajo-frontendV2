@@ -150,6 +150,11 @@ const CustomizedDialogs = () => {
       console.log(encontrado)
     }
   }
+
+  function timeoutReload() {
+    setTimeout(function () { window.location.reload() }, 1000);
+  }
+
   estaPostulado()
   const postularse = async (e) => {
     e.preventDefault()
@@ -187,6 +192,8 @@ const CustomizedDialogs = () => {
           '¡Buena suerte!',
           'success'
         )
+        timeoutReload()
+        
       }
     })
   }
