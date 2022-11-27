@@ -77,7 +77,7 @@ const ListadoOfertas = () => {
                     </Link>
                 </Box>
                 <Box sx={{ display: "flex", justifyContent: "start" }}>
-                    <Link to="/admin/listadoOfertasInactivas" style={{ textDecoration: "none" }}>
+                    <Link to="/admin/listadoOfertasRevision" style={{ textDecoration: "none" }}>
                         <Button variant="contained" color='error' sx={{ margin: "0.5rem" }}>
                             Ofertas en revisión
                         </Button>

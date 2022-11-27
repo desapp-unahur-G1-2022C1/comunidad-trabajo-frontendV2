@@ -30,6 +30,8 @@ import EdicionDatosPersonalesPostulante from './Components/perfilUsuario/Edicion
 import PerfilEmpresaPublico from './Components/empresa/EmpresaPerfilPublico'
 import PerfilPostulantePublico from './Components/perfilUsuario/UsuarioPerfilPublico'
 import MiCV from './Components/perfilUsuario/miCV/MiCV';
+import ListadoOfertasRevision from "./Components/panelAdmin/listadoOfertasAdmin/ListadoOfertasRevision";
+
 import { CheckRole } from './PrivateRoute';
 function App() {
   const postulante = 1
@@ -124,6 +126,11 @@ function App() {
           <Route exact path="/admin/listadoOfertasInactivas">
             <CheckRole role={admin}>
               <ListadoOfertasInactivas/>
+            </CheckRole>
+          </Route>
+          <Route exact path="/admin/listadoOfertasRevision">
+            <CheckRole role={admin}>
+              <ListadoOfertasRevision/>
             </CheckRole>
           </Route>
           <Route exact path="/edicionEmpresa">
