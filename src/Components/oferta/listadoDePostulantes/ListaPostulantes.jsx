@@ -10,6 +10,8 @@ import { Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function ListaPostulantes({postulantes}) {
   
@@ -74,15 +76,15 @@ export default function ListaPostulantes({postulantes}) {
               <TableCell align="center"><Typography variant="body1">{postulante.Postulante.id}</Typography></TableCell>
               <TableCell align="center"><Typography variant="body1"></Typography>{postulante.Postulante.telefono}</TableCell>
               <TableCell align="center"><Typography variant="body1">{postulante.Postulante.email}</Typography></TableCell>
-              <TableCell align="center"><Typography variant="body1"></Typography>{postulante.contactado? "si" : "no" }</TableCell>
+              <TableCell align="center"><Typography variant="body1"></Typography>{postulante.contactado? <CheckIcon color="success"/>: <CloseIcon color="error"/> }</TableCell>
               <TableCell align="center">
                 <Link to={`/postulante/${postulante.Postulante.id}`} style={{textDecoration:'none'}}>
                   <Button variant="contained" color='relaxed'sx={{margin:"0.5rem"}}>
                     Ver
                   </Button>
                 </Link>
-                <Button variant="outlined" color='error'sx={{margin:"0.5rem"}}>Borrar</Button>
-                <Button variant="contained" color='info'sx={{margin:"0.5rem"}} onClick={ async ()=> contactar(postulante.id)} >Contactado</Button>
+                
+                {postulante.contactado? <Button variant="contained" color='info'sx={{margin:"0.5rem"}} onClick={ async ()=> contactar(postulante.id)} disabled >Contactado</Button> : <Button variant="contained" color='info'sx={{margin:"0.5rem"}} onClick={ async ()=> contactar(postulante.id)}  >Contactado</Button> }
               </TableCell>
             </TableRow>
           ))}
