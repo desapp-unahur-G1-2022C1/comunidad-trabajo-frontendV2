@@ -44,9 +44,9 @@ export default function PerfilUsuario() {
       })
       Swal.fire({
         icon: 'success',
-        title: 'Su registro fue realizado correctamente',
+        title: 'Su foto fue actualizada correctamente',
         confirmButtonText: 'Finalizar',
-        text: 'Para continuar pulse el boton',
+        text: 'Para continuar pulse finalizar',
         footer: '',
         showCloseButton: true
       })

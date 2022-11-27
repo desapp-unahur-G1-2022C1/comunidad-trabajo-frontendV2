@@ -34,9 +34,9 @@ const MiCV = () => {
             })
             Swal.fire({
                 icon: 'success',
-                title: 'Su registro fue realizado correctamente',
+                title: 'Su CV fue actualizado correctamente',
                 confirmButtonText: 'Finalizar',
-                text: 'Para continuar pulse el boton',
+                text: 'Para continuar pulse finalizar',
                 footer: '',
                 showCloseButton: true
               })
