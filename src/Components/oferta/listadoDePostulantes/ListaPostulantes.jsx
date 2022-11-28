@@ -20,7 +20,7 @@ import { useState, useEffect } from 'react';
 export default function ListaPostulantes({ postulantes }) {
 
 
-  const [pdf, setPdf] = useState(null);
+  const [pdf, setPdf] = useState();
 
   const contactar = async (idPostulacion) => {
 
