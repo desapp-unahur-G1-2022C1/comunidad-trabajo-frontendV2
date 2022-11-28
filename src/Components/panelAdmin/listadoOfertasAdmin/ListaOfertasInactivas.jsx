@@ -71,7 +71,7 @@ export default function ListaOfertas({ofertas}) {
               <TableCell align="left">
                 <Link style={{textDecoration:"none"}} to={`/oferta/${oferta.id}`}><Button variant="contained" color="relaxed" sx={{margin:"0.5rem"}}>VER OFERTA</Button></Link>
                 <Button variant="contained" color='relaxed'sx={{margin:"0.5rem"}} onClick={async ()=> activar(oferta.id)}>Aceptar</Button>
-              <Button variant="outlined" color='error'sx={{margin:"0.5rem"}}>Accion2</Button></TableCell>
+              <Button variant="outlined" color='error'sx={{margin:"0.5rem"}}>Suspender</Button></TableCell>
               
             </TableRow>
           ))} 

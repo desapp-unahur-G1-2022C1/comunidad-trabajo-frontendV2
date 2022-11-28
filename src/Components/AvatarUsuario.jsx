@@ -123,7 +123,7 @@ const AvatarUsuario = () => {
     {
       grupo == 3
       ?
-      <Avatar onClick={handleClick} src="https://cdn.discordapp.com/attachments/967448302029254666/1031649016074731530/unknown.png"  />
+      <Avatar onClick={handleClick} src="https://cdn.discordapp.com/attachments/955646153297395722/1046571441262432257/hurlingham.png"  />
       :
       grupo == 2
       ?
