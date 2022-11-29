@@ -128,7 +128,9 @@ export default function PerfilUsuario() {
           </Link>
         </Box>
         <Box sx={{ display: "flex", justifyContent: "center", padding: "1rem" }}>
-          <Button variant="contained" sx={{ width: "25rem" }}>Datos academicos</Button>
+          <Link to='/miPerfil/datosAcademicos' style={{ textDecoration: 'none' }}>
+            <Button variant="contained" sx={{ width: "25rem" }}>Datos academicos</Button>
+          </Link>
         </Box>
         <Box sx={{ display: "flex", justifyContent: "center", padding: "1rem" }}>
           <Link to='/miPerfil/MiCV' style={{ textDecoration: 'none' }}>

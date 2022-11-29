@@ -26,6 +26,7 @@ import PostulantesDeOferta from './Components/oferta/listadoDePostulantes/Listad
 import EdicionEmpresa from './Components/empresa/EdicionEmpresa';
 import EdicionOferta from './Components/oferta/EdicionOferta';
 import PostulanteDatosPrivado from './Components/perfilUsuario/PostulanteDatosPrivado';
+import PostulanteDatosAcademicosPrivado from './Components/perfilUsuario/PostulanteDatosAcademicosPrivado';
 import EdicionDatosPersonalesPostulante from './Components/perfilUsuario/EdicionDatosPersonalesPostulante';
 import PerfilEmpresaPublico from './Components/empresa/EmpresaPerfilPublico'
 import PerfilPostulantePublico from './Components/perfilUsuario/UsuarioPerfilPublico'
@@ -152,6 +153,11 @@ function App() {
           <Route exact path="/miPerfil/misDatos">
             <CheckRole role={postulante}>
               <PostulanteDatosPrivado/>
+            </CheckRole>
+          </Route>
+          <Route exact path="/miPerfil/datosAcademicos">
+            <CheckRole role={postulante}>
+              <PostulanteDatosAcademicosPrivado/>
             </CheckRole>
           </Route>
           <Route exact path="/miPerfil/misDatos/editar">
