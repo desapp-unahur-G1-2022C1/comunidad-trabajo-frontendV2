@@ -135,7 +135,7 @@ export default function WithMaterialUI() {
       nombreEmpresa: undefined,
       cuit: undefined,
       descripcion: undefined,
-      pais: undefined,
+      pais: "Argentina",
       provincia: undefined,
       ciudad: undefined,
       calle: undefined,
@@ -158,7 +158,7 @@ export default function WithMaterialUI() {
         nombreEmpresa: values.nombreEmpresa,
         cuit: values.cuit,
         descripcion: values.descripcion,
-        pais: values.pais,
+        pais: "Argentina",
         provincia: values.provincia,
         ciudad: values.ciudad,
         calle: values.calle,
@@ -274,9 +274,10 @@ export default function WithMaterialUI() {
                 <TextField
                   id="pais"
                   name="pais"
-                  label="Pais"
+                  label="Argentina"
                   variant="outlined"
                   fullWidth
+                  disabled
                   value={formik.values.pais}
                   onChange={formik.handleChange}
                   error={
