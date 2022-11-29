@@ -8,6 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Button, Typography } from '@mui/material';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 export default function ListaEmpresas({empresas}) {
   function activar(idEmpresa){
@@ -34,7 +35,9 @@ export default function ListaEmpresas({empresas}) {
           text: 'Verifique sus datos',
           footer: '',
           showCloseButton: true
-        })))
+        }))).then(
+          window.location.reload()
+        )
   };
   return (
     <TableContainer component={Paper}>
@@ -60,7 +63,13 @@ export default function ListaEmpresas({empresas}) {
               <TableCell align="left"><Typography variant="body1">{empresa.nombre_empresa}</Typography></TableCell>
               <TableCell align="left"><Typography variant="body1">{empresa.nombre_representante}</Typography></TableCell>
               <TableCell align="left"><Typography variant="body1">{empresa.email_representante}</Typography></TableCell>
-              <TableCell align="left"><Button variant="contained" color='relaxed'sx={{margin:"0.5rem"}} onClick={async ()=> activar(empresa.id)}>Activar</Button><Button variant="outlined" color='error'sx={{margin:"0.5rem"}}>Accion2</Button></TableCell>
+              <TableCell align="left">
+              <Button variant="contained" color='relaxed'sx={{margin:"0.5rem"}} onClick={async ()=> activar(empresa.id)}>Activar</Button>
+              <Link style={{textDecoration:"none"}} to={`/empresa/${empresa.id}`}>
+                  <Button variant="contained" color='relaxed'sx={{margin:"0.5rem"}}>Ver empresa</Button>
+                </Link>
+              <Button variant="outlined" color='error'sx={{margin:"0.5rem"}}>Accion2</Button>
+              </TableCell>
               
             </TableRow>
           ))}
