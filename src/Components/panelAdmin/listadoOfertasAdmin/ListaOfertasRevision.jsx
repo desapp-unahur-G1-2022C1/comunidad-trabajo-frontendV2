@@ -7,7 +7,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Button, Typography } from '@mui/material';
-import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 
 export default function ListaOfertas({ofertas}) {
