@@ -11,39 +11,7 @@ import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 
 export default function ListaOfertas({ofertas}) {
-  const activar = async (idOferta) => {
-    var data = {
-      idEstado: 1
-    };
-      await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${idOferta}`, {
-      method: "PUT", // or 'PUT'
-      body: JSON.stringify(data), // data can be `string` or {object}!
-      headers: {
-        "Content-Type": "application/json",
-      },
-      
-      })
-      Swal.fire({
-        icon: 'success',
-        title: 'La oferta fue aceptada exitosamente',
-        confirmButtonText: 'Finalizar',
-        text: 'Para continuar pulse el boton',
-        footer: '',
-        showCloseButton: true
-      })
-      .then(
-        window.location.reload()
-      )
-      .catch((error) => console.error("Error:", error,
-      Swal.fire({
-        icon: 'error',
-        title: 'Ocurrio un error al aceptar la oferta',
-        confirmButtonText: 'Volver',
-        text: 'Verifique sus datos',
-        footer: '',
-        showCloseButton: true
-      })),)
-  }
+ 
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -70,8 +38,7 @@ export default function ListaOfertas({ofertas}) {
               <TableCell align="left"><Typography variant="body1">{oferta.Estado.nombre_estado}</Typography></TableCell>
               <TableCell align="left">
                 <Link style={{textDecoration:"none"}} to={`/oferta/${oferta.id}`}><Button variant="contained" color="relaxed" sx={{margin:"0.5rem"}}>VER OFERTA</Button></Link>
-                <Button variant="contained" color='relaxed'sx={{margin:"0.5rem"}} onClick={async ()=> activar(oferta.id)}>Aceptar</Button>
-              <Button variant="outlined" color='error'sx={{margin:"0.5rem"}}>Accion2</Button></TableCell>
+              </TableCell>
               
             </TableRow>
           ))} 

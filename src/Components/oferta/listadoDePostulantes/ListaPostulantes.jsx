@@ -22,6 +22,9 @@ export default function ListaPostulantes({ postulantes }) {
 
   const [pdf, setPdf] = useState();
 
+  function timeoutReload() {
+    setTimeout(function () { window.location.reload() }, 1000);
+  }
   const contactar = async (idPostulacion) => {
 
 
@@ -49,7 +52,7 @@ export default function ListaPostulantes({ postulantes }) {
       showCloseButton: true
     })
       .then(
-        window.location.reload()
+        timeoutReload()
       )
       .catch((error) => console.error("Error:", error,
         Swal.fire({

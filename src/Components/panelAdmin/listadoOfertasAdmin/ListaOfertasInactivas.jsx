@@ -10,40 +10,92 @@ import { Button, Typography } from '@mui/material';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 
-export default function ListaOfertas({ofertas}) {
-  const activar = async (idOferta) => {
+export default function ListaOfertas({ ofertas }) {
+
+
+  function timeoutReload() {
+    setTimeout(function () { window.location.reload() }, 1000);
+  }
+
+
+  const activar = async (idOferta, titulo) => {
     var data = {
       idEstado: 1
     };
-      await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${idOferta}`, {
-      method: "PUT", // or 'PUT'
-      body: JSON.stringify(data), // data can be `string` or {object}!
-      headers: {
-        "Content-Type": "application/json",
-      },
-      
+
+    Swal.fire({
+      icon: 'warning',
+      title: `¿Deseas activar la oferta ${titulo}?`,
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Activar',
+      cancelButtonText: 'Cancelar'
+    })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${idOferta}`, {
+              method: "PUT", // or 'PUT'
+              body: JSON.stringify(data), // data can be `string` or {object}!
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+          } catch (error) {
+            console.log(error)
+          }
+          Swal.fire(
+            `La oferta fue aceptada correctamente`,
+            'success'
+          ).then(
+            () => {
+              window.location.reload()
+            }
+          )       
+        }
       })
-      Swal.fire({
-        icon: 'success',
-        title: 'La oferta fue aceptada exitosamente',
-        confirmButtonText: 'Finalizar',
-        text: 'Para continuar pulse el boton',
-        footer: '',
-        showCloseButton: true
+    }
+
+  const mandarARevision = async (idOferta, titulo) => {
+    var data = {
+      idEstado: 4
+    };
+
+    Swal.fire({
+      icon: 'warning',
+      title: `¿Deseas mandar a revisión ${titulo}?`,
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '¡Si, mandar!',
+      cancelButtonText: 'No, cancelar'
+    })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${idOferta}`, {
+              method: "PUT", // or 'PUT'
+              body: JSON.stringify(data), // data can be `string` or {object}!
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+          } catch (error) {
+            console.log(error)
+          }
+          Swal.fire({
+            icon: 'success',
+            title: `La oferta fue aceptada correctamente`,
+            confirmButtonText: 'Continuar',
+        }).then(
+            () => {
+              window.location.reload()
+            }
+          )       
+        }
       })
-      .then(
-        window.location.reload()
-      )
-      .catch((error) => console.error("Error:", error,
-      Swal.fire({
-        icon: 'error',
-        title: 'Ocurrio un error al aceptar la oferta',
-        confirmButtonText: 'Volver',
-        text: 'Verifique sus datos',
-        footer: '',
-        showCloseButton: true
-      })),)
-  }
+    }
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -52,29 +104,30 @@ export default function ListaOfertas({ofertas}) {
             <TableCell><Typography variant='h6'>ID Oferta</Typography></TableCell>
             <TableCell align="left"><Typography variant='h6'>Titulo</Typography></TableCell>
             <TableCell align="left"><Typography variant='h6'>Empresa</Typography></TableCell>
-            <TableCell align="left"><Typography variant ="h6">Estado</Typography></TableCell>
+            <TableCell align="left"><Typography variant="h6">Estado</Typography></TableCell>
             <TableCell align="left"><Typography variant='h6'>Acciones</Typography></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {ofertas.map((oferta) => (
             <TableRow
-              
+
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-              {oferta.id}
+                {oferta.id}
               </TableCell>
               <TableCell align="left"><Typography variant="body1">{oferta.titulo_oferta}</Typography></TableCell>
               <TableCell align="left"><Typography variant="body1"></Typography>{oferta.Empresa.nombre_empresa}</TableCell>
               <TableCell align="left"><Typography variant="body1">{oferta.Estado.nombre_estado}</Typography></TableCell>
               <TableCell align="left">
-                <Link style={{textDecoration:"none"}} to={`/oferta/${oferta.id}`}><Button variant="contained" color="relaxed" sx={{margin:"0.5rem"}}>VER OFERTA</Button></Link>
-                <Button variant="contained" color='relaxed'sx={{margin:"0.5rem"}} onClick={async ()=> activar(oferta.id)}>Aceptar</Button>
-              <Button variant="outlined" color='error'sx={{margin:"0.5rem"}}>Suspender</Button></TableCell>
-              
+                <Link style={{ textDecoration: "none" }} to={`/oferta/${oferta.id}`}><Button variant="contained" color="relaxed" sx={{ margin: "0.5rem" }}>VER OFERTA</Button></Link>
+                <Button variant="contained" color='relaxed' sx={{ margin: "0.5rem" }} onClick={async() => activar(oferta.id, oferta.titulo_oferta)}>Activar</Button>
+                <Button variant="outlined" color='error' sx={{ margin: "0.5rem" }} onClick={async() => mandarARevision(oferta.id, oferta.titulo_oferta)}>Suspender</Button>
+              </TableCell>
+
             </TableRow>
-          ))} 
+          ))}
         </TableBody>
       </Table>
     </TableContainer>
