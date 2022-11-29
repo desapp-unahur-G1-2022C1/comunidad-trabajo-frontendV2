@@ -247,7 +247,8 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
         areasEstudio: values.areasEstudio,
         otrosDetalles: values.otrosDetalles,
         beneficios: values.beneficios,
-        remuneracion: values.remuneracion
+        remuneracion: values.remuneracion,
+        idEstado: 2
       };
       console.log(values);
         await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${datosOferta.id}`, {
