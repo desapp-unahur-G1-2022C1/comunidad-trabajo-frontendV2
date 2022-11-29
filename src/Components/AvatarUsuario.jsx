@@ -99,7 +99,7 @@ const AvatarUsuario = () => {
           {
             headers: {
               "type": "image/jpeg",
-              "file": splitFileName(datosUsuario.foto)
+              "file": grupo == 2 ? splitFileName(datosUsuario.logo) : splitFileName(datosUsuario.foto),
             },
             responseType: 'blob'
           }
@@ -123,13 +123,10 @@ const AvatarUsuario = () => {
     {
       grupo == 3
       ?
-      <Avatar onClick={handleClick} src="https://cdn.discordapp.com/attachments/955646153297395722/1046571441262432257/hurlingham.png"  />
+      <Avatar onClick={handleClick} src="https://cdn.discordapp.com/attachments/955646153297395722/1046571441262432257/hurlingham.png"/>
+      
       :
-      grupo == 2
-      ?
-      <Avatar onClick={handleClick} {...stringAvatar(`${datosUsuario.nombre_empresa}`)  }/>
-      :
-      datosUsuario.foto != "path de la foto" ? <Avatar onClick={handleClick} src={foto}/>:<Avatar onClick={handleClick} {...stringAvatar(`${datosUsuario.nombre}` + " " + `${datosUsuario.apellido}`)  }/>
+      datosUsuario.foto != "path de la foto" ? <Avatar onClick={handleClick} src={foto} sx={{backgroundColor:"white"}}/>:<Avatar onClick={handleClick} {...stringAvatar(`${datosUsuario.nombre}` + " " + `${datosUsuario.apellido}`)  }/>
     }
     <Menu
         id="simple-menu"
