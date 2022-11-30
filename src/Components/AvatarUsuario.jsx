@@ -123,10 +123,10 @@ const AvatarUsuario = () => {
     {
       grupo == 3
       ?
-      <Avatar onClick={handleClick} src="https://cdn.discordapp.com/attachments/955646153297395722/1046571441262432257/hurlingham.png"/>
+      <Avatar onClick={handleClick} src="https://cdn.discordapp.com/attachments/955646153297395722/1046571441262432257/hurlingham.png" className='fotoPerfil'/>
       
       :
-      datosUsuario.foto != "path de la foto" ? <Avatar onClick={handleClick} src={foto} sx={{backgroundColor:"white"}}/>:<Avatar onClick={handleClick} {...stringAvatar(`${datosUsuario.nombre}` + " " + `${datosUsuario.apellido}`)  }/>
+      datosUsuario.foto != "path de la foto" ? <Avatar onClick={handleClick} src={foto} sx={{backgroundColor:"white"}} className='fotoPerfil'/>:<Avatar onClick={handleClick} {...stringAvatar(`${datosUsuario.nombre}` + " " + `${datosUsuario.apellido}`)  } className='fotoPerfil'/>
     }
     <Menu
         id="simple-menu"
