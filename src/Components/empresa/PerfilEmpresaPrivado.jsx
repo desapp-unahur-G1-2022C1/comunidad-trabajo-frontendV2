@@ -19,15 +19,25 @@ export default function PerfilEmpresa() {
   var idUsuario = sessionStorage.getItem('idUsuario')
   var grupo = sessionStorage.getItem('grupo')
   var estaLogeado = sessionStorage.getItem('estaLogeado')
-  axios.get(`https://comunidad-backend-v3.herokuapp.com/empresas/idUsuario/${idUsuario}`)
-    .then(({ data }) => {
-      cambiarDatosUsuario(data)
-    })
+  
 
   
   const [logo, setLogo] = useState();
   const [uploadLogo, setUploadLogo] = useState(null)
+  const [llamado, setLlamado] = useState(false)
 
+
+  async function actualizarDatos(){
+    if (llamado == false) {
+      
+      await axios.get(`https://comunidad-backend-v3.herokuapp.com/empresas/idUsuario/${idUsuario}`)
+      .then(({ data }) => {
+        cambiarDatosUsuario(data)
+      })
+      setLlamado(true)
+    } 
+  }
+  actualizarDatos()
 
   function timeoutReload() {
     setTimeout(function () { window.location.reload() }, 2000);
@@ -67,6 +77,8 @@ export default function PerfilEmpresa() {
       console.log(err);
     }
   }
+
+  
 
 
   const handleFileSelect = (e) => {

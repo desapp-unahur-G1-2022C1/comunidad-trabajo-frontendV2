@@ -26,11 +26,19 @@ export default function DividerText() {
   var grupo =  sessionStorage.getItem('grupo')
   var estaLogeado = sessionStorage.getItem('estaLogeado')
 
+  const [llamado, setLlamado] = useState(false)
   
-  
-    axios.get(`https://comunidad-backend-v3.herokuapp.com/empresas/idUsuario/${idUsuario}`)
-            .then(({data}) => {
-                    cambiarDatosUsuario(data)})
+  async function actualizarDatos(){
+    if (llamado == false) {
+      
+      await axios.get(`https://comunidad-backend-v3.herokuapp.com/empresas/idUsuario/${idUsuario}`)
+      .then(({ data }) => {
+        cambiarDatosUsuario(data)
+      })
+      setLlamado(true)
+    } 
+  }
+  actualizarDatos()
             
             
   return (
