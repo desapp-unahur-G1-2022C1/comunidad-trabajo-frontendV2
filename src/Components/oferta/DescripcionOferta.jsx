@@ -19,6 +19,7 @@ import Swal from "sweetalert2";
 import PlaceIcon from '@mui/icons-material/Place';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ScheduleIcon from '@mui/icons-material/Schedule';
+import NotFound from "../NotFound";
 
 
 
@@ -255,6 +256,11 @@ const CustomizedDialogs = () => {
         }
         return (
           <Fragment>
+            {
+            estado != 2 && (grupo == 1 || grupo == null)
+            ?
+            <NotFound></NotFound>
+            :
             <Header />
             <Grid containter spacing={2}>
               <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -392,7 +398,9 @@ const CustomizedDialogs = () => {
 
                   </Box>
                 </Box>
-              </Box></Grid>
+              </Box>
+            </Grid> 
+          }
           </Fragment>
         );
       };
