@@ -81,7 +81,7 @@ const AvatarUsuario = () => {
       cambiarDatosUsuario([])
       cambiarIdUsuario(0)
       cambiarGrupo(0)
-      history.push("/")
+      window.location.reload()
     }
 
 

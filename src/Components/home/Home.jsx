@@ -18,14 +18,20 @@ const Home = () => {
   const [pagina, setPagina] = useState(1);
   const [busquedaActual, setBusquedaActual] = useState('');
 
-  
-  
-  const API_URL = `https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=0&limite=3&ordenar=id&idEstado=1`;
+  var API_URL = `https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=0&limite=3&ordenar=id&idEstado=1`;
+  var grupo =  sessionStorage.getItem('grupo')
+  var datosUsuario = JSON.parse(sessionStorage.getItem('datosUsuario'))
 
   const primerLlamado = async () => {
     if (llamado === false){
       try{
-        const api = await fetch(API_URL);
+        var api
+        if (grupo == 2){
+          api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/cuit/${datosUsuario.id}?pagina=0&limite=3&ordenar=id&idEstado=1`);
+        }
+        else{
+          api = await fetch(API_URL);
+        }
         const datos = await api.json();
         setListaOfertas(datos.ofertas.rows)
         setCantPaginas(datos.totalPaginas)
@@ -42,7 +48,13 @@ const Home = () => {
       const {ofertas} = e.target.elements;
       const ofertasValue = ofertas.value;
       setBusquedaActual(ofertasValue);
-      const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=0&limite=3&buscarTitulo=${ofertasValue}&ordenar=id&idEstado=1`);
+      var api
+      if (grupo == 2){
+        api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/cuit/${datosUsuario.id}?pagina=0&limite=&buscarTitulo=${ofertasValue}3&ordenar=id&idEstado=1`);
+      }
+      else{
+        api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=0&limite=3&buscarTitulo=${ofertasValue}&ordenar=id&idEstado=1`);
+      }
       const datos = await api.json();
       setPagina(1)
       setListaOfertas(datos.ofertas.rows);
@@ -55,7 +67,13 @@ const Home = () => {
   }
 
   const cambiarPagina = async (e, p) => {
-    const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&ordenar=id&buscarTitulo=${busquedaActual}&idEstado=1`);
+    var api
+    if (grupo == 2){
+      api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/cuit/${datosUsuario.id}?pagina=${p - 1}&limite=3&ordenar=id&buscarTitulo=${busquedaActual}&idEstado=1`);
+    }
+    else{
+      api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=${p - 1}&limite=3&ordenar=id&buscarTitulo=${busquedaActual}&idEstado=1`);
+    }
     const datos = await api.json();
     setListaOfertas(datos.ofertas.rows);
     setPagina(p)
