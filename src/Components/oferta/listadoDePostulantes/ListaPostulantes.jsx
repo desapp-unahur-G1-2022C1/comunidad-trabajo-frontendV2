@@ -14,13 +14,14 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { useState, useEffect } from 'react';
+import { useRef } from 'react';
 
 
 
 export default function ListaPostulantes({ postulantes }) {
 
 
-  const [pdf, setPdf] = useState();
+  const pdf = useRef();
 
   function timeoutReload() {
     setTimeout(function () { window.location.reload() }, 1000);
@@ -89,14 +90,15 @@ export default function ListaPostulantes({ postulantes }) {
     console.log(pdfBlob);
     const virtualUrl = URL.createObjectURL(pdfBlob);
     console.log(virtualUrl);
-    setPdf(virtualUrl);
+    pdf.current = virtualUrl
+    console.log(pdf)
   };
 
 
 
-  function abrirPdf(cvPostulante) {
-    traerPdf(cvPostulante);
-    window.open(pdf);
+  async function abrirPdf(cvPostulante) {
+      await traerPdf(cvPostulante);
+      window.open(pdf.current);
     }
 
 
@@ -127,7 +129,7 @@ export default function ListaPostulantes({ postulantes }) {
               </TableCell>
               <TableCell align="center"><Typography variant="body1">{postulante.Postulante.id}</Typography></TableCell>
               <TableCell align="center"><Typography variant="body1"></Typography>{postulante.Postulante.telefono}</TableCell>
-              <TableCell align="center"><Button onMouseOver={async () => traerPdf(postulante.Postulante.cv)} onClick={async () =>abrirPdf(postulante.Postulante.cv)}><PictureAsPdfIcon color="error" /></Button></TableCell>
+              <TableCell align="center"><Button onClick={async () =>abrirPdf(postulante.Postulante.cv)}><PictureAsPdfIcon color="error" /></Button></TableCell>
               <TableCell align="center"><Typography variant="body1"></Typography>{postulante.contactado ? <CheckIcon color="success" /> : <CloseIcon color="error" />}</TableCell>
               <TableCell align="center">
                 <Link to={`/postulante/${postulante.Postulante.id}`} style={{ textDecoration: 'none' }}>
