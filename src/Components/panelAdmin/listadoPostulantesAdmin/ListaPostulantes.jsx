@@ -36,7 +36,6 @@ export default function ListaPostulantes({postulantes}) {
                 <Link style={{textDecoration:"none"}} to={`/postulante/${postulante.id}`}>
                   <Button variant="contained" color='relaxed'sx={{margin:"0.5rem"}}>Ver postulante</Button>
                 </Link>
-                <Button variant="outlined" color='error'sx={{margin:"0.5rem"}}>Accion2</Button>
               </TableCell>
               
             </TableRow>

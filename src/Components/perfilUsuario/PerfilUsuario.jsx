@@ -99,6 +99,8 @@ export default function PerfilUsuario() {
     }
     traerFoto();
   }, []);
+
+  
   return (
 
     <React.Fragment>
