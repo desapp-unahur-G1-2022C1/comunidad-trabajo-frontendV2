@@ -33,7 +33,7 @@ const Ofertas = ({listaOfertas}) => {
       <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}> 
       
         {listaOfertas.map((oferta) => (
-          <Card sx={{ width: 500, margin: "1rem" }} key = {oferta.id}>
+          <Card sx={{ width: 500, margin: "1rem" }} key = {oferta.id} className='oferta'>
             <Box sx={{ height: 400, margin: "1rem" }}>
             <CardMedia
               component="img"
