@@ -10,29 +10,3 @@
 .selectCss:hover{
     background-color: #dadada;
 }
-
-.fotoPerfil{
-    height: 70px;
-    width: 70px;
-    transition: 200ms;
-    position: relative;
-    width: 70%;
-    height: 70%;
-  }
-  
-.fotoPerfil:hover{
-    transform: scale(1.40);
-}
-
-.oferta{
-    height: 70px;
-    width: 70px;
-    transition: 5000ms;
-    position: relative;
-    width: 70%;
-    height: 70%;
-  }
-  
-  .oferta:hover{
-    transform: scale(1.05);
-  }
