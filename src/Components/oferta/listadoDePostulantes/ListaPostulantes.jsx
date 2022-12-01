@@ -90,8 +90,6 @@ export default function ListaPostulantes({ postulantes }) {
     const virtualUrl = URL.createObjectURL(pdfBlob);
     console.log(virtualUrl);
     setPdf(virtualUrl);
-    
-
   };
 
 
@@ -99,7 +97,7 @@ export default function ListaPostulantes({ postulantes }) {
   function abrirPdf(cvPostulante) {
     traerPdf(cvPostulante);
     window.open(pdf);
-  }
+    }
 
 
 
@@ -129,7 +127,7 @@ export default function ListaPostulantes({ postulantes }) {
               </TableCell>
               <TableCell align="center"><Typography variant="body1">{postulante.Postulante.id}</Typography></TableCell>
               <TableCell align="center"><Typography variant="body1"></Typography>{postulante.Postulante.telefono}</TableCell>
-              <TableCell align="center"><Button onClick={async () =>abrirPdf(postulante.Postulante.cv)}><PictureAsPdfIcon color="error" /></Button></TableCell>
+              <TableCell align="center"><Button onMouseOver={async () => traerPdf(postulante.Postulante.cv)} onClick={async () =>abrirPdf(postulante.Postulante.cv)}><PictureAsPdfIcon color="error" /></Button></TableCell>
               <TableCell align="center"><Typography variant="body1"></Typography>{postulante.contactado ? <CheckIcon color="success" /> : <CloseIcon color="error" />}</TableCell>
               <TableCell align="center">
                 <Link to={`/postulante/${postulante.Postulante.id}`} style={{ textDecoration: 'none' }}>

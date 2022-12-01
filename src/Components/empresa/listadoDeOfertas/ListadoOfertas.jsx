@@ -30,8 +30,8 @@ const ListadoOfertas = () => {
             const api = await fetch(API_URL);
             const datos = await api.json();
             setLlamado(true)
-            setOfertas(datos)
-            console.log(datos)
+            setOfertas(datos.ofertas.rows)
+            console.log(datos.ofertas.rows)
             
             }
             catch(error){
