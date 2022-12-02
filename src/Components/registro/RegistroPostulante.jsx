@@ -73,7 +73,7 @@ export default function WithMaterialUI() {
     if (llamadoTipoDocumento === false) {
       try {
         const api = await fetch(
-          `https://comunidad-de-trabajo.herokuapp.com/tiposDocumentos`
+          `https://comunidad-backend-v3-production.up.railway.app/tiposDocumentos`
         );
         const datos = await api.json();
         setTiposDocumentos(datos.tipos_documentos);
@@ -92,7 +92,7 @@ export default function WithMaterialUI() {
     if (llamadoListaCarreras === false) {
       try {
         const api = await fetch(
-          `https://comunidad-backend-v3.herokuapp.com/carreras/`
+          `https://comunidad-backend-v3-production.up.railway.app/carreras/`
         );
         const datos = await api.json();
         setListaCarreras(datos.carreras);
@@ -111,7 +111,7 @@ export default function WithMaterialUI() {
     if (llamadoTipoDocumento === false) {
       try {
         const api = await fetch(
-          `https://comunidad-backend-v3.herokuapp.com/estudios/`
+          `https://comunidad-backend-v3-production.up.railway.app/estudios/`
         );
         const datos = await api.json();
         setListaEstudios(datos.estudios);
@@ -130,7 +130,7 @@ export default function WithMaterialUI() {
     if (llamadoProvincias === false) {
       try {
         const api = await fetch(
-          `https://comunidad-backend-v3.herokuapp.com/provincias`
+          `https://comunidad-backend-v3-production.up.railway.app/provincias`
         );
         const datos = await api.json();
         setListaProvincias(datos.provincias);
@@ -150,7 +150,7 @@ export default function WithMaterialUI() {
     if (provinciaActual != provincia) {
       try {
         const api = await fetch(
-          `https://comunidad-backend-v3.herokuapp.com/ciudades/?idProvincia=${provincia}`
+          `https://comunidad-backend-v3-production.up.railway.app/ciudades/?idProvincia=${provincia}`
         );
         const datos = await api.json();
         console.log(datos)
@@ -169,7 +169,7 @@ export default function WithMaterialUI() {
     if (llamadoIdiomas === false) {
       try {
         const api = await fetch(
-          `https://comunidad-backend-v3.herokuapp.com/idiomas`
+          `https://comunidad-backend-v3-production.up.railway.app/idiomas`
         );
         const datos = await api.json();
         console.log(datos.idiomas)
@@ -188,7 +188,7 @@ export default function WithMaterialUI() {
     if (llamadoNiveles === false) {
       try {
         const api = await fetch(
-          `https://comunidad-backend-v3.herokuapp.com/nivelesIdiomas`
+          `https://comunidad-backend-v3-production.up.railway.app/nivelesIdiomas`
         );
         const datos = await api.json();
         setListaNiveles(datos.niveles_idiomas);
@@ -287,7 +287,7 @@ export default function WithMaterialUI() {
       console.log(values);
       console.log(IdActual);
       if (IdActual == listaIDs.length - 1){
-        fetch("https://comunidad-backend-v3.herokuapp.com/postulantes/", {
+        fetch("https://comunidad-backend-v3-production.up.railway.app/postulantes/", {
         method: "POST", // or 'PUT'
         body: JSON.stringify(data), // data can be `string` or {object}!
         headers: {

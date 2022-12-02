@@ -111,7 +111,7 @@ export default function WithMaterialUI()  {
   var estaLogeado = sessionStorage.getItem('estaLogeado')
 
   const { id } = useParams();
-  const API_URL = `https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${id}`;
+  const API_URL = `https://comunidad-backend-v3-production.up.railway.app/ofertas/idOferta/${id}`;
 
   const [llamadoOferta, setLlamadoOferta] = useState(false);
   const  descripcionAPI = async () => {
@@ -136,7 +136,7 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
     if (llamadolistaEstudio === false) {
       try {
         const api = await fetch(
-          `https://comunidad-de-trabajo.herokuapp.com/estudios/`
+          `https://comunidad-backend-v3-production.up.railway.app/estudios/`
         );
         const datos = await api.json();
         setlistaEstudio(datos.estudios);
@@ -155,7 +155,7 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
     if (llamadolistaCarrera === false) {
       try {
         const api = await fetch(
-          `https://comunidad-de-trabajo.herokuapp.com/carreras/`
+          `https://comunidad-backend-v3-production.up.railway.app/carreras/`
         );
         const datos = await api.json();
         setlistaCarrera(datos.carreras);
@@ -174,7 +174,7 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
     if (llamadolistaJornada === false) {
       try {
         const api = await fetch(
-          ` https://comunidad-backend-v3.herokuapp.com/jornadas/`
+          ` https://comunidad-backend-v3-production.up.railway.app/jornadas/`
         );
         const datos = await api.json();
         setlistaJornada(datos.jornadas);
@@ -193,7 +193,7 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
     if (llamadolistaContrato === false) {
       try {
         const api = await fetch(
-          ` https://comunidad-backend-v3.herokuapp.com/contratos/`
+          ` https://comunidad-backend-v3-production.up.railway.app/contratos/`
         );
         const datos = await api.json();
         setlistaContrato(datos.contratos);
@@ -251,7 +251,7 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
         idEstado: 2
       };
       console.log(values);
-        await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${datosOferta.id}`, {
+        await fetch(`https://comunidad-backend-v3-production.up.railway.app/ofertas/idOferta/${datosOferta.id}`, {
         method: "PUT", // or 'PUT'
         body: JSON.stringify(data), // data can be `string` or {object}!
         headers: {

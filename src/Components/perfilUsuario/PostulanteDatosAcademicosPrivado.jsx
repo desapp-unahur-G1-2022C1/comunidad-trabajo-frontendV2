@@ -26,7 +26,7 @@ export default function DividerText() {
   var grupo =  sessionStorage.getItem('grupo')
   var estaLogeado = sessionStorage.getItem('estaLogeado')
 
-  axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${datosUsuario.Usuario.id}`)
+  axios.get(`https://comunidad-backend-v3-production.up.railway.app/postulantes/idUsuario/${datosUsuario.Usuario.id}`)
             .then(({data}) => {
                     cambiarDatosUsuario(data)
                     console.log(data)
