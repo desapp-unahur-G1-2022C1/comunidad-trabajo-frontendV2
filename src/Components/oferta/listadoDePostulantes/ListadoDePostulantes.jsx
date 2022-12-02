@@ -24,7 +24,7 @@ const ListadoPostulantes = () => {
     const [llamado, setLlamado] = useState(false);
     const [postulantes, setPostulantes] = useState([]);
     const { id } = useParams();
-    const API_URL = `https://comunidad-backend-v3.herokuapp.com/postulacionesId/oferta/?pagina=0&limite=10&id=${id}`
+    const API_URL = `https://comunidad-backend-v3-production.up.railway.app/postulacionesId/oferta/?pagina=0&limite=10&id=${id}`
 
     const primerLlamado = async () => {
         if(llamado === false){
@@ -43,7 +43,7 @@ const ListadoPostulantes = () => {
 
 
 
-    const traerOferta = `https://comunidad-de-trabajo.herokuapp.com/ofertas/${id}`;
+    const traerOferta = `https://comunidad-backend-v3-production.up.railway.app/ofertas/idOferta/${id}`;
     const [idEmpresa, setIdEmpresa] = useState('')
     const traerIdEmpresa = async () => {
       try {

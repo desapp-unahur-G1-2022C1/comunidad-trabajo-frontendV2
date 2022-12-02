@@ -25,7 +25,7 @@ const MiCV = () => {
         try {
             const res = await axios({
               method: "post",
-              url: "https://comunidad-backend-v3.herokuapp.com/files/cv/",
+              url: "https://comunidad-backend-v3-production.up.railway.app/files/cv/",
               data: formData,
               headers: { 
                 "Content-Type": "multipart/form-data",
@@ -42,7 +42,7 @@ const MiCV = () => {
               })
                 .then(async function (result) {
                   if (result.value) {
-                    await axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${datosUsuario.Usuario.id}`)
+                    await axios.get(`https://comunidad-backend-v3-production.up.railway.app/postulantes/idUsuario/${datosUsuario.Usuario.id}`)
                       .then(({ data }) => {
                         console.log(data)
                         sessionStorage.setItem('datosUsuario', JSON.stringify(data));
@@ -66,7 +66,7 @@ const MiCV = () => {
     useEffect(() => {
         const traerPdf = async () => {
             const fetchedData = await axios.get(
-                `https://comunidad-backend-v3.herokuapp.com/files`,
+                `https://comunidad-backend-v3-production.up.railway.app/files`,
                 {
                     headers: {
                         "Content-Type": "application/json",

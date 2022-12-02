@@ -31,7 +31,7 @@ const Login = () => {
     }
     const history = useHistory()
     const handleSubmit = async () => {
-        await axios.post('https://comunidad-backend-v3.herokuapp.com/usuarios/signin', body)
+        await axios.post('https://comunidad-backend-v3-production.up.railway.app/usuarios/signin', body)
         .then(({data}) => {
             console.log(data)
             cambiarToken(data.token)
@@ -49,7 +49,7 @@ const Login = () => {
               })
         }
         else if (data.grupo == 1){
-            axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${data.id}`)
+            axios.get(`https://comunidad-backend-v3-production.up.railway.app/postulantes/idUsuario/${data.id}`)
             .then(({data}) => {
                 cambiarEstadoLogeado(true)
                 cambiarDatosUsuario(data)
@@ -58,7 +58,7 @@ const Login = () => {
             })
         }
         else if (data.grupo == 2){
-            axios.get(`https://comunidad-backend-v3.herokuapp.com/empresas/idUsuario/${data.id}`)
+            axios.get(`https://comunidad-backend-v3-production.up.railway.app/empresas/idUsuario/${data.id}`)
             .then(({data}) => {
                     cambiarEstadoLogeado(true)
                     cambiarDatosUsuario(data)

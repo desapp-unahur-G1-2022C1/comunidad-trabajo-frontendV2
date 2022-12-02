@@ -28,7 +28,7 @@ export default function DividerText() {
   const [provinciaPostulante, setProvinciaPostulante] = useState()
   const [ciudadPostulante, setCiudadPostulante] = useState()
   const [fechaNacPostulante, setFechaNacPostulante] = useState()
-  axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/dni/${id}`)
+  axios.get(`https://comunidad-backend-v3-production.up.railway.app/postulantes/dni/${id}`)
     .then(({ data }) => {
       setNombrePostulante(data.nombre)
       setApellidoPostulante(data.apellido)

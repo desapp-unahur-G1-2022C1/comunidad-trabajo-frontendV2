@@ -95,7 +95,7 @@ const AvatarUsuario = () => {
     useEffect(() => {
       const traerFoto = async () => {
         const fetchedData = await axios.get(
-          `https://comunidad-backend-v3.herokuapp.com/files`,
+          `https://comunidad-backend-v3-production.up.railway.app/files`,
           {
             headers: {
               "type": "image/jpeg",
