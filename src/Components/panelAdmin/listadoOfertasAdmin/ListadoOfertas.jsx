@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react'
 
 import Header from "../../Header"
-import { Box, Button, Pagination } from '@mui/material';
+import { Box, Button, Pagination, Typography } from '@mui/material';
 import BarraBusquedaOfertas from './BarraBusquedaOfertas';
 import ListaOfertas from './ListaOfertas';
 import BusquedaNoEncontrada from './BusquedaNoEncontrada';
@@ -93,10 +93,13 @@ const ListadoOfertas = () => {
     return (
         <Fragment>
             <Header />
-            <BarraBusquedaOfertas
-                traerOfertas={traerOfertas} />
-            <Box sx={{display:"flex" }}>
-                <Box sx={{ display: "flex", justifyContent: "start" }}>
+            <Box sx={{ display: "flex", justifyContent: "space-evenly", alignItems: "center" }}>
+                <Typography variant="h4" sx={{ textAlign: "center", margin: "1rem" }}>Ofertas activas</Typography>
+                <BarraBusquedaOfertas
+                    traerOfertas={traerOfertas} />
+            </Box>
+            <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
+                <Box sx={{ display: "flex" }}>
                     <Link to="/admin/listadoOfertasInactivas" style={{ textDecoration: "none" }}>
                         <Button variant="contained" color='edit' sx={{ margin: "0.5rem" }}>
                             Ofertas pendientes ({cantOfertasPendientes})

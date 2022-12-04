@@ -23,6 +23,7 @@ const ListadoPostulantes = () => {
 
     const [llamado, setLlamado] = useState(false);
     const [postulantes, setPostulantes] = useState([]);
+    const [ofertaActual, setOfertaActual] = useState([]);
     const { id } = useParams();
     const API_URL = `https://comunidad-backend-v3-production.up.railway.app/postulacionesId/oferta/?pagina=0&limite=10&id=${id}`
 
@@ -43,12 +44,13 @@ const ListadoPostulantes = () => {
 
 
 
-    const traerOferta = `https://comunidad-backend-v3-production.up.railway.app/ofertas/idOferta/${id}`;
+    const API_OFERTA = `https://comunidad-backend-v3-production.up.railway.app/ofertas/idOferta/${id}`;
     const [idEmpresa, setIdEmpresa] = useState('')
     const traerIdEmpresa = async () => {
       try {
-        const api = await fetch(traerOferta);
+        const api = await fetch(API_OFERTA);
         const datos = await api.json();
+        setOfertaActual(datos)
         setIdEmpresa(datos.fk_id_empresa);
       } catch (error) {
         console.log(error);
@@ -66,6 +68,7 @@ const ListadoPostulantes = () => {
                 ?
                 <Box>
                 <Header/>
+                <Typography variant="h4" sx={{display:"flex", justifyContent:"center", margin:"1rem"}}> Postulantes a {ofertaActual.titulo_oferta} </Typography>
                 <ListaPostulantes
                 postulantes={postulantes}/>
                 </Box>

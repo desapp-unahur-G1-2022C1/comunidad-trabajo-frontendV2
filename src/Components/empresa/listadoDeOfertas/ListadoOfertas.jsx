@@ -1,4 +1,4 @@
-import React, { Fragment, useState} from 'react'
+import React, { Fragment, useState } from 'react'
 import { TextField } from '@mui/material/TextField';
 import { Button } from '@mui/material/Button';
 import { Box } from '@mui/system';
@@ -12,11 +12,11 @@ import { useContext } from 'react';
 
 const ListadoOfertas = () => {
 
-    const {cambiarDatosUsuario, cambiarToken, cambiarIdUsuario, cambiarEstadoLogeado, cambiarGrupo} = useContext(DatosUsuarioContextProvider)
+    const { cambiarDatosUsuario, cambiarToken, cambiarIdUsuario, cambiarEstadoLogeado, cambiarGrupo } = useContext(DatosUsuarioContextProvider)
     var datosUsuario = JSON.parse(sessionStorage.getItem('datosUsuario'))
     var token = sessionStorage.getItem('token')
     var idUsuario = sessionStorage.getItem('idUsuario')
-    var grupo =  sessionStorage.getItem('grupo')
+    var grupo = sessionStorage.getItem('grupo')
     var estaLogeado = sessionStorage.getItem('estaLogeado')
 
     const [llamado, setLlamado] = useState(false);
@@ -25,51 +25,53 @@ const ListadoOfertas = () => {
     const API_URL = `https://comunidad-backend-v3-production.up.railway.app/ofertas/cuit/${datosUsuario.id}/`
 
     const primerLlamado = async () => {
-        if(llamado === false){
-            try{
-            const api = await fetch(API_URL);
-            const datos = await api.json();
-            setLlamado(true)
-            setOfertas(datos)
-            console.log(datos)
-            
+        if (llamado === false) {
+            try {
+                const api = await fetch(API_URL);
+                const datos = await api.json();
+                setLlamado(true)
+                setOfertas(datos)
+                console.log(datos)
+
             }
-            catch(error){
+            catch (error) {
                 console.log(error)
             }
         }
     }
 
     const traerOfertas = async (e) => {
-        try{
+        try {
             e.preventDefault()
-            const {usuario} = e.target.elements;
+            const { usuario } = e.target.elements;
             const usuarioValue = usuario.value;
             const api = await fetch(`https://comunidad-backend-v3-production.up.railway.app/usuariosOfertas/?buscarApellido=${usuarioValue}`);
             const datos = await api.json();
             console.log(datos.Ofertas.rows)
             setOfertas(datos.Ofertas.rows)
-            
-            
+
+
         }
-        catch(err){
+        catch (err) {
             console.log(err)
         }
     }
 
     primerLlamado()
-    return (  
+    return (
         <Fragment>
-            <Header/>
-            <BarraBusquedaOfertas
-            traerOfertas={traerOfertas}/>
+            <Header />
+            <Box sx={{ display: "flex", justifyContent:"space-evenly",  alignItems:"center"}}>
+                <Typography variant="h4" sx={{ textAlign: "center", margin: "1rem" }}>Listado de Ofertas</Typography>
+                <BarraBusquedaOfertas traerOfertas={traerOfertas} />
+            </Box>
             {Ofertas.length === 0 && llamado === true ?
-            <BusquedaNoEncontrada/> :
-            <ListaOfertas
-            Ofertas={Ofertas}/>
+                <BusquedaNoEncontrada /> :
+                <ListaOfertas
+                    Ofertas={Ofertas} />
             }
         </Fragment>
     );
 }
- 
+
 export default ListadoOfertas;

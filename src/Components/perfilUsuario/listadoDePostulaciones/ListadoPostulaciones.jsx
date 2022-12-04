@@ -44,7 +44,10 @@ const ListadoOfertas = () => {
     return (  
         <Fragment>
             <Header/>
+            <Box sx={{display: 'flex', justifyContent: 'space-evenly', alignItems: 'center'}}>
+            <Typography variant="h4" sx={{textAlign:"center" , margin:"1rem"}}>Mis postulaciones</Typography>
             <BarraBusquedaOfertas/>
+            </Box>
             <ListaOfertas
             Ofertas={Ofertas}/>
         </Fragment>

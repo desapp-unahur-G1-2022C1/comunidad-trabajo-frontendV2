@@ -1,7 +1,7 @@
-import React, { Fragment, useState} from 'react'
+import React, { Fragment, useState } from 'react'
 
 import Header from "../../Header"
-import { Box, Button, Pagination } from '@mui/material';
+import { Box, Button, Pagination, Typography } from '@mui/material';
 import BarraBusquedaOfertas from './BarraBusquedaOfertas';
 import BusquedaNoEncontrada from './BusquedaNoEncontrada';
 import { Link } from 'react-router-dom';
@@ -19,24 +19,24 @@ const ListadoOfertas = () => {
     const API_URL = `https://comunidad-backend-v3-production.up.railway.app/ofertas/?pagina=0&limite=3&idEstado=4&ordenar=id`;
 
     const primerLlamado = async () => {
-        if(llamado === false){
-            try{
+        if (llamado === false) {
+            try {
                 const api = await fetch(API_URL);
                 const datos = await api.json();
                 setLlamado(true)
                 setOfertas(datos.ofertas.rows)
                 setCantPaginas(datos.totalPaginas)
             }
-            catch(error){
+            catch (error) {
                 console.log(error)
             }
         }
     }
 
     const traerOfertas = async (e, p) => {
-        try{
+        try {
             e.preventDefault()
-            const {oferta} = e.target.elements;
+            const { oferta } = e.target.elements;
             const ofertaValue = oferta.value;
             setBusquedaActual(ofertaValue);
             const api = await fetch(`https://comunidad-backend-v3-production.up.railway.app/ofertas/?pagina=0&limite=3&idEstado=4&ordenar=id&buscarTitulo=${ofertaValue}`);
@@ -47,13 +47,13 @@ const ListadoOfertas = () => {
             setCantPaginas(datos.totalPaginas)
             console.log(ofertas)
         }
-        catch(err){
+        catch (err) {
             console.log(err)
         }
     }
 
     const cambiarPagina = async (e, p) => {
-        
+
         const api = await fetch(`https://comunidad-backend-v3-production.up.railway.app/ofertas/?pagina=${p - 1}&limite=3&ordenar=id&buscarTitulo=${busquedaActual}&idEstado=4`);
         const datos = await api.json();
         setOfertas(datos.ofertas.rows);
@@ -63,18 +63,20 @@ const ListadoOfertas = () => {
 
 
     primerLlamado()
-    return (  
+    return (
         <Fragment>
-            <Header/>
-            <BarraBusquedaOfertas
-            traerOfertas={traerOfertas}/>
+            <Header />
+            <Box sx={{ display: "flex", justifyContent: "space-evenly", alignItems: "center" }}>
+                <Typography variant="h4" sx={{ textAlign: 'center', margin: "1rem" }}>Ofertas en revisión</Typography>
+                <BarraBusquedaOfertas traerOfertas={traerOfertas} />
+            </Box>
             {ofertas.length === 0 && llamado === true ?
-            <BusquedaNoEncontrada/> :
-            <ListaOfertasRevision
-            ofertas={ofertas}/>}
-            <Pagination color="primary" count={cantPaginas} page={pagina} onChange={cambiarPagina} sx={{display:"flex", justifyContent:"center", margin:"1rem"}}/>
+                <BusquedaNoEncontrada /> :
+                <ListaOfertasRevision
+                    ofertas={ofertas} />}
+            <Pagination color="primary" count={cantPaginas} page={pagina} onChange={cambiarPagina} sx={{ display: "flex", justifyContent: "center", margin: "1rem" }} />
         </Fragment>
     );
 }
- 
+
 export default ListadoOfertas;

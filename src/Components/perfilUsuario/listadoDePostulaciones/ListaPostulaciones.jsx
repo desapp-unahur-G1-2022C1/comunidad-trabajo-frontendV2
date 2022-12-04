@@ -57,9 +57,9 @@ export default function ListaOfertas({ Ofertas }) {
         <TableHead>
           <TableRow>
             <TableCell><Typography variant='h6'>ID Oferta</Typography></TableCell>
-            <TableCell align="left"><Typography variant='h6'>Nombre</Typography></TableCell>
-            <TableCell align="left"><Typography variant='h6'>Empresa</Typography></TableCell>
-            <TableCell align="left"><Typography variant='h6'>Acciones</Typography></TableCell>
+            <TableCell align="center"><Typography variant='h6'>Nombre</Typography></TableCell>
+            <TableCell align="center"><Typography variant='h6'>Empresa</Typography></TableCell>
+            <TableCell align="center"><Typography variant='h6'>Acciones</Typography></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -71,9 +71,9 @@ export default function ListaOfertas({ Ofertas }) {
               <TableCell component="th" scope="row">
                 {oferta.Oferta.id}
               </TableCell>
-              <TableCell align="left"><Typography variant="body1">{oferta.Oferta.titulo_oferta}</Typography></TableCell>
-              <TableCell align="left"><Typography variant="body1">{oferta.Empresa.nombre_empresa}</Typography></TableCell>
-              <TableCell align="left">
+              <TableCell align="center"><Typography variant="body1">{oferta.Oferta.titulo_oferta}</Typography></TableCell>
+              <TableCell align="center"><Typography variant="body1">{oferta.Empresa.nombre_empresa}</Typography></TableCell>
+              <TableCell align="center">
                 <Link to={`/oferta/${oferta.Oferta.id}`} style={{ textDecoration: 'none' }}>
                   <Button variant="contained" color='relaxed' sx={{ margin: "0.5rem" }}>
                     Ver

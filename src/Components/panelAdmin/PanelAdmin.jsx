@@ -22,7 +22,7 @@ const PanelAdmin = () => {
           sx={{
             display: "flex",
             justifyContent: "flex-start",
-            alignContent: "center",
+            alignItems: "center",
           }}
         >
           <Box>

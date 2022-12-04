@@ -10,24 +10,24 @@ import { Button, Typography } from '@mui/material';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 
-export default function ListaEmpresas({empresas}) {
-  function activar(idEmpresa){
-      fetch(`https://comunidad-backend-v3-production.up.railway.app/empresas/cuit/${idEmpresa}`, 
-        {
+export default function ListaEmpresas({ empresas }) {
+  function activar(idEmpresa) {
+    fetch(`https://comunidad-backend-v3-production.up.railway.app/empresas/cuit/${idEmpresa}`,
+      {
         method: 'PATCH', // or 'PUT'
         headers: {
-          "Content-Type": "application/json"  
+          "Content-Type": "application/json"
         }
       })
-        Swal.fire({
-          icon: 'success',
-          title: 'La empresa fue activada exitosamente',
-          confirmButtonText: 'Finalizar',
-          text: 'Para continuar pulse el boton',
-          footer: '',
-          showCloseButton: true,
-        })
-        .catch((err) => console.error("Error:", err, 
+    Swal.fire({
+      icon: 'success',
+      title: 'La empresa fue activada exitosamente',
+      confirmButtonText: 'Finalizar',
+      text: 'Para continuar pulse el boton',
+      footer: '',
+      showCloseButton: true,
+    })
+      .catch((err) => console.error("Error:", err,
         Swal.fire({
           icon: 'error',
           title: 'Ocurrio un error al activar la empresa',
@@ -45,32 +45,32 @@ export default function ListaEmpresas({empresas}) {
         <TableHead>
           <TableRow>
             <TableCell><Typography variant='h6'>CUIT</Typography></TableCell>
-            <TableCell align="left"><Typography variant='h6'>Nombre</Typography></TableCell>
-            <TableCell align="left"><Typography variant='h6'>Representante</Typography></TableCell>
-            <TableCell align="left"><Typography variant ="h6">Email</Typography></TableCell>
-            <TableCell align="left"><Typography variant='h6'>Acciones</Typography></TableCell>
+            <TableCell align="center"><Typography variant='h6'>Nombre</Typography></TableCell>
+            <TableCell align="center"><Typography variant='h6'>Representante</Typography></TableCell>
+            <TableCell align="center"><Typography variant="h6">Email</Typography></TableCell>
+            <TableCell align="center"><Typography variant='h6'>Acciones</Typography></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {empresas.map((empresa) => (
             <TableRow
-              
+
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
                 {empresa.id}
               </TableCell>
-              <TableCell align="left"><Typography variant="body1">{empresa.nombre_empresa}</Typography></TableCell>
-              <TableCell align="left"><Typography variant="body1">{empresa.nombre_representante}</Typography></TableCell>
-              <TableCell align="left"><Typography variant="body1">{empresa.email_representante}</Typography></TableCell>
-              <TableCell align="left">
-              <Button variant="contained" color='relaxed'sx={{margin:"0.5rem"}} onClick={async ()=> activar(empresa.id)}>Activar</Button>
-              <Link style={{textDecoration:"none"}} to={`/empresa/${empresa.id}`}>
-                  <Button variant="contained" color='relaxed'sx={{margin:"0.5rem"}}>Ver empresa</Button>
+              <TableCell align="center"><Typography variant="body1">{empresa.nombre_empresa}</Typography></TableCell>
+              <TableCell align="center"><Typography variant="body1">{empresa.nombre_representante}</Typography></TableCell>
+              <TableCell align="center"><Typography variant="body1">{empresa.email_representante}</Typography></TableCell>
+              <TableCell align="center">
+                <Button variant="contained" color='relaxed' sx={{ margin: "0.5rem" }} onClick={async () => activar(empresa.id)}>Activar</Button>
+                <Link style={{ textDecoration: "none" }} to={`/empresa/${empresa.id}`}>
+                  <Button variant="contained" color='relaxed' sx={{ margin: "0.5rem" }}>Ver empresa</Button>
                 </Link>
-              <Button variant="outlined" color='error'sx={{margin:"0.5rem"}}>Accion2</Button>
+
               </TableCell>
-              
+
             </TableRow>
           ))}
         </TableBody>

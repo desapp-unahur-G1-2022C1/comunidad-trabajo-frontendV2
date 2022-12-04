@@ -1,4 +1,4 @@
-import React, { Fragment, useState} from 'react'
+import React, { Fragment, useState } from 'react'
 import { TextField } from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import { Box } from '@mui/system';
@@ -20,24 +20,24 @@ const ListadoEmpresas = () => {
     const API_URL = `https://comunidad-backend-v3-production.up.railway.app/empresas/?pagina=0&limite=5&idEstado=2&ordenar=id`;
 
     const primerLlamado = async () => {
-        if(llamado === false){
-            try{
+        if (llamado === false) {
+            try {
                 const api = await fetch(API_URL);
                 const datos = await api.json();
                 setLlamado(true)
                 setEmpresas(datos.empresas.rows)
                 setCantPaginas(datos.totalPaginas)
             }
-            catch(error){
+            catch (error) {
                 console.log(error)
             }
         }
     }
 
     const traerEmpresas = async (e, p) => {
-        try{
+        try {
             e.preventDefault()
-            const {empresa} = e.target.elements;
+            const { empresa } = e.target.elements;
             const empresaValue = empresa.value;
             setBusquedaActual(empresaValue);
             const api = await fetch(`https://comunidad-backend-v3-production.up.railway.app/empresas/?pagina=0&limite=5&idEstado=2&ordenar=id&nombreEmpresa=${empresaValue}`);
@@ -48,39 +48,42 @@ const ListadoEmpresas = () => {
             setCantPaginas(datos.totalPaginas)
             console.log(empresas)
         }
-        catch(err){
+        catch (err) {
             console.log(err)
         }
     }
 
     const cambiarPagina = async (e, p) => {
-        
+
         const api = await fetch(`https://comunidad-backend-v3-production.up.railway.app/empresas/?pagina=${p - 1}&limite=5&idEstado=2&ordenar=id&nombreEmpresa=${busquedaActual}`);;
         const datos = await api.json();
         setEmpresas(datos.empresas.rows);
         setPagina(p)
         console.log(datos.empresas.rows)
-        
-        
+
+
     }
 
 
     primerLlamado()
-    return (  
+    return (
         <Fragment>
-            <Header/>
-            <BarraBusquedaEmpresas
-            traerEmpresas={traerEmpresas}/>
+            <Header />
+            <Box sx={{ display: "flex", justifyContent: "space-evenly", alignItems: "center" }}>
+                <Typography variant="h4" sx={{ textAlign: "center", margin_: "1rem" }}>Empresas pendientes</Typography>
+                <BarraBusquedaEmpresas
+                    traerEmpresas={traerEmpresas} />
+            </Box>
             {empresas.length === 0 && llamado === true ?
-            <BusquedaNoEncontrada/> :
-            <ListaEmpresasInactivas
-            empresas={empresas}/>}
-            <Pagination color="primary" count={cantPaginas} page={pagina} onChange={cambiarPagina} sx={{display:"flex", justifyContent:"center", margin:"1rem"}}/>
-        
-            
-            
+                <BusquedaNoEncontrada /> :
+                <ListaEmpresasInactivas
+                    empresas={empresas} />}
+            <Pagination color="primary" count={cantPaginas} page={pagina} onChange={cambiarPagina} sx={{ display: "flex", justifyContent: "center", margin: "1rem" }} />
+
+
+
         </Fragment>
     );
 }
- 
+
 export default ListadoEmpresas;

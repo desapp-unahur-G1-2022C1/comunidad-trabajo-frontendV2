@@ -1,11 +1,11 @@
 import React, { Fragment, useState} from 'react'
 
 import Header from "../../Header"
-import { Pagination } from '@mui/material';
+import { Pagination, Typography } from '@mui/material';
 import BarraBusquedaPostulantes from './BarraBusquedaPostulantes';
 import ListaPostulantes from './ListaPostulantes';
 import BusquedaNoEncontrada from './BusquedaNoEncontrada';
-
+import { Box } from '@mui/system';
 const ListadoPostulantes = () => {
 
 
@@ -64,8 +64,11 @@ const ListadoPostulantes = () => {
     return (  
         <Fragment>
             <Header/>
-            <BarraBusquedaPostulantes
+            <Box sx={{ display: "flex", justifyContent:"space-evenly",  alignItems:"center"}}>
+                <Typography variant="h4" sx={{textAlign: "center", margin: "1rem" }}>Listado de postulantes</Typography>
+                <BarraBusquedaPostulantes
             traerPostulantes={traerPostulantes}/>
+            </Box>
             {postulantes.length === 0 && llamado === true ?
             <BusquedaNoEncontrada/> :
             <ListaPostulantes
