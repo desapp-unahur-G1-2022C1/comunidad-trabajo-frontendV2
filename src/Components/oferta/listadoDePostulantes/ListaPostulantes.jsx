@@ -133,7 +133,7 @@ export default function ListaPostulantes({ postulantes }) {
                   </Button>
                 </Link>
 
-                {postulante.contactado ? <Button variant="contained" color='info' sx={{ margin: "0.5rem" }} onClick={async () => contactar(postulante.id)} disabled >Contactado</Button> : <Button variant="contained" color='info' sx={{ margin: "0.5rem" }} onClick={async () => contactar(postulante.id)}  >Contactado</Button>}
+                {postulante.contactado ? <Button variant="contained" color='info' sx={{ margin: "0.5rem" }}  disabled >Contactar</Button> : <Button variant="contained" color='info' sx={{ margin: "0.5rem" }} onClick={async () => contactar(postulante.id)}  >Contactar</Button>}
               </TableCell>
             </TableRow>
           ))}
