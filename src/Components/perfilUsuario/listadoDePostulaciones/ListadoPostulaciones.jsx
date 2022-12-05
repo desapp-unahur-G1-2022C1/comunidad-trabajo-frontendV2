@@ -22,7 +22,7 @@ const ListadoOfertas = () => {
     const [llamado, setLlamado] = useState(false);
     const [Ofertas, setOfertas] = useState([]);
 
-    const API_URL = `https://comunidad-backend-v3-production.up.railway.app/postulacionesId/postulante/?pagina=0&limite=10&id=${datosUsuario.id}`
+    const API_URL = `https://comunidad-backend-v3.herokuapp.com/postulacionesId/postulante/?pagina=0&limite=10&id=${datosUsuario.id}`
 
     const primerLlamado = async () => {
         if(llamado === false){

@@ -35,7 +35,7 @@ export default function PerfilUsuario() {
     try {
       const res = await axios({
         method: "post",
-        url: "https://comunidad-backend-v3-production.up.railway.app/files/foto/",
+        url: "https://comunidad-backend-v3.herokuapp.com/files/foto/",
         data: formData,
         headers: {
           "Content-Type": "multipart/form-data",
@@ -52,7 +52,7 @@ export default function PerfilUsuario() {
       })
         .then(async function (result) {
           if (result.value) {
-            await axios.get(`https://comunidad-backend-v3-production.up.railway.app/postulantes/idUsuario/${datosUsuario.Usuario.id}`)
+            await axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${datosUsuario.Usuario.id}`)
               .then(({ data }) => {
                 console.log(data)
                 sessionStorage.setItem('datosUsuario', JSON.stringify(data));
@@ -78,7 +78,7 @@ export default function PerfilUsuario() {
   useEffect(() => {
     const traerFoto = async () => {
       const fetchedData = await axios.get(
-        `https://comunidad-backend-v3-production.up.railway.app/files`,
+        `https://comunidad-backend-v3.herokuapp.com/files`,
         {
           headers: {
             "type": "image/jpeg",

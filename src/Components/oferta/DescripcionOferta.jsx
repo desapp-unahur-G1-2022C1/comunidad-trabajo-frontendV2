@@ -79,7 +79,7 @@ const CustomizedDialogs = () => {
   const [idEmpresa, setIdEmpresa] = useState();
   const [estado, setEstado] = useState();
   const [fechaPublicacion, setFechaPublicacion] = useState();
-  const API_URL = `https://comunidad-backend-v3-production.up.railway.app/ofertas/idOferta/${id}`;
+  const API_URL = `https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${id}`;
 
   const descripcionAPI = async () => {
 
@@ -132,7 +132,7 @@ const CustomizedDialogs = () => {
     let idsOfertas
     if (estaLogeado && datosUsuario.id != null) {
       try {
-        const api = await fetch(`https://comunidad-backend-v3-production.up.railway.app/postulacionesId/postulante/?&id=${datosUsuario.id}`);
+        const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/postulacionesId/postulante/?&id=${datosUsuario.id}`);
         const datos = await api.json();
         console.log(datos)
         idsOfertas = datos.postulaciones.rows.map(postulacion => postulacion.fk_id_oferta)
@@ -171,7 +171,7 @@ const CustomizedDialogs = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const api = await fetch(`https://comunidad-backend-v3-production.up.railway.app/postulaciones`, {
+          const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/postulaciones`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -208,7 +208,7 @@ const CustomizedDialogs = () => {
     var data = {
       idEstado: 1
     };
-    await fetch(`https://comunidad-backend-v3-production.up.railway.app/ofertas/idOferta/${idOferta}`, {
+    await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${idOferta}`, {
       method: "PUT", // or 'PUT'
       body: JSON.stringify(data), // data can be `string` or {object}!
       headers: {

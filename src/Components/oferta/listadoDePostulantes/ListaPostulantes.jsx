@@ -31,7 +31,7 @@ export default function ListaPostulantes({ postulantes }) {
     var data = {
       contactado: true
     };
-    await fetch(`https://comunidad-backend-v3-production.up.railway.app/postulaciones/${idPostulacion}`, {
+    await fetch(`https://comunidad-backend-v3.herokuapp.com/postulaciones/${idPostulacion}`, {
       method: "PUT", // or 'PUT'
       body: JSON.stringify(data), // data can be `string` or {object}!
       headers: {
@@ -69,7 +69,7 @@ export default function ListaPostulantes({ postulantes }) {
 
   const traerPdf = async (cvPostulante) => {
     const fetchedData = await axios.get(
-      `https://comunidad-backend-v3-production.up.railway.app/files`,
+      `https://comunidad-backend-v3.herokuapp.com/files`,
       {
         headers: {
           "Content-Type": "application/json",

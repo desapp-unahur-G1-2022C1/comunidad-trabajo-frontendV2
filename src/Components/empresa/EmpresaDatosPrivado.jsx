@@ -31,7 +31,7 @@ export default function DividerText() {
   async function actualizarDatos(){
     if (llamado == false) {
       
-      await axios.get(`https://comunidad-backend-v3-production.up.railway.app/empresas/idUsuario/${idUsuario}`)
+      await axios.get(`https://comunidad-backend-v3.herokuapp.com/empresas/idUsuario/${idUsuario}`)
       .then(({ data }) => {
         cambiarDatosUsuario(data)
       })

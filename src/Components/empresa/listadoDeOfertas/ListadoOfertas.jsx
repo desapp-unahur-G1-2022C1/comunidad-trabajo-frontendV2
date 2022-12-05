@@ -22,7 +22,7 @@ const ListadoOfertas = () => {
     const [llamado, setLlamado] = useState(false);
     const [Ofertas, setOfertas] = useState([]);
 
-    const API_URL = `https://comunidad-backend-v3-production.up.railway.app/ofertas/cuit/${datosUsuario.id}/`
+    const API_URL = `https://comunidad-backend-v3.herokuapp.com/ofertas/cuit/${datosUsuario.id}/`
 
     const primerLlamado = async () => {
         if (llamado === false) {
@@ -30,8 +30,8 @@ const ListadoOfertas = () => {
                 const api = await fetch(API_URL);
                 const datos = await api.json();
                 setLlamado(true)
-                setOfertas(datos)
-                console.log(datos)
+                setOfertas(datos.ofertas.rows)
+                console.log(datos.ofertas.rows)
 
             }
             catch (error) {
@@ -45,7 +45,7 @@ const ListadoOfertas = () => {
             e.preventDefault()
             const { usuario } = e.target.elements;
             const usuarioValue = usuario.value;
-            const api = await fetch(`https://comunidad-backend-v3-production.up.railway.app/usuariosOfertas/?buscarApellido=${usuarioValue}`);
+            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/usuariosOfertas/?buscarApellido=${usuarioValue}`);
             const datos = await api.json();
             console.log(datos.Ofertas.rows)
             setOfertas(datos.Ofertas.rows)

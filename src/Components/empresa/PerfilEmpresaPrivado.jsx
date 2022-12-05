@@ -30,7 +30,7 @@ export default function PerfilEmpresa() {
   async function actualizarDatos(){
     if (llamado == false) {
       
-      await axios.get(`https://comunidad-backend-v3-production.up.railway.app/empresas/idUsuario/${idUsuario}`)
+      await axios.get(`https://comunidad-backend-v3.herokuapp.com/empresas/idUsuario/${idUsuario}`)
       .then(({ data }) => {
         cambiarDatosUsuario(data)
       })
@@ -49,7 +49,7 @@ export default function PerfilEmpresa() {
     try {
       const res = await axios({
         method: "post",
-        url: "https://comunidad-backend-v3-production.up.railway.app/files/logo/",
+        url: "https://comunidad-backend-v3.herokuapp.com/files/logo/",
         data: formData,
         headers: {
           "Content-Type": "multipart/form-data",
@@ -65,7 +65,7 @@ export default function PerfilEmpresa() {
       })
         .then(async function (result) {
           if (result.value) {
-            await axios.get(`https://comunidad-backend-v3-production.up.railway.app/empresas/cuit/${datosUsuario.id}`)
+            await axios.get(`https://comunidad-backend-v3.herokuapp.com/empresas/cuit/${datosUsuario.id}`)
               .then(({ data }) => {
                 console.log(data)
                 sessionStorage.setItem('datosUsuario', JSON.stringify(data));
@@ -93,7 +93,7 @@ export default function PerfilEmpresa() {
   useEffect(() => {
     const traerLogo = async () => {
       const fetchedData = await axios.get(
-        `https://comunidad-backend-v3-production.up.railway.app/files`,
+        `https://comunidad-backend-v3.herokuapp.com/files`,
         {
           headers: {
             "type": "image/png",

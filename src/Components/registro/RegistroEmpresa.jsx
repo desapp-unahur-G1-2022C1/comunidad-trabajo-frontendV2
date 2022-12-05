@@ -99,7 +99,7 @@ export default function WithMaterialUI() {
     if (llamadoProvincias === false) {
       try {
         const api = await fetch(
-          `https://comunidad-backend-v3-production.up.railway.app/provincias`
+          `https://comunidad-backend-v3.herokuapp.com/provincias`
         );
         const datos = await api.json();
         setListaProvincias(datos.provincias);
@@ -117,7 +117,7 @@ export default function WithMaterialUI() {
     if (provinciaActual != provincia) {
       try {
         const api = await fetch(
-          `https://comunidad-backend-v3-production.up.railway.app/ciudades/?idProvincia=${provincia}`
+          `https://comunidad-backend-v3.herokuapp.com/ciudades/?idProvincia=${provincia}`
         );
         const datos = await api.json();
         console.log(datos)
@@ -172,7 +172,7 @@ export default function WithMaterialUI() {
         emailRepresentante: values.emailRepresentante,
       };
       console.log(values);
-        fetch(`https://comunidad-backend-v3-production.up.railway.app/empresas/`, {
+        fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/`, {
         method: "POST", // or 'PUT'
         body: JSON.stringify(data), // data can be `string` or {object}!
         headers: {

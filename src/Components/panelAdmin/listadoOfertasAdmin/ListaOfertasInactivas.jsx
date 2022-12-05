@@ -38,7 +38,7 @@ export default function ListaOfertas({ ofertas }) {
       .then(async (result) => {
         if (result.isConfirmed) {
           try {
-            await fetch(`https://comunidad-backend-v3-production.up.railway.app/ofertas/idOferta/${idOferta}`, {
+            await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${idOferta}`, {
               method: "PUT", // or 'PUT'
               body: JSON.stringify(data), // data can be `string` or {object}!
               headers: {
@@ -77,7 +77,7 @@ export default function ListaOfertas({ ofertas }) {
       .then(async (result) => {
         if (result.isConfirmed) {
           try {
-            await fetch(`https://comunidad-backend-v3-production.up.railway.app/ofertas/idOferta/${idOferta}`, {
+            await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${idOferta}`, {
               method: "PUT", // or 'PUT'
               body: JSON.stringify(data), // data can be `string` or {object}!
               headers: {

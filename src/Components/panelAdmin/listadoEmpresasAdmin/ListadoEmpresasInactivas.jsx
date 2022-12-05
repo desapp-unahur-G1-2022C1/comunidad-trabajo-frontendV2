@@ -17,7 +17,7 @@ const ListadoEmpresas = () => {
     const [cantPaginas, setCantPaginas] = useState(0);
     const [pagina, setPagina] = useState(1);
     const [busquedaActual, setBusquedaActual] = useState('');
-    const API_URL = `https://comunidad-backend-v3-production.up.railway.app/empresas/?pagina=0&limite=5&idEstado=2&ordenar=id`;
+    const API_URL = `https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=0&limite=5&idEstado=2&ordenar=id`;
 
     const primerLlamado = async () => {
         if (llamado === false) {
@@ -40,7 +40,7 @@ const ListadoEmpresas = () => {
             const { empresa } = e.target.elements;
             const empresaValue = empresa.value;
             setBusquedaActual(empresaValue);
-            const api = await fetch(`https://comunidad-backend-v3-production.up.railway.app/empresas/?pagina=0&limite=5&idEstado=2&ordenar=id&nombreEmpresa=${empresaValue}`);
+            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=0&limite=5&idEstado=2&ordenar=id&nombreEmpresa=${empresaValue}`);
             const datos = await api.json();
             setPagina(1)
             console.log(datos)
@@ -55,7 +55,7 @@ const ListadoEmpresas = () => {
 
     const cambiarPagina = async (e, p) => {
 
-        const api = await fetch(`https://comunidad-backend-v3-production.up.railway.app/empresas/?pagina=${p - 1}&limite=5&idEstado=2&ordenar=id&nombreEmpresa=${busquedaActual}`);;
+        const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/?pagina=${p - 1}&limite=5&idEstado=2&ordenar=id&nombreEmpresa=${busquedaActual}`);;
         const datos = await api.json();
         setEmpresas(datos.empresas.rows);
         setPagina(p)

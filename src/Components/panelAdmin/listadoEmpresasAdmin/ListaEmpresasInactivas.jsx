@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 export default function ListaEmpresas({ empresas }) {
   function activar(idEmpresa) {
-    fetch(`https://comunidad-backend-v3-production.up.railway.app/empresas/cuit/${idEmpresa}`,
+    fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/cuit/${idEmpresa}`,
       {
         method: 'PATCH', // or 'PUT'
         headers: {
