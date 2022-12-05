@@ -19,7 +19,7 @@ const ListadoOfertas = () => {
     const [cantOfertasRevision, setCantOfertasRevision] = useState(0);
 
 
-    const API_URL = `https://comunidad-backend-v3-production.up.railway.app/ofertas/?pagina=0&limite=3&ordenar=id&idEstado=1`;
+    const API_URL = `https://comunidad-backend-v3-production.up.railway.app/ofertas/?pagina=0&limite=6&ordenar=id&idEstado=1`;
 
     const primerLlamado = async () => {
         if (llamado === false) {
@@ -42,7 +42,7 @@ const ListadoOfertas = () => {
             const { oferta } = e.target.elements;
             const ofertaValue = oferta.value;
             setBusquedaActual(ofertaValue);
-            const api = await fetch(`https://comunidad-backend-v3-production.up.railway.app/ofertas/?pagina=0&limite=3&ordenar=id&idEstado=1&buscarTitulo=${ofertaValue}`);
+            const api = await fetch(`https://comunidad-backend-v3-production.up.railway.app/ofertas/?pagina=0&limite=6&ordenar=id&idEstado=1&buscarTitulo=${ofertaValue}`);
             const datos = await api.json();
             setPagina(1)
             console.log(datos)
@@ -57,7 +57,7 @@ const ListadoOfertas = () => {
 
     const cambiarPagina = async (e, p) => {
 
-        const api = await fetch(`https://comunidad-backend-v3-production.up.railway.app/ofertas/?pagina=${p - 1}&limite=3&ordenar=id&idEstado=1&buscarTitulo=${busquedaActual}`);
+        const api = await fetch(`https://comunidad-backend-v3-production.up.railway.app/ofertas/?pagina=${p - 1}&limite=6&ordenar=id&idEstado=1&buscarTitulo=${busquedaActual}`);
         const datos = await api.json();
         setOfertas(datos.ofertas.rows);
         setPagina(p)
