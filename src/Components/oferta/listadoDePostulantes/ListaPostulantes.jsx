@@ -92,9 +92,9 @@ export default function ListaPostulantes({ postulantes }) {
 
 
   async function abrirPdf(cvPostulante) {
-      await traerPdf(cvPostulante);
-      window.open(pdf.current);
-    }
+    await traerPdf(cvPostulante);
+    window.open(pdf.current);
+  }
 
 
 
@@ -102,45 +102,46 @@ export default function ListaPostulantes({ postulantes }) {
 
   return (
     <>
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell><Typography variant='h6'>Nombre</Typography></TableCell>
-            <TableCell align="center"><Typography variant='h6'>DNI</Typography></TableCell>
-            <TableCell align="center"><Typography variant='h6'>Telefono</Typography></TableCell>
-            <TableCell align="center"><Typography variant='h6'>CV</Typography></TableCell>
-            <TableCell align="center"><Typography variant='h6'>Contactado</Typography></TableCell>
-            <TableCell align="center"><Typography variant='h6'>Acciones</Typography></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {postulantes.map((postulante) => (
-            <TableRow
-
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {postulante.Postulante.nombre} {postulante.Postulante.apellido}
-              </TableCell>
-              <TableCell align="center"><Typography variant="body1">{postulante.Postulante.id}</Typography></TableCell>
-              <TableCell align="center"><Typography variant="body1"></Typography>{postulante.Postulante.telefono}</TableCell>
-              <TableCell align="center"><Button onClick={async () =>abrirPdf(postulante.Postulante.cv)}><PictureAsPdfIcon color="error" /></Button></TableCell>
-              <TableCell align="center"><Typography variant="body1"></Typography>{postulante.contactado ? <CheckIcon color="success" /> : <CloseIcon color="error" />}</TableCell>
-              <TableCell align="center">
-                <Link to={`/postulante/${postulante.Postulante.id}`} style={{ textDecoration: 'none' }}>
-                  <Button variant="contained" color='relaxed' sx={{ margin: "0.5rem" }}>
-                    Ver
-                  </Button>
-                </Link>
-
-                {postulante.contactado ? <Button variant="contained" color='info' sx={{ margin: "0.5rem" }}  disabled >Contactar</Button> : <Button variant="contained" color='info' sx={{ margin: "0.5rem" }} onClick={async () => contactar(postulante.id)}  >Contactar</Button>}
-              </TableCell>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell><Typography variant='h6'>Nombre</Typography></TableCell>
+              <TableCell align="center"><Typography variant='h6'>DNI</Typography></TableCell>
+              <TableCell align="center"><Typography variant='h6'>Telefono</Typography></TableCell>
+              <TableCell align="center"><Typography variant='h6'>CV</Typography></TableCell>
+              <TableCell align="center"><Typography variant='h6'>Contactado</Typography></TableCell>
+              <TableCell align="center"><Typography variant='h6'>Acciones</Typography></TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {postulantes.map((postulante) => (
+              <TableRow
+
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {postulante.Postulante.nombre} {postulante.Postulante.apellido}
+                </TableCell>
+                <TableCell align="center"><Typography variant="body1">{postulante.Postulante.id}</Typography></TableCell>
+                <TableCell align="center"><Typography variant="body1"></Typography>{postulante.Postulante.telefono}</TableCell>
+                <TableCell align="center"><Button onClick={async () => abrirPdf(postulante.Postulante.cv)}><PictureAsPdfIcon color="error" /></Button></TableCell>
+                <TableCell align="center">
+                  {postulante.contactado ? <CheckIcon color="success" /> : <CloseIcon color="error" />}</TableCell>
+                <TableCell align="center">
+                  <Link to={`/postulante/${postulante.Postulante.id}`} style={{ textDecoration: 'none' }}>
+                    <Button variant="contained" color='relaxed' sx={{ margin: "0.5rem" }}>
+                      Ver
+                    </Button>
+                  </Link>
+
+                  {postulante.contactado ? <Button variant="contained" color='info' sx={{ margin: "0.5rem" }} disabled >Contactar</Button> : <Button variant="contained" color='info' sx={{ margin: "0.5rem" }} onClick={async () => contactar(postulante.id)}  >Contactar</Button>}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </>
   );
 }
