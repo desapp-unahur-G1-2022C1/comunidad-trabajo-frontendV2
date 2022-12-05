@@ -36,3 +36,9 @@
   .oferta:hover{
     transform: scale(1.05);
   }
+
+  .botonCambioFoto:hover{
+    transform: scale(1.2);
+    background-color: #dadada;
+    border-radius: 20%;
+  }

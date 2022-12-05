@@ -9,8 +9,9 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
-
+import { useRef } from 'react';
 import Swal from 'sweetalert2';
+import { AddAPhoto } from '@mui/icons-material';
 
 
 export default function PerfilUsuario() {
@@ -23,7 +24,7 @@ export default function PerfilUsuario() {
 
   const [foto, setFoto] = useState();
 
-  const [uploadFoto, setUploadFoto] = useState(null)
+  const uploadFoto = useRef()
 
   function timeoutReload() {
     setTimeout(function () { window.location.reload() }, 2000);
@@ -31,7 +32,7 @@ export default function PerfilUsuario() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('uploadFoto', uploadFoto);
+    formData.append('uploadFoto', uploadFoto.current);
     try {
       const res = await axios({
         method: "post",
@@ -66,7 +67,8 @@ export default function PerfilUsuario() {
   }
 
   const handleFileSelect = (e) => {
-    setUploadFoto(e.target.files[0])
+    uploadFoto.current = e.target.files[0];
+    handleSubmit(e)
 
   }
 
@@ -113,9 +115,14 @@ export default function PerfilUsuario() {
                 src={foto}
                 sx={{ height: "8rem", width: "8rem", border: "4px solid", borderColor: "primary.main" }}
               />
-              <form onSubmit={handleSubmit}>
-                <input type="file" onChange={handleFileSelect} />
-                <button type="submit">Subir</button>
+
+              <form >
+                <label for="uploadFoto">
+                  <AddAPhoto color="primary" className='botonCambioFoto'/>
+                </label>
+                <input type="file" id="uploadFoto" onChange={handleFileSelect} style={{display:"none"}} />
+                
+
               </form>
             </Stack>
           </Box>
