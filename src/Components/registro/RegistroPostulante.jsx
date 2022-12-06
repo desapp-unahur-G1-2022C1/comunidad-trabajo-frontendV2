@@ -73,7 +73,7 @@ export default function WithMaterialUI() {
     if (llamadoTipoDocumento === false) {
       try {
         const api = await fetch(
-          `https://comunidad-backend-v3.herokuapp.com/tiposDocumentos`
+          `https://comunidad-backend-v3.herokuapp.com/tiposDocumento`
         );
         const datos = await api.json();
         setTiposDocumentos(datos.tipos_documentos);
