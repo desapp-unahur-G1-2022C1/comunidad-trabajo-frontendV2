@@ -15,6 +15,10 @@ export const theme = createTheme({
         edit:{
             main:"#e68025",
             contrastText: '#ffffff'
+        },
+        finalizado:{
+            main:"#000000",
+            contrastText: '#ffffff'
         }
     }
 });

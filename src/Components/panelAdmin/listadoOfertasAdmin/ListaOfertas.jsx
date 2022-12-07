@@ -98,7 +98,7 @@ export default function ListaOfertas({ ofertas }) {
                   </Button>
                 </Link>
                 <Button variant="outlined" color='error' sx={{ margin: "0.5rem" }} onClick={async () => mandarARevision(oferta.id, oferta.titulo_oferta)} >
-                  DESHABILITAR
+                  Revisar
                 </Button>
               </TableCell>
 
