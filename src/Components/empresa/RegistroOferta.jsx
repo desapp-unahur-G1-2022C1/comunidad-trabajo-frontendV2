@@ -24,6 +24,7 @@ import DatosUsuarioContextProvider from '../../Context/DatosUsuarioContext';
 import { useContext } from 'react';
 import { useHistory } from "react-router-dom";
 
+
 const validationSchema = yup.object({
   tituloOferta: yup
     .string("Ingrese su un titulo para la oferta")
@@ -276,9 +277,9 @@ export default function WithMaterialUI() {
       </Typography>
       <Box sx={{ display: "flex", justifyContent: "center", padding: "2rem" }}>
         <form onSubmit={formik.handleSubmit}>
-          <div>
+          <Box sx={{display:"flex", justifyContent:"center"}}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={8}>
                 <TextField
                   variant="outlined"
                   id="tituloOferta"
@@ -295,13 +296,14 @@ export default function WithMaterialUI() {
                   helperText={formik.touched.tituloOferta && formik.errors.tituloOferta}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={8}>
                 <TextField
                   variant="outlined"
                   id="descripcion"
                   name="descripcion"
                   label="Descripcion"
                   fullWidth
+                  multiline
                   value={formik.values.descripcion}
                   onChange={formik.handleChange}
                   error={
@@ -312,7 +314,7 @@ export default function WithMaterialUI() {
                   helperText={formik.touched.descripcion && formik.errors.descripcion}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={8}>
                 <TextField
                   variant="outlined"
                   id="fechaVigencia"
@@ -328,7 +330,7 @@ export default function WithMaterialUI() {
                   }
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={8}>
                 <TextField
                   id="horarioLaboralDesde"
                   name="horarioLaboralDesde"
@@ -344,7 +346,7 @@ export default function WithMaterialUI() {
                   helperText={formik.touched.horarioLaboralDesde && formik.errors.horarioLaboralDesde}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={8}>
                 <TextField
                   id="horarioLaboralHasta"
                   name="horarioLaboralHasta"
@@ -360,7 +362,7 @@ export default function WithMaterialUI() {
                   }
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={8}>
                 <TextField
                   id="edadDesde"
                   name="edadDesde"
@@ -375,7 +377,7 @@ export default function WithMaterialUI() {
                   }
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={8}>
                 <TextField
                   id="edadHasta"
                   name="edadHasta"
@@ -388,7 +390,7 @@ export default function WithMaterialUI() {
                   error={formik.touched.edadHasta && Boolean(formik.errors.edadHasta)}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={8}>
                 <TextField
                   id="experienciaPreviaDesc"
                   name="experienciaPreviaDesc"
@@ -400,7 +402,7 @@ export default function WithMaterialUI() {
                   error={formik.touched.experienciaPreviaDesc && Boolean(formik.errors.experienciaPreviaDesc)}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={8}>
                 <TextField
                   id="zonaTrabajo"
                   name="zonaTrabajo"
@@ -412,7 +414,7 @@ export default function WithMaterialUI() {
                   error={formik.touched.zonaTrabajo && Boolean(formik.errors.zonaTrabajo)}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={8}>
                 <TextField
                   id="areasEstudio"
                   name="areasEstudio"
@@ -426,13 +428,14 @@ export default function WithMaterialUI() {
                   }
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={8}>
                 <TextField
                   id="otrosDetalles"
                   name="otrosDetalles"
                   variant="outlined"
                   label="Otros detalles"
                   fullWidth
+                  multiline
                   value={formik.values.otrosDetalles}
                   onChange={formik.handleChange}
                   error={
@@ -440,7 +443,7 @@ export default function WithMaterialUI() {
                   }
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={8}>
                 <TextField
                   id="beneficios"
                   name="beneficios"
@@ -454,7 +457,7 @@ export default function WithMaterialUI() {
                   }
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={8}>
                 <TextField
                   id="remuneracion"
                   name="remuneracion"
@@ -469,7 +472,7 @@ export default function WithMaterialUI() {
                   }
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={8}>
               <FormControl fullWidth>
               <InputLabel>Estudio</InputLabel>
               <Select
@@ -492,7 +495,7 @@ export default function WithMaterialUI() {
               </Select>
               </FormControl>
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={8}>
               <FormControl fullWidth>
                 <InputLabel>Carrera</InputLabel>
                 <Select
@@ -515,7 +518,7 @@ export default function WithMaterialUI() {
                 </Select>
               </FormControl>
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={8}>
               <FormControl fullWidth>
               <InputLabel>Jornada</InputLabel>
               <Select
@@ -538,7 +541,7 @@ export default function WithMaterialUI() {
               </Select>
               </FormControl>
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={8}>
               <FormControl fullWidth>
                 <InputLabel>Contrato</InputLabel>
                 <Select
@@ -562,7 +565,7 @@ export default function WithMaterialUI() {
               </FormControl>
               </Grid>
             </Grid>
-          </div>
+          </Box>
            <Box>
               <Button
                 style={{ display: "flex", margin: "1rem" }}

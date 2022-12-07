@@ -43,7 +43,7 @@ const MiCV = () => {
               })
                 .then(async function (result) {
                   if (result.value) {
-                    await axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${datosUsuario.Usuario.id}?`)
+                    await axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${datosUsuario.Usuario.id}`)
                       .then(({ data }) => {
                         console.log(data)
                         sessionStorage.setItem('datosUsuario', JSON.stringify(data));
@@ -67,7 +67,7 @@ const MiCV = () => {
     useEffect(() => {
         const traerPdf = async () => {
             const fetchedData = await axios.get(
-                `https://comunidad-backend-v3.herokuapp.com/files`,
+                `https://comunidad-backend-v3.herokuapp.com/files/?authorization=${token}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
