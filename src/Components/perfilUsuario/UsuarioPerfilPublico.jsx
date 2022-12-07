@@ -75,16 +75,16 @@ export default function DividerText() {
               <Typography sx={{ fontSize: "20px", paddingLeft: "0.5rem" }} variant="body1">{emailPostulante}</Typography>
             </Typography>
             <Typography sx={{ display: 'flex', justifyContent: 'center' }}>
-              <Typography sx={{ fontSize: "20px", paddingLeft: "0.5rem" }} variant="body1">Numero de contecto:</Typography>
+              <Typography sx={{ fontSize: "20px", paddingLeft: "0.5rem" }} variant="body1">Número de contacto:</Typography>
               <Typography sx={{ fontSize: "20px", paddingLeft: "0.5rem" }} variant="body1">+54 9 {telefonoPostulante}</Typography>
             </Typography>
           </Box>
           <Divider>
-            <Chip sx={{ backgroundColor: '#009688', color: '#ffffff' }} label="UBICACION" />
+            <Chip sx={{ backgroundColor: '#009688', color: '#ffffff' }} label="UBICACIÓN" />
           </Divider>
           <Box>
             <Typography sx={{ display: 'flex', justifyContent: 'center', margin: '2rem' }}>
-              <Typography sx={{ fontSize: "20px", paddingLeft: "0.5rem" }} variant="body1">Pais:</Typography>
+              <Typography sx={{ fontSize: "20px", paddingLeft: "0.5rem" }} variant="body1">País:</Typography>
               <Typography sx={{ fontSize: "20px", paddingLeft: "0.5rem" }} variant="body1">{paisPostulante}</Typography>
             </Typography>
             <Typography sx={{ display: 'flex', justifyContent: 'center', margin: '2rem' }}>
