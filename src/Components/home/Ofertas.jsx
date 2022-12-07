@@ -57,11 +57,11 @@ const Ofertas = ({listaOfertas}) => {
                 
                
                 {
-                  oferta.descripcion.length < 120
+                  oferta.descripcion.length < 70
                   ?
                   oferta.descripcion
                   :
-                  <p>{oferta.descripcion.substring(0,120)}...</p>
+                  <p>{oferta.descripcion.substring(0,70)}...</p>
                 }
               </Typography>
             </CardContent>
