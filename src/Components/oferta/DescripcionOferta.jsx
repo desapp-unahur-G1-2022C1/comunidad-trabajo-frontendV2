@@ -265,7 +265,6 @@ const CustomizedDialogs = () => {
           :
           <>
             <Header />
-            <Box></Box>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <Grid containter spacing={2} sx={{ display: "flex", justifyContent: "center", maxWidth: "50rem" }}>
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -287,7 +286,7 @@ const CustomizedDialogs = () => {
                               <CalendarMonthIcon />Publicado hace: {publicadoHace(fechaPublicacion)}
                             </Typography>
                           </Box>
-                          <img src="https://graffica.info/wp-content/uploads/2022/05/Telefonica-rebranding-2021-800x445-3.jpeg" alt="" style={{ width: "80px", height: "80px" }} />
+                          <img src="https://cdn.discordapp.com/attachments/955646153297395722/996230598853148792/unknown.png" alt="" style={{width: "100px", height: "100px" }} />
                         </Box>
                       </Box>
                     </Grid>

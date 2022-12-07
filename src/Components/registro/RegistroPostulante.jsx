@@ -281,7 +281,7 @@ export default function WithMaterialUI() {
         estudios: values.estudios,
         carrera: values.carrera,
         cantMaterias: values.cantMateriasAprobadas,
-        alumnoUnahur: "false",
+        alumnoUnahur: "true",
         presentacion: "",
       };
       console.log(values);

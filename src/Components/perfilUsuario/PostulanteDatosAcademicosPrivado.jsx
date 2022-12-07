@@ -3,11 +3,11 @@ import { styled } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
 import Chip from '@mui/material/Chip';
 import Header from '../Header';
-import { Box, Typography, Button } from '@mui/material';
-import { useState } from 'react';
+import { Box, Typography } from '@mui/material';
+
 import DatosUsuarioContextProvider from '../../Context/DatosUsuarioContext';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+
 import axios from "axios";
 
 const Root = styled('div')(({ theme }) => ({
