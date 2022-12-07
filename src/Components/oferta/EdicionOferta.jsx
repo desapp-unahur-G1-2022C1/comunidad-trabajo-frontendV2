@@ -297,8 +297,8 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
       <Box sx={{ display: "flex", justifyContent: "center", padding: "2rem" }}>
         <form onSubmit={formik.handleSubmit}>
           <div>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} md={4}>
+            <Grid sx={{display:'flex', justifyContent:'center'}} container spacing={2}>
+              <Grid item xs={12} sm={8} md={8} sx={{padding:'1rem'}}>
                 <TextField
                   variant="outlined"
                   id="tituloOferta"
@@ -315,13 +315,14 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
                   helperText={formik.touched.tituloOferta && formik.errors.tituloOferta}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8} sx={{padding:'1rem'}}>
                 <TextField
                   variant="outlined"
                   id="descripcion"
                   name="descripcion"
                   label="Descripcion"
                   fullWidth
+                  multiline
                   value={formik.values.descripcion}
                   onChange={formik.handleChange}
                   error={
@@ -332,7 +333,7 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
                   helperText={formik.touched.descripcion && formik.errors.descripcion}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8} sx={{padding:'1rem'}}>
                 <TextField
                   variant="outlined"
                   id="fechaVigencia"
@@ -348,7 +349,7 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
                   }
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8} sx={{padding:'1rem'}}>
                 <TextField
                   id="horarioLaboralDesde"
                   name="horarioLaboralDesde"
@@ -364,7 +365,7 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
                   helperText={formik.touched.horarioLaboralDesde && formik.errors.horarioLaboralDesde}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8} sx={{padding:'1rem'}}>
                 <TextField
                   id="horarioLaboralHasta"
                   name="horarioLaboralHasta"
@@ -380,7 +381,7 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
                   }
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8} sx={{padding:'1rem'}}>
                 <TextField
                   id="edadDesde"
                   name="edadDesde"
@@ -395,7 +396,7 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
                   }
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8} sx={{padding:'1rem'}}>
                 <TextField
                   id="edadHasta"
                   name="edadHasta"
@@ -408,7 +409,7 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
                   error={formik.touched.edadHasta && Boolean(formik.errors.edadHasta)}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8} sx={{padding:'1rem'}}>
                 <TextField
                   id="experienciaPreviaDesc"
                   name="experienciaPreviaDesc"
@@ -420,7 +421,7 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
                   error={formik.touched.experienciaPreviaDesc && Boolean(formik.errors.experienciaPreviaDesc)}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8} sx={{padding:'1rem'}}>
                 <TextField
                   id="zonaTrabajo"
                   name="zonaTrabajo"
@@ -432,7 +433,7 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
                   error={formik.touched.zonaTrabajo && Boolean(formik.errors.zonaTrabajo)}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8} sx={{padding:'1rem'}}>
                 <TextField
                   id="areasEstudio"
                   name="areasEstudio"
@@ -446,13 +447,14 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
                   }
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8} sx={{padding:'1rem'}}>
                 <TextField
                   id="otrosDetalles"
                   name="otrosDetalles"
                   variant="outlined"
                   label="Otros detalles"
                   fullWidth
+                  multiline
                   value={formik.values.otrosDetalles}
                   onChange={formik.handleChange}
                   error={
@@ -460,7 +462,7 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
                   }
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8} sx={{padding:'1rem'}}>
                 <TextField
                   id="beneficios"
                   name="beneficios"
@@ -474,7 +476,7 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
                   }
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8} sx={{padding:'1rem'}}>
                 <TextField
                   id="remuneracion"
                   name="remuneracion"
@@ -489,7 +491,7 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
                   }
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8} sx={{padding:'1rem'}}>
               <FormControl fullWidth>
               <InputLabel>Estudio</InputLabel>
               <Select
@@ -512,7 +514,7 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
               </Select>
               </FormControl>
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8} sx={{padding:'1rem'}}>
               <FormControl fullWidth>
                 <InputLabel>Carrera</InputLabel>
                 <Select
@@ -535,7 +537,7 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
                 </Select>
               </FormControl>
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8} sx={{padding:'1rem'}}>
               <FormControl fullWidth>
               <InputLabel>Jornada</InputLabel>
               <Select
@@ -558,7 +560,7 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
               </Select>
               </FormControl>
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8} sx={{padding:'1rem'}}>
               <FormControl fullWidth>
                 <InputLabel>Contrato</InputLabel>
                 <Select
@@ -581,18 +583,19 @@ let datosOferta = JSON.parse(sessionStorage.getItem('datosOferta'))
                 </Select>
               </FormControl>
               </Grid>
+              <Grid item xs={12} sm={8} md={8} sx={{padding:'1rem'}}>
+                <Button
+                  style={{ display: "flex", justifyContent:'center'}}
+                  fullWidth
+                  id="confirmar"
+                  variant="contained"
+                  type="submit"
+                >
+                  Confirmar
+                </Button>
+              </Grid>
             </Grid>
           </div>
-           <Box>
-              <Button
-                style={{ display: "flex", margin: "1rem" }}
-                id="confirmar"
-                variant="contained"
-                type="submit"
-              >
-                Confirmar
-              </Button>
-            </Box>
         </form>
       </Box>
     </Fragment>

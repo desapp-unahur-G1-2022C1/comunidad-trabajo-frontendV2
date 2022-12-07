@@ -278,7 +278,7 @@ export default function WithMaterialUI() {
       <Box sx={{ display: "flex", justifyContent: "center", padding: "2rem" }}>
         <form onSubmit={formik.handleSubmit}>
           <Box sx={{display:"flex", justifyContent:"center"}}>
-            <Grid container spacing={2}>
+            <Grid sx={{diaplay:'flex', justifyContent:'center'}}container spacing={2}>
               <Grid item xs={12} sm={8} md={8}>
                 <TextField
                   variant="outlined"
@@ -564,18 +564,18 @@ export default function WithMaterialUI() {
                 </Select>
               </FormControl>
               </Grid>
+              <Grid item xs={12} sm={8} md={8}>
+                <Button
+                  fullWidth
+                  id="confirmar"
+                  variant="contained"
+                  type="submit"
+                >
+                  Confirmar
+                </Button>
+              </Grid>
             </Grid>
           </Box>
-           <Box>
-              <Button
-                style={{ display: "flex", margin: "1rem" }}
-                id="confirmar"
-                variant="contained"
-                type="submit"
-              >
-                Confirmar
-              </Button>
-            </Box>
         </form>
       </Box>
     </Fragment>

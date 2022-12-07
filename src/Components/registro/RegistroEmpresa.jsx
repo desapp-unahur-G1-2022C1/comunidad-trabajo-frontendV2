@@ -18,11 +18,11 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import FormFormHelperText from "@mui/material";
 import { MenuList } from "@material-ui/core";
-import IdFormContext from '../../Context/IdFormContext';
-import { useContext } from 'react';
+import IdFormContext from "../../Context/IdFormContext";
+import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 const validationSchema = yup.object({
@@ -89,8 +89,8 @@ const validationSchema = yup.object({
 });
 
 export default function WithMaterialUI() {
-  const history = useHistory()
-  const {id} = useContext(IdFormContext)
+  const history = useHistory();
+  const { id } = useContext(IdFormContext);
 
   const [listaProvincias, setListaProvincias] = useState([]);
   const [llamadoProvincias, setLlamadoProvincias] = useState(false);
@@ -120,13 +120,13 @@ export default function WithMaterialUI() {
           `https://comunidad-backend-v3.herokuapp.com/ciudades/?idProvincia=${provincia}`
         );
         const datos = await api.json();
-        console.log(datos)
+        console.log(datos);
         setListaCiudades(datos.ciudades);
         setLlamadoCiudades(true);
       } catch (error) {
         console.log(error);
       }
-    setProvinciaActual(provincia)
+      setProvinciaActual(provincia);
     }
   };
 
@@ -172,42 +172,49 @@ export default function WithMaterialUI() {
         emailRepresentante: values.emailRepresentante,
       };
       console.log(values);
-        fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/`, {
+      fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/`, {
         method: "POST", // or 'PUT'
         body: JSON.stringify(data), // data can be `string` or {object}!
         headers: {
           "Content-Type": "application/json",
         },
-        
-        })
+      })
         .then((res) => res.json())
-        .then((response) => console.log("Success:", response,
-        Swal.fire({
-          icon: 'success',
-          title: 'La empresa fue creada exitosamente',
-          confirmButtonText: 'Finalizar',
-          text: 'Para continuar pulse el boton',
-          footer: '',
-          showCloseButton: true
-        })
-        .then(function (result) {
-          if (result.value) {
-              history.push('/')
-          }
-        })))
-        .catch((error) => console.error("Error:", error,
-        Swal.fire({
-          icon: 'error',
-          title: 'Ocurrio un error al crear la empresa',
-          confirmButtonText: 'Volver',
-          text: 'Verifique sus datos',
-          footer: '',
-          showCloseButton: true
-        })))
+        .then((response) =>
+          console.log(
+            "Success:",
+            response,
+            Swal.fire({
+              icon: "success",
+              title: "La empresa fue creada exitosamente",
+              confirmButtonText: "Finalizar",
+              text: "Para continuar pulse el boton",
+              footer: "",
+              showCloseButton: true,
+            }).then(function (result) {
+              if (result.value) {
+                history.push("/");
+              }
+            })
+          )
+        )
+        .catch((error) =>
+          console.error(
+            "Error:",
+            error,
+            Swal.fire({
+              icon: "error",
+              title: "Ocurrio un error al crear la empresa",
+              confirmButtonText: "Volver",
+              text: "Verifique sus datos",
+              footer: "",
+              showCloseButton: true,
+            })
+          )
+        );
     },
   });
   return (
-    
     <Fragment>
       <Header />
       <Typography
@@ -218,9 +225,13 @@ export default function WithMaterialUI() {
       </Typography>
       <Box sx={{ display: "flex", justifyContent: "center", padding: "2rem" }}>
         <form onSubmit={formik.handleSubmit}>
-          <div>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} md={4}>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Grid
+              sx={{ diaplay: "flex", justifyContent: "center" }}
+              container
+              spacing={2}
+            >
+              <Grid item xs={12} sm={8} md={8}>
                 <TextField
                   variant="outlined"
                   id="nombreEmpresa"
@@ -234,28 +245,28 @@ export default function WithMaterialUI() {
                     Boolean(formik.errors.nombreEmpresa) &&
                     true
                   }
-                  helperText={formik.touched.nombreEmpresa && formik.errors.nombreEmpresa}
+                  helperText={
+                    formik.touched.nombreEmpresa && formik.errors.nombreEmpresa
+                  }
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8}>
                 <TextField
                   variant="outlined"
                   id="cuit"
                   name="cuit"
                   label="Cuit"
                   fullWidth
-                  type='number'
+                  type="number"
                   value={formik.values.cuit}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.cuit &&
-                    Boolean(formik.errors.cuit) &&
-                    true
+                    formik.touched.cuit && Boolean(formik.errors.cuit) && true
                   }
                   helperText={formik.touched.cuit && formik.errors.cuit}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8}>
                 <TextField
                   id="descripcion"
                   name="descripcion"
@@ -265,12 +276,16 @@ export default function WithMaterialUI() {
                   value={formik.values.descripcion}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.descripcion && Boolean(formik.errors.descripcion) && true
+                    formik.touched.descripcion &&
+                    Boolean(formik.errors.descripcion) &&
+                    true
                   }
-                  helperText={formik.touched.descripcion && formik.errors.descripcion}
+                  helperText={
+                    formik.touched.descripcion && formik.errors.descripcion
+                  }
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8}>
                 <TextField
                   id="pais"
                   name="pais"
@@ -280,77 +295,87 @@ export default function WithMaterialUI() {
                   disabled
                   value={formik.values.pais}
                   onChange={formik.handleChange}
-                  error={
-                    formik.touched.pais &&
-                    Boolean(formik.errors.pais)
-                  }
+                  error={formik.touched.pais && Boolean(formik.errors.pais)}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8}>
                 <FormControl fullWidth>
-                  <InputLabel>
-                    Provincia
-                  </InputLabel>
+                  <InputLabel>Provincia</InputLabel>
                   <Select
                     labelId="demo-simple-select-error-label"
                     id="provincia"
                     variant="outlined"
                     name="provincia"
                     label="Provincia"
-                    type='number'
+                    type="number"
                     fullWidth
                     value={formik.values.provincia}
                     onChange={formik.handleChange}
                   >
-                    {listaProvincias.map((provincia) => ( 
-                      <MenuList className='selectCss'  value={provincia.id} key={provincia.id} >
-                        <Box sx={{display:'flex', justifyContent:'center'}}>{provincia.nombre}</Box>
+                    {listaProvincias.map((provincia) => (
+                      <MenuList
+                        className="selectCss"
+                        value={provincia.id}
+                        key={provincia.id}
+                      >
+                        <Box sx={{ display: "flex", justifyContent: "center" }}>
+                          {provincia.nombre}
+                        </Box>
                       </MenuList>
                     ))}
-                  
                   </Select>
                 </FormControl>
-                {
-                  formik.values.provincia === undefined ? null 
-                  :
-                    <Popover>
-                      {console.log('aca' + formik.values.provincia)}
-                      {llamarCiudades(formik.values.provincia)}
-                      {listaCiudades.map((ciudad) => ( 
-                      <MenuList className='selectCss'  value={ciudad.id} key={ciudad.id} >
-                        <Box sx={{display:'flex', justifyContent:'center'}}>{ciudad.nombre}</Box>
+                {formik.values.provincia === undefined ? null : (
+                  <Popover>
+                    {console.log("aca" + formik.values.provincia)}
+                    {llamarCiudades(formik.values.provincia)}
+                    {listaCiudades.map((ciudad) => (
+                      <MenuList
+                        className="selectCss"
+                        value={ciudad.id}
+                        key={ciudad.id}
+                      >
+                        <Box sx={{ display: "flex", justifyContent: "center" }}>
+                          {ciudad.nombre}
+                        </Box>
                       </MenuList>
                     ))}
-                    </Popover>
-                }
+                  </Popover>
+                )}
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8}>
                 <FormControl fullWidth>
-                  <InputLabel>
-                    Ciudad
-                  </InputLabel>
+                  <InputLabel>Ciudad</InputLabel>
                   <Select
                     labelId="demo-simple-select-error-label"
                     id="ciudad"
                     variant="outlined"
                     name="ciudad"
                     label="Ciudad"
-                    type='number'
+                    type="number"
                     fullWidth
                     value={formik.values.ciudad}
                     onChange={formik.handleChange}
-                    error={formik.touched.tipoDocumento && Boolean(formik.errors.tipoDocumento)}
+                    error={
+                      formik.touched.tipoDocumento &&
+                      Boolean(formik.errors.tipoDocumento)
+                    }
                   >
-                    {listaCiudades.map((ciudad) => ( 
-                      <MenuList className='selectCss'  value={ciudad.id} key={ciudad.id} >
-                        <Box sx={{display:'flex', justifyContent:'center'}}>{ciudad.nombre}</Box>
+                    {listaCiudades.map((ciudad) => (
+                      <MenuList
+                        className="selectCss"
+                        value={ciudad.id}
+                        key={ciudad.id}
+                      >
+                        <Box sx={{ display: "flex", justifyContent: "center" }}>
+                          {ciudad.nombre}
+                        </Box>
                       </MenuList>
                     ))}
                   </Select>
-                  
                 </FormControl>
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8}>
                 <TextField
                   id="calle"
                   name="calle"
@@ -362,35 +387,33 @@ export default function WithMaterialUI() {
                   error={formik.touched.calle && Boolean(formik.errors.calle)}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8}>
                 <TextField
                   id="nro"
                   name="nro"
                   variant="outlined"
                   label="Numero"
                   fullWidth
-                  type='number'
+                  type="number"
                   value={formik.values.nro}
                   onChange={formik.handleChange}
                   error={formik.touched.nro && Boolean(formik.errors.nro)}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8}>
                 <TextField
                   id="piso"
                   name="piso"
                   variant="outlined"
                   label="Piso"
                   fullWidth
-                  type='number'
+                  type="number"
                   value={formik.values.piso}
                   onChange={formik.handleChange}
-                  error={
-                    formik.touched.piso && Boolean(formik.errors.piso)
-                  }
+                  error={formik.touched.piso && Boolean(formik.errors.piso)}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8}>
                 <TextField
                   id="depto"
                   name="depto"
@@ -399,27 +422,23 @@ export default function WithMaterialUI() {
                   fullWidth
                   value={formik.values.depto}
                   onChange={formik.handleChange}
-                  error={
-                    formik.touched.depto && Boolean(formik.errors.depto)
-                  }
+                  error={formik.touched.depto && Boolean(formik.errors.depto)}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8}>
                 <TextField
                   id="cp"
                   name="cp"
                   variant="outlined"
                   label="Codigo postal"
                   fullWidth
-                  type='number'
+                  type="number"
                   value={formik.values.cp}
                   onChange={formik.handleChange}
-                  error={
-                    formik.touched.cp && Boolean(formik.errors.cp)
-                  }
+                  error={formik.touched.cp && Boolean(formik.errors.cp)}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8}>
                 <TextField
                   id="telefono"
                   name="telefono"
@@ -434,7 +453,7 @@ export default function WithMaterialUI() {
                   }
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8}>
                 <TextField
                   id="web"
                   name="web"
@@ -443,12 +462,10 @@ export default function WithMaterialUI() {
                   fullWidth
                   value={formik.values.web}
                   onChange={formik.handleChange}
-                  error={
-                    formik.touched.web && Boolean(formik.errors.web)
-                  }
+                  error={formik.touched.web && Boolean(formik.errors.web)}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8}>
                 <TextField
                   id="nombreRepresentante"
                   name="nombreRepresentante"
@@ -458,11 +475,12 @@ export default function WithMaterialUI() {
                   value={formik.values.nombreRepresentante}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.nombreRepresentante && Boolean(formik.errors.nombreRepresentante)
+                    formik.touched.nombreRepresentante &&
+                    Boolean(formik.errors.nombreRepresentante)
                   }
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={8} md={8}>
                 <TextField
                   id="emailRepresentante"
                   name="emailRepresentante"
@@ -472,22 +490,23 @@ export default function WithMaterialUI() {
                   value={formik.values.emailRepresentante}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.emailRepresentante && Boolean(formik.errors.emailRepresentante)
+                    formik.touched.emailRepresentante &&
+                    Boolean(formik.errors.emailRepresentante)
                   }
                 />
               </Grid>
+              <Grid item xs={12} sm={8} md={8}>
+                <Button
+                  fullWidth
+                  id="confirmar"
+                  variant="contained"
+                  type="submit"
+                >
+                  Confirmar
+                </Button>
+              </Grid>
             </Grid>
-          </div>
-           <Box>
-              <Button
-                style={{ display: "flex", margin: "1rem" }}
-                id="confirmar"
-                variant="contained"
-                type="submit"
-              >
-                Confirmar
-              </Button>
-            </Box>
+          </Box>
         </form>
       </Box>
     </Fragment>
