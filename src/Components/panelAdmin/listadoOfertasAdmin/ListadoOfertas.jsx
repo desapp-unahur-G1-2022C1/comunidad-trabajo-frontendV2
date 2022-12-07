@@ -17,7 +17,7 @@ const ListadoOfertas = () => {
     const [busquedaActual, setBusquedaActual] = useState('');
     const [cantOfertasPendientes, setCantOfertasPendientes] = useState(0);
     const [cantOfertasRevision, setCantOfertasRevision] = useState(0);
-
+    const [cantOfertasFinalizadas, setCantOfertasFinalizadas] = useState(0);
 
     const API_URL = `https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=0&limite=6&ordenar=id&idEstado=1`;
 
@@ -88,6 +88,18 @@ const ListadoOfertas = () => {
     }
     traerOfertasRevision()
 
+    const traerOfertasFinalizadas = async () => {
+        try {
+            const api = await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?pagina=0&ordenar=id&idEstado=5`);
+            const datos = await api.json();
+            setCantOfertasFinalizadas(datos.ofertas.count)
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
+    traerOfertasFinalizadas()
+
 
     primerLlamado()
     return (
@@ -110,6 +122,13 @@ const ListadoOfertas = () => {
                     <Link to="/admin/listadoOfertasRevision" style={{ textDecoration: "none" }}>
                         <Button variant="contained" color='error' sx={{ margin: "0.5rem" }}>
                             Ofertas en revisión ({cantOfertasRevision})
+                        </Button>
+                    </Link>
+                </Box>
+                <Box sx={{ display: "flex" }}>
+                    <Link to="/admin/listadoOfertasFinalizadas" style={{ textDecoration: "none" }}>
+                        <Button variant="contained" color='finalizado' sx={{ margin: "0.5rem" }}>
+                            Ofertas finalizadas ({cantOfertasFinalizadas})
                         </Button>
                     </Link>
                 </Box>

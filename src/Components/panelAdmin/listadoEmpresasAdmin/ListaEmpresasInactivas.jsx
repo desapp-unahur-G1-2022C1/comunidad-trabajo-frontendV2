@@ -14,34 +14,47 @@ export default function ListaEmpresas({ empresas }) {
 
   var token = sessionStorage.getItem('token')
 
-  function activar(idEmpresa) {
-    fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/cuit/${idEmpresa}`,
-      {
-        method: 'PATCH', // or 'PUT'
-        headers: {
-          "Content-Type": "application/json"
+  const activar = async (idEmpresa, nombre) => {
+    var data = {
+      idEstado: 1
+    };
+
+    Swal.fire({
+      icon: 'warning',
+      title: `¿Deseas activar la empresa ${nombre}?`,
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Activar',
+      cancelButtonText: 'Cancelar'
+    })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            await fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/cuit/${idEmpresa}?authorization=${token}`, {
+              method: "PUT", // or 'PUT'
+              body: JSON.stringify(data), // data can be `string` or {object}!
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+          } catch (error) {
+            console.log(error)
+          }
+          Swal.fire({
+            icon: 'success',
+            title: `La empresa fue aceptada correctamente`,
+            confirmButtonText: 'Aceptar'
+            
+          }
+          ).then(
+            () => {
+              window.location.reload()
+            }
+          )
         }
       })
-    Swal.fire({
-      icon: 'success',
-      title: 'La empresa fue activada exitosamente',
-      confirmButtonText: 'Finalizar',
-      text: 'Para continuar pulse el boton',
-      footer: '',
-      showCloseButton: true,
-    })
-      .catch((err) => console.error("Error:", err,
-        Swal.fire({
-          icon: 'error',
-          title: 'Ocurrio un error al activar la empresa',
-          confirmButtonText: 'Volver',
-          text: 'Verifique sus datos',
-          footer: '',
-          showCloseButton: true
-        }))).then(
-          window.location.reload()
-        )
-  };
+  }
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -67,7 +80,7 @@ export default function ListaEmpresas({ empresas }) {
               <TableCell align="center"><Typography variant="body1">{empresa.nombre_representante}</Typography></TableCell>
               <TableCell align="center"><Typography variant="body1">{empresa.email_representante}</Typography></TableCell>
               <TableCell align="center">
-                <Button variant="contained" color='relaxed' sx={{ margin: "0.5rem" }} onClick={async () => activar(empresa.id)}>Activar</Button>
+                <Button variant="contained" color='relaxed' sx={{ margin: "0.5rem" }} onClick={async () => activar(empresa.id, empresa.nombre_empresa)}>Activar</Button>
                 <Link style={{ textDecoration: "none" }} to={`/empresa/${empresa.id}`}>
                   <Button variant="contained" color='relaxed' sx={{ margin: "0.5rem" }}>Ver empresa</Button>
                 </Link>

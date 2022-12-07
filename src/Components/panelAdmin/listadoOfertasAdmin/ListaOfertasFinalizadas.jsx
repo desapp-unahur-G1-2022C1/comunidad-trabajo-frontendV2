@@ -7,30 +7,33 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Button, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 import CircleIcon from '@mui/icons-material/Circle';
 import { Box } from '@mui/system';
 
 
-
 export default function ListaOfertas({ ofertas }) {
 
-
-
   var token = sessionStorage.getItem('token')
-  const mandarARevision = async (idOferta, titulo) => {
+
+  function timeoutReload() {
+    setTimeout(function () { window.location.reload() }, 1000);
+  }
+
+
+  const activar = async (idOferta, titulo) => {
     var data = {
-      idEstado: 4
+      idEstado: 1
     };
 
     Swal.fire({
       icon: 'warning',
-      title: `¿Deseas mandar a revisión ${titulo}?`,
+      title: `¿Deseas activar la oferta ${titulo}?`,
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Aceptar',
+      confirmButtonText: 'Activar',
       cancelButtonText: 'Cancelar'
     })
       .then(async (result) => {
@@ -47,23 +50,56 @@ export default function ListaOfertas({ ofertas }) {
             console.log(error)
           }
           Swal.fire(
-            {
-              icon: 'success',
-              title: `La oferta fue mandada a revisión correctamente`,
-              confirmButtonText: 'Aceptar'
-            }
+            `La oferta fue aceptada correctamente`,
+            'success'
           ).then(
             () => {
               window.location.reload()
             }
           )
-
-
-
         }
       })
   }
 
+  const mandarARevision = async (idOferta, titulo) => {
+    var data = {
+      idEstado: 4
+    };
+
+    Swal.fire({
+      icon: 'warning',
+      title: `¿Deseas mandar a revisión ${titulo}?`,
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '¡Si, mandar!',
+      cancelButtonText: 'No, cancelar'
+    })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${idOferta}?authorization=${token}`, {
+              method: "PUT", // or 'PUT'
+              body: JSON.stringify(data), // data can be `string` or {object}!
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+          } catch (error) {
+            console.log(error)
+          }
+          Swal.fire({
+            icon: 'success',
+            title: `La oferta fue aceptada correctamente`,
+            confirmButtonText: 'Continuar',
+          }).then(
+            () => {
+              window.location.reload()
+            }
+          )
+        }
+      })
+  }
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -89,19 +125,13 @@ export default function ListaOfertas({ ofertas }) {
               <TableCell align="center"><Typography variant="body1"></Typography>{oferta.Empresa.nombre_empresa}</TableCell>
               <TableCell align="center">
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <CircleIcon color='success' />
+                  <CircleIcon/>
                   <Typography variant="body1">{oferta.Estado.nombre_estado}</Typography>
                 </Box>
               </TableCell>
               <TableCell align="center">
-                <Link style={{ textDecoration: "none" }} to={`/oferta/${oferta.id}`}>
-                  <Button variant="contained" color='relaxed' sx={{ margin: "0.5rem" }}>
-                    VER OFERTA
-                  </Button>
-                </Link>
-                <Button variant="outlined" color='error' sx={{ margin: "0.5rem" }} onClick={async () => mandarARevision(oferta.id, oferta.titulo_oferta)} >
-                  Revisar
-                </Button>
+                <Link style={{ textDecoration: "none" }} to={`/oferta/${oferta.id}`}><Button variant="contained" color="relaxed" sx={{ margin: "0.5rem" }}>VER OFERTA</Button></Link>
+                
               </TableCell>
 
             </TableRow>

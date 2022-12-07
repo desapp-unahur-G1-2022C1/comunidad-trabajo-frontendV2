@@ -49,9 +49,12 @@ export default function ListaOfertas({ ofertas }) {
           } catch (error) {
             console.log(error)
           }
-          Swal.fire(
-            `La oferta fue aceptada correctamente`,
-            'success'
+          Swal.fire({
+            icon: 'success',
+            title: `La oferta fue aceptada correctamente`,
+            confirmButtonText: 'Aceptar'
+            
+          }
           ).then(
             () => {
               window.location.reload()
