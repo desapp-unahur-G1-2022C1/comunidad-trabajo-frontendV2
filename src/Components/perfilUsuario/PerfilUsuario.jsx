@@ -53,7 +53,7 @@ export default function PerfilUsuario() {
       })
         .then(async function (result) {
           if (result.value) {
-            await axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${datosUsuario.Usuario.id}?` )
+            await axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${datosUsuario.Usuario.id}?`)
               .then(({ data }) => {
                 console.log(data)
                 sessionStorage.setItem('datosUsuario', JSON.stringify(data));
@@ -102,7 +102,7 @@ export default function PerfilUsuario() {
     traerFoto();
   }, []);
 
-  
+
   return (
 
     <React.Fragment>
@@ -118,10 +118,10 @@ export default function PerfilUsuario() {
 
               <form >
                 <label for="uploadFoto">
-                  <AddAPhoto color="primary" className='botonCambioFoto'/>
+                  <AddAPhoto color="primary" className='botonCambioFoto' />
                 </label>
-                <input type="file" id="uploadFoto" onChange={handleFileSelect} style={{display:"none"}} />
-                
+                <input type="file" id="uploadFoto" onChange={handleFileSelect} style={{ display: "none" }} />
+
 
               </form>
             </Stack>

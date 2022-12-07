@@ -11,6 +11,10 @@ import { useContext } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useEffect } from 'react';
+import { useRef } from 'react';
+import { AddAPhoto } from '@mui/icons-material';
+
+
 
 export default function PerfilEmpresa() {
   const { cambiarDatosUsuario, cambiarToken, cambiarIdUsuario, cambiarEstadoLogeado, cambiarGrupo } = useContext(DatosUsuarioContextProvider)
@@ -19,23 +23,23 @@ export default function PerfilEmpresa() {
   var idUsuario = sessionStorage.getItem('idUsuario')
   var grupo = sessionStorage.getItem('grupo')
   var estaLogeado = sessionStorage.getItem('estaLogeado')
-  
 
-  
+
+
   const [logo, setLogo] = useState();
-  const [uploadLogo, setUploadLogo] = useState(null)
+  const uploadLogo = useRef()
   const [llamado, setLlamado] = useState(false)
 
 
-  async function actualizarDatos(){
+  async function actualizarDatos() {
     if (llamado == false) {
-      
+
       await axios.get(`https://comunidad-backend-v3.herokuapp.com/empresas/idUsuario/${idUsuario}?`)
-      .then(({ data }) => {
-        cambiarDatosUsuario(data)
-      })
+        .then(({ data }) => {
+          cambiarDatosUsuario(data)
+        })
       setLlamado(true)
-    } 
+    }
   }
   actualizarDatos()
 
@@ -45,7 +49,7 @@ export default function PerfilEmpresa() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('uploadLogo', uploadLogo);
+    formData.append('uploadLogo', uploadLogo.current);
     try {
       const res = await axios({
         method: "post",
@@ -78,12 +82,12 @@ export default function PerfilEmpresa() {
     }
   }
 
-  
+
 
 
   const handleFileSelect = (e) => {
-    setUploadLogo(e.target.files[0])
-
+    uploadLogo.current = e.target.files[0];
+    handleSubmit(e)
   }
 
   function splitFileName(str) {
@@ -122,8 +126,20 @@ export default function PerfilEmpresa() {
       <Box>
         <Box sx={{ display: "flex", justifyContent: "flex-start", alignContent: "center" }}>
           <Box>
-            <Stack direction="row" spacing={2} sx={{ padding: "1rem" }}>
-              <Avatar src={logo} sx={{ height: "8rem", width: "8rem", border: "4px solid", borderColor: "primary.main" }}/>
+            <Stack direction="row" spacing={1} sx={{ padding: "1rem" }}>
+              <Avatar
+                src={logo}
+                sx={{ height: "8rem", width: "8rem", border: "4px solid", borderColor: "primary.main" }}
+              />
+
+              <form >
+                <label for="uploadLogo">
+                  <AddAPhoto color="primary" className='botonCambioFoto' />
+                </label>
+                <input type="file" id="uploadLogo" onChange={handleFileSelect} style={{ display: "none" }} />
+
+
+              </form>
             </Stack>
           </Box>
           <Box sx={{ padding: "1rem" }}>
