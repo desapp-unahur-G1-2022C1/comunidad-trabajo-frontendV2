@@ -56,7 +56,7 @@ export default function DividerText() {
         </Typography>
       </Box>
       <Divider>
-        <Chip sx={{backgroundColor:'#009688', color:'#ffffff'}} label="ES ALUMNO UNAHUR" />
+        <Chip sx={{backgroundColor:'#009688', color:'#ffffff'}} label="¿ES ALUMNO UNAHUR?" />
       </Divider>
       <Box>
         <Typography sx={{display:'flex', justifyContent:'center', margin:'2rem'}}>
@@ -64,9 +64,9 @@ export default function DividerText() {
             {
                 datosUsuario.alumno_unahur
                 ?
-                    <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">Verdadero</Typography>
+                    <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">Si</Typography>
                 :
-                    <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">Falso</Typography>
+                    <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">No</Typography>
             }
             
         </Typography>
