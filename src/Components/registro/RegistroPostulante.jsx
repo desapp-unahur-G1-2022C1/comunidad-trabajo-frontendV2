@@ -62,7 +62,7 @@ const validationSchema = yup.object({
 export default function WithMaterialUI() {
   
 
-  const listaIDs = ["datosPersonales", "datosAcademicos", "archivos"];
+  const listaIDs = ["datosPersonales", "datosAcademicos"];
   const [estadoBoton, setEstadoBoton] = useState(true);
 
   /*Llama a los TIPOS DE DOCUMENTOS para seleccionar en el formulario*/
