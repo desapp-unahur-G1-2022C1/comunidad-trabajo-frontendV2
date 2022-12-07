@@ -23,6 +23,8 @@ export default function ListaPostulantes({ postulantes }) {
 
   const pdf = useRef();
 
+  var token = sessionStorage.getItem('token')
+
   function timeoutReload() {
     setTimeout(function () { window.location.reload() }, 1000);
   }
@@ -31,7 +33,7 @@ export default function ListaPostulantes({ postulantes }) {
     var data = {
       contactado: true
     };
-    await fetch(`https://comunidad-backend-v3.herokuapp.com/postulaciones/${idPostulacion}`, {
+    await fetch(`https://comunidad-backend-v3.herokuapp.com/postulaciones/${idPostulacion}?authorization=${token}`, {
       method: "PUT", // or 'PUT'
       body: JSON.stringify(data), // data can be `string` or {object}!
       headers: {
@@ -69,7 +71,7 @@ export default function ListaPostulantes({ postulantes }) {
 
   const traerPdf = async (cvPostulante) => {
     const fetchedData = await axios.get(
-      `https://comunidad-backend-v3.herokuapp.com/files`,
+      `https://comunidad-backend-v3.herokuapp.com/files/?authorization=${token}`,
       {
         headers: {
           "Content-Type": "application/json",

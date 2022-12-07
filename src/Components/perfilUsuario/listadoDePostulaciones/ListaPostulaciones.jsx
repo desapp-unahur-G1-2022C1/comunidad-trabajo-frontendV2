@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 
 export default function ListaOfertas({ Ofertas }) {
 
+  var token = sessionStorage.getItem('token')
 
   const eliminarPostulacion = (id) => {
 
@@ -25,7 +26,7 @@ export default function ListaOfertas({ Ofertas }) {
       denyButtonText: `Cancelar`,
     }).then((res) => {
       if (res.isConfirmed) {
-        axios.delete(`https://comunidad-backend-v3.herokuapp.com/postulaciones/${id}`)
+        axios.delete(`https://comunidad-backend-v3.herokuapp.com/postulaciones/${id}?$authorization=${token}`)
           .then(res => {
             console.log(res);
             console.log(res.data);

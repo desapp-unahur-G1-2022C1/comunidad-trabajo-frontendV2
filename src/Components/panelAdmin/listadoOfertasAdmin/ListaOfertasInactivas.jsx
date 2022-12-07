@@ -15,6 +15,7 @@ import { Box } from '@mui/system';
 
 export default function ListaOfertas({ ofertas }) {
 
+  var token = sessionStorage.getItem('token')
 
   function timeoutReload() {
     setTimeout(function () { window.location.reload() }, 1000);
@@ -38,7 +39,7 @@ export default function ListaOfertas({ ofertas }) {
       .then(async (result) => {
         if (result.isConfirmed) {
           try {
-            await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${idOferta}`, {
+            await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${idOferta}?authorization=${token}`, {
               method: "PUT", // or 'PUT'
               body: JSON.stringify(data), // data can be `string` or {object}!
               headers: {
@@ -77,7 +78,7 @@ export default function ListaOfertas({ ofertas }) {
       .then(async (result) => {
         if (result.isConfirmed) {
           try {
-            await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${idOferta}`, {
+            await fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/idOferta/${idOferta}?authorization=${token}`, {
               method: "PUT", // or 'PUT'
               body: JSON.stringify(data), // data can be `string` or {object}!
               headers: {

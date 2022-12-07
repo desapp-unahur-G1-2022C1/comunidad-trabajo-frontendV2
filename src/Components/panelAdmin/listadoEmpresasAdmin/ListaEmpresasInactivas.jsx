@@ -11,6 +11,9 @@ import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 
 export default function ListaEmpresas({ empresas }) {
+
+  var token = sessionStorage.getItem('token')
+
   function activar(idEmpresa) {
     fetch(`https://comunidad-backend-v3.herokuapp.com/empresas/cuit/${idEmpresa}`,
       {

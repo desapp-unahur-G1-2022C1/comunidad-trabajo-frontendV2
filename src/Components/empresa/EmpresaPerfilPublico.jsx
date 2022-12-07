@@ -28,7 +28,11 @@ const Root = styled('div')(({ theme }) => ({
     const [paisEmpresa, setPaisEmpresa] = useState()
     const [provinciaEmpresa, seProvinciaEmpresa] = useState()
     const [ciudadEmpresa, setCiudadEmpresa] = useState()
-    axios.get(`https://comunidad-backend-v3.herokuapp.com/empresas/cuit/${id}`)
+
+    var token = sessionStorage.getItem('token')
+
+    
+    axios.get(`https://comunidad-backend-v3.herokuapp.com/empresas/cuit/${id}?`)
               .then(({data}) => {
                 setNombreEmpresa(data.nombre_empresa)
                 setDescripcionEmpresa(data.descripcion)

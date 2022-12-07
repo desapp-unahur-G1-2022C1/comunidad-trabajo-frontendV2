@@ -116,7 +116,7 @@ export default function WithMaterialUI() {
     if (llamadolistaEstudio === false) {
       try {
         const api = await fetch(
-          `https://comunidad-backend-v3.herokuapp.com/estudios/`
+          `https://comunidad-backend-v3.herokuapp.com/estudios/?`
         );
         const datos = await api.json();
         setlistaEstudio(datos.estudios);
@@ -135,7 +135,7 @@ export default function WithMaterialUI() {
     if (llamadolistaCarrera === false) {
       try {
         const api = await fetch(
-          `https://comunidad-backend-v3.herokuapp.com/carreras/`
+          `https://comunidad-backend-v3.herokuapp.com/carreras/?`
         );
         const datos = await api.json();
         setlistaCarrera(datos.carreras);
@@ -154,7 +154,7 @@ export default function WithMaterialUI() {
     if (llamadolistaJornada === false) {
       try {
         const api = await fetch(
-          ` https://comunidad-backend-v3.herokuapp.com/jornadas/`
+          ` https://comunidad-backend-v3.herokuapp.com/jornadas/?`
         );
         const datos = await api.json();
         setlistaJornada(datos.jornadas);
@@ -173,7 +173,7 @@ export default function WithMaterialUI() {
     if (llamadolistaContrato === false) {
       try {
         const api = await fetch(
-          ` https://comunidad-backend-v3.herokuapp.com/contratos/`
+          ` https://comunidad-backend-v3.herokuapp.com/contratos/?`
         );
         const datos = await api.json();
         setlistaContrato(datos.contratos);
@@ -230,7 +230,7 @@ export default function WithMaterialUI() {
         remuneracion: values.remuneracion
       };
       console.log(values);
-        fetch("https://comunidad-backend-v3.herokuapp.com/ofertas/", {
+        fetch(`https://comunidad-backend-v3.herokuapp.com/ofertas/?authorization=${token}`, {
         method: "POST", // or 'PUT'
         body: JSON.stringify(data), // data can be `string` or {object}!
         headers: {

@@ -80,7 +80,7 @@ export default function WithMaterialUI() {
     if (llamadoTipoDocumento === false) {
       try {
         const api = await fetch(
-          `https://comunidad-backend-v3.herokuapp.com/tiposDocumentos`
+          `https://comunidad-backend-v3.herokuapp.com/tiposDocumento/`
         );
         const datos = await api.json();
         setTiposDocumentos(datos.tipos_documentos);
@@ -99,7 +99,7 @@ export default function WithMaterialUI() {
     if (llamadoListaCarreras === false) {
       try {
         const api = await fetch(
-          `https://comunidad-backend-v3.herokuapp.com/carreras/`
+          `https://comunidad-backend-v3.herokuapp.com/carreras/?`
         );
         const datos = await api.json();
         setListaCarreras(datos.carreras);
@@ -118,7 +118,7 @@ export default function WithMaterialUI() {
     if (llamadoTipoDocumento === false) {
       try {
         const api = await fetch(
-          `https://comunidad-backend-v3.herokuapp.com/estudios/`
+          `https://comunidad-backend-v3.herokuapp.com/estudios/?`
         );
         const datos = await api.json();
         setListaEstudios(datos.estudios);
@@ -137,7 +137,7 @@ export default function WithMaterialUI() {
     if (llamadoProvincias === false) {
       try {
         const api = await fetch(
-          `https://comunidad-backend-v3.herokuapp.com/provincias`
+          `https://comunidad-backend-v3.herokuapp.com/provincias/?`
         );
         const datos = await api.json();
         setListaProvincias(datos.provincias);
@@ -155,7 +155,7 @@ export default function WithMaterialUI() {
     if (provinciaActual != provincia) {
       try {
         const api = await fetch(
-          `https://comunidad-backend-v3.herokuapp.com/ciudades/?idProvincia=${provincia}`
+          `https://comunidad-backend-v3.herokuapp.com/ciudades/?idProvincia=${provincia}&`
         );
         const datos = await api.json();
         console.log(datos)
@@ -208,7 +208,7 @@ export default function WithMaterialUI() {
       console.log(values);
       console.log(IdActual);
       
-        fetch(`https://comunidad-backend-v3.herokuapp.com/postulantes/dni/${datosUsuario.id}`, {
+        fetch(`https://comunidad-backend-v3.herokuapp.com/postulantes/dni/${datosUsuario.id}?authorization=${token}`, {
         method: "PUT", // or 'PUT'
         body: JSON.stringify(data), // data can be `string` or {object}!
         headers: {
@@ -227,7 +227,7 @@ export default function WithMaterialUI() {
         })
         .then(function (result) {
           if (result.value) {
-            axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${datosUsuario.Usuario.id}`)
+            axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${datosUsuario.Usuario.id}?`)
             .then(({data}) => {
               sessionStorage.setItem('datosUsuario', JSON.stringify(data));
             })

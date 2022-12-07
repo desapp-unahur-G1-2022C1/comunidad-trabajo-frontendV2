@@ -25,12 +25,17 @@ export default function DividerText() {
   var idUsuario = sessionStorage.getItem('idUsuario')
   var grupo =  sessionStorage.getItem('grupo')
   var estaLogeado = sessionStorage.getItem('estaLogeado')
+  
+  
+  async function traerDatos() {
+    await axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${datosUsuario.Usuario.id}?`)
+    .then(({data}) => {
+      cambiarDatosUsuario(data)
+    }
+    )
+  }
 
-  axios.get(`https://comunidad-backend-v3.herokuapp.com/postulantes/idUsuario/${datosUsuario.Usuario.id}`)
-            .then(({data}) => {
-                    cambiarDatosUsuario(data)
-                    console.log(data)
-  })
+  traerDatos()
 
  
   const formatoFechaNacimiento = (fecha) => {
