@@ -299,7 +299,7 @@ const CustomizedDialogs = () => {
                       </Typography>
                       </Grid>
                       <Grid item xs={8} sm={8} md={8}> <Typography variant="h5" sx={{ marginBottom: "0.5rem" }}>
-                        Descripcion
+                        Descripción
                       </Typography>
                         <Typography variant="body1" sx={{ marginBottom: "0.5rem", whiteSpace: "pre-line" }}  >
                           {descripcion}
