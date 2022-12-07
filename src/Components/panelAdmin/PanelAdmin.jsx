@@ -61,13 +61,6 @@ const PanelAdmin = () => {
           </Button></Link> 
         </Box>
       </Box>
-      <Box
-          sx={{ display: "flex", justifyContent: "center", padding: "1rem" }}
-        >
-          <Button variant="contained" sx={{ width: "25rem" }}>
-            Estadisticas
-          </Button>
-        </Box>
     </Fragment>
   );
 };

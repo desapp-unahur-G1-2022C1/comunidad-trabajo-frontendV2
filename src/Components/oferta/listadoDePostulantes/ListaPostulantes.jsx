@@ -33,34 +33,39 @@ export default function ListaPostulantes({ postulantes }) {
     var data = {
       contactado: true
     };
-    await fetch(`https://comunidad-backend-v3.herokuapp.com/postulaciones/${idPostulacion}?authorization=${token}`, {
-      method: "PUT", // or 'PUT'
-      body: JSON.stringify(data), // data can be `string` or {object}!
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-    })
     Swal.fire({
-      icon: 'success',
-      title: 'El postulante fue contactado',
-      confirmButtonText: 'Finalizar',
-      text: 'Para continuar pulse el boton',
-      footer: '',
-      showCloseButton: true
-    })
-      .then(
-        timeoutReload()
-      )
-      .catch((error) => console.error("Error:", error,
+      icon: 'warning',
+      title: '¿Desea contactar al postulante?',
+      showCancelButton: true,
+      confirmButtonText: `Contactar`,
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await fetch(`https://comunidad-backend-v3.herokuapp.com/postulaciones/${idPostulacion}?authorization=${token}`, {
+            method: "PUT", // or 'PUT'
+            body: JSON.stringify(data), // data can be `string` or {object}!
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+        } catch (error) {
+          console.log(error)
+        }
         Swal.fire({
-          icon: 'error',
-          title: 'Ocurrio un error al contactar al postulante',
-          confirmButtonText: 'Volver',
-          text: 'Verifique sus datos',
-          footer: '',
-          showCloseButton: true
-        })),)
+          icon: 'success',
+          title: `El postulante fue contactado correctamente`,
+          confirmButtonText: 'Aceptar'
+        }
+        ).then(
+          () => {
+            window.location.reload()
+          }
+        )
+      }
+    })   
   }
 
 

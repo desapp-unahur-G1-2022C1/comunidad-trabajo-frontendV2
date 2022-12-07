@@ -219,7 +219,7 @@ export default function WithMaterialUI() {
         
         Swal.fire({
           icon: 'success',
-          title: 'Su registro fue realizado correctamente',
+          title: 'Sus datos fueron actualizados correctaemente',
           confirmButtonText: 'Finalizar',
           text: 'Para continuar pulse el boton',
           footer: '',
