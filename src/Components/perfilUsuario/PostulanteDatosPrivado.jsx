@@ -78,7 +78,7 @@ export default function DividerText() {
             <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{datosUsuario.Usuario.usuario}</Typography>
         </Typography>
         <Typography sx={{display:'flex', justifyContent:'center'}}>
-            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">Numero de contecto:</Typography>
+            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">Número de contacto:</Typography>
             <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1"> +54 9 {datosUsuario.telefono}</Typography>
         </Typography>
       </Box>
@@ -87,7 +87,7 @@ export default function DividerText() {
       </Divider>
       <Box>
         <Typography sx={{display:'flex', justifyContent:'center', margin:'2rem'}}>
-            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">Pais:</Typography>
+            <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">País:</Typography>
             <Typography sx={{ fontSize: "20px", paddingLeft:"0.5rem"}} variant="body1">{datosUsuario.pais}</Typography>
         </Typography>
         <Typography sx={{display:'flex', justifyContent:'center', margin:'2rem'}}>
