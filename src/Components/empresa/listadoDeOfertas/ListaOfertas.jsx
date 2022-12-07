@@ -45,8 +45,11 @@ export default function ListaOfertas({ Ofertas }) {
             console.log(error)
           }
           Swal.fire(
-            `La oferta fue finalizada correctamente`,
-            'success'
+            {
+              icon: 'success',
+              title: 'Oferta finalizada',
+              showConfirmButton: true
+            }
           ).then(
             () => {
               window.location.reload()
