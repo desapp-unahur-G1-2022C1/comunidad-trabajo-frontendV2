@@ -21,12 +21,12 @@ export default function ListaOfertas({ ofertas }) {
   var token = sessionStorage.getItem('token')
   const mandarARevision = async (idOferta, titulo) => {
     var data = {
-      idEstado: 4
+      idEstado: 5
     };
 
     Swal.fire({
       icon: 'warning',
-      title: `¿Deseas mandar a revisión ${titulo}?`,
+      title: `¿Deseas finalizar la oferta ${titulo}?`,
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
@@ -49,7 +49,7 @@ export default function ListaOfertas({ ofertas }) {
           Swal.fire(
             {
               icon: 'success',
-              title: `La oferta fue mandada a revisión correctamente`,
+              title: `La oferta fue finalizada correctamente`,
               confirmButtonText: 'Aceptar'
             }
           ).then(
