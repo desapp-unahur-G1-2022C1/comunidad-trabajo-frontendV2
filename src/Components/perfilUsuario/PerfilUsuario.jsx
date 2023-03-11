@@ -80,11 +80,12 @@ export default function PerfilUsuario() {
   useEffect(() => {
     const traerFoto = async () => {
       const fetchedData = await axios.get(
-        `https://comunidad-backend-v3.herokuapp.com/files/?authorization=${token}`,
+        `https://comunidad-backend-v3.herokuapp.com/files`,
         {
           headers: {
             "type": "image/jpeg",
-            "file": splitFileName(datosUsuario.foto)
+            "file": splitFileName(datosUsuario.foto),
+            "authorization": token
           },
           responseType: 'blob'
         }

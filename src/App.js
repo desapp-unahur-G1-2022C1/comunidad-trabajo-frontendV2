@@ -33,6 +33,10 @@ import PerfilPostulantePublico from './Components/perfilUsuario/UsuarioPerfilPub
 import MiCV from './Components/perfilUsuario/miCV/MiCV';
 import ListadoOfertasRevision from "./Components/panelAdmin/listadoOfertasAdmin/ListadoOfertasRevision";
 import ListadoOfertasFinalizadas from "./Components/panelAdmin/listadoOfertasAdmin/ListadoOfertasFinalizadas";
+import PostulantesDeOfertaAdmin from './Components/panelAdmin/listadoOfertasAdmin/PostulantesDeOfertaAdmin';
+
+
+
 import { CheckRole } from './PrivateRoute';
 function App() {
   const postulante = 1
@@ -107,6 +111,11 @@ function App() {
           <Route exact path='/listadoDePostulantes/:id'>
             <CheckRole role={empresa}>
               <PostulantesDeOferta/>
+            </CheckRole>
+          </Route>
+          <Route exact path="/admin/listadoPostulaciones/:id">
+            <CheckRole role={admin}>
+              <PostulantesDeOfertaAdmin/>
             </CheckRole>
           </Route>
           <Route exact path="/admin/listadoEmpresas">

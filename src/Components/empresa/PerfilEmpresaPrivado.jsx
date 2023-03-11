@@ -97,11 +97,12 @@ export default function PerfilEmpresa() {
   useEffect(() => {
     const traerLogo = async () => {
       const fetchedData = await axios.get(
-        `https://comunidad-backend-v3.herokuapp.com/files/?authorization=${token}`,
+        `https://comunidad-backend-v3.herokuapp.com/files`,
         {
           headers: {
             "type": "image/png",
-            "file": splitFileName(datosUsuario.logo)
+            "file": splitFileName(datosUsuario.logo),
+            "authorization": token
           },
           responseType: 'blob'
         }

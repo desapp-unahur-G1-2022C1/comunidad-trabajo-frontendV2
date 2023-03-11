@@ -99,8 +99,13 @@ export default function ListaOfertas({ ofertas }) {
                     VER OFERTA
                   </Button>
                 </Link>
+                <Link style={{ textDecoration: "none" }} to={`/admin/listadoPostulaciones/${oferta.id}`}>
+                  <Button variant="contained" color='relaxed' sx={{ margin: "0.5rem" }}>
+                    VER POSTULANTES
+                  </Button>
+                </Link>
                 <Button variant="outlined" color='error' sx={{ margin: "0.5rem" }} onClick={async () => mandarARevision(oferta.id, oferta.titulo_oferta)} >
-                  Revisar
+                  Finalizar
                 </Button>
               </TableCell>
 

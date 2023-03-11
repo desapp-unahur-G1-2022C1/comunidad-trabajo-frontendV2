@@ -76,12 +76,13 @@ export default function ListaPostulantes({ postulantes }) {
 
   const traerPdf = async (cvPostulante) => {
     const fetchedData = await axios.get(
-      `https://comunidad-backend-v3.herokuapp.com/files/?authorization=${token}`,
+      `https://comunidad-backend-v3.herokuapp.com/files`,
       {
         headers: {
           "Content-Type": "application/json",
           "type": "application/pdf",
-          "file": splitFileName(cvPostulante)
+          "file": splitFileName(cvPostulante),
+          "authorization": token
         },
         responseType: 'blob'
       }

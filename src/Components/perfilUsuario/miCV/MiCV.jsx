@@ -67,12 +67,13 @@ const MiCV = () => {
     useEffect(() => {
         const traerPdf = async () => {
             const fetchedData = await axios.get(
-                `https://comunidad-backend-v3.herokuapp.com/files/?authorization=${token}`,
+                `https://comunidad-backend-v3.herokuapp.com/files/`,
                 {
                     headers: {
                         "Content-Type": "application/json",
                         "type": "application/pdf",
-                        "file": splitFileName(datosUsuario.cv)
+                        "file": splitFileName(datosUsuario.cv),
+                        "authorization": token
                     },
                     responseType: 'blob'
                 }

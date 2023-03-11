@@ -96,11 +96,12 @@ const AvatarUsuario = () => {
     useEffect(() => {
       const traerFoto = async () => {
         const fetchedData = await axios.get(
-          `https://comunidad-backend-v3.herokuapp.com/files/?authorization=${token}`,
+          `https://comunidad-backend-v3.herokuapp.com/files`,
           {
             headers: {
               "type": "image/jpeg",
               "file": grupo == 2 ? splitFileName(datosUsuario.logo) : splitFileName(datosUsuario.foto),
+              "authorization": token
             },
             responseType: 'blob'
           }

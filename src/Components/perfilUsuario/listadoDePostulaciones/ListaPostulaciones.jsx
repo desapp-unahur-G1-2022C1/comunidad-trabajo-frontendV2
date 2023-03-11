@@ -6,10 +6,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button, Typography } from '@mui/material';
+import { Button, Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import CircleIcon from '@mui/icons-material/Circle';
 
 export default function ListaOfertas({ Ofertas }) {
 
@@ -60,6 +61,7 @@ export default function ListaOfertas({ Ofertas }) {
             <TableCell><Typography variant='h6'>ID Oferta</Typography></TableCell>
             <TableCell align="center"><Typography variant='h6'>Nombre</Typography></TableCell>
             <TableCell align="center"><Typography variant='h6'>Empresa</Typography></TableCell>
+            <TableCell align='center'><Typography variant='h6'>Estado</Typography></TableCell>
             <TableCell align="center"><Typography variant='h6'>Acciones</Typography></TableCell>
           </TableRow>
         </TableHead>
@@ -74,6 +76,12 @@ export default function ListaOfertas({ Ofertas }) {
               </TableCell>
               <TableCell align="center"><Typography variant="body1">{oferta.Oferta.titulo_oferta}</Typography></TableCell>
               <TableCell align="center"><Typography variant="body1">{oferta.Empresa.nombre_empresa}</Typography></TableCell>
+              <TableCell align="center">
+                <Box>{ 
+                        oferta.Estado.id == 1 ? <CircleIcon color="success"  /> : oferta.Estado.id == 2 ? <CircleIcon color= "warning"  /> : <CircleIcon color="error" /> 
+                      } <Typography variant="body1">{oferta.Estado.nombre_estado}</Typography>
+                </Box>
+              </TableCell>
               <TableCell align="center">
                 <Link to={`/oferta/${oferta.Oferta.id}`} style={{ textDecoration: 'none' }}>
                   <Button variant="contained" color='relaxed' sx={{ margin: "0.5rem" }}>
